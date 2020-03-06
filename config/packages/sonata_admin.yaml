@@ -1,0 +1,29 @@
+sonata_admin:
+    title: 'Manager'
+    search: false
+    show_mosaic_button: false
+    options:
+        form_type: horizontal
+    security:
+        handler: sonata.admin.security.handler.role
+        role_admin: ROLE_ADMIN
+        role_super_admin: ROLE_SUPER_ADMIN
+    dashboard:
+        groups:
+        blocks:
+            - { type: sonata.admin.block.admin_list, position: left }
+    templates:
+        layout: 'app/layout.html.twig'
+        user_block: 'app/user_block.html.twig'
+    assets:
+        extra_javascripts:
+            - bundles/sortablebehavior/js/init.js
+
+sonata_block:
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+
+sonata_doctrine_orm_admin:
+    templates:
+        form: ['app/form/form_admin_fields.html.twig']

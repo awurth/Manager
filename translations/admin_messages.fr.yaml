@@ -1,0 +1,17 @@
+admin:
+    group:
+
+breadcrumb:
+    link_form_field_create: Ajouter
+    link_form_field_list: Champs
+
+form:
+    group:
+
+list:
+    label__action: Actions
+    label_enabled: Activé
+
+filter:
+
+menu:

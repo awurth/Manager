@@ -1,0 +1,22 @@
+@import "user_block";
+
+.html-text-field {
+  display: block;
+  padding-top: 7px;
+}
+
+.sonata-ba-field-inline-table {
+  th, .checkbox {
+    text-align: center;
+  }
+  th.wrap-content {
+    white-space: nowrap;
+    width: 1%;
+  }
+}
+
+.vich-image {
+  img {
+    max-width: 100%;
+  }
+}
