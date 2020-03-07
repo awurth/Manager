@@ -3,6 +3,50 @@ services:
         class: App\Admin\UserAdmin
         arguments: [~, App\Entity\User, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: user, label: admin.user, label_translator_strategy: sonata.admin.label.strategy.underscore }
+            - { name: sonata.admin, manager_type: orm, group: settings, label: admin.user, label_translator_strategy: sonata.admin.label.strategy.underscore }
         calls:
             - [setPasswordEncoder, ['@security.password_encoder']]
+
+    admin.project:
+        class: App\Admin\ProjectAdmin
+        arguments: [~, App\Entity\Project, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: project, label: admin.project, label_translator_strategy: sonata.admin.label.strategy.underscore }
+
+    admin.project_environment:
+        class: App\Admin\ProjectEnvironmentAdmin
+        arguments: [~, App\Entity\ProjectEnvironment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: project, label: admin.project_environment, label_translator_strategy: sonata.admin.label.strategy.underscore }
+
+    admin.server:
+        class: App\Admin\ServerAdmin
+        arguments: [~, App\Entity\Server, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: server, label: admin.server, label_translator_strategy: sonata.admin.label.strategy.underscore }
+
+    admin.server_user:
+        class: App\Admin\ServerUserAdmin
+        arguments: [~, App\Entity\ServerUser, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: server, label: admin.server_user, label_translator_strategy: sonata.admin.label.strategy.underscore }
+
+    admin.customer:
+        class: App\Admin\CustomerAdmin
+        arguments: [~, App\Entity\Customer, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: customer, label: admin.customer, label_translator_strategy: sonata.admin.label.strategy.underscore }
+        calls:
+            - [addChild, ['@admin.customer_contact', 'customer']]
+
+    admin.customer_contact:
+        class: App\Admin\CustomerContactAdmin
+        arguments: [~, App\Entity\CustomerContact, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: customer, label: admin.customer_contact, label_translator_strategy: sonata.admin.label.strategy.underscore }
+
+    admin.credentials:
+        class: App\Admin\CredentialsAdmin
+        arguments: [~, App\Entity\Credentials, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: credentials, label: admin.credentials, label_translator_strategy: sonata.admin.label.strategy.underscore }

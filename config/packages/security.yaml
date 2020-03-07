@@ -7,6 +7,13 @@ security:
         ROLE_ADMIN:
             - ROLE_USER
             - ROLE_SONATA_ADMIN
+            - ROLE_ADMIN_CREDENTIALS_ALL
+            - ROLE_ADMIN_CUSTOMER_ALL
+            - ROLE_ADMIN_CUSTOMER_CONTACT_ALL
+            - ROLE_ADMIN_PROJECT_ALL
+            - ROLE_ADMIN_PROJECT_ENVIRONMENT_ALL
+            - ROLE_ADMIN_SERVER_ALL
+            - ROLE_ADMIN_SERVER_USER_ALL
             - ROLE_ADMIN_USER_ALL
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 

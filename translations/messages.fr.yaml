@@ -1,31 +1,81 @@
 admin:
     group:
+        settings: Paramètres
+    credentials: Identifiants
+    customer: Clients
+    customer_contact: Contacts
+    project: Projets
+    server: Serveurs
     user: Utilisateurs
 
 breadcrumb:
+    link_credentials_create: Ajouter
+    link_credentials_list: Identifiants
+    link_customer_create: Ajouter
+    link_customer_list: Clients
+    link_customer_contact_create: Ajouter
+    link_customer_contact_list: Contacts
+    link_project_create: Ajouter
+    link_project_list: Projets
+    link_server_create: Ajouter
+    link_server_list: Serveurs
     link_user_create: Ajouter
     link_user_list: Utilisateurs
 
 form:
     group:
+        label_environments: Environnements
+        label_project: Projet
+        label_project_environments: Projets
+        label_server: Serveur
+        label_server_users: Utilisateurs
+    label_address: Adresse
+    label_city: Ville
+    label_description: Description
     label_email: Adresse email
+    label_environment: Environnement
     label_firstname: Prénom
     label_gender: Genre
+    label_ip: Adresse IP
+    label_job: Fonction
     label_lastname: Nom
+    label_name: Nom
+    label_operating_system: Système d'exploitation
+    label_password: Mot de passe
+    label_path: Emplacement
+    label_phone: Téléphone
     label_plain_password: Mot de passe
+    label_postcode: Code postal
+    label_project: Projet
+    label_server: Serveur
+    label_url: URL
+    label_username: Nom d'utilisateur
+    label_website: Site web
 
 list:
     label__action: Actions
+    label_address: Adresse
+    label_city: Ville
+    label_description: Description
     label_email: Adresse email
     label_enabled: Activé
     label_firstname: Prénom
     label_gender: Genre
     label_id: ID
+    label_ip: Adresse IP
+    label_job: Fonction
     label_lastname: Nom
+    label_name: Nom
+    label_operating_system: Système d'exploitation
+    label_phone: Téléphone
+    label_postcode: Code postal
+    label_username: Nom d'utilisateur
+    label_website: Site web
 
 filter:
 
 menu:
+    label_contacts: Contacts
 
 gender_female: Féminin
 gender_male: Masculin

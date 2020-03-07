@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Rollerworks\Component\PasswordStrength\Validator\Constraints\PasswordRequirements;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -28,14 +29,16 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true)
      *
      * @Assert\NotBlank()
+     * @Assert\Email()
+     * @Assert\Length(max=255)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
      */
     private $password;
 
@@ -52,16 +55,16 @@ class User implements UserInterface
     private $gender;
 
     /**
-     * @ORM\Column(type="string", length=30, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
-     * @Assert\NotBlank(groups={"AppRegistration"})
+     * @Assert\Length(max=255)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=30, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
-     * @Assert\NotBlank(groups={"AppRegistration"})
+     * @Assert\Length(max=255)
      */
     private $lastname;
 
@@ -80,10 +83,16 @@ class User implements UserInterface
     private $updatedAt;
 
     /**
-     * @Assert\NotBlank(groups={"AppRegistration"})
-     * @PasswordRequirements(minLength=8, requireCaseDiff=true, requireSpecialCharacter=true, groups={"AppRegistration", "AppIdentity"})
+     * @ORM\OneToMany(targetEntity="App\Entity\CryptographicKey", mappedBy="user")
      */
+    private $cryptographicKeys;
+
     private $plainPassword;
+
+    public function __construct()
+    {
+        $this->cryptographicKeys = new ArrayCollection();
+    }
 
     public function __toString(): string
     {
@@ -242,6 +251,37 @@ class User implements UserInterface
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CryptographicKey[]
+     */
+    public function getCryptographicKeys(): Collection
+    {
+        return $this->cryptographicKeys;
+    }
+
+    public function addCryptographicKey(CryptographicKey $cryptographicKey): self
+    {
+        if (!$this->cryptographicKeys->contains($cryptographicKey)) {
+            $this->cryptographicKeys[] = $cryptographicKey;
+            $cryptographicKey->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCryptographicKey(CryptographicKey $cryptographicKey): self
+    {
+        if ($this->cryptographicKeys->contains($cryptographicKey)) {
+            $this->cryptographicKeys->removeElement($cryptographicKey);
+            // set the owning side to null (unless already changed)
+            if ($cryptographicKey->getUser() === $this) {
+                $cryptographicKey->setUser(null);
+            }
+        }
 
         return $this;
     }

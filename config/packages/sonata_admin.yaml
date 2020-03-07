@@ -10,11 +10,39 @@ sonata_admin:
         role_super_admin: ROLE_SUPER_ADMIN
     dashboard:
         groups:
-            user:
+            project:
                 on_top: true
-                label: admin.user
+                label: admin.project
                 label_catalogue: messages
-                icon: '<i class="fa fa-user"></i>'
+                icon: '<i class="fa fa-code"></i>'
+                items:
+                    - admin.project
+            server:
+                on_top: true
+                label: admin.server
+                label_catalogue: messages
+                icon: '<i class="fa fa-server"></i>'
+                items:
+                    - admin.server
+            customer:
+                on_top: true
+                label: admin.customer
+                label_catalogue: messages
+                icon: '<i class="fa fa-address-book"></i>'
+                items:
+                    - admin.customer
+            credentials:
+                on_top: true
+                label: admin.credentials
+                label_catalogue: messages
+                icon: '<i class="fa fa-key"></i>'
+                items:
+                    - admin.credentials
+            settings:
+                keep_open: true
+                label: admin.group.settings
+                label_catalogue: messages
+                icon: '<i class="fa fa-wrench"></i>'
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
     templates:
