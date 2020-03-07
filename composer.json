@@ -7,6 +7,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "gedmo/doctrine-extensions": "^2.4",
+        "rollerworks/password-strength-bundle": "^2.2",
         "runroom/sortable-behavior-bundle": "^1.2",
         "sonata-project/admin-bundle": "^3.56",
         "sonata-project/doctrine-orm-admin-bundle": "^3.13",

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -19,19 +20,8 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
-    /**
-     * @var FormFactoryInterface
-     */
     protected $formFactory;
-
-    /**
-     * @var UserPasswordEncoderInterface
-     */
     protected $passwordEncoder;
-
-    /**
-     * @var UrlGeneratorInterface
-     */
     protected $urlGenerator;
 
     public function __construct(FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator, UserPasswordEncoderInterface $passwordEncoder)
@@ -55,7 +45,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
         $data = $form->getData();
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $data['username']
+            $data['email']
         );
 
         return $data;
@@ -63,13 +53,17 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider): UserInterface
     {
-        return $userProvider->loadUserByUsername($credentials['username']);
+        return $userProvider->loadUserByUsername($credentials['email']);
     }
 
     public function checkCredentials($credentials, UserInterface $user): bool
     {
         if (!$this->passwordEncoder->isPasswordValid($user, $credentials['password'])) {
             return false;
+        }
+
+        if (!$user->hasRole('ROLE_ADMIN')) {
+            throw new CustomUserMessageAuthenticationException('You don\'t have permission to access that page.');
         }
 
         return true;

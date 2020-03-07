@@ -162,6 +162,12 @@
     "roave/security-advisories": {
         "version": "dev-master"
     },
+    "rollerworks/password-strength-bundle": {
+        "version": "v2.2.0"
+    },
+    "rollerworks/password-strength-validator": {
+        "version": "v1.3.0"
+    },
     "runroom/sortable-behavior-bundle": {
         "version": "1.0.1"
     },
