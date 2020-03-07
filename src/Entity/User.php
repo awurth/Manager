@@ -18,6 +18,7 @@ class User implements UserInterface
 {
     public const GENDER_FEMALE = 0;
     public const GENDER_MALE = 1;
+    public const GENDER_NEUTRAL = 2;
 
     /**
      * @ORM\Id()

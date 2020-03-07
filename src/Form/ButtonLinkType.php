@@ -11,8 +11,7 @@ class ButtonLinkType extends AbstractType
     {
         $resolver->setDefaults([
             'mapped' => false,
-            'required' => false,
-            'translation_domain' => 'admin_messages'
+            'required' => false
         ]);
     }
 

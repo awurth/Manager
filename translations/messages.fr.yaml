@@ -1,0 +1,32 @@
+admin:
+    group:
+    user: Utilisateurs
+
+breadcrumb:
+    link_user_create: Ajouter
+    link_user_list: Utilisateurs
+
+form:
+    group:
+    label_email: Adresse email
+    label_firstname: Prénom
+    label_gender: Genre
+    label_lastname: Nom
+    label_plain_password: Mot de passe
+
+list:
+    label__action: Actions
+    label_email: Adresse email
+    label_enabled: Activé
+    label_firstname: Prénom
+    label_gender: Genre
+    label_id: ID
+    label_lastname: Nom
+
+filter:
+
+menu:
+
+gender_female: Féminin
+gender_male: Masculin
+gender_neutral: Neutre
