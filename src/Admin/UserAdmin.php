@@ -3,7 +3,9 @@
 namespace App\Admin;
 
 use App\Entity\User;
+use Knp\Menu\ItemInterface as MenuItemInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -105,5 +107,14 @@ final class UserAdmin extends AbstractAdmin
             ->remove('batch')
             ->remove('export')
             ->remove('show');
+    }
+
+    protected function configureTabMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null): void
+    {
+        if (!$childAdmin && $action === 'edit') {
+            $menu->addChild('menu.label_ssh_keys', [
+                'uri' => $this->generateUrl('admin.ssh_key.list', ['id' => $this->getRequest()->get('id')])
+            ]);
+        }
     }
 }

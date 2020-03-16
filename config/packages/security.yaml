@@ -14,6 +14,7 @@ security:
             - ROLE_ADMIN_PROJECT_ENVIRONMENT_ALL
             - ROLE_ADMIN_SERVER_ALL
             - ROLE_ADMIN_SERVER_USER_ALL
+            - ROLE_ADMIN_SSH_KEY_ALL
             - ROLE_ADMIN_USER_ALL
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 

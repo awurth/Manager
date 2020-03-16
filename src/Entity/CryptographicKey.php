@@ -11,6 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CryptographicKey
 {
+    public const TYPE_SSH = 'ssh';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -21,7 +23,7 @@ class CryptographicKey
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $type;
+    private $type = self::TYPE_SSH;
 
     /**
      * @ORM\Column(type="string", length=255)

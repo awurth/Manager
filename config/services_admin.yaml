@@ -5,7 +5,14 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: settings, label: admin.user, label_translator_strategy: sonata.admin.label.strategy.underscore }
         calls:
+            - [addChild, ['@admin.ssh_key', 'user']]
             - [setPasswordEncoder, ['@security.password_encoder']]
+
+    admin.ssh_key:
+        class: App\Admin\SshKeyAdmin
+        arguments: [~, App\Entity\CryptographicKey, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: settings, label: admin.ssh_key, label_translator_strategy: sonata.admin.label.strategy.underscore }
 
     admin.project:
         class: App\Admin\ProjectAdmin
