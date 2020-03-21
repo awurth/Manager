@@ -30,13 +30,16 @@ breadcrumb:
 
 form:
     group:
+        label_customer: Client
         label_environments: Environnements
         label_project: Projet
         label_project_environments: Projets
+        label_projects: Projets
         label_server: Serveur
         label_server_users: Utilisateurs
     label_address: Adresse
     label_city: Ville
+    label_customer: Client
     label_description: Description
     label_email: Adresse email
     label_environment: Environnement
@@ -64,6 +67,7 @@ list:
     label__action: Actions
     label_address: Adresse
     label_city: Ville
+    label_customer_name: Client
     label_created_at: Date de création
     label_description: Description
     label_email: Adresse email

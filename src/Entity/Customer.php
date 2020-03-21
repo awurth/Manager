@@ -83,9 +83,15 @@ class Customer
      */
     private $contacts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="customer", cascade={"persist"})
+     */
+    private $projects;
+
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -219,6 +225,37 @@ class Customer
             // set the owning side to null (unless already changed)
             if ($contact->getCustomer() === $this) {
                 $contact->setCustomer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setCustomer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        if ($this->projects->contains($project)) {
+            $this->projects->removeElement($project);
+            // set the owning side to null (unless already changed)
+            if ($project->getCustomer() === $this) {
+                $project->setCustomer(null);
             }
         }
 

@@ -53,6 +53,11 @@ class Project
     private $type;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="projects")
+     */
+    private $customer;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectEnvironment", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $environments;
@@ -128,6 +133,18 @@ class Project
     public function setType(?ProjectType $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): self
+    {
+        $this->customer = $customer;
 
         return $this;
     }

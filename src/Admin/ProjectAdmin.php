@@ -22,6 +22,7 @@ final class ProjectAdmin extends AbstractAdmin
         $formMapper
             ->with('Project', ['label' => 'form.group.label_project'])
                 ->add('name')
+                ->add('customer')
                 ->add('type')
                 ->add('description')
             ->end()
@@ -44,6 +45,10 @@ final class ProjectAdmin extends AbstractAdmin
                 'row_align' => 'center'
             ])
             ->addIdentifier('name', null, [
+                'header_class' => 'text-center',
+                'row_align' => 'center'
+            ])
+            ->addIdentifier('customer.name', null, [
                 'header_class' => 'text-center',
                 'row_align' => 'center'
             ])

@@ -23,16 +23,21 @@ final class CustomerAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
-            ->add('name')
-            ->add('address')
-            ->add('postcode')
-            ->add('city')
-            ->add('phone', TelType::class, [
-                'required' => false
-            ])
-            ->add('email', EmailType::class, [
-                'required' => false
-            ]);
+            ->with('Customer', ['label' => 'form.group.label_customer'])
+                ->add('name')
+                ->add('address')
+                ->add('postcode')
+                ->add('city')
+                ->add('phone', TelType::class, [
+                    'required' => false
+                ])
+                ->add('email', EmailType::class, [
+                    'required' => false
+                ])
+            ->end()
+            ->with('Projects', ['label' => 'form.group.label_projects'])
+                ->add('projects', null, ['label' => false])
+            ->end();
     }
 
     protected function configureListFields(ListMapper $listMapper): void
