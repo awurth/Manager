@@ -20,6 +20,12 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: project, label: admin.project, label_translator_strategy: sonata.admin.label.strategy.underscore }
 
+    admin.project_type:
+        class: App\Admin\ProjectTypeAdmin
+        arguments: [~, App\Entity\ProjectType, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: settings, label: admin.project_type, label_translator_strategy: sonata.admin.label.strategy.underscore }
+
     admin.project_environment:
         class: App\Admin\ProjectEnvironmentAdmin
         arguments: [~, App\Entity\ProjectEnvironment, ~]

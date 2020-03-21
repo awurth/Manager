@@ -5,6 +5,7 @@ admin:
     customer: Clients
     customer_contact: Contacts
     project: Projets
+    project_type: Types de projets
     server: Serveurs
     ssh_key: Clés SSH
     user: Utilisateurs
@@ -18,6 +19,8 @@ breadcrumb:
     link_customer_contact_list: Contacts
     link_project_create: Ajouter
     link_project_list: Projets
+    link_project_type_create: Ajouter
+    link_project_type_list: Types de projets
     link_ssh_key_create: Ajouter
     link_ssh_key_list: Clés SSH
     link_server_create: Ajouter
@@ -52,6 +55,7 @@ form:
     label_project: Projet
     label_server: Serveur
     label_ssh_key_value: Clé
+    label_type: Type
     label_url: URL
     label_username: Nom d'utilisateur
     label_website: Site web
@@ -74,6 +78,7 @@ list:
     label_operating_system: Système d'exploitation
     label_phone: Téléphone
     label_postcode: Code postal
+    label_type_name: Type
     label_username: Nom d'utilisateur
     label_website: Site web
 

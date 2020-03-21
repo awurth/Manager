@@ -48,6 +48,11 @@ class Project
     private $updatedAt;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProjectType", inversedBy="projects")
+     */
+    private $type;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectEnvironment", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $environments;
@@ -111,6 +116,18 @@ class Project
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getType(): ?ProjectType
+    {
+        return $this->type;
+    }
+
+    public function setType(?ProjectType $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
