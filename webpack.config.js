@@ -8,6 +8,7 @@ Encore
   .setOutputPath('public/build/')
   .setPublicPath('/build')
   .addEntry('admin', './assets/admin/ts/main.ts')
+  .addEntry('app', './assets/app/ts/main.ts')
   .splitEntryChunks()
   .enableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
