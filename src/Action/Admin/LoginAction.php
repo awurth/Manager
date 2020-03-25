@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Admin;
 
-use App\Form\LoginType;
+use App\Action\AbstractAction;
+use App\Form\Admin\LoginType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,7 +13,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Twig\Environment;
 
 /**
- * @Route("/login", name="app_login")
+ * @Route("/login", name="admin_login")
  */
 class LoginAction extends AbstractAction
 {
@@ -43,7 +44,7 @@ class LoginAction extends AbstractAction
             'username' => $this->authenticationUtils->getLastUsername()
         ]);
 
-        return $this->render('app/security/login.html.twig', [
+        return $this->render('admin/security/login.html.twig', [
             'form' => $form->createView(),
             'last_username' => $this->authenticationUtils->getLastUsername(),
             'error' => $this->authenticationUtils->getLastAuthenticationError()

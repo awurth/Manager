@@ -1,4 +1,4 @@
-{% extends 'app/layout.html.twig' %}
+{% extends 'admin/layout.html.twig' %}
 
 {% block sonata_nav %}
 {% endblock sonata_nav %}
@@ -35,7 +35,7 @@
           {% endfor %}
         {% endfor %}
         <p class="login-box-msg">Connexion</p>
-        <form action="{{ path("app_login") }}" method="post" role="form">
+        <form action="{{ path("admin_login") }}" method="post" role="form">
           {{ form_row(form._token) }}
 
           <div class="form-group has-feedback">

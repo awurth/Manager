@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Admin;
 
+use DateTimeInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,7 +26,7 @@ class HtmlTextType extends AbstractType implements DataTransformerInterface
 
     public function transform($value)
     {
-        if ($value instanceof \DateTimeInterface) {
+        if ($value instanceof DateTimeInterface) {
             return $value->format('d/m/Y - H\hi');
         }
 

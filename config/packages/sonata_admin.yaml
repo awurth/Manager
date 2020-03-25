@@ -13,41 +13,41 @@ sonata_admin:
             project:
                 on_top: true
                 label: admin.project
-                label_catalogue: messages
+                label_catalogue: admin
                 icon: '<i class="fa fa-code"></i>'
                 items:
                     - admin.project
             server:
                 on_top: true
                 label: admin.server
-                label_catalogue: messages
+                label_catalogue: admin
                 icon: '<i class="fa fa-server"></i>'
                 items:
                     - admin.server
             customer:
                 on_top: true
                 label: admin.customer
-                label_catalogue: messages
+                label_catalogue: admin
                 icon: '<i class="fa fa-address-book"></i>'
                 items:
                     - admin.customer
             credentials:
                 on_top: true
                 label: admin.credentials
-                label_catalogue: messages
+                label_catalogue: admin
                 icon: '<i class="fa fa-key"></i>'
                 items:
                     - admin.credentials
             settings:
                 keep_open: true
                 label: admin.group.settings
-                label_catalogue: messages
+                label_catalogue: admin
                 icon: '<i class="fa fa-wrench"></i>'
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
     templates:
-        layout: 'app/layout.html.twig'
-        user_block: 'app/user_block.html.twig'
+        layout: 'admin/layout.html.twig'
+        user_block: 'admin/user_block.html.twig'
     assets:
         extra_javascripts:
             - bundles/sortablebehavior/js/init.js
@@ -59,4 +59,4 @@ sonata_block:
 
 sonata_doctrine_orm_admin:
     templates:
-        form: ['app/form/form_admin_fields.html.twig']
+        form: ['admin/form/form_admin_fields.html.twig']

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Admin;
 
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/logout", name="app_logout")
+ * @Route("/logout", name="admin_logout")
  */
 class LogoutAction
 {

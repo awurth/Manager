@@ -1,3 +1,8 @@
+admin_actions:
+    resource: ../../src/Action/Admin/
+    type: annotation
+    prefix: /admin
+
 actions:
     resource: ../../src/Action/
     type: annotation

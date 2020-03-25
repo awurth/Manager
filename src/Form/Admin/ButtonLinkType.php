@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Admin;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,10 +13,5 @@ class ButtonLinkType extends AbstractType
             'mapped' => false,
             'required' => false
         ]);
-    }
-
-    public function getBlockPrefix(): string
-    {
-        return 'button_link';
     }
 }
