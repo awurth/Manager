@@ -22,7 +22,6 @@ Encore
   .enableSassLoader()
   .enableTypeScriptLoader()
   .enablePostCssLoader()
-  .autoProvidejQuery()
 ;
 
 module.exports = Encore.getWebpackConfig();

@@ -1,4 +1,1 @@
 import '../scss/main.scss';
-
-$(() => {
-});
