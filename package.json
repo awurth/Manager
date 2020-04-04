@@ -8,6 +8,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.13.0",
         "tailwindcss": "^1.2.0"
     },
     "devDependencies": {
