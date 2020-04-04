@@ -3,30 +3,17 @@
 namespace App\Admin;
 
 use App\Entity\CryptographicKey;
-use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 final class SshKeyAdmin extends AbstractAdmin
 {
     protected $baseRoutePattern = 'ssh-key';
     protected $classnameLabel = 'SshKey';
-
-    public function createQuery($context = 'list')
-    {
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery();
-
-        $alias = current($query->getRootAliases());
-
-        $query
-            ->where($alias.'.type = :type')
-            ->setParameter('type', CryptographicKey::TYPE_SSH);
-
-        return $query;
-    }
 
     protected function configureBatchActions($actions): array
     {
@@ -55,6 +42,19 @@ final class SshKeyAdmin extends AbstractAdmin
                 'header_class' => 'text-center',
                 'row_align' => 'center'
             ]);
+    }
+
+    protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
+    {
+        /** @var ProxyQuery $query */
+        $qb = $query->getQueryBuilder();
+        $alias = current($qb->getRootAliases());
+
+        $query
+            ->where($alias.'.type = :type')
+            ->setParameter('type', CryptographicKey::TYPE_SSH);
+
+        return $query;
     }
 
     protected function configureRoutes(RouteCollection $collection): void
