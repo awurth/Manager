@@ -22,6 +22,9 @@ Encore
   .enableSassLoader()
   .enableTypeScriptLoader()
   .enablePostCssLoader()
+  .copyFiles([
+    { from: './assets/app/images' }
+  ])
 ;
 
 module.exports = Encore.getWebpackConfig();
