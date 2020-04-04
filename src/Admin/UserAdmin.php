@@ -60,7 +60,8 @@ final class UserAdmin extends AbstractAdmin
                     'gender_female' => User::GENDER_FEMALE,
                     'gender_male' => User::GENDER_MALE,
                     'gender_neutral' => User::GENDER_NEUTRAL
-                ]
+                ],
+                'translation_domain' => 'admin'
             ])
             ->add('firstname')
             ->add('lastname');
