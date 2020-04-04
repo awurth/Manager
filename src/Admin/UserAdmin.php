@@ -21,7 +21,7 @@ final class UserAdmin extends AbstractAdmin
     /**
      * @var UserPasswordEncoderInterface
      */
-    protected $passwordEncoder;
+    private $passwordEncoder;
 
     /**
      * @param User $user
@@ -41,11 +41,6 @@ final class UserAdmin extends AbstractAdmin
         if ($user->getPlainPassword()) {
             $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPlainPassword()));
         }
-    }
-
-    public function setPasswordEncoder(UserPasswordEncoderInterface $passwordEncoder): void
-    {
-        $this->passwordEncoder = $passwordEncoder;
     }
 
     protected function configureBatchActions($actions): array
@@ -116,5 +111,10 @@ final class UserAdmin extends AbstractAdmin
                 'uri' => $this->generateUrl('admin.ssh_key.list', ['id' => $this->getRequest()->get('id')])
             ]);
         }
+    }
+
+    public function setPasswordEncoder(UserPasswordEncoderInterface $passwordEncoder): void
+    {
+        $this->passwordEncoder = $passwordEncoder;
     }
 }
