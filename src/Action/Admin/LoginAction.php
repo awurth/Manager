@@ -7,29 +7,18 @@ use App\Form\Admin\LoginType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Twig\Environment;
 
 /**
  * @Route("/login", name="admin_login")
  */
 class LoginAction extends AbstractAction
 {
-    protected $authenticationUtils;
-    protected $formFactory;
+    private $authenticationUtils;
+    private $formFactory;
 
-    public function __construct(
-        AuthenticationUtils $authenticationUtils,
-        AuthorizationCheckerInterface $authorizationChecker,
-        Environment $twig,
-        FormFactoryInterface $formFactory,
-        RouterInterface $router
-    )
+    public function __construct(AuthenticationUtils $authenticationUtils, FormFactoryInterface $formFactory)
     {
-        parent::__construct($authorizationChecker, $twig, $router);
-
         $this->authenticationUtils = $authenticationUtils;
         $this->formFactory = $formFactory;
     }

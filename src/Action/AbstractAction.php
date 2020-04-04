@@ -9,29 +9,23 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Security;
+use Throwable;
 use Twig\Environment;
 
 abstract class AbstractAction
 {
-    protected $authorizationChecker;
     protected $router;
+    protected $security;
     protected $twig;
 
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker, Environment $twig, RouterInterface $router)
-    {
-        $this->authorizationChecker = $authorizationChecker;
-        $this->twig = $twig;
-        $this->router = $router;
-    }
-
-    protected function createNotFoundException(string $message = 'Not Found', \Throwable $previous = null): NotFoundHttpException
+    protected function createNotFoundException(string $message = 'Not Found', ?Throwable $previous = null): NotFoundHttpException
     {
         return new NotFoundHttpException($message, $previous);
     }
 
-    protected function createAccessDeniedException(string $message = 'Access Denied.', \Throwable $previous = null): AccessDeniedException
+    protected function createAccessDeniedException(string $message = 'Access Denied.', ?Throwable $previous = null): AccessDeniedException
     {
         return new AccessDeniedException($message, $previous);
     }
@@ -47,7 +41,7 @@ abstract class AbstractAction
         }
     }
 
-    protected function file($file, string $fileName = null, string $disposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT): BinaryFileResponse
+    protected function file($file, ?string $fileName = null, string $disposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT): BinaryFileResponse
     {
         $response = new BinaryFileResponse($file);
         $response->setContentDisposition($disposition, $fileName ?? $response->getFile()->getFilename());
@@ -57,7 +51,7 @@ abstract class AbstractAction
 
     protected function isGranted($attributes, $subject = null): bool
     {
-        return $this->authorizationChecker->isGranted($attributes, $subject);
+        return $this->security->isGranted($attributes, $subject);
     }
 
     protected function json($data, int $status = 200, array $headers = []): JsonResponse
@@ -84,5 +78,29 @@ abstract class AbstractAction
         $response->setContent($this->twig->render($view, $parameters));
 
         return $response;
+    }
+
+    /**
+     * @required
+     */
+    public function setRouter(RouterInterface $router): void
+    {
+        $this->router = $router;
+    }
+
+    /**
+     * @required
+     */
+    public function setSecurity(Security $security): void
+    {
+        $this->security = $security;
+    }
+
+    /**
+     * @required
+     */
+    public function setTwig(Environment $twig): void
+    {
+        $this->twig = $twig;
     }
 }
