@@ -96,18 +96,6 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
-    "easycorp/easy-log-handler": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "70062abc2cd58794d2a90274502f81b55cd9951b"
-        },
-        "files": [
-            "config/packages/dev/easy_log_handler.yaml"
-        ]
-    },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.38"
     },
@@ -123,6 +111,9 @@
     "knplabs/knp-menu-bundle": {
         "version": "v2.3.0"
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.3"
+    },
     "monolog/monolog": {
         "version": "1.25.3"
     },
@@ -136,7 +127,7 @@
         "version": "2.2.3"
     },
     "php": {
-        "version": "7.3"
+        "version": "7.4"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"
@@ -167,9 +158,6 @@
     },
     "rollerworks/password-strength-validator": {
         "version": "v1.3.0"
-    },
-    "runroom/sortable-behavior-bundle": {
-        "version": "1.0.1"
     },
     "sonata-project/admin-bundle": {
         "version": "3.31",
@@ -582,6 +570,9 @@
         "files": [
             "config/packages/vich_uploader.yaml"
         ]
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.1"
     },
     "webmozart/assert": {
         "version": "1.6.0"

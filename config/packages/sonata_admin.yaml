@@ -48,9 +48,6 @@ sonata_admin:
     templates:
         layout: 'admin/layout.html.twig'
         user_block: 'admin/user_block.html.twig'
-    assets:
-        extra_javascripts:
-            - bundles/sortablebehavior/js/init.js
 
 sonata_block:
     blocks:

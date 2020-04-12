@@ -8,7 +8,6 @@
         "ext-iconv": "*",
         "gedmo/doctrine-extensions": "^2.4",
         "rollerworks/password-strength-bundle": "^2.2",
-        "runroom/sortable-behavior-bundle": "^1.2",
         "sonata-project/admin-bundle": "^3.56",
         "sonata-project/doctrine-orm-admin-bundle": "^3.13",
         "symfony/asset": "4.4.*",
@@ -75,8 +74,7 @@
         ]
     },
     "conflict": {
-        "symfony/symfony": "*",
-        "twig/twig": ">=3.0"
+        "symfony/symfony": "*"
     },
     "extra": {
         "symfony": {
