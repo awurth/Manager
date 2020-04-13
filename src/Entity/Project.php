@@ -21,6 +21,16 @@ class Project
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProjectType", inversedBy="projects")
+     */
+    private $type;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="projects")
+     */
+    private $customer;
+
+    /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank()
@@ -48,16 +58,6 @@ class Project
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ProjectType", inversedBy="projects")
-     */
-    private $type;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="projects")
-     */
-    private $customer;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectEnvironment", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $environments;
@@ -75,6 +75,30 @@ class Project
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getType(): ?ProjectType
+    {
+        return $this->type;
+    }
+
+    public function setType(?ProjectType $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): self
+    {
+        $this->customer = $customer;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -121,30 +145,6 @@ class Project
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getType(): ?ProjectType
-    {
-        return $this->type;
-    }
-
-    public function setType(?ProjectType $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getCustomer(): ?Customer
-    {
-        return $this->customer;
-    }
-
-    public function setCustomer(?Customer $customer): self
-    {
-        $this->customer = $customer;
 
         return $this;
     }

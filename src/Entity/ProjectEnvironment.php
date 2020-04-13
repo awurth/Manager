@@ -19,6 +19,22 @@ class ProjectEnvironment
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="environments")
+     * @ORM\JoinColumn(nullable=false)
+     *
+     * @Assert\NotNull()
+     */
+    private $project;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Server", inversedBy="projectEnvironments")
+     * @ORM\JoinColumn(nullable=false)
+     *
+     * @Assert\NotNull()
+     */
+    private $server;
+
+    /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank()
@@ -60,25 +76,33 @@ class ProjectEnvironment
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="environments")
-     * @ORM\JoinColumn(nullable=false)
-     *
-     * @Assert\NotNull()
-     */
-    private $project;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Server", inversedBy="projectEnvironments")
-     * @ORM\JoinColumn(nullable=false)
-     *
-     * @Assert\NotNull()
-     */
-    private $server;
-
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
+    public function getServer(): ?Server
+    {
+        return $this->server;
+    }
+
+    public function setServer(?Server $server): self
+    {
+        $this->server = $server;
+
+        return $this;
     }
 
     public function getEnvironment(): ?string
@@ -149,30 +173,6 @@ class ProjectEnvironment
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getProject(): ?Project
-    {
-        return $this->project;
-    }
-
-    public function setProject(?Project $project): self
-    {
-        $this->project = $project;
-
-        return $this;
-    }
-
-    public function getServer(): ?Server
-    {
-        return $this->server;
-    }
-
-    public function setServer(?Server $server): self
-    {
-        $this->server = $server;
 
         return $this;
     }

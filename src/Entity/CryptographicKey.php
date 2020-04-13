@@ -21,6 +21,14 @@ class CryptographicKey
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cryptographicKeys")
+     * @ORM\JoinColumn(nullable=false)
+     *
+     * @Assert\NotNull()
+     */
+    private $user;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $type = self::TYPE_SSH;
@@ -54,14 +62,6 @@ class CryptographicKey
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cryptographicKeys")
-     * @ORM\JoinColumn(nullable=false)
-     *
-     * @Assert\NotNull()
-     */
-    private $user;
-
     public function __toString(): string
     {
         return (string)$this->name;
@@ -70,6 +70,18 @@ class CryptographicKey
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
     public function getType(): ?string
@@ -128,18 +140,6 @@ class CryptographicKey
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }

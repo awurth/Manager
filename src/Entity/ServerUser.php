@@ -18,6 +18,14 @@ class ServerUser
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Server", inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     *
+     * @Assert\NotNull()
+     */
+    private $server;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Assert\Length(max=255)
@@ -31,14 +39,6 @@ class ServerUser
      */
     private $password;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Server", inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
-     *
-     * @Assert\NotNull()
-     */
-    private $server;
-
     public function __toString(): string
     {
         return (string)$this->username;
@@ -47,6 +47,18 @@ class ServerUser
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getServer(): ?Server
+    {
+        return $this->server;
+    }
+
+    public function setServer(?Server $server): self
+    {
+        $this->server = $server;
+
+        return $this;
     }
 
     public function getUsername(): ?string
@@ -69,18 +81,6 @@ class ServerUser
     public function setPassword(?string $password): self
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    public function getServer(): ?Server
-    {
-        return $this->server;
-    }
-
-    public function setServer(?Server $server): self
-    {
-        $this->server = $server;
 
         return $this;
     }

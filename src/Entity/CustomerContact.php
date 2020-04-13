@@ -19,6 +19,14 @@ class CustomerContact
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="contacts")
+     * @ORM\JoinColumn(nullable=false)
+     *
+     * @Assert\NotNull()
+     */
+    private $customer;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Assert\Email()
@@ -68,14 +76,6 @@ class CustomerContact
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="contacts")
-     * @ORM\JoinColumn(nullable=false)
-     *
-     * @Assert\NotNull()
-     */
-    private $customer;
-
     public function __toString(): string
     {
         return (string)$this->email;
@@ -84,6 +84,18 @@ class CustomerContact
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): self
+    {
+        $this->customer = $customer;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -166,18 +178,6 @@ class CustomerContact
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getCustomer(): ?Customer
-    {
-        return $this->customer;
-    }
-
-    public function setCustomer(?Customer $customer): self
-    {
-        $this->customer = $customer;
 
         return $this;
     }
