@@ -45,6 +45,7 @@ form:
     label_environment: Environnement
     label_firstname: Prénom
     label_gender: Genre
+    label_image_file: Image
     label_ip: Adresse IP
     label_job: Fonction
     label_lastname: Nom

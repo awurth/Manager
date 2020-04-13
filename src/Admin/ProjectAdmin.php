@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\Form\Type\CollectionType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 final class ProjectAdmin extends AbstractAdmin
 {
@@ -21,6 +22,7 @@ final class ProjectAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Project', ['label' => 'form.group.label_project'])
+                ->add('imageFile', VichImageType::class, ['required' => false])
                 ->add('name')
                 ->add('slug')
                 ->add('customer')

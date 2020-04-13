@@ -2,14 +2,20 @@
 
 namespace App\Entity;
 
+use Carbon\Carbon;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
+ *
+ * @Vich\Uploadable()
  */
 class Project
 {
@@ -67,9 +73,23 @@ class Project
     private $updatedAt;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageFilename;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectEnvironment", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $environments;
+
+    /**
+     * @var File
+     *
+     * @Vich\UploadableField(mapping="project_image", fileNameProperty="imageFilename")
+     *
+     * @Assert\Image()
+     */
+    private $imageFile;
 
     public function __construct()
     {
@@ -79,6 +99,27 @@ class Project
     public function __toString(): string
     {
         return (string)$this->name;
+    }
+
+    public function getCarbonUpdatedAt(): ?Carbon
+    {
+        return $this->updatedAt ? (new Carbon($this->updatedAt)) : null;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+
+        if ($imageFile) {
+            $this->updatedAt = new DateTime();
+        }
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -166,6 +207,18 @@ class Project
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getImageFilename(): ?string
+    {
+        return $this->imageFilename;
+    }
+
+    public function setImageFilename(?string $imageFilename): self
+    {
+        $this->imageFilename = $imageFilename;
 
         return $this;
     }
