@@ -6,7 +6,7 @@
     <ul class="mt-4">
       {% for project in projects %}
         <li>
-          <a href="{{ path('app_project', { id: project.id }) }}">{{ project.name }}</a>
+          <a href="{{ path('app_project', { slug: project.slug }) }}">{{ project.name }}</a>
         </li>
       {% endfor %}
     </ul>

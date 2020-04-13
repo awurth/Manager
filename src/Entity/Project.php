@@ -35,6 +35,15 @@ class Project
      *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
+     * @Assert\Regex("/^[0-9a-z-]+$/")
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max=255)
      */
     private $name;
 
@@ -97,6 +106,18 @@ class Project
     public function setCustomer(?Customer $customer): self
     {
         $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

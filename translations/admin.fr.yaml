@@ -57,6 +57,7 @@ form:
     label_postcode: Code postal
     label_project: Projet
     label_server: Serveur
+    label_slug: URL
     label_ssh_key_value: Clé
     label_type: Type
     label_url: URL
@@ -82,6 +83,7 @@ list:
     label_operating_system: Système d'exploitation
     label_phone: Téléphone
     label_postcode: Code postal
+    label_slug: URL
     label_type_name: Type
     label_username: Nom d'utilisateur
     label_website: Site web
