@@ -69,15 +69,22 @@ abstract class AbstractAction
         return $this->redirect($this->router->generate($route, $parameters), $status);
     }
 
-    protected function render(string $view, array $parameters = [], Response $response = null): Response
+    protected function render(string $template, array $parameters = [], Response $response = null): Response
     {
         if (null === $response) {
             $response = new Response();
         }
 
-        $response->setContent($this->twig->render($view, $parameters));
+        $response->setContent($this->twig->render($template, $parameters));
 
         return $response;
+    }
+
+    protected function renderPage(string $page, string $template, array $parameters = [], Response $response = null): Response
+    {
+        $parameters['page_name'] = $page;
+
+        return $this->render($template, $parameters, $response);
     }
 
     /**

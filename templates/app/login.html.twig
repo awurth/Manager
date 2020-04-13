@@ -1,0 +1,50 @@
+{% extends 'app/layout.html.twig' %}
+
+{% block topbar %}{% endblock %}
+
+{% block html_class %}h-full{% endblock %}
+{% block body_class %}h-full m-0 bg-gray-200{% endblock %}
+
+{% block body %}
+  <div class="flex flex-wrap justify-center content-center h-full">
+    <div class="w-full max-w-sm">
+      <h1 class="text-center text-gray-800 text-xl font-bold mb-4">Connexion</h1>
+      <form class="bg-white shadow-md rounded px-8 py-6 mb-32" action="{{ path('app_login') }}" method="post">
+        {% if error %}
+          <div class="bg-red-100 border-l-4 border-red-500 text-red-700 text-sm p-4 mb-4" role="alert">
+            <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+          </div>
+        {% endif %}
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Adresse email</label>
+          <input
+            type="text"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="email"
+            name="{{ form.email.vars.full_name }}"
+            value="{{ last_username }}"
+            required="required"
+            placeholder="Adresse email"
+          >
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Mot de passe</label>
+          <input
+            type="password"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="password"
+            name="{{ form.password.vars.full_name }}"
+            required="required"
+            placeholder="Mot de passe"
+          >
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded focus:outline-none focus:shadow-outline">Connexion</button>
+        </div>
+
+        {{ form_row(form._token) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

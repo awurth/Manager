@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class AdminAuthenticator extends AbstractFormLoginAuthenticator
+class AppAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
@@ -33,7 +33,7 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request): bool
     {
-        return 'admin_login' === $request->attributes->get('_route')
+        return 'app_login' === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
@@ -58,15 +58,7 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user): bool
     {
-        if (!$this->passwordEncoder->isPasswordValid($user, $credentials['password'])) {
-            return false;
-        }
-
-        if (!$user->hasRole('ROLE_ADMIN')) {
-            throw new CustomUserMessageAuthenticationException('You don\'t have permission to access that page.');
-        }
-
-        return true;
+        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
@@ -75,11 +67,11 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('sonata_admin_dashboard'));
+        return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }
 
     protected function getLoginUrl(): string
     {
-        return $this->urlGenerator->generate('admin_login');
+        return $this->urlGenerator->generate('app_login');
     }
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ app.request.locale }}">
+<html lang="{{ app.request.locale }}" class="{% block html_class %}{% endblock %}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +12,7 @@
 
   <title>Manager</title>
 </head>
-<body class="{% block body_class %}{% endblock %}">
+<body class="{% block body_class %}{% endblock %}"{% if page_name is defined %} data-page="{{ page_name }}"{% endif %}>
 {% block topbar %}
   {% include 'app/_topbar.html.twig' %}
 {% endblock %}
