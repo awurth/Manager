@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="{{ app.request.locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}" />
+
+  {% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+  {% endblock %}
+
+  <title>Manager</title>
+</head>
+<body class="{% block body_class %}{% endblock %}">
+{% block topbar %}
+  {% include 'app/_topbar.html.twig' %}
+{% endblock %}
+{#{% block sidebar %}#}
+{#  {% include 'app/_sidebar.html.twig' %}#}
+{#{% endblock %}#}
+{% block body %}
+{% endblock %}
+{% block javascripts %}
+  {{ encore_entry_script_tags('app') }}
+{% endblock %}
+</body>
+</html>
