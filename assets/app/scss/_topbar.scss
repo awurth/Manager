@@ -10,6 +10,7 @@ header.topbar {
   top: 0;
   .btn {
     @apply p-2 m-1 text-xs text-gray-100 rounded;
+    align-items: center;
     display: flex;
     font-weight: bold;
     &:hover {

@@ -8,6 +8,14 @@
     </h1>
   </div>
   <ul class="flex ml-auto">
+    {% if is_granted('ROLE_ADMIN') %}
+      <li>
+        <a class="btn" href="{{ path('app_admin') }}">
+          <i class="fas fa-wrench mr-1"></i>
+          Admin
+        </a>
+      </li>
+    {% endif %}
     <li>
       <a class="btn" href="{{ path('app_projects') }}">Projets</a>
     </li>
@@ -15,7 +23,10 @@
       <a class="btn" href="{{ path('app_groups') }}">Groupes</a>
     </li>
     <li>
-      <a class="btn" href="{{ path('app_servers') }}">Serveurs</a>
+      <a class="btn" href="{{ path('app_servers') }}">
+        <i class="fas fa-server mr-1"></i>
+        Serveurs
+      </a>
     </li>
     <li class="dropdown">
       <button class="btn" type="button">
