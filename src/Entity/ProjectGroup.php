@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -48,6 +49,11 @@ class ProjectGroup
     public function __toString(): string
     {
         return (string)$this->name;
+    }
+
+    public function getCarbonUpdatedAt(): ?Carbon
+    {
+        return $this->updatedAt ? (new Carbon($this->updatedAt)) : null;
     }
 
     public function getId(): ?int
