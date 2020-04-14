@@ -1,10 +1,37 @@
-<header class="topbar flex flex-wrap content-center">
-  <a class="block px-2" href="{{ path('app_home') }}">
-    <img class="inline-block align-middle h-8" src="{{ asset('build/logo.png') }}" alt="Manager">
-    <span class="inline-block align-middle ml-1 text-gray-100 font-bold">Manager</span>
-  </a>
-  <a class="btn" href="{{ path('app_projects') }}">Projets</a>
-  <a class="btn" href="{{ path('app_groups') }}">Groupes</a>
-  <a class="btn" href="{{ path('app_servers') }}">Serveurs</a>
-  <a class="btn" href="{{ path('app_logout') }}">Déconnexion</a>
+<header class="topbar flex flex-wrap content-center px-2">
+  <div class="flex">
+    <h1 class="flex">
+      <a class="flex items-center px-2" href="{{ path('app_home') }}">
+        <img class="h-6" src="{{ asset('build/logo.png') }}" alt="Manager">
+        <span class="ml-2 text-gray-100 font-bold">Manager</span>
+      </a>
+    </h1>
+  </div>
+  <ul class="flex ml-auto">
+    <li>
+      <a class="btn" href="{{ path('app_projects') }}">Projets</a>
+    </li>
+    <li>
+      <a class="btn" href="{{ path('app_groups') }}">Groupes</a>
+    </li>
+    <li>
+      <a class="btn" href="{{ path('app_servers') }}">Serveurs</a>
+    </li>
+    <li class="dropdown">
+      <button class="btn" type="button">
+        {{ app.user.username }}
+      </button>
+      <div class="menu">
+        <ul>
+          <li>
+            <a class="block px-4 py-2" href="{{ path('app_logout') }}">Paramètres</a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a class="block px-4 py-2" href="{{ path('app_logout') }}">Déconnexion</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
 </header>

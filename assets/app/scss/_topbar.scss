@@ -4,18 +4,45 @@ body {
 
 header.topbar {
   @apply bg-red-900;
-  height: 3rem;
   left: 0;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   .btn {
-    @apply px-2 text-xs text-gray-100 rounded;
-    align-items: center;
+    @apply p-2 m-1 text-xs text-gray-100 rounded;
     display: flex;
     font-weight: bold;
     &:hover {
       @apply bg-white text-red-900;
+    }
+  }
+  .dropdown {
+    position: relative;
+  }
+  .menu {
+    @apply py-2 bg-white border shadow rounded;
+    display: none;
+    min-width: 15rem;
+    position: absolute;
+    right: 0;
+    top: 2.75rem;
+    &.open {
+      display: block;
+    }
+    ul {
+      li {
+        &.divider {
+          @apply bg-gray-300;
+          height: 1px;
+          margin: 0.25rem 0;
+        }
+        a {
+          @apply text-sm;
+          &:hover {
+            @apply bg-gray-200;
+          }
+        }
+      }
     }
   }
 }
