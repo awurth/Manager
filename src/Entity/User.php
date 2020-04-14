@@ -104,6 +104,21 @@ class User implements UserInterface
         return $this->getFirstname().' '.$this->getLastname();
     }
 
+    /**
+     * @return CryptographicKey[]
+     */
+    public function getSshKeys(): array
+    {
+        $sshKeys = [];
+        foreach ($this->getCryptographicKeys() as $cryptographicKey) {
+            if ($cryptographicKey->getType() === CryptographicKey::TYPE_SSH) {
+                $sshKeys[] = $cryptographicKey;
+            }
+        }
+
+        return $sshKeys;
+    }
+
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
