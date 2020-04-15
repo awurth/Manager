@@ -7,8 +7,7 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 Encore
   .setOutputPath('public/build/')
   .setPublicPath('/build')
-  .addEntry('admin', './assets/admin/ts/main.ts')
-  .addEntry('app', './assets/app/ts/main.ts')
+  .addEntry('app', './assets/ts/main.ts')
   .splitEntryChunks()
   .enableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
@@ -23,7 +22,7 @@ Encore
   .enableTypeScriptLoader()
   .enablePostCssLoader()
   .copyFiles([
-    { from: './assets/app/images' }
+    { from: './assets/images' }
   ])
 ;
 

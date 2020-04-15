@@ -10,8 +10,6 @@
         "knplabs/knp-menu-bundle": "^2.0",
         "nesbot/carbon": "^2.32",
         "rollerworks/password-strength-bundle": "^2.2",
-        "sonata-project/admin-bundle": "^3.56",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.13",
         "symfony/asset": "4.4.*",
         "symfony/console": "4.4.*",
         "symfony/dotenv": "4.4.*",
