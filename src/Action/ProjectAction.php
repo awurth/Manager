@@ -30,7 +30,7 @@ class ProjectAction extends AbstractAction
             throw $this->createNotFoundException('Project not found');
         }
 
-        return $this->renderPage('project', 'app/project.html.twig', [
+        return $this->renderPage('project', 'app/project/project.html.twig', [
             'project' => $project
         ]);
     }
