@@ -103,10 +103,10 @@
         "version": "2.1.0"
     },
     "knplabs/knp-menu": {
-        "version": "2.6.0"
+        "version": "v3.1.0"
     },
     "knplabs/knp-menu-bundle": {
-        "version": "v2.3.0"
+        "version": "v3.0.0"
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.3"

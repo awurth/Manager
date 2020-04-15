@@ -7,7 +7,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "gedmo/doctrine-extensions": "^2.4",
-        "knplabs/knp-menu-bundle": "^2.0",
+        "knplabs/knp-menu-bundle": "^3.0",
         "nesbot/carbon": "^2.32",
         "rollerworks/password-strength-bundle": "^2.2",
         "symfony/asset": "4.4.*",
