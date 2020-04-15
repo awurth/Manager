@@ -144,6 +144,9 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/event-dispatcher": {
+        "version": "1.0.0"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
@@ -183,9 +186,6 @@
             "bin/console",
             "config/bootstrap.php"
         ]
-    },
-    "symfony/debug": {
-        "version": "v4.4.2"
     },
     "symfony/debug-bundle": {
         "version": "4.1",
