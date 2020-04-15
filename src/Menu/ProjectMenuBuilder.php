@@ -28,38 +28,39 @@ class ProjectMenuBuilder
 
         $menu
             ->addChild('Project', [
-                'label' => $project->getName(),
-                'route' => 'app_project',
-                'routeParameters' => [
-                    'slug' => $project->getSlug()
-                ],
                 'attributes' => [
                     'class' => 'header'
                 ],
                 'extras' => [
-                    'identicon' => substr($project->getName(), 0, 1)
+                    'identicon' => substr($project->getName(), 0, 1),
+                    'translation_domain' => false
+                ],
+                'label' => $project->getName(),
+                'route' => 'app_project',
+                'routeParameters' => [
+                    'slug' => $project->getSlug()
                 ]
             ]);
 
         $menu
             ->addChild('Overview', [
+                'extras' => [
+                    'icon' => 'fas fa-home'
+                ],
                 'label' => 'project.overview',
                 'route' => 'app_project',
                 'routeParameters' => [
                     'slug' => $project->getSlug()
-                ],
-                'extras' => [
-                    'icon' => 'fas fa-home'
                 ]
             ]);
 
         $menu
             ->addChild('Settings', [
-                'label' => 'project.settings',
-                'route' => 'app_home',
                 'extras' => [
                     'icon' => 'fas fa-cog'
-                ]
+                ],
+                'label' => 'project.settings',
+                'route' => 'app_home'
             ]);
 
         return $menu;
