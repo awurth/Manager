@@ -2,6 +2,7 @@
 
 namespace App\Action;
 
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -17,8 +18,19 @@ use Twig\Environment;
 
 abstract class AbstractAction
 {
+    /**
+     * @var RouterInterface
+     */
     protected $router;
+
+    /**
+     * @var Security
+     */
     protected $security;
+
+    /**
+     * @var Environment
+     */
     protected $twig;
 
     protected function createNotFoundException(string $message = 'Not Found', ?Throwable $previous = null): NotFoundHttpException
@@ -55,6 +67,12 @@ abstract class AbstractAction
         $response->setContentDisposition($disposition, $fileName ?? $response->getFile()->getFilename());
 
         return $response;
+    }
+
+    protected function getUser(): User
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return $this->security->getUser();
     }
 
     protected function isGranted($attributes, $subject = null): bool
