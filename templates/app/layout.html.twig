@@ -13,13 +13,20 @@
   <title>Manager</title>
 </head>
 <body class="{% block body_class %}{% endblock %}"{% if page_name is defined %} data-page="{{ page_name }}"{% endif %}>
+
 {% block topbar %}
-  {% include 'app/_topbar.html.twig' %}
+  {{ include('app/_topbar.html.twig') }}
 {% endblock %}
-{% block body %}
+
+{% block flash %}
+  {{ include('app/_flash.html.twig') }}
 {% endblock %}
+
+{% block body %}{% endblock %}
+
 {% block javascripts %}
   {{ encore_entry_script_tags('app') }}
 {% endblock %}
+
 </body>
 </html>
