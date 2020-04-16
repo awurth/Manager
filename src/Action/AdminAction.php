@@ -12,10 +12,7 @@ class AdminAction extends AbstractAction
 {
     public function __invoke(): Response
     {
-        if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->redirectToRoute('app_login');
-        }
-
+        $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         return $this->renderPage('admin', 'app/admin/admin.html.twig');

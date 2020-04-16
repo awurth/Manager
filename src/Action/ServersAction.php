@@ -21,9 +21,7 @@ class ServersAction extends AbstractAction
 
     public function __invoke(): Response
     {
-        if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->redirectToRoute('app_login');
-        }
+        $this->denyAccessUnlessLoggedIn();
 
         $servers = $this->serverRepository->findAll();
 

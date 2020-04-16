@@ -24,9 +24,7 @@ class LoginAction extends AbstractAction
 
     public function __invoke(): Response
     {
-        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->redirectToRoute('app_home');
-        }
+        $this->denyAccessUnlessLoggedIn();
 
         $form = $this->formFactory->create(LoginType::class, [
             'username' => $this->authenticationUtils->getLastUsername()

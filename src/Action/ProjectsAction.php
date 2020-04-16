@@ -20,9 +20,7 @@ class ProjectsAction extends AbstractAction
 
     public function __invoke(): Response
     {
-        if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->redirectToRoute('app_login');
-        }
+        $this->denyAccessUnlessLoggedIn();
 
         $projects = $this->projectRepository->findAll();
 

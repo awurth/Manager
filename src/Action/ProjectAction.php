@@ -20,9 +20,7 @@ class ProjectAction extends AbstractAction
 
     public function __invoke(string $slug): Response
     {
-        if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->redirectToRoute('app_login');
-        }
+        $this->denyAccessUnlessLoggedIn();
 
         $project = $this->projectRepository->findOneBy(['slug' => $slug]);
 

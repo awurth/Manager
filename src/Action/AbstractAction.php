@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -30,11 +31,18 @@ abstract class AbstractAction
         return new AccessDeniedException($message, $previous);
     }
 
-    protected function denyAccessUnlessGranted($attributes, $subject = null, string $message = 'Access Denied.'): void
+    protected function denyAccessUnlessLoggedIn(): void
     {
-        if (!$this->isGranted($attributes, $subject)) {
+        if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw new HttpException(401);
+        }
+    }
+
+    protected function denyAccessUnlessGranted(string $attribute, $subject = null, string $message = 'Access Denied.'): void
+    {
+        if (!$this->isGranted($attribute, $subject)) {
             $exception = $this->createAccessDeniedException($message);
-            $exception->setAttributes($attributes);
+            $exception->setAttributes($attribute);
             $exception->setSubject($subject);
 
             throw $exception;
