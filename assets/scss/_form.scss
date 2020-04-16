@@ -1,0 +1,29 @@
+input[type="text"], textarea {
+  @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight;
+  &:focus {
+    @apply outline-none bg-white border-gray-500;
+  }
+}
+
+input[type="file"] {
+  @apply block w-full bg-white border border-gray-400 px-4 py-2 pr-8 mb-3 rounded leading-tight;
+}
+
+select {
+  @apply block appearance-none w-full bg-white border border-gray-400 px-4 py-2 pr-8 mb-3 rounded leading-tight;
+  &:hover {
+    @apply border-gray-500;
+  }
+  &:focus {
+    @apply outline-none shadow-outline;
+  }
+}
+
+label {
+  @apply inline-block mb-2 font-bold;
+  &.required {
+    &::after {
+      content: " *";
+    }
+  }
+}
