@@ -39,6 +39,7 @@ header.topbar {
         }
         a {
           @apply text-sm;
+          display: block;
           &:hover {
             @apply bg-gray-200;
           }

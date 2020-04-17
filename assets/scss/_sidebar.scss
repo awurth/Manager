@@ -10,6 +10,7 @@ nav.sidebar {
   width: 15.625rem;
   > ul {
     > li {
+      position: relative;
       > a {
         @apply text-gray-700 text-sm;
         align-items: center;
@@ -46,6 +47,51 @@ nav.sidebar {
             justify-content: center;
             margin-right: 0.5rem;
             text-transform: uppercase;
+          }
+        }
+      }
+      > ul {
+        display: none;
+      }
+      &.current {
+        > ul {
+          display: block;
+          > li {
+            > a {
+              @apply text-gray-700 text-sm;
+              align-items: center;
+              display: flex;
+              margin-left: 4px;
+              padding: 0.75rem 0.75rem 0.75rem (0.875rem + 1.5rem);
+              &:hover {
+                @apply text-gray-900 bg-gray-200;
+              }
+            }
+            &.current {
+              > a {
+                @apply text-red-900 font-bold;
+              }
+            }
+          }
+        }
+      }
+      &:not(.current):hover {
+        > ul {
+          @apply py-1 bg-white border border-l-0 shadow rounded-r;
+          display: block;
+          left: 15.625rem;
+          margin-left: -1px;
+          min-width: 10rem;
+          position: absolute;
+          top: 0;
+          > li {
+            > a {
+              @apply px-4 py-2 text-sm;
+              display: block;
+              &:hover {
+                @apply bg-gray-200;
+              }
+            }
           }
         }
       }
