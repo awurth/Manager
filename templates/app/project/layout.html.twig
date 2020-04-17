@@ -4,7 +4,7 @@
 
 {% block body %}
   {% block sidebar %}
-    {% include 'app/sidebar/_project_sidebar.html.twig' %}
+    {{ include('app/sidebar/_project_sidebar.html.twig') }}
   {% endblock %}
   {% block page_container %}
     <div class="container mx-auto p-4">

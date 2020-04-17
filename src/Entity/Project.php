@@ -3,13 +3,10 @@
 namespace App\Entity;
 
 use Carbon\Carbon;
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -43,19 +40,12 @@ class Project
     private $customer;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
-     * @Assert\Regex("/^[0-9a-z-]+$/")
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
      */
     private $name;
 
@@ -88,15 +78,6 @@ class Project
      */
     private $environments;
 
-    /**
-     * @var File
-     *
-     * @Vich\UploadableField(mapping="project_image", fileNameProperty="imageFilename")
-     *
-     * @Assert\Image()
-     */
-    private $imageFile;
-
     public function __construct()
     {
         $this->environments = new ArrayCollection();
@@ -110,22 +91,6 @@ class Project
     public function getCarbonUpdatedAt(): ?Carbon
     {
         return $this->updatedAt ? (new Carbon($this->updatedAt)) : null;
-    }
-
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    public function setImageFile(?File $imageFile): self
-    {
-        $this->imageFile = $imageFile;
-
-        if ($imageFile) {
-            $this->updatedAt = new DateTime();
-        }
-
-        return $this;
     }
 
     public function getId(): ?int
