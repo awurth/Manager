@@ -60,8 +60,19 @@ class ProjectMenuBuilder
                     'icon' => 'fas fa-cog'
                 ],
                 'label' => 'project.settings',
-                'route' => 'app_home'
+                'route' => 'app_project_edit',
+                'routeParameters' => [
+                    'slug' => $project->getSlug()
+                ]
             ]);
+
+        $menu['Settings']->addChild('General', [
+            'label' => 'project.general_settings',
+            'route' => 'app_project_edit',
+            'routeParameters' => [
+                'slug' => $project->getSlug()
+            ]
+        ]);
 
         return $menu;
     }

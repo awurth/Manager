@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Project;
 
+use App\Action\AbstractAction;
 use App\Repository\ProjectRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +28,8 @@ class ProjectAction extends AbstractAction
         if (!$project) {
             throw $this->createNotFoundException('Project not found');
         }
+
+        $this->denyAccessUnlessGranted('VIEW', $project);
 
         return $this->renderPage('project', 'app/project/project.html.twig', [
             'project' => $project

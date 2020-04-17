@@ -1,6 +1,8 @@
 select_customer: Sélectionnez un client
 select_project_type: Sélectionnez un type
 
+project.general_settings: Général
+project.members: Membres
 project.overview: Projet
 project.settings: Paramètres
 
@@ -8,3 +10,4 @@ flash:
     success:
         project:
             create: Projet créé avec succès
+            edit: Projet modifié avec succès
