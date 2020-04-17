@@ -89,9 +89,15 @@ class User implements UserInterface
 
     private $plainPassword;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectMember", mappedBy="user", orphanRemoval=true)
+     */
+    private $projects;
+
     public function __construct()
     {
         $this->cryptographicKeys = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -295,6 +301,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($cryptographicKey->getUser() === $this) {
                 $cryptographicKey->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectMember[]
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(ProjectMember $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(ProjectMember $project): self
+    {
+        if ($this->projects->contains($project)) {
+            $this->projects->removeElement($project);
+            // set the owning side to null (unless already changed)
+            if ($project->getUser() === $this) {
+                $project->setUser(null);
             }
         }
 

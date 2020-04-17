@@ -78,9 +78,15 @@ class Project
      */
     private $environments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectMember", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $members;
+
     public function __construct()
     {
         $this->environments = new ArrayCollection();
+        $this->members = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -231,6 +237,37 @@ class Project
             // set the owning side to null (unless already changed)
             if ($environment->getProject() === $this) {
                 $environment->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectMember[]
+     */
+    public function getMembers(): Collection
+    {
+        return $this->members;
+    }
+
+    public function addMember(ProjectMember $member): self
+    {
+        if (!$this->members->contains($member)) {
+            $this->members[] = $member;
+            $member->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMember(ProjectMember $member): self
+    {
+        if ($this->members->contains($member)) {
+            $this->members->removeElement($member);
+            // set the owning side to null (unless already changed)
+            if ($member->getProject() === $this) {
+                $member->setProject(null);
             }
         }
 
