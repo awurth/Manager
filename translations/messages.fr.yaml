@@ -1,6 +1,9 @@
 select_customer: Sélectionnez un client
 select_project_type: Sélectionnez un type
 
+admin:
+    users: Utilisateurs
+
 project:
     general_settings: Général
     member:

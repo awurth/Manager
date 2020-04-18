@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Admin;
 
+use App\Action\AbstractAction;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin", name="app_admin")
+ * @Route("/", name="app_admin")
  */
 class AdminAction extends AbstractAction
 {

@@ -31,6 +31,15 @@ class AdminMenuBuilder
                 'route' => 'app_admin'
             ]);
 
+        $menu
+            ->addChild('Users', [
+                'extras' => [
+                    'icon' => 'fas fa-users'
+                ],
+                'label' => 'admin.users',
+                'route' => 'app_admin_users'
+            ]);
+
         return $menu;
     }
 }
