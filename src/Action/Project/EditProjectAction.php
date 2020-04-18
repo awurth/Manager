@@ -46,7 +46,7 @@ class EditProjectAction extends AbstractAction
             throw $this->createNotFoundException('Project not found');
         }
 
-        $this->denyAccessUnlessGranted('EDIT', $project);
+        $this->denyAccessUnlessGranted('MEMBER', $project);
 
         $model = new EditProject($project);
         $form = $this->formFactory->create(EditProjectType::class, $model);

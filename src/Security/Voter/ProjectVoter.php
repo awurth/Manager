@@ -11,6 +11,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProjectVoter extends Voter
 {
+    private const ACCESS_LEVELS = [
+        'GUEST' => ProjectMember::ACCESS_LEVEL_GUEST,
+        'MEMBER' => ProjectMember::ACCESS_LEVEL_MEMBER,
+        'OWNER' => ProjectMember::ACCESS_LEVEL_OWNER
+    ];
+
     private $authorizationChecker;
 
     public function __construct(AuthorizationCheckerInterface $authorizationChecker)
@@ -20,7 +26,7 @@ class ProjectVoter extends Voter
 
     protected function supports($attribute, $subject): bool
     {
-        return in_array($attribute, ['EDIT', 'DELETE', 'VIEW'])
+        return array_key_exists($attribute, self::ACCESS_LEVELS)
             && $subject instanceof Project;
     }
 
@@ -47,16 +53,7 @@ class ProjectVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case 'EDIT':
-                return $projectMember->getAccessLevel() >= ProjectMember::ACCESS_LEVEL_MEMBER;
-            case 'DELETE':
-                return $projectMember->getAccessLevel() >= ProjectMember::ACCESS_LEVEL_OWNER;
-            case 'VIEW':
-                return $projectMember->getAccessLevel() >= ProjectMember::ACCESS_LEVEL_GUEST;
-        }
-
-        return false;
+        return $projectMember->getAccessLevel() >= self::ACCESS_LEVELS[$attribute];
     }
 
     private function getProjectMember(UserInterface $user, Project $project): ?ProjectMember

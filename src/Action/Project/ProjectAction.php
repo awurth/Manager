@@ -29,7 +29,7 @@ class ProjectAction extends AbstractAction
             throw $this->createNotFoundException('Project not found');
         }
 
-        $this->denyAccessUnlessGranted('VIEW', $project);
+        $this->denyAccessUnlessGranted('GUEST', $project);
 
         return $this->renderPage('project', 'app/project/project.html.twig', [
             'project' => $project
