@@ -48,6 +48,13 @@ nav.sidebar {
             margin-right: 0.5rem;
             text-transform: uppercase;
           }
+          > i {
+            @apply bg-white w-12 h-12 rounded-full text-base text-gray-700;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            margin-right: 0.5rem;
+          }
         }
       }
       > ul {

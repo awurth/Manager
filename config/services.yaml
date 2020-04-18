@@ -33,6 +33,10 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
 
+    App\Menu\AdminMenuBuilder:
+        tags:
+            - { name: knp_menu.menu_builder, method: create, alias: admin }
+
     App\Menu\ProjectMenuBuilder:
         tags:
             - { name: knp_menu.menu_builder, method: create, alias: project }
