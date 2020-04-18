@@ -4,6 +4,7 @@ namespace App\Action\Project;
 
 use App\Action\AbstractAction;
 use App\Entity\Project;
+use App\Entity\ProjectMember;
 use App\Form\CreateProjectType;
 use App\Form\Model\CreateProject;
 use Doctrine\ORM\EntityManagerInterface;
@@ -44,9 +45,14 @@ class CreateProjectAction extends AbstractAction
                 ->setDescription($model->description)
                 ->setImageFilename($model->imageFilename)
                 ->setName($model->name)
-                ->setOwner($this->getUser())
                 ->setSlug($model->slug)
                 ->setType($model->type);
+
+            $project->addMember(
+                (new ProjectMember())
+                    ->setUser($this->getUser())
+                    ->setAccessLevel(ProjectMember::ACCESS_LEVEL_OWNER)
+            );
 
             $this->entityManager->persist($project);
             $this->entityManager->flush();

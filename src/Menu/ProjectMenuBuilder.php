@@ -74,6 +74,14 @@ class ProjectMenuBuilder
             ]
         ]);
 
+        $menu['Settings']->addChild('Members', [
+            'label' => 'project.members',
+            'route' => 'app_project_members',
+            'routeParameters' => [
+                'slug' => $project->getSlug()
+            ]
+        ]);
+
         return $menu;
     }
 

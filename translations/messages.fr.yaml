@@ -1,13 +1,21 @@
 select_customer: Sélectionnez un client
 select_project_type: Sélectionnez un type
 
-project.general_settings: Général
-project.members: Membres
-project.overview: Projet
-project.settings: Paramètres
+project:
+    general_settings: Général
+    member:
+        access_level:
+            guest: Invité
+            member: Membre
+            owner: Propriétaire
+    members: Membres
+    overview: Projet
+    settings: Paramètres
 
 flash:
     success:
         project:
             create: Projet créé avec succès
             edit: Projet modifié avec succès
+            member:
+                add: Membre(s) ajouté(s) avec succès

@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProjectMember
 {
+    public const ACCESS_LEVEL_GUEST = 0;
+    public const ACCESS_LEVEL_MEMBER = 10;
+    public const ACCESS_LEVEL_OWNER = 100;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -30,6 +34,11 @@ class ProjectMember
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $accessLevel = self::ACCESS_LEVEL_GUEST;
 
     public function getId(): ?int
     {
@@ -56,6 +65,18 @@ class ProjectMember
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAccessLevel(): ?int
+    {
+        return $this->accessLevel;
+    }
+
+    public function setAccessLevel(int $accessLevel): self
+    {
+        $this->accessLevel = $accessLevel;
 
         return $this;
     }

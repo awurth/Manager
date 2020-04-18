@@ -3,6 +3,7 @@
 namespace App\Security\Voter;
 
 use App\Entity\Project;
+use App\Entity\ProjectMember;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -42,14 +43,30 @@ class ProjectVoter extends Voter
             return true;
         }
 
+        if (!$projectMember = $this->getProjectMember($user, $subject)) {
+            return false;
+        }
+
         switch ($attribute) {
             case 'EDIT':
+                return $projectMember->getAccessLevel() >= ProjectMember::ACCESS_LEVEL_MEMBER;
             case 'DELETE':
-                return $user === $subject->getOwner();
+                return $projectMember->getAccessLevel() >= ProjectMember::ACCESS_LEVEL_OWNER;
             case 'VIEW':
-                return true;
+                return $projectMember->getAccessLevel() >= ProjectMember::ACCESS_LEVEL_GUEST;
         }
 
         return false;
+    }
+
+    private function getProjectMember(UserInterface $user, Project $project): ?ProjectMember
+    {
+        foreach ($project->getMembers() as $projectMember) {
+            if ($projectMember->getUser() === $user) {
+                return $projectMember;
+            }
+        }
+
+        return null;
     }
 }
