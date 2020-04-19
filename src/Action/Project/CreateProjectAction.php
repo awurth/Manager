@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/projects/new", name="app_create_project")
+ * @Route("/projects/new", name="app_project_create")
  */
 class CreateProjectAction extends AbstractAction
 {
