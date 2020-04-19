@@ -2,7 +2,7 @@
 
 {% block page_content %}
   <h1 class="pb-3 mb-4 border-b border-gray-300 text-2xl font-bold">Utilisateurs</h1>
-  <a class="inline-block px-4 py-2 bg-green-600 hover:bg-green-700 rounded text-white mb-4" href="#">Nouvel utilisateur</a>
+  <a class="inline-block px-4 py-2 bg-green-600 hover:bg-green-700 rounded text-white mb-4" href="{{ path('app_admin_user_create') }}">Nouvel utilisateur</a>
   <ul class="list-disc list-inside">
     {% for user in users %}
       <li class="mb-4">

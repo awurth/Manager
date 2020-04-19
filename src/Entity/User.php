@@ -6,20 +6,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- *
- * @UniqueEntity("email")
  */
 class User implements UserInterface
 {
-    public const GENDER_FEMALE = 0;
-    public const GENDER_MALE = 1;
-    public const GENDER_NEUTRAL = 2;
+    public const GENDER_NEUTRAL = 0;
+    public const GENDER_FEMALE = 1;
+    public const GENDER_MALE = 2;
 
     /**
      * @ORM\Id()
@@ -30,10 +26,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     *
-     * @Assert\NotBlank()
-     * @Assert\Email()
-     * @Assert\Length(max=255)
      */
     private $email;
 
@@ -49,22 +41,16 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="integer")
-     *
-     * @Assert\NotBlank()
      */
     private $gender;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(max=255)
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(max=255)
      */
     private $lastname;
 
@@ -86,8 +72,6 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\CryptographicKey", mappedBy="user")
      */
     private $cryptographicKeys;
-
-    private $plainPassword;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectMember", mappedBy="user", orphanRemoval=true)
@@ -127,12 +111,6 @@ class User implements UserInterface
 
     public function eraseCredentials(): void
     {
-        $this->plainPassword = null;
-    }
-
-    public function getPlainPassword(): ?string
-    {
-        return $this->plainPassword;
     }
 
     public function getSalt(): ?string
@@ -143,13 +121,6 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string)$this->email;
-    }
-
-    public function setPlainPassword(?string $plainPassword): self
-    {
-        $this->plainPassword = $plainPassword;
-
-        return $this;
     }
 
     public function getId(): ?int

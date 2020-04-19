@@ -24,3 +24,5 @@ flash:
                 add: Membre(s) ajouté(s) avec succès
                 leave: Vous avez quitté le projet
                 remove: Membre supprimé avec succès
+        user:
+            create: Utilisateur créé avec succès

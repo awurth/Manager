@@ -34,7 +34,10 @@ class AdminMenuBuilder
         $menu
             ->addChild('Users', [
                 'extras' => [
-                    'icon' => 'fas fa-users'
+                    'icon' => 'fas fa-users',
+                    'routes' => [
+                        'app_admin_user_create'
+                    ]
                 ],
                 'label' => 'admin.users',
                 'route' => 'app_admin_users'
