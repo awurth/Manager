@@ -2,6 +2,7 @@ select_customer: Sélectionnez un client
 select_project_type: Sélectionnez un type
 
 admin:
+    credentials: Identifiants
     projects: Projets
     users: Utilisateurs
 

@@ -52,6 +52,15 @@ class AdminMenuBuilder
                 'route' => 'app_admin_projects'
             ]);
 
+        $menu
+            ->addChild('Credentials', [
+                'extras' => [
+                    'icon' => 'fas fa-key'
+                ],
+                'label' => 'admin.credentials',
+                'route' => 'app_admin_credentials'
+            ]);
+
         return $menu;
     }
 }
