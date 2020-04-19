@@ -76,12 +76,12 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectMember", mappedBy="user", orphanRemoval=true)
      */
-    private $projects;
+    private $projectMembers;
 
     public function __construct()
     {
         $this->cryptographicKeys = new ArrayCollection();
-        $this->projects = new ArrayCollection();
+        $this->projectMembers = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -107,6 +107,19 @@ class User implements UserInterface
         }
 
         return $sshKeys;
+    }
+
+    /**
+     * @return Project[]
+     */
+    public function getProjects(): array
+    {
+        $projects = [];
+        foreach ($this->getProjectMembers() as $projectMember) {
+            $projects[] = $projectMember->getProject();
+        }
+
+        return $projects;
     }
 
     public function eraseCredentials(): void
@@ -281,28 +294,28 @@ class User implements UserInterface
     /**
      * @return Collection|ProjectMember[]
      */
-    public function getProjects(): Collection
+    public function getProjectMembers(): Collection
     {
-        return $this->projects;
+        return $this->projectMembers;
     }
 
-    public function addProject(ProjectMember $project): self
+    public function addProjectMember(ProjectMember $projectMember): self
     {
-        if (!$this->projects->contains($project)) {
-            $this->projects[] = $project;
-            $project->setUser($this);
+        if (!$this->projectMembers->contains($projectMember)) {
+            $this->projectMembers[] = $projectMember;
+            $projectMember->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeProject(ProjectMember $project): self
+    public function removeProjectMember(ProjectMember $projectMember): self
     {
-        if ($this->projects->contains($project)) {
-            $this->projects->removeElement($project);
+        if ($this->projectMembers->contains($projectMember)) {
+            $this->projectMembers->removeElement($projectMember);
             // set the owning side to null (unless already changed)
-            if ($project->getUser() === $this) {
-                $project->setUser(null);
+            if ($projectMember->getUser() === $this) {
+                $projectMember->setUser(null);
             }
         }
 
