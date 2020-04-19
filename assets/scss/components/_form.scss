@@ -5,6 +5,13 @@ input[type="text"], input[type="email"], input[type="password"], textarea {
   }
 }
 
+input[type="checkbox"], input[type="radio"] {
+  margin-right: 0.5rem;
+  + label {
+    margin-right: 1rem;
+  }
+}
+
 input[type="file"] {
   @apply block w-full bg-white border border-gray-400 px-4 py-2 pr-8 mb-3 rounded leading-tight;
 }
@@ -24,6 +31,14 @@ label {
   &.required {
     &::after {
       content: " *";
+    }
+  }
+  input[type="checkbox"] + &, input[type="radio"] + & {
+    @apply font-normal;
+    &.required {
+      &::after {
+        content: "";
+      }
     }
   }
 }
