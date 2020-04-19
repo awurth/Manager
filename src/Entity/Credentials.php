@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CredentialsRepository")
@@ -20,39 +21,26 @@ class Credentials
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(max=255)
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Email()
-     * @Assert\Length(max=255)
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\Length(max=255)
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Url()
-     * @Assert\Length(max=255)
      */
     private $website;
 
@@ -75,9 +63,48 @@ class Credentials
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CredentialsUser", mappedBy="credentials", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $credentialsUsers;
+
+    public function __construct()
+    {
+        $this->credentialsUsers = new ArrayCollection();
+    }
+
     public function __toString(): string
     {
         return (string)$this->name;
+    }
+
+    /**
+     * @param User[] $users
+     */
+    public function setUsers(array $users): void
+    {
+        foreach ($this->getCredentialsUsers() as $credentialsUser) {
+            if (!in_array($credentialsUser->getUser(), $users, true)) {
+                $this->removeCredentialsUser($credentialsUser);
+            }
+        }
+
+        foreach ($users as $user) {
+            $alreadyAdded = false;
+            foreach ($this->getCredentialsUsers() as $credentialsUser) {
+                if ($credentialsUser->getUser() === $user) {
+                    $alreadyAdded = true;
+                }
+            }
+
+            if (!$alreadyAdded) {
+                $this->addCredentialsUser(
+                    (new CredentialsUser())
+                        ->setUser($user)
+                        ->setAccessLevel(CredentialsUser::ACCESS_LEVEL_USER)
+                );
+            }
+        }
     }
 
     public function getId(): ?int
@@ -177,6 +204,37 @@ class Credentials
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CredentialsUser[]
+     */
+    public function getCredentialsUsers(): Collection
+    {
+        return $this->credentialsUsers;
+    }
+
+    public function addCredentialsUser(CredentialsUser $credentialsUser): self
+    {
+        if (!$this->credentialsUsers->contains($credentialsUser)) {
+            $this->credentialsUsers[] = $credentialsUser;
+            $credentialsUser->setCredentials($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCredentialsUser(CredentialsUser $credentialsUser): self
+    {
+        if ($this->credentialsUsers->contains($credentialsUser)) {
+            $this->credentialsUsers->removeElement($credentialsUser);
+            // set the owning side to null (unless already changed)
+            if ($credentialsUser->getCredentials() === $this) {
+                $credentialsUser->setCredentials(null);
+            }
+        }
 
         return $this;
     }

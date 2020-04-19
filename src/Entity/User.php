@@ -78,10 +78,16 @@ class User implements UserInterface
      */
     private $projectMembers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CredentialsUser", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $credentialsUsers;
+
     public function __construct()
     {
         $this->cryptographicKeys = new ArrayCollection();
         $this->projectMembers = new ArrayCollection();
+        $this->credentialsUsers = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -120,6 +126,19 @@ class User implements UserInterface
         }
 
         return $projects;
+    }
+
+    /**
+     * @return Credentials[]
+     */
+    public function getCredentialsList(): array
+    {
+        $credentialsList = [];
+        foreach ($this->getCredentialsUsers() as $credentialsUser) {
+            $credentialsList[] = $credentialsUser->getCredentials();
+        }
+
+        return $credentialsList;
     }
 
     public function eraseCredentials(): void
@@ -316,6 +335,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($projectMember->getUser() === $this) {
                 $projectMember->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CredentialsUser[]
+     */
+    public function getCredentialsUsers(): Collection
+    {
+        return $this->credentialsUsers;
+    }
+
+    public function addCredentialsUser(CredentialsUser $credentialsUser): self
+    {
+        if (!$this->credentialsUsers->contains($credentialsUser)) {
+            $this->credentialsUsers[] = $credentialsUser;
+            $credentialsUser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCredentialsUser(CredentialsUser $credentialsUser): self
+    {
+        if ($this->credentialsUsers->contains($credentialsUser)) {
+            $this->credentialsUsers->removeElement($credentialsUser);
+            // set the owning side to null (unless already changed)
+            if ($credentialsUser->getUser() === $this) {
+                $credentialsUser->setUser(null);
             }
         }
 
