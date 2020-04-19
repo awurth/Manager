@@ -45,7 +45,7 @@ abstract class AbstractAction
 
     protected function denyAccessUnlessLoggedIn(): void
     {
-        if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$this->isLoggedIn()) {
             throw new HttpException(401);
         }
     }
@@ -75,9 +75,14 @@ abstract class AbstractAction
         return $this->security->getUser();
     }
 
-    protected function isGranted($attributes, $subject = null): bool
+    protected function isGranted(string $attribute, $subject = null): bool
     {
-        return $this->security->isGranted($attributes, $subject);
+        return $this->security->isGranted($attribute, $subject);
+    }
+
+    protected function isLoggedIn(): bool
+    {
+        return $this->isGranted('IS_AUTHENTICATED_REMEMBERED');
     }
 
     protected function json($data, int $status = 200, array $headers = []): JsonResponse
