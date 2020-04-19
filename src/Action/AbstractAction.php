@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -69,6 +70,19 @@ abstract class AbstractAction
         return $response;
     }
 
+    protected function getReferer(Request $request): ?string
+    {
+        if ($referer = $request->headers->get('Referer')) {
+            if (false !== $pos = strpos($referer, '?')) {
+                $referer = substr($referer, 0, $pos);
+            }
+
+            return $referer ?: null;
+        }
+
+        return null;
+    }
+
     protected function getUser(): User
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
@@ -93,6 +107,14 @@ abstract class AbstractAction
     protected function redirect(string $url, int $status = 302): RedirectResponse
     {
         return new RedirectResponse($url, $status);
+    }
+
+    protected function redirectToReferer(Request $request, string $fallbackRoute, array $parameters = [], int $status = 302): RedirectResponse
+    {
+        $referer = $this->getReferer($request);
+        return $referer
+            ? $this->redirect($referer, $status)
+            : $this->redirect($this->router->generate($fallbackRoute, $parameters), $status);
     }
 
     protected function redirectToRoute(string $route, array $parameters = [], int $status = 302): RedirectResponse

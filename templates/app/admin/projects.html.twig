@@ -10,7 +10,7 @@
         <a class="py-2 pl-2 pr-1 ml-2 border border-gray-400 hover:bg-gray-200 rounded text-xs" href="{{ path('app_project_edit', { slug: project.slug }) }}">
           <i class="fas fa-edit"></i>
         </a>
-        <a class="p-2 ml-2 bg-red-600 hover:bg-red-700 rounded text-xs text-white" href="#">
+        <a class="p-2 ml-2 bg-red-600 hover:bg-red-700 rounded text-xs text-white" href="{{ path('app_project_delete', { slug: project.slug }) }}">
           <i class="fas fa-trash"></i>
         </a>
       </li>

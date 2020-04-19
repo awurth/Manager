@@ -26,7 +26,7 @@ class ProjectVoter extends Voter
 
     protected function supports($attribute, $subject): bool
     {
-        return array_key_exists($attribute, self::ACCESS_LEVELS)
+        return (array_key_exists($attribute, self::ACCESS_LEVELS) || 'DELETE')
             && $subject instanceof Project;
     }
 
@@ -51,6 +51,10 @@ class ProjectVoter extends Voter
 
         if (!$projectMember = $this->getProjectMember($user, $subject)) {
             return false;
+        }
+
+        if ('DELETE' === $attribute) {
+            return $projectMember->getAccessLevel() >= ProjectMember::ACCESS_LEVEL_OWNER;
         }
 
         return $projectMember->getAccessLevel() >= self::ACCESS_LEVELS[$attribute];

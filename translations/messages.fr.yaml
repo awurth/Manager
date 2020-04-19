@@ -20,6 +20,7 @@ flash:
     success:
         project:
             create: Projet créé avec succès
+            delete: Projet supprimé avec succès
             edit: Projet modifié avec succès
             member:
                 add: Membre(s) ajouté(s) avec succès
