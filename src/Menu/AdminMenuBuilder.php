@@ -43,6 +43,15 @@ class AdminMenuBuilder
                 'route' => 'app_admin_users'
             ]);
 
+        $menu
+            ->addChild('Projects', [
+                'extras' => [
+                    'icon' => 'fas fa-tasks'
+                ],
+                'label' => 'admin.projects',
+                'route' => 'app_admin_projects'
+            ]);
+
         return $menu;
     }
 }
