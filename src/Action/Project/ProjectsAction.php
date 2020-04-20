@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Project;
 
+use App\Action\AbstractAction;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,7 +15,7 @@ class ProjectsAction extends AbstractAction
     {
         $this->denyAccessUnlessLoggedIn();
 
-        return $this->renderPage('projects', 'app/projects.html.twig', [
+        return $this->renderPage('projects', 'app/project/projects.html.twig', [
             'projects' => $this->getUser()->getProjects()
         ]);
     }
