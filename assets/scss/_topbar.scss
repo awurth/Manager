@@ -8,13 +8,17 @@ header.topbar {
   position: fixed;
   right: 0;
   top: 0;
-  .btn {
-    @apply p-2 m-1 text-xs text-gray-100 rounded;
-    align-items: center;
-    display: flex;
-    font-weight: bold;
-    &:hover {
-      @apply bg-white text-red-900;
+  > ul {
+    > li {
+      > a, button {
+        @apply p-2 m-1 text-xs text-gray-100 rounded;
+        align-items: center;
+        display: flex;
+        font-weight: bold;
+        &:hover {
+          @apply bg-white text-red-900;
+        }
+      }
     }
   }
   .dropdown {

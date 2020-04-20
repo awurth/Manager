@@ -2,9 +2,9 @@
 
 {% block body %}
   <div class="container mx-auto p-4">
-    <h1 class="pb-3 border-b border-gray-300 text-2xl font-bold">Projets</h1>
+    <h1 class="pb-3 mb-4 border-b border-gray-300 text-2xl font-bold">Projets</h1>
     {% if is_granted('ROLE_PROJECT_CREATE') %}
-      <a class="inline-block px-4 py-2 bg-green-600 hover:bg-green-700 rounded text-white mt-4" href="{{ path('app_project_create') }}">Nouveau projet</a>
+      <a class="btn success" href="{{ path('app_project_create') }}">Nouveau projet</a>
     {% endif %}
     <ul class="flex flex-col mt-4">
       {% for project in projects %}

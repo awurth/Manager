@@ -10,38 +10,38 @@
   <ul class="flex ml-auto">
     {% if is_granted('ROLE_ADMIN') %}
       <li>
-        <a class="btn" href="{{ path('app_admin') }}">
+        <a href="{{ path('app_admin') }}">
           <i class="fas fa-wrench mr-1"></i>
           Admin
         </a>
       </li>
     {% endif %}
     <li>
-      <a class="btn" href="{{ path('app_credentials_list') }}">
+      <a href="{{ path('app_credentials_list') }}">
         <i class="fas fa-key mr-1"></i>
         Identifiants
       </a>
     </li>
     <li>
-      <a class="btn" href="{{ path('app_projects') }}">
+      <a href="{{ path('app_projects') }}">
         <i class="fas fa-tasks mr-1"></i>
         Projets
       </a>
     </li>
     <li>
-      <a class="btn" href="{{ path('app_groups') }}">
+      <a href="{{ path('app_groups') }}">
         <i class="fas fa-object-group mr-1"></i>
         Groupes
       </a>
     </li>
     <li>
-      <a class="btn" href="{{ path('app_servers') }}">
+      <a href="{{ path('app_servers') }}">
         <i class="fas fa-server mr-1"></i>
         Serveurs
       </a>
     </li>
     <li class="dropdown">
-      <button class="btn" type="button">
+      <button type="button">
         {{ app.user.username }}
       </button>
       <div class="menu">
