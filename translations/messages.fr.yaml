@@ -22,6 +22,7 @@ flash:
         credentials:
             create: Identifiants créés avec succès
             edit: Identifiants mis à jour avec succès
+            delete: Identifiants supprimés avec succès
         project:
             create: Projet créé avec succès
             delete: Projet supprimé avec succès
