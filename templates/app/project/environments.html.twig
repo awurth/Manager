@@ -1,0 +1,18 @@
+{% extends 'app/project/layout.html.twig' %}
+
+{% block page_content %}
+  <h1 class="pb-3 mb-4 border-b border-gray-300 text-2xl font-bold">Environnements</h1>
+  <a class="btn success mb-4" href="{{ path('app_project_environment_create', { slug: project.slug }) }}">Nouvel environnement</a>
+  {% if project.environments|length %}
+    <ul class="list-disc list-inside">
+      {% for environment in project.environments %}
+        <li class="mb-4">
+          <strong>{{ environment.name }}</strong>
+          <a class="btn" href="{{ path('app_project_environment_edit', { slug: project.slug, id: environment.id }) }}">
+            <i class="fas fa-edit"></i>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

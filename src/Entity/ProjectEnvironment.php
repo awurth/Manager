@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectEnvironmentRepository")
@@ -21,39 +20,27 @@ class ProjectEnvironment
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="environments")
      * @ORM\JoinColumn(nullable=false)
-     *
-     * @Assert\NotNull()
      */
     private $project;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Server", inversedBy="projectEnvironments")
      * @ORM\JoinColumn(nullable=false)
-     *
-     * @Assert\NotNull()
      */
     private $server;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
      */
-    private $environment;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
      */
     private $path;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(max=255)
      */
     private $url;
 
@@ -105,14 +92,14 @@ class ProjectEnvironment
         return $this;
     }
 
-    public function getEnvironment(): ?string
+    public function getName(): ?string
     {
-        return $this->environment;
+        return $this->name;
     }
 
-    public function setEnvironment(string $environment): self
+    public function setName(string $name): self
     {
-        $this->environment = $environment;
+        $this->name = $name;
 
         return $this;
     }

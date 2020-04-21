@@ -7,15 +7,23 @@ use App\Repository\ProjectRepository;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProjectMenuBuilder
 {
+    private $authorizationChecker;
     private $factory;
     private $projectRepository;
     private $requestStack;
 
-    public function __construct(FactoryInterface $factory, ProjectRepository $projectRepository, RequestStack $requestStack)
+    public function __construct(
+        AuthorizationCheckerInterface $authorizationChecker,
+        FactoryInterface $factory,
+        ProjectRepository $projectRepository,
+        RequestStack $requestStack
+    )
     {
+        $this->authorizationChecker = $authorizationChecker;
         $this->factory = $factory;
         $this->projectRepository = $projectRepository;
         $this->requestStack = $requestStack;
@@ -55,32 +63,46 @@ class ProjectMenuBuilder
             ]);
 
         $menu
-            ->addChild('Settings', [
+            ->addChild('Environments', [
                 'extras' => [
-                    'icon' => 'fas fa-cog'
+                    'icon' => 'fas fa-server',
+                    'routes' => [
+                        'app_project_environment_create',
+                        'app_project_environment_edit'
+                    ]
                 ],
-                'label' => 'project.settings',
-                'route' => 'app_project_edit',
+                'label' => 'project.environments',
+                'route' => 'app_project_environments',
                 'routeParameters' => [
                     'slug' => $project->getSlug()
                 ]
             ]);
 
-        $menu['Settings']->addChild('General', [
-            'label' => 'project.general_settings',
-            'route' => 'app_project_edit',
-            'routeParameters' => [
-                'slug' => $project->getSlug()
-            ]
-        ]);
+        $menu
+            ->addChild('Members', [
+                'extras' => [
+                    'icon' => 'fas fa-users'
+                ],
+                'label' => 'project.members',
+                'route' => 'app_project_members',
+                'routeParameters' => [
+                    'slug' => $project->getSlug()
+                ]
+            ]);
 
-        $menu['Settings']->addChild('Members', [
-            'label' => 'project.members',
-            'route' => 'app_project_members',
-            'routeParameters' => [
-                'slug' => $project->getSlug()
-            ]
-        ]);
+        if ($this->authorizationChecker->isGranted('EDIT', $project)) {
+            $menu
+                ->addChild('Settings', [
+                    'extras' => [
+                        'icon' => 'fas fa-cog'
+                    ],
+                    'label' => 'project.settings',
+                    'route' => 'app_project_edit',
+                    'routeParameters' => [
+                        'slug' => $project->getSlug()
+                    ]
+                ]);
+        }
 
         return $menu;
     }
