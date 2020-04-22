@@ -1,11 +1,11 @@
 {% extends 'app/project/layout.html.twig' %}
 
 {% block page_content %}
-  <h1 class="pb-3 mb-4 border-b border-gray-300 text-2xl font-bold">Nouvel environnement</h1>
+  <div class="page-title">
+    <h1>Nouvel environnement</h1>
+  </div>
   {{ form_start(form) }}
     {{ form_rest(form) }}
-    <button type="submit" class="btn success mt-4">
-      Créer !
-    </button>
+    <button type="submit" class="btn success mt-4">Créer !</button>
   {{ form_end(form) }}
 {% endblock %}

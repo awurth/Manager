@@ -1,7 +1,9 @@
 {% extends 'app/admin/layout.html.twig' %}
 
 {% block page_content %}
-  <h1 class="pb-3 mb-4 border-b border-gray-300 text-2xl font-bold">Clients</h1>
+  <div class="page-title">
+    <h1>Clients</h1>
+  </div>
   <a class="btn success mb-4" href="{{ path('app_admin_customer_create') }}">Nouveau client</a>
   <ul class="list-disc list-inside">
     {% for customer in customers %}
