@@ -12,7 +12,7 @@ export default class Dropdown {
     this.init();
   }
 
-  public closeAll () {
+  public closeAll (): void {
     this.dropdowns.forEach((dropdown: Element) => {
       const menu = dropdown.querySelector('.menu');
       if (menu) {
@@ -21,7 +21,7 @@ export default class Dropdown {
     });
   }
 
-  private init () {
+  private init (): void {
     this.dropdowns = document.querySelectorAll(this.selector);
 
     this.dropdowns.forEach(dropdown => {
@@ -32,7 +32,7 @@ export default class Dropdown {
   }
 
   @bind
-  private onDocumentClick (event: MouseEvent) {
+  private onDocumentClick (event: MouseEvent): void {
     const target = event.target as Element;
     if (!target.closest(this.selector)) {
       this.closeAll();
@@ -40,7 +40,7 @@ export default class Dropdown {
   }
 
   @bind
-  private onDropdownClick (event: MouseEvent) {
+  private onDropdownClick (event: MouseEvent): void {
     const dropdown = event.currentTarget as Element;
     const menu = dropdown.querySelector('.menu');
     const isOpen = menu && menu.classList.contains('open');
