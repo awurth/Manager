@@ -61,6 +61,15 @@ class AdminMenuBuilder
                 'route' => 'app_admin_credentials'
             ]);
 
+        $menu
+            ->addChild('Customers', [
+                'extras' => [
+                    'icon' => 'fas fa-user-tie'
+                ],
+                'label' => 'admin.customers',
+                'route' => 'app_admin_customers'
+            ]);
+
         return $menu;
     }
 }

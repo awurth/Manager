@@ -3,6 +3,7 @@ select_project_type: Sélectionnez un type
 
 admin:
     credentials: Identifiants
+    customers: Clients
     projects: Projets
     users: Utilisateurs
 
@@ -23,6 +24,9 @@ flash:
             create: Identifiants créés avec succès
             edit: Identifiants mis à jour avec succès
             delete: Identifiants supprimés avec succès
+        customer:
+            create: Client créé avec succès
+            edit: Client mis à jour avec succès
         project:
             create: Projet créé avec succès
             delete: Projet supprimé avec succès

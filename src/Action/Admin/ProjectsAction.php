@@ -26,7 +26,7 @@ class ProjectsAction extends AbstractAction
 
         $projects = $this->projectRepository->findAll();
 
-        return $this->renderPage('admin-users', 'app/admin/projects.html.twig', [
+        return $this->renderPage('admin-projects', 'app/admin/projects.html.twig', [
             'projects' => $projects
         ]);
     }

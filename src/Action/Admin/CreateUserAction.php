@@ -59,7 +59,7 @@ class CreateUserAction extends AbstractAction
             return $this->redirectToRoute('app_admin_users');
         }
 
-        return $this->renderPage('admin', 'app/admin/create_user.html.twig', [
+        return $this->renderPage('admin-create-user', 'app/admin/create_user.html.twig', [
             'form' => $form->createView()
         ]);
     }
