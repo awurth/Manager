@@ -25,7 +25,7 @@ class AccessLevelLabelExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('access_level_label', [$this, 'getAccessLevelLabel']),
+            new TwigFilter('access_level_label', [$this, 'getAccessLevelLabel'])
         ];
     }
 

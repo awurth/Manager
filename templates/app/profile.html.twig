@@ -14,7 +14,7 @@
               <strong>{{ ssh_key.name }}</strong>
               <span>{{ ssh_key.value }}</span>
               <span class="block">
-                Ajoutée {{ ssh_key.carbonCreatedAt.locale(app.request.locale).diffForHumans }}
+                Ajoutée {{ ssh_key.createdAt|diffForHumans }}
               </span>
             </li>
           {% endfor %}

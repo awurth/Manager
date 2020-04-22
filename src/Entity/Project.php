@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -86,11 +85,6 @@ class Project
     public function __toString(): string
     {
         return (string)$this->name;
-    }
-
-    public function getCarbonUpdatedAt(): ?Carbon
-    {
-        return $this->updatedAt ? (new Carbon($this->updatedAt)) : null;
     }
 
     public function getId(): ?int

@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -66,11 +65,6 @@ class CryptographicKey
     public function __toString(): string
     {
         return (string)$this->name;
-    }
-
-    public function getCarbonCreatedAt(): ?Carbon
-    {
-        return $this->createdAt ? (new Carbon($this->createdAt)) : null;
     }
 
     public function getId(): ?int
