@@ -14,8 +14,6 @@ class EditProject
 {
     public $type;
 
-    public $customer;
-
     /**
      * @Assert\NotBlank()
      */
@@ -37,7 +35,6 @@ class EditProject
     public function __construct(Project $project)
     {
         $this->type = $project->getType();
-        $this->customer = $project->getCustomer();
         $this->name = $project->getName();
         $this->description = $project->getDescription();
     }

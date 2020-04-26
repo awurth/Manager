@@ -16,8 +16,6 @@ class CreateProject
 {
     public $type;
 
-    public $customer;
-
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max=255)

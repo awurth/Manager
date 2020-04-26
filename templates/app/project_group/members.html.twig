@@ -1,4 +1,4 @@
-{% extends 'app/project/layout.html.twig' %}
+{% extends 'app/project_group/layout.html.twig' %}
 
 {% block page_content %}
   <div class="page-title">
@@ -11,14 +11,14 @@
     <button type="submit" class="btn success mt-4">Ajouter</button>
   {{ form_end(form) }}
   <h2 class="mb-3 mt-6 text-lg font-bold">Membres existants</h2>
-  {% if project.members|length %}
+  {% if group.members|length %}
     <ul class="list-disc list-inside">
-      {% for member in project.members %}
+      {% for member in group.members %}
         <li class="mb-4">
           <strong>{{ member.user.email }}</strong>
           <small class="border rounded p-1 ml-2 text-gray-700">{{ member|access_level_label }}</small>
           {% if member.accessLevel != constant('App\\Entity\\ProjectMember::ACCESS_LEVEL_OWNER') %}
-            <a class="p-2 ml-2 bg-red-600 hover:bg-red-700 rounded text-xs text-white" href="{{ path('app_project_member_remove', { slug: project.slug, id: member.id }) }}">
+            <a class="p-2 ml-2 bg-red-600 hover:bg-red-700 rounded text-xs text-white" href="{{ path('app_project_group_member_remove', { slug: group.slug, id: member.id }) }}">
               <i class="fas fa-trash"></i>
             </a>
           {% endif %}

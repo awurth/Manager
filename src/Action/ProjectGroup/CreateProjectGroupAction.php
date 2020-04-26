@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Action\Project;
+namespace App\Action\ProjectGroup;
 
 use App\Action\AbstractAction;
-use App\Entity\Project;
-use App\Entity\ProjectMember;
-use App\Form\CreateProjectType;
-use App\Form\Model\CreateProject;
+use App\Entity\ProjectGroup;
+use App\Entity\ProjectGroupMember;
+use App\Form\CreateProjectGroupType;
+use App\Form\Model\CreateProjectGroup;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/projects/new", name="app_project_create")
+ * @Route("/groups/new", name="app_project_group_create")
  */
-class CreateProjectAction extends AbstractAction
+class CreateProjectGroupAction extends AbstractAction
 {
     private $formFactory;
     private $flashBag;
@@ -33,37 +33,36 @@ class CreateProjectAction extends AbstractAction
     public function __invoke(Request $request): Response
     {
         $this->denyAccessUnlessLoggedIn();
-        $this->denyAccessUnlessGranted('ROLE_PROJECT_CREATE');
+        $this->denyAccessUnlessGranted('ROLE_PROJECT_GROUP_CREATE');
 
-        $model = new CreateProject();
-        $form = $this->formFactory->create(CreateProjectType::class, $model);
+        $model = new CreateProjectGroup();
+        $form = $this->formFactory->create(CreateProjectGroupType::class, $model);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $project = (new Project())
+            $group = (new ProjectGroup())
+                ->setCustomer($model->customer)
                 ->setDescription($model->description)
-                ->setImageFilename($model->imageFilename)
                 ->setName($model->name)
-                ->setSlug($model->slug)
-                ->setType($model->type);
+                ->setSlug($model->slug);
 
-            $project->addMember(
-                (new ProjectMember())
+            $group->addMember(
+                (new ProjectGroupMember())
                     ->setUser($this->getUser())
-                    ->setAccessLevel(ProjectMember::ACCESS_LEVEL_OWNER)
+                    ->setAccessLevel(ProjectGroupMember::ACCESS_LEVEL_OWNER)
             );
 
-            $this->entityManager->persist($project);
+            $this->entityManager->persist($group);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.project.create');
+            $this->flashBag->add('success', 'flash.success.project_group.create');
 
-            return $this->redirectToRoute('app_project', [
-                'slug' => $project->getSlug()
+            return $this->redirectToRoute('app_project_group_view', [
+                'slug' => $group->getSlug()
             ]);
         }
 
-        return $this->renderPage('create-project', 'app/project/create_project.html.twig', [
+        return $this->renderPage('create-project-group', 'app/project_group/create.html.twig', [
             'form' => $form->createView()
         ]);
     }

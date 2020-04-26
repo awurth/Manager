@@ -54,7 +54,6 @@ class EditProjectAction extends AbstractAction
 
         if ($form->isSubmitted() && $form->isValid()) {
             $project
-                ->setCustomer($model->customer)
                 ->setDescription($model->description)
                 ->setName($model->name)
                 ->setType($model->type);

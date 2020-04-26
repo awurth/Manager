@@ -18,6 +18,16 @@ project:
     overview: Projet
     settings: Paramètres
 
+project_group:
+    member:
+        access_level:
+            guest: Invité
+            member: Membre
+            owner: Propriétaire
+    members: Membres
+    overview: Groupe
+    settings: Paramètres
+
 flash:
     success:
         credentials:
@@ -37,6 +47,13 @@ flash:
             member:
                 add: Membre(s) ajouté(s) avec succès
                 leave: Vous avez quitté le projet
+                remove: Membre supprimé avec succès
+        project_group:
+            create: Groupe créé avec succès
+            edit: Groupe mis à jour avec succès
+            member:
+                add: Membre(s) ajouté(s) avec succès
+                leave: Vous avez quitté le groupe
                 remove: Membre supprimé avec succès
         user:
             create: Utilisateur créé avec succès

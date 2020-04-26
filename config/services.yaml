@@ -38,6 +38,10 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: create, alias: admin }
 
+    App\Menu\ProjectGroupMenuBuilder:
+        tags:
+            - { name: knp_menu.menu_builder, method: create, alias: project_group }
+
     App\Menu\ProjectMenuBuilder:
         tags:
             - { name: knp_menu.menu_builder, method: create, alias: project }

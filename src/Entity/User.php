@@ -69,12 +69,17 @@ class User implements UserInterface
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CryptographicKey", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\CryptographicKey", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $cryptographicKeys;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectMember", mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectGroupMember", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $projectGroupMembers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectMember", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $projectMembers;
 
@@ -86,6 +91,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->cryptographicKeys = new ArrayCollection();
+        $this->projectGroupMembers = new ArrayCollection();
         $this->projectMembers = new ArrayCollection();
         $this->credentialsUsers = new ArrayCollection();
     }
@@ -113,6 +119,19 @@ class User implements UserInterface
         }
 
         return $sshKeys;
+    }
+
+    /**
+     * @return ProjectGroup[]
+     */
+    public function getProjectGroups(): array
+    {
+        $projectGroups = [];
+        foreach ($this->getProjectGroupMembers() as $projectGroupMember) {
+            $projectGroups[] = $projectGroupMember->getProjectGroup();
+        }
+
+        return $projectGroups;
     }
 
     /**
@@ -304,6 +323,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($cryptographicKey->getUser() === $this) {
                 $cryptographicKey->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectGroupMember[]
+     */
+    public function getProjectGroupMembers(): Collection
+    {
+        return $this->projectGroupMembers;
+    }
+
+    public function addProjectGroupMember(ProjectGroupMember $projectGroupMember): self
+    {
+        if (!$this->projectGroupMembers->contains($projectGroupMember)) {
+            $this->projectGroupMembers[] = $projectGroupMember;
+            $projectGroupMember->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjectGroupMember(ProjectGroupMember $projectGroupMember): self
+    {
+        if ($this->projectGroupMembers->contains($projectGroupMember)) {
+            $this->projectGroupMembers->removeElement($projectGroupMember);
+            // set the owning side to null (unless already changed)
+            if ($projectGroupMember->getUser() === $this) {
+                $projectGroupMember->setUser(null);
             }
         }
 

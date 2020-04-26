@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectGroupRepository")
@@ -19,10 +20,17 @@ class ProjectGroup
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="projectGroups")
+     */
+    private $customer;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $slug;
+
+    /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
      */
     private $name;
 
@@ -45,6 +53,16 @@ class ProjectGroup
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectGroupMember", mappedBy="projectGroup", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $members;
+
+    public function __construct()
+    {
+        $this->members = new ArrayCollection();
+    }
+
     public function __toString(): string
     {
         return (string)$this->name;
@@ -53,6 +71,30 @@ class ProjectGroup
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): self
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -99,6 +141,37 @@ class ProjectGroup
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectGroupMember[]
+     */
+    public function getMembers(): Collection
+    {
+        return $this->members;
+    }
+
+    public function addMember(ProjectGroupMember $member): self
+    {
+        if (!$this->members->contains($member)) {
+            $this->members[] = $member;
+            $member->setProjectGroup($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMember(ProjectGroupMember $member): self
+    {
+        if ($this->members->contains($member)) {
+            $this->members->removeElement($member);
+            // set the owning side to null (unless already changed)
+            if ($member->getProjectGroup() === $this) {
+                $member->setProjectGroup(null);
+            }
+        }
 
         return $this;
     }

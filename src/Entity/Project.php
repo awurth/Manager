@@ -6,12 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
- *
- * @Vich\Uploadable()
  */
 class Project
 {
@@ -26,11 +23,6 @@ class Project
      * @ORM\ManyToOne(targetEntity="App\Entity\ProjectType", inversedBy="projects")
      */
     private $type;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="projects")
-     */
-    private $customer;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
@@ -100,18 +92,6 @@ class Project
     public function setType(?ProjectType $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getCustomer(): ?Customer
-    {
-        return $this->customer;
-    }
-
-    public function setCustomer(?Customer $customer): self
-    {
-        $this->customer = $customer;
 
         return $this;
     }

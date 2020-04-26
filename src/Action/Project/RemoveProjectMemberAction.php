@@ -18,20 +18,20 @@ class RemoveProjectMemberAction extends AbstractAction
 {
     private $entityManager;
     private $flashBag;
-    private $projectRepository;
     private $projectMemberRepository;
+    private $projectRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FlashBagInterface $flashBag,
-        ProjectRepository $projectRepository,
-        ProjectMemberRepository $projectMemberRepository
+        ProjectMemberRepository $projectMemberRepository,
+        ProjectRepository $projectRepository
     )
     {
         $this->entityManager = $entityManager;
         $this->flashBag = $flashBag;
-        $this->projectRepository = $projectRepository;
         $this->projectMemberRepository = $projectMemberRepository;
+        $this->projectRepository = $projectRepository;
     }
 
     public function __invoke(string $slug, int $id): Response

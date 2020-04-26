@@ -16,7 +16,7 @@ class AdminMenuBuilder
 
     public function create(array $options): ItemInterface
     {
-        $menu = $this->factory->createItem('Project Menu');
+        $menu = $this->factory->createItem('Admin Menu');
 
         $menu
             ->addChild('Admin', [

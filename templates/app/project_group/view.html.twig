@@ -1,0 +1,22 @@
+{% extends 'app/project_group/layout.html.twig' %}
+
+{% block page_content %}
+  <div class="page-title">
+    <h1>{{ group.name }}</h1>
+  </div>
+  {% if group.description %}
+    <p class="mb-4">{{ group.description }}</p>
+  {% endif %}
+  <div class="grid grid-cols-2 gap-4">
+    {% if group.customer %}
+      <div class="px-4 py-2 border border-gray-300 shadow">
+        <h2 class="font-bold mb-2">Client</h2>
+        <p>{{ group.customer.name }}</p>
+        <p>{{ group.customer.address }}</p>
+        <p>{{ group.customer.postcode }} {{ group.customer.city }}</p>
+        {% if group.customer.phone %}<p>{{ group.customer.phone }}</p>{% endif %}
+        {% if group.customer.email %}<p>{{ group.customer.email }}</p>{% endif %}
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

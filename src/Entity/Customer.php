@@ -69,14 +69,14 @@ class Customer
     private $contacts;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="customer", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectGroup", mappedBy="customer", cascade={"persist"})
      */
-    private $projects;
+    private $projectGroups;
 
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
-        $this->projects = new ArrayCollection();
+        $this->projectGroups = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -217,30 +217,30 @@ class Customer
     }
 
     /**
-     * @return Collection|Project[]
+     * @return Collection|ProjectGroup[]
      */
-    public function getProjects(): Collection
+    public function getProjectGroups(): Collection
     {
-        return $this->projects;
+        return $this->projectGroups;
     }
 
-    public function addProject(Project $project): self
+    public function addProjectGroup(ProjectGroup $projectGroup): self
     {
-        if (!$this->projects->contains($project)) {
-            $this->projects[] = $project;
-            $project->setCustomer($this);
+        if (!$this->projectGroups->contains($projectGroup)) {
+            $this->projectGroups[] = $projectGroup;
+            $projectGroup->setCustomer($this);
         }
 
         return $this;
     }
 
-    public function removeProject(Project $project): self
+    public function removeProjectGroup(ProjectGroup $projectGroup): self
     {
-        if ($this->projects->contains($project)) {
-            $this->projects->removeElement($project);
+        if ($this->projectGroups->contains($projectGroup)) {
+            $this->projectGroups->removeElement($projectGroup);
             // set the owning side to null (unless already changed)
-            if ($project->getCustomer() === $this) {
-                $project->setCustomer(null);
+            if ($projectGroup->getCustomer() === $this) {
+                $projectGroup->setCustomer(null);
             }
         }
 
