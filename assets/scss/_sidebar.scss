@@ -17,7 +17,7 @@ nav.sidebar {
         display: flex;
         padding: 1rem;
         &:hover {
-          @apply text-gray-900 bg-gray-200;
+          @apply text-gray-900 bg-gray-300;
         }
         > i {
           margin-right: 0.5rem;
@@ -28,6 +28,7 @@ nav.sidebar {
           margin-left: 4px;
         }
         &.current, &.current_ancestor {
+          @apply bg-gray-200;
           box-shadow: inset 4px 0 0 theme('colors.red.800');
           > a {
             @apply text-red-900 font-bold;
@@ -71,12 +72,12 @@ nav.sidebar {
               margin-left: 4px;
               padding: 0.75rem 0.75rem 0.75rem (0.875rem + 1.5rem);
               &:hover {
-                @apply text-gray-900 bg-gray-200;
+                @apply text-gray-900 bg-gray-300;
               }
             }
             &.current {
               > a {
-                @apply text-red-900 font-bold;
+                @apply bg-gray-300 text-red-900 font-bold;
               }
             }
           }
