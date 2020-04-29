@@ -4,7 +4,7 @@ namespace App\Action\Admin;
 
 use App\Action\AbstractAction;
 use App\Entity\User;
-use App\Form\CreateUserType;
+use App\Form\Type\CreateUserType;
 use App\Form\Model\CreateUser;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;

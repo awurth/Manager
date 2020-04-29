@@ -3,7 +3,7 @@
 namespace App\Action\Project;
 
 use App\Action\AbstractAction;
-use App\Form\EditProjectType;
+use App\Form\Type\EditProjectType;
 use App\Form\Model\EditProject;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;

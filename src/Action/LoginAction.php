@@ -2,7 +2,7 @@
 
 namespace App\Action;
 
-use App\Form\LoginType;
+use App\Form\Type\LoginType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

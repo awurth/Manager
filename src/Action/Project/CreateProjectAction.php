@@ -5,7 +5,7 @@ namespace App\Action\Project;
 use App\Action\AbstractAction;
 use App\Entity\Project;
 use App\Entity\ProjectMember;
-use App\Form\CreateProjectType;
+use App\Form\Type\CreateProjectType;
 use App\Form\Model\CreateProject;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;

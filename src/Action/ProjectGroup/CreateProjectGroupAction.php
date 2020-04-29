@@ -5,7 +5,7 @@ namespace App\Action\ProjectGroup;
 use App\Action\AbstractAction;
 use App\Entity\ProjectGroup;
 use App\Entity\ProjectGroupMember;
-use App\Form\CreateProjectGroupType;
+use App\Form\Type\CreateProjectGroupType;
 use App\Form\Model\CreateProjectGroup;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;

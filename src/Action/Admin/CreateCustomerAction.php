@@ -4,7 +4,7 @@ namespace App\Action\Admin;
 
 use App\Action\AbstractAction;
 use App\Entity\Customer;
-use App\Form\CreateCustomerType;
+use App\Form\Type\CreateCustomerType;
 use App\Form\Model\CreateCustomer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;

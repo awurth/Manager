@@ -5,7 +5,7 @@ namespace App\Action\Credentials;
 use App\Action\AbstractAction;
 use App\Entity\Credentials;
 use App\Entity\CredentialsUser;
-use App\Form\CreateCredentialsType;
+use App\Form\Type\CreateCredentialsType;
 use App\Form\Model\CreateCredentials;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;

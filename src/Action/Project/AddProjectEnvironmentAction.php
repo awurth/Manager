@@ -4,7 +4,7 @@ namespace App\Action\Project;
 
 use App\Action\AbstractAction;
 use App\Entity\ProjectEnvironment;
-use App\Form\CreateProjectEnvironmentType;
+use App\Form\Type\CreateProjectEnvironmentType;
 use App\Form\Model\CreateProjectEnvironment;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;

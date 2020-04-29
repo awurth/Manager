@@ -3,7 +3,7 @@
 namespace App\Action\Credentials;
 
 use App\Action\AbstractAction;
-use App\Form\EditCredentialsType;
+use App\Form\Type\EditCredentialsType;
 use App\Form\Model\EditCredentials;
 use App\Repository\CredentialsRepository;
 use Doctrine\ORM\EntityManagerInterface;

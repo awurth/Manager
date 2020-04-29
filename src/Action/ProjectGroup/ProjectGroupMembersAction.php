@@ -4,7 +4,7 @@ namespace App\Action\ProjectGroup;
 
 use App\Action\AbstractAction;
 use App\Entity\ProjectGroupMember;
-use App\Form\AddProjectGroupMemberType;
+use App\Form\Type\AddProjectGroupMemberType;
 use App\Form\Model\AddProjectGroupMember;
 use App\Repository\ProjectGroupRepository;
 use Doctrine\ORM\EntityManagerInterface;

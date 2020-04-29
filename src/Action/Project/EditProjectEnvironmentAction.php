@@ -3,8 +3,7 @@
 namespace App\Action\Project;
 
 use App\Action\AbstractAction;
-use App\Entity\ProjectEnvironment;
-use App\Form\EditProjectEnvironmentType;
+use App\Form\Type\EditProjectEnvironmentType;
 use App\Form\Model\EditProjectEnvironment;
 use App\Repository\ProjectEnvironmentRepository;
 use App\Repository\ProjectRepository;

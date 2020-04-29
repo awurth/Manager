@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Type;
 
-use App\Form\Model\CreateCustomer;
+use App\Entity\Customer;
+use App\Form\Model\EditProjectGroup;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CreateCustomerType extends AbstractType
+class EditProjectGroupType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name')
-            ->add('address')
-            ->add('postcode')
-            ->add('city')
-            ->add('phone', TelType::class, [
+            ->add('description', TextareaType::class, [
                 'required' => false
             ])
-            ->add('email', EmailType::class, [
+            ->add('customer', EntityType::class, [
+                'class' => Customer::class,
+                'placeholder' => 'select_customer',
                 'required' => false
             ]);
     }
@@ -29,7 +29,7 @@ class CreateCustomerType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => CreateCustomer::class
+            'data_class' => EditProjectGroup::class
         ]);
     }
 }

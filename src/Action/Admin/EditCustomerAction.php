@@ -3,7 +3,7 @@
 namespace App\Action\Admin;
 
 use App\Action\AbstractAction;
-use App\Form\EditCustomerType;
+use App\Form\Type\EditCustomerType;
 use App\Form\Model\EditCustomer;
 use App\Repository\CustomerRepository;
 use Doctrine\ORM\EntityManagerInterface;

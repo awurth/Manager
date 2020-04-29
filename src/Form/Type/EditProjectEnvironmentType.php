@@ -1,27 +1,30 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Type;
 
-use App\Entity\Customer;
-use App\Form\Model\EditProjectGroup;
+use App\Entity\Server;
+use App\Form\Model\EditProjectEnvironment;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditProjectGroupType extends AbstractType
+class EditProjectEnvironmentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('server', EntityType::class, [
+                'class' => Server::class
+            ])
             ->add('name')
-            ->add('description', TextareaType::class, [
+            ->add('path')
+            ->add('url', UrlType::class, [
                 'required' => false
             ])
-            ->add('customer', EntityType::class, [
-                'class' => Customer::class,
-                'placeholder' => 'select_customer',
+            ->add('description', TextareaType::class, [
                 'required' => false
             ]);
     }
@@ -29,7 +32,7 @@ class EditProjectGroupType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => EditProjectGroup::class
+            'data_class' => EditProjectEnvironment::class
         ]);
     }
 }
