@@ -40,7 +40,7 @@ class AdminMenuBuilder
                     ]
                 ],
                 'label' => 'admin.users',
-                'route' => 'app_admin_users'
+                'route' => 'app_admin_user_list'
             ]);
 
         $menu
@@ -49,7 +49,7 @@ class AdminMenuBuilder
                     'icon' => 'fas fa-tasks'
                 ],
                 'label' => 'admin.projects',
-                'route' => 'app_admin_projects'
+                'route' => 'app_admin_project_list'
             ]);
 
         $menu
@@ -58,7 +58,7 @@ class AdminMenuBuilder
                     'icon' => 'fas fa-key'
                 ],
                 'label' => 'admin.credentials',
-                'route' => 'app_admin_credentials'
+                'route' => 'app_admin_credentials_list'
             ]);
 
         $menu
@@ -67,7 +67,7 @@ class AdminMenuBuilder
                     'icon' => 'fas fa-user-tie'
                 ],
                 'label' => 'admin.customers',
-                'route' => 'app_admin_customers'
+                'route' => 'app_admin_customer_list'
             ]);
 
         return $menu;

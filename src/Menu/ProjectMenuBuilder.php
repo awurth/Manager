@@ -44,7 +44,7 @@ class ProjectMenuBuilder
                     'translation_domain' => false
                 ],
                 'label' => $project->getName(),
-                'route' => 'app_project',
+                'route' => 'app_project_view',
                 'routeParameters' => [
                     'slug' => $project->getSlug()
                 ]
@@ -56,7 +56,7 @@ class ProjectMenuBuilder
                     'icon' => 'fas fa-home'
                 ],
                 'label' => 'project.overview',
-                'route' => 'app_project',
+                'route' => 'app_project_view',
                 'routeParameters' => [
                     'slug' => $project->getSlug()
                 ]
@@ -67,12 +67,12 @@ class ProjectMenuBuilder
                 'extras' => [
                     'icon' => 'fas fa-server',
                     'routes' => [
-                        'app_project_environment_create',
+                        'app_project_environment_add',
                         'app_project_environment_edit'
                     ]
                 ],
                 'label' => 'project.environments',
-                'route' => 'app_project_environments',
+                'route' => 'app_project_environment_list',
                 'routeParameters' => [
                     'slug' => $project->getSlug()
                 ]

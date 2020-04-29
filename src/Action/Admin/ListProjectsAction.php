@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/projects", name="app_admin_projects")
+ * @Route("/projects", name="app_admin_project_list")
  */
-class ProjectsAction extends AbstractAction
+class ListProjectsAction extends AbstractAction
 {
     private $projectRepository;
 
@@ -26,7 +26,7 @@ class ProjectsAction extends AbstractAction
 
         $projects = $this->projectRepository->findAll();
 
-        return $this->renderPage('admin-projects', 'app/admin/projects.html.twig', [
+        return $this->renderPage('admin-list-projects', 'app/admin/list_projects.html.twig', [
             'projects' => $projects
         ]);
     }

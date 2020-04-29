@@ -55,7 +55,7 @@ class CreateUserAction extends AbstractAction
 
             $this->flashBag->add('success', 'flash.success.user.create');
 
-            return $this->redirectToRoute('app_admin_users');
+            return $this->redirectToRoute('app_admin_user_list');
         }
 
         return $this->renderPage('admin-create-user', 'app/admin/create_user.html.twig', [

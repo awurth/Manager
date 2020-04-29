@@ -12,7 +12,7 @@
       {% for project in projects %}
         <li class="flex py-3 border-b last:border-b-0">
           <div class="flex w-12 h-12 mr-4">
-            <a href="{{ path('app_project', { slug: project.slug }) }}" class="block w-full h-full">
+            <a href="{{ path('app_project_view', { slug: project.slug }) }}" class="block w-full h-full">
               {% if project.imageFilename %}
                 <img class="w-full" src="{{ vich_uploader_asset(project, 'imageFile') }}" alt="{{ project.name }}">
               {% else %}
@@ -23,7 +23,7 @@
             </a>
           </div>
           <div class="flex flex-auto items-center">
-            <a class="mr-auto text-sm font-bold" href="{{ path('app_project', { slug: project.slug }) }}">{{ project.name }}</a>
+            <a class="mr-auto text-sm font-bold" href="{{ path('app_project_view', { slug: project.slug }) }}">{{ project.name }}</a>
             <span class="text-sm text-gray-600">Dernière mise à jour {{ project.updatedAt|diffForHumans }}</span>
           </div>
         </li>

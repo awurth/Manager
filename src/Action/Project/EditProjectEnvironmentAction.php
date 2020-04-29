@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/project/{slug}/environments/{id}/edit", requirements={"id": "\d+"}, name="app_project_environment_edit")
+ * @Route("/project/{slug}/environment/{id}/edit", requirements={"id": "\d+"}, name="app_project_environment_edit")
  */
 class EditProjectEnvironmentAction extends AbstractAction
 {
@@ -75,7 +75,7 @@ class EditProjectEnvironmentAction extends AbstractAction
 
             $this->flashBag->add('success', 'flash.success.project.environment.edit');
 
-            return $this->redirectToRoute('app_project_environments', ['slug' => $project->getSlug()]);
+            return $this->redirectToRoute('app_project_environment_list', ['slug' => $project->getSlug()]);
         }
 
         return $this->renderPage('edit-project-environment', 'app/project/edit_environment.html.twig', [

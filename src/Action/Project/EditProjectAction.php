@@ -67,10 +67,10 @@ class EditProjectAction extends AbstractAction
 
             $this->flashBag->add('success', 'flash.success.project.edit');
 
-            return $this->redirectToRoute('app_project', ['slug' => $project->getSlug()]);
+            return $this->redirectToRoute('app_project_view', ['slug' => $project->getSlug()]);
         }
 
-        return $this->renderPage('edit-project', 'app/project/edit_project.html.twig', [
+        return $this->renderPage('edit-project', 'app/project/edit.html.twig', [
             'form' => $form->createView()
         ]);
     }

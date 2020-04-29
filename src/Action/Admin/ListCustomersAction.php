@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/customers", name="app_admin_customers")
+ * @Route("/customers", name="app_admin_customer_list")
  */
-class CustomersAction extends AbstractAction
+class ListCustomersAction extends AbstractAction
 {
     private $customerRepository;
 
@@ -26,7 +26,7 @@ class CustomersAction extends AbstractAction
 
         $customers = $this->customerRepository->findAll();
 
-        return $this->renderPage('admin-customers', 'app/admin/customers.html.twig', [
+        return $this->renderPage('admin-list-customers', 'app/admin/list_customers.html.twig', [
             'customers' => $customers
         ]);
     }

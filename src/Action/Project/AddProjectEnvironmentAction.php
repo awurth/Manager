@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/project/{slug}/environments/new", name="app_project_environment_create")
+ * @Route("/project/{slug}/environments/new", name="app_project_environment_add")
  */
 class AddProjectEnvironmentAction extends AbstractAction
 {
@@ -66,10 +66,10 @@ class AddProjectEnvironmentAction extends AbstractAction
 
             $this->flashBag->add('success', 'flash.success.project.environment.create');
 
-            return $this->redirectToRoute('app_project_environments', ['slug' => $project->getSlug()]);
+            return $this->redirectToRoute('app_project_environment_list', ['slug' => $project->getSlug()]);
         }
 
-        return $this->renderPage('create-project-environment', 'app/project/create_environment.html.twig', [
+        return $this->renderPage('add-project-environment', 'app/project/add_environment.html.twig', [
             'form' => $form->createView()
         ]);
     }

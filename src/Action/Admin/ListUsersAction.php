@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/users", name="app_admin_users")
+ * @Route("/users", name="app_admin_user_list")
  */
-class UsersAction extends AbstractAction
+class ListUsersAction extends AbstractAction
 {
     private $userRepository;
 
@@ -26,7 +26,7 @@ class UsersAction extends AbstractAction
 
         $users = $this->userRepository->findAll();
 
-        return $this->renderPage('admin-users', 'app/admin/users.html.twig', [
+        return $this->renderPage('admin-list-users', 'app/admin/list_users.html.twig', [
             'users' => $users
         ]);
     }

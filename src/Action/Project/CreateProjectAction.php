@@ -56,12 +56,12 @@ class CreateProjectAction extends AbstractAction
 
             $this->flashBag->add('success', 'flash.success.project.create');
 
-            return $this->redirectToRoute('app_project', [
+            return $this->redirectToRoute('app_project_view', [
                 'slug' => $project->getSlug()
             ]);
         }
 
-        return $this->renderPage('create-project', 'app/project/create_project.html.twig', [
+        return $this->renderPage('create-project', 'app/project/create.html.twig', [
             'form' => $form->createView()
         ]);
     }

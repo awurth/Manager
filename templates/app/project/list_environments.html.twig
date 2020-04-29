@@ -4,7 +4,7 @@
   <div class="page-title">
     <h1>Environnements</h1>
   </div>
-  <a class="btn success mb-4" href="{{ path('app_project_environment_create', { slug: project.slug }) }}">Nouvel environnement</a>
+  <a class="btn success mb-4" href="{{ path('app_project_environment_add', { slug: project.slug }) }}">Nouvel environnement</a>
   {% if project.environments|length %}
     <ul class="list-disc list-inside">
       {% for environment in project.environments %}

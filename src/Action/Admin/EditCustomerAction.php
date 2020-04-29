@@ -65,7 +65,7 @@ class EditCustomerAction extends AbstractAction
 
             $this->flashBag->add('success', 'flash.success.customer.edit');
 
-            return $this->redirectToRoute('app_admin_customers');
+            return $this->redirectToRoute('app_admin_customer_list');
         }
 
         return $this->renderPage('admin-edit-customer', 'app/admin/edit_customer.html.twig', [

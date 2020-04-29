@@ -7,15 +7,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/projects", name="app_projects")
+ * @Route("/projects", name="app_project_list")
  */
-class ProjectsAction extends AbstractAction
+class ListProjectsAction extends AbstractAction
 {
     public function __invoke(): Response
     {
         $this->denyAccessUnlessLoggedIn();
 
-        return $this->renderPage('projects', 'app/project/projects.html.twig', [
+        return $this->renderPage('list-projects', 'app/project/list.html.twig', [
             'projects' => $this->getUser()->getProjects()
         ]);
     }

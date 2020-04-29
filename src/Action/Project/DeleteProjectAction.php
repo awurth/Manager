@@ -47,6 +47,6 @@ class DeleteProjectAction extends AbstractAction
 
         $this->flashBag->add('success', 'flash.success.project.delete');
 
-        return $this->redirectToRoute('app_projects');
+        return $this->redirectToRoute('app_project_list');
     }
 }

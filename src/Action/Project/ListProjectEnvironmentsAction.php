@@ -4,13 +4,14 @@ namespace App\Action\Project;
 
 use App\Action\AbstractAction;
 use App\Repository\ProjectRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/project/{slug}", name="app_project")
+ * @Route("/project/{slug}/environments", name="app_project_environment_list")
  */
-class ProjectAction extends AbstractAction
+class ListProjectEnvironmentsAction extends AbstractAction
 {
     private $projectRepository;
 
@@ -19,7 +20,7 @@ class ProjectAction extends AbstractAction
         $this->projectRepository = $projectRepository;
     }
 
-    public function __invoke(string $slug): Response
+    public function __invoke(Request $request, string $slug): Response
     {
         $this->denyAccessUnlessLoggedIn();
 
@@ -29,9 +30,9 @@ class ProjectAction extends AbstractAction
             throw $this->createNotFoundException('Project not found');
         }
 
-        $this->denyAccessUnlessGranted('GUEST', $project);
+        $this->denyAccessUnlessGranted('MEMBER', $project);
 
-        return $this->renderPage('project', 'app/project/project.html.twig', [
+        return $this->renderPage('list-project-environments', 'app/project/list_environments.html.twig', [
             'project' => $project
         ]);
     }

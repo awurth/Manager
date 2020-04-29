@@ -51,7 +51,7 @@ class CreateCustomerAction extends AbstractAction
 
             $this->flashBag->add('success', 'flash.success.customer.create');
 
-            return $this->redirectToRoute('app_admin_customers');
+            return $this->redirectToRoute('app_admin_customer_list');
         }
 
         return $this->renderPage('admin-create-customer', 'app/admin/create_customer.html.twig', [

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/group/{slug}/members/{id}/remove", requirements={"id": "\d+"}, name="app_project_group_member_remove")
+ * @Route("/group/{slug}/member/{id}/remove", requirements={"id": "\d+"}, name="app_project_group_member_remove")
  */
 class RemoveProjectGroupMemberAction extends AbstractAction
 {

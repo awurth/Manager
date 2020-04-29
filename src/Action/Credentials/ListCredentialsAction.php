@@ -9,13 +9,13 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/credentials", name="app_credentials_list")
  */
-class CredentialsAction extends AbstractAction
+class ListCredentialsAction extends AbstractAction
 {
     public function __invoke(): Response
     {
         $this->denyAccessUnlessLoggedIn();
 
-        return $this->renderPage('credentials', 'app/credentials/list.html.twig', [
+        return $this->renderPage('list-credentials', 'app/credentials/list.html.twig', [
             'credentials' => $this->getUser()->getCredentialsList()
         ]);
     }

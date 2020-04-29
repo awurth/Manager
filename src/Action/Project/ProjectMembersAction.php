@@ -65,7 +65,7 @@ class ProjectMembersAction extends AbstractAction
 
             $this->flashBag->add('success', 'flash.success.project.member.add');
 
-            return $this->redirectToRoute('app_project', ['slug' => $project->getSlug()]);
+            return $this->redirectToRoute('app_project_view', ['slug' => $project->getSlug()]);
         }
 
         return $this->renderPage('project-members', 'app/project/members.html.twig', [

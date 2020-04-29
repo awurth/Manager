@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/groups", name="app_groups")
+ * @Route("/groups", name="app_group_list")
  */
 class ListProjectGroupsAction extends AbstractAction
 {
