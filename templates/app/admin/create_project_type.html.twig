@@ -1,0 +1,11 @@
+{% extends 'app/admin/layout.html.twig' %}
+
+{% block page_content %}
+  <div class="page-title">
+    <h1>Nouveau type de projet</h1>
+  </div>
+  {{ form_start(form) }}
+    {{ form_rest(form) }}
+    <button type="submit" class="btn success mt-4">Créer</button>
+  {{ form_end(form) }}
+{% endblock %}

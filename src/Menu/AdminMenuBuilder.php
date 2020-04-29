@@ -61,6 +61,21 @@ class AdminMenuBuilder
                 'route' => 'app_admin_project_list'
             ]);
 
+        $menu['Projects']->addChild('Projects', [
+            'label' => 'admin.projects',
+            'route' => 'app_admin_project_list'
+        ]);
+
+        $menu['Projects']->addChild('Project Types', [
+            'extras' => [
+                'routes' => [
+                    'app_admin_project_type_create'
+                ]
+            ],
+            'label' => 'admin.project_types',
+            'route' => 'app_admin_project_type_list'
+        ]);
+
         $menu
             ->addChild('Credentials', [
                 'extras' => [

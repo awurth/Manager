@@ -1,0 +1,21 @@
+{% extends 'app/admin/layout.html.twig' %}
+
+{% block page_content %}
+  <div class="page-title">
+    <h1>Types de projets</h1>
+  </div>
+  <a class="btn success mb-4" href="{{ path('app_admin_project_type_create') }}">Nouveau type</a>
+  <ul class="list-disc list-inside">
+    {% for type in types %}
+      <li class="mb-4">
+        <span class="font-bold">{{ type.name }}</span>
+        <a class="btn" href="{{ path('app_admin_project_type_edit', { id: type.id }) }}">
+          <i class="fas fa-edit"></i>
+        </a>
+        <a class="btn danger" href="{{ path('app_admin_project_type_delete', { id: type.id }) }}">
+          <i class="fas fa-trash"></i>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

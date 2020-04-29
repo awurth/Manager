@@ -6,6 +6,7 @@ admin:
     customers: Clients
     project_groups: Groupes
     projects: Projets
+    project_types: Types
     users: Utilisateurs
 
 project:
@@ -49,6 +50,10 @@ flash:
                 add: Membre(s) ajouté(s) avec succès
                 leave: Vous avez quitté le projet
                 remove: Membre supprimé avec succès
+            type:
+                create: Type de projet créé avec succès
+                delete: Type de projet supprimé avec succès
+                edit: Type de projet mis à jour avec succès
         project_group:
             create: Groupe créé avec succès
             edit: Groupe mis à jour avec succès
