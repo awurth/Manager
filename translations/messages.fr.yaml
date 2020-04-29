@@ -4,6 +4,7 @@ select_project_type: Sélectionnez un type
 admin:
     credentials: Identifiants
     customers: Clients
+    project_groups: Groupes
     projects: Projets
     users: Utilisateurs
 

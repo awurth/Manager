@@ -1,0 +1,18 @@
+{% extends 'app/admin/layout.html.twig' %}
+
+{% block page_content %}
+  <div class="page-title">
+    <h1>Groupes</h1>
+  </div>
+  <a class="btn success mb-4" href="{{ path('app_project_group_create') }}">Nouveau groupe</a>
+  <ul class="list-disc list-inside">
+    {% for group in groups %}
+      <li class="mb-4">
+        <a class="font-bold" href="{{ path('app_project_group_view', { slug: group.slug }) }}">{{ group.name }}</a>
+        <a class="py-2 pl-2 pr-1 ml-2 border border-gray-400 hover:bg-gray-200 rounded text-xs" href="{{ path('app_project_group_edit', { slug: group.slug }) }}">
+          <i class="fas fa-edit"></i>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

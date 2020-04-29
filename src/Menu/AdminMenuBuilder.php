@@ -44,6 +44,15 @@ class AdminMenuBuilder
             ]);
 
         $menu
+            ->addChild('Project Groups', [
+                'extras' => [
+                    'icon' => 'fas fa-object-group'
+                ],
+                'label' => 'admin.project_groups',
+                'route' => 'app_admin_project_group_list'
+            ]);
+
+        $menu
             ->addChild('Projects', [
                 'extras' => [
                     'icon' => 'fas fa-tasks'
