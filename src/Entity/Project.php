@@ -68,15 +68,18 @@ class Project
      */
     private $members;
 
-    public function __construct()
+    public function __construct(string $slug, string $name)
     {
+        $this->slug = $slug;
+        $this->name = $name;
+
         $this->environments = new ArrayCollection();
         $this->members = new ArrayCollection();
     }
 
     public function __toString(): string
     {
-        return (string)$this->name;
+        return $this->getName();
     }
 
     public function getId(): ?int
@@ -96,7 +99,7 @@ class Project
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getSlug(): string
     {
         return $this->slug;
     }
@@ -108,7 +111,7 @@ class Project
         return $this;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }

@@ -28,14 +28,16 @@ class ProjectType
      */
     private $projects;
 
-    public function __construct()
+    public function __construct(string $name)
     {
+        $this->name = $name;
+
         $this->projects = new ArrayCollection();
     }
 
     public function __toString(): string
     {
-        return (string)$this->name;
+        return $this->getName();
     }
 
     public function getId(): ?int
@@ -43,7 +45,7 @@ class ProjectType
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }

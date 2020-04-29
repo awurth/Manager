@@ -40,11 +40,9 @@ class CreateCredentialsAction extends AbstractAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $credentials = (new Credentials())
-                ->setName($model->name)
+            $credentials = (new Credentials($model->name, $model->password))
                 ->setUsername($model->username)
                 ->setEmail($model->email)
-                ->setPassword($model->password)
                 ->setWebsite($model->website)
                 ->setDescription($model->description)
                 ->addCredentialsUser(

@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CustomerContactRepository")
@@ -21,44 +20,31 @@ class CustomerContact
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="contacts")
      * @ORM\JoinColumn(nullable=false)
-     *
-     * @Assert\NotNull()
      */
     private $customer;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Email()
-     * @Assert\Length(max=255)
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(max=255)
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(max=255)
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(max=255)
      */
     private $job;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(max=255)
      */
     private $phone;
 

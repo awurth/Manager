@@ -73,15 +73,17 @@ class Customer
      */
     private $projectGroups;
 
-    public function __construct()
+    public function __construct(string $name)
     {
+        $this->name = $name;
+
         $this->contacts = new ArrayCollection();
         $this->projectGroups = new ArrayCollection();
     }
 
     public function __toString(): string
     {
-        return (string)$this->name;
+        return $this->getName();
     }
 
     public function getId(): ?int
@@ -89,7 +91,7 @@ class Customer
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }

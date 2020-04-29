@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CryptographicKeyRepository")
@@ -23,8 +22,6 @@ class CryptographicKey
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cryptographicKeys")
      * @ORM\JoinColumn(nullable=false)
-     *
-     * @Assert\NotNull()
      */
     private $user;
 
@@ -35,16 +32,11 @@ class CryptographicKey
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
-     *
-     * @Assert\NotBlank()
      */
     private $value;
 
@@ -62,9 +54,15 @@ class CryptographicKey
      */
     private $updatedAt;
 
+    public function __construct(string $name, string $value)
+    {
+        $this->name = $name;
+        $this->value = $value;
+    }
+
     public function __toString(): string
     {
-        return (string)$this->name;
+        return $this->getName();
     }
 
     public function getId(): ?int
@@ -96,7 +94,7 @@ class CryptographicKey
         return $this;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -108,7 +106,7 @@ class CryptographicKey
         return $this;
     }
 
-    public function getValue(): ?string
+    public function getValue(): string
     {
         return $this->value;
     }

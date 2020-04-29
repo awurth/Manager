@@ -68,14 +68,17 @@ class Credentials
      */
     private $credentialsUsers;
 
-    public function __construct()
+    public function __construct(string $name, string $password)
     {
+        $this->name = $name;
+        $this->password = $password;
+
         $this->credentialsUsers = new ArrayCollection();
     }
 
     public function __toString(): string
     {
-        return (string)$this->name;
+        return $this->getName();
     }
 
     /**
@@ -112,7 +115,7 @@ class Credentials
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -148,7 +151,7 @@ class Credentials
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
         return $this->password;
     }

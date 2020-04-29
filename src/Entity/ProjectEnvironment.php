@@ -63,6 +63,17 @@ class ProjectEnvironment
      */
     private $updatedAt;
 
+    public function __construct(string $name, string $path)
+    {
+        $this->name = $name;
+        $this->path = $path;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,7 +103,7 @@ class ProjectEnvironment
         return $this;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -104,7 +115,7 @@ class ProjectEnvironment
         return $this;
     }
 
-    public function getPath(): ?string
+    public function getPath(): string
     {
         return $this->path;
     }

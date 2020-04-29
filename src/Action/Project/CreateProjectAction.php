@@ -40,11 +40,9 @@ class CreateProjectAction extends AbstractAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $project = (new Project())
+            $project = (new Project($model->slug, $model->name))
                 ->setDescription($model->description)
                 ->setImageFilename($model->imageFilename)
-                ->setName($model->name)
-                ->setSlug($model->slug)
                 ->setType($model->type);
 
             $project->addMember(

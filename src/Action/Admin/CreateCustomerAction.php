@@ -39,8 +39,7 @@ class CreateCustomerAction extends AbstractAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $customer = (new Customer())
-                ->setName($model->name)
+            $customer = (new Customer($model->name))
                 ->setAddress($model->address)
                 ->setPostcode($model->postcode)
                 ->setCity($model->city)

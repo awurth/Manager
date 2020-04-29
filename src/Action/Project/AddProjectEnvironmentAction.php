@@ -55,10 +55,8 @@ class AddProjectEnvironmentAction extends AbstractAction
 
         if ($form->isSubmitted() && $form->isValid()) {
             $project->addEnvironment(
-                (new ProjectEnvironment())
+                (new ProjectEnvironment($model->name, $model->path))
                     ->setServer($model->server)
-                    ->setName($model->name)
-                    ->setPath($model->path)
                     ->setUrl($model->url)
                     ->setDescription($model->description)
             );

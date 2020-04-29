@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServerRepository")
@@ -21,23 +20,16 @@ class Server
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(max=255)
      */
     private $ip;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(max=255)
      */
     private $operatingSystem;
 
@@ -51,15 +43,17 @@ class Server
      */
     private $projectEnvironments;
 
-    public function __construct()
+    public function __construct(string $name)
     {
+        $this->name = $name;
+
         $this->users = new ArrayCollection();
         $this->projectEnvironments = new ArrayCollection();
     }
 
     public function __toString(): string
     {
-        return (string)$this->name;
+        return $this->getName();
     }
 
     public function getId(): ?int
@@ -67,7 +61,7 @@ class Server
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }

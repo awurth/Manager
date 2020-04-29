@@ -42,7 +42,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="integer")
      */
-    private $gender;
+    private $gender = self::GENDER_NEUTRAL;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -88,8 +88,10 @@ class User implements UserInterface
      */
     private $credentialsUsers;
 
-    public function __construct()
+    public function __construct(string $email)
     {
+        $this->email = $email;
+
         $this->cryptographicKeys = new ArrayCollection();
         $this->projectGroupMembers = new ArrayCollection();
         $this->projectMembers = new ArrayCollection();
@@ -98,7 +100,7 @@ class User implements UserInterface
 
     public function __toString(): string
     {
-        return (string)$this->email;
+        return $this->getEmail();
     }
 
     public function getFullName(): string
@@ -171,7 +173,7 @@ class User implements UserInterface
 
     public function getUsername(): string
     {
-        return (string)$this->email;
+        return $this->getEmail();
     }
 
     public function getId(): ?int
@@ -179,7 +181,7 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }

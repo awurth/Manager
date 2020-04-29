@@ -40,11 +40,9 @@ class CreateProjectGroupAction extends AbstractAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $group = (new ProjectGroup())
+            $group = (new ProjectGroup($model->slug, $model->name))
                 ->setCustomer($model->customer)
-                ->setDescription($model->description)
-                ->setName($model->name)
-                ->setSlug($model->slug);
+                ->setDescription($model->description);
 
             $group->addMember(
                 (new ProjectGroupMember())

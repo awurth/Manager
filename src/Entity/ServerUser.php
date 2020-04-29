@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServerUserRepository")
@@ -20,22 +19,16 @@ class ServerUser
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Server", inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
-     *
-     * @Assert\NotNull()
      */
     private $server;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(max=255)
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Length(max=255)
      */
     private $password;
 

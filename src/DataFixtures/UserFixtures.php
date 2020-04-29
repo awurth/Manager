@@ -22,8 +22,7 @@ class UserFixtures extends Fixture
             return;
         }
 
-        $user = (new User())
-            ->setEmail('admin@pilipili-web.com')
+        $user = (new User('admin@pilipili-web.com'))
             ->setRoles(['ROLE_ADMIN'])
             ->setGender(User::GENDER_NEUTRAL);
 

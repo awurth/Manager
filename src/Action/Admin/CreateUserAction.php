@@ -42,14 +42,13 @@ class CreateUserAction extends AbstractAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = new User();
-            $user
-                ->setEmail($model->email)
-                ->setPassword($this->userPasswordEncoder->encodePassword($user, $model->plainPassword))
+            $user = (new User($model->email))
                 ->setGender($model->gender)
                 ->setFirstname($model->firstname)
                 ->setLastname($model->lastname)
                 ->addRole($model->role);
+
+            $user->setPassword($this->userPasswordEncoder->encodePassword($user, $model->plainPassword));
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();
