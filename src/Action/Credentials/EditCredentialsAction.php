@@ -4,6 +4,7 @@ namespace App\Action\Credentials;
 
 use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
+use App\Action\TwigTrait;
 use App\Form\Type\EditCredentialsType;
 use App\Form\Model\EditCredentials;
 use App\Repository\CredentialsRepository;
@@ -20,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EditCredentialsAction extends AbstractAction
 {
     use SecurityTrait;
+    use TwigTrait;
 
     private $credentialsRepository;
     private $entityManager;

@@ -4,6 +4,7 @@ namespace App\Action\Admin;
 
 use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
+use App\Action\TwigTrait;
 use App\Entity\Customer;
 use App\Form\Type\CreateCustomerType;
 use App\Form\Model\CreateCustomer;
@@ -20,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CreateCustomerAction extends AbstractAction
 {
     use SecurityTrait;
+    use TwigTrait;
 
     private $entityManager;
     private $flashBag;

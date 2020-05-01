@@ -4,6 +4,7 @@ namespace App\Action\Project;
 
 use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
+use App\Action\TwigTrait;
 use App\Entity\ProjectMember;
 use App\Form\Model\AddProjectMember;
 use App\Form\Type\AddProjectMemberType;
@@ -21,6 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProjectMembersAction extends AbstractAction
 {
     use SecurityTrait;
+    use TwigTrait;
 
     private $entityManager;
     private $flashBag;

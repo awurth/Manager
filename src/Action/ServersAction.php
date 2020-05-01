@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ServersAction extends AbstractAction
 {
     use SecurityTrait;
+    use TwigTrait;
 
     private $serverRepository;
 

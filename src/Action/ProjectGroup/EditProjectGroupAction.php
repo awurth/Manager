@@ -4,6 +4,7 @@ namespace App\Action\ProjectGroup;
 
 use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
+use App\Action\TwigTrait;
 use App\Form\Type\EditProjectGroupType;
 use App\Form\Model\EditProjectGroup;
 use App\Repository\ProjectGroupRepository;
@@ -20,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EditProjectGroupAction extends AbstractAction
 {
     use SecurityTrait;
+    use TwigTrait;
 
     private $entityManager;
     private $flashBag;

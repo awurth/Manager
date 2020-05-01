@@ -4,6 +4,7 @@ namespace App\Action\Project;
 
 use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
+use App\Action\TwigTrait;
 use App\Repository\ProjectRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ViewProjectAction extends AbstractAction
 {
     use SecurityTrait;
+    use TwigTrait;
 
     private $projectRepository;
 

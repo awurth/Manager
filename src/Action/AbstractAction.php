@@ -6,12 +6,10 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Throwable;
-use Twig\Environment;
 
 abstract class AbstractAction
 {
@@ -19,11 +17,6 @@ abstract class AbstractAction
      * @var RouterInterface
      */
     protected $router;
-
-    /**
-     * @var Environment
-     */
-    protected $twig;
 
     protected function createNotFoundException(string $message = 'Not Found', ?Throwable $previous = null): NotFoundHttpException
     {
@@ -74,37 +67,11 @@ abstract class AbstractAction
         return $this->redirect($this->router->generate($route, $parameters), $status);
     }
 
-    protected function render(string $template, array $parameters = [], Response $response = null): Response
-    {
-        if (null === $response) {
-            $response = new Response();
-        }
-
-        $response->setContent($this->twig->render($template, $parameters));
-
-        return $response;
-    }
-
-    protected function renderPage(string $page, string $template, array $parameters = [], Response $response = null): Response
-    {
-        $parameters['page_name'] = $page;
-
-        return $this->render($template, $parameters, $response);
-    }
-
     /**
      * @required
      */
     public function setRouter(RouterInterface $router): void
     {
         $this->router = $router;
-    }
-
-    /**
-     * @required
-     */
-    public function setTwig(Environment $twig): void
-    {
-        $this->twig = $twig;
     }
 }

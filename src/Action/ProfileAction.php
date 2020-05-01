@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileAction extends AbstractAction
 {
     use SecurityTrait;
+    use TwigTrait;
 
     public function __invoke(): Response
     {

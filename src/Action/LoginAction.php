@@ -14,6 +14,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginAction extends AbstractAction
 {
     use SecurityTrait;
+    use TwigTrait;
 
     private $authenticationUtils;
     private $formFactory;

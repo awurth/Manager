@@ -4,6 +4,7 @@ namespace App\Action\Admin;
 
 use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
+use App\Action\TwigTrait;
 use App\Form\Type\EditCustomerType;
 use App\Form\Model\EditCustomer;
 use App\Repository\CustomerRepository;
@@ -20,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EditCustomerAction extends AbstractAction
 {
     use SecurityTrait;
+    use TwigTrait;
 
     private $customerRepository;
     private $entityManager;

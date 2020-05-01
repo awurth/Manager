@@ -4,6 +4,7 @@ namespace App\Action\ProjectGroup;
 
 use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
+use App\Action\TwigTrait;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ListProjectGroupsAction extends AbstractAction
 {
     use SecurityTrait;
+    use TwigTrait;
 
     public function __invoke(): Response
     {

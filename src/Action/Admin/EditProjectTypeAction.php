@@ -4,6 +4,7 @@ namespace App\Action\Admin;
 
 use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
+use App\Action\TwigTrait;
 use App\Entity\ProjectType;
 use App\Form\Model\EditProjectType;
 use App\Form\Type\EditProjectTypeType;
@@ -21,6 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EditProjectTypeAction extends AbstractAction
 {
     use SecurityTrait;
+    use TwigTrait;
 
     private $entityManager;
     private $flashBag;
