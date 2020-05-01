@@ -2,7 +2,6 @@
 
 namespace App\Action\Admin;
 
-use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Repository\ProjectRepository;
@@ -12,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/projects", name="app_admin_project_list")
  */
-class ListProjectsAction extends AbstractAction
+class ListProjectsAction
 {
     use SecurityTrait;
     use TwigTrait;

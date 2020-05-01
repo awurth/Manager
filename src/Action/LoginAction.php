@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 /**
  * @Route("/login", name="app_login")
  */
-class LoginAction extends AbstractAction
+class LoginAction
 {
     use RoutingTrait;
     use SecurityTrait;

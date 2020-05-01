@@ -2,7 +2,6 @@
 
 namespace App\Action\Project;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Entity\ProjectMember;
@@ -11,12 +10,13 @@ use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/project/{slug}/member/{id}/remove", requirements={"id": "\d+"}, name="app_project_member_remove")
  */
-class RemoveProjectMemberAction extends AbstractAction
+class RemoveProjectMemberAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -46,7 +46,7 @@ class RemoveProjectMemberAction extends AbstractAction
         $project = $this->projectRepository->findOneBy(['slug' => $slug]);
 
         if (!$project) {
-            throw $this->createNotFoundException('Project not found');
+            throw new NotFoundHttpException('Project not found');
         }
 
         $this->denyAccessUnlessGranted('MEMBER', $project);
@@ -54,7 +54,7 @@ class RemoveProjectMemberAction extends AbstractAction
         $member = $this->projectMemberRepository->find($id);
 
         if (!$member) {
-            throw $this->createNotFoundException('Project member not found');
+            throw new NotFoundHttpException('Project member not found');
         }
 
         $user = $this->getUser();

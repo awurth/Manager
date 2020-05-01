@@ -2,17 +2,17 @@
 
 namespace App\Action\Project;
 
-use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Repository\ProjectRepository;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/project/{slug}", name="app_project_view")
  */
-class ViewProjectAction extends AbstractAction
+class ViewProjectAction
 {
     use SecurityTrait;
     use TwigTrait;
@@ -31,7 +31,7 @@ class ViewProjectAction extends AbstractAction
         $project = $this->projectRepository->findOneBy(['slug' => $slug]);
 
         if (!$project) {
-            throw $this->createNotFoundException('Project not found');
+            throw new NotFoundHttpException('Project not found');
         }
 
         $this->denyAccessUnlessGranted('GUEST', $project);

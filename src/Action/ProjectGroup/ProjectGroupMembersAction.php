@@ -2,7 +2,6 @@
 
 namespace App\Action\ProjectGroup;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
@@ -15,12 +14,13 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/group/{slug}/members", name="app_project_group_members")
  */
-class ProjectGroupMembersAction extends AbstractAction
+class ProjectGroupMembersAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -51,7 +51,7 @@ class ProjectGroupMembersAction extends AbstractAction
         $group = $this->projectGroupRepository->findOneBy(['slug' => $slug]);
 
         if (!$group) {
-            throw $this->createNotFoundException('Project not found');
+            throw new NotFoundHttpException('Project not found');
         }
 
         $this->denyAccessUnlessGranted('MEMBER', $group);

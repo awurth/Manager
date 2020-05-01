@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/profile", name="app_profile")
  */
-class ProfileAction extends AbstractAction
+class ProfileAction
 {
     use SecurityTrait;
     use TwigTrait;

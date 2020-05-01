@@ -2,7 +2,6 @@
 
 namespace App\Action\ProjectGroup;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
@@ -14,12 +13,13 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/group/{slug}/edit", name="app_project_group_edit")
  */
-class EditProjectGroupAction extends AbstractAction
+class EditProjectGroupAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -50,10 +50,10 @@ class EditProjectGroupAction extends AbstractAction
         $group = $this->projectGroupRepository->findOneBy(['slug' => $slug]);
 
         if (!$group) {
-            throw $this->createNotFoundException('Project group not found');
+            throw new NotFoundHttpException('Project group not found');
         }
 
-        // $this->denyAccessUnlessGranted('MEMBER', $group);
+        $this->denyAccessUnlessGranted('MEMBER', $group);
 
         $model = new EditProjectGroup($group);
         $form = $this->formFactory->create(EditProjectGroupType::class, $model);

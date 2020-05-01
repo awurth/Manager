@@ -2,7 +2,6 @@
 
 namespace App\Action\Admin;
 
-use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Repository\CustomerRepository;
@@ -12,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/customers", name="app_admin_customer_list")
  */
-class ListCustomersAction extends AbstractAction
+class ListCustomersAction
 {
     use SecurityTrait;
     use TwigTrait;

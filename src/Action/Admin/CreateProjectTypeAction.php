@@ -2,7 +2,6 @@
 
 namespace App\Action\Admin;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
@@ -19,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/projects/types/new", name="app_admin_project_type_create")
  */
-class CreateProjectTypeAction extends AbstractAction
+class CreateProjectTypeAction
 {
     use RoutingTrait;
     use SecurityTrait;

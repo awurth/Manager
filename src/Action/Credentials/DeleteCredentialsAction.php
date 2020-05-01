@@ -2,7 +2,6 @@
 
 namespace App\Action\Credentials;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Repository\CredentialsRepository;
@@ -10,12 +9,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/credentials/{id}/delete", requirements={"id": "\d+"}, name="app_credentials_delete")
  */
-class DeleteCredentialsAction extends AbstractAction
+class DeleteCredentialsAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -42,7 +42,7 @@ class DeleteCredentialsAction extends AbstractAction
         $credentials = $this->credentialsRepository->find($id);
 
         if (!$credentials) {
-            throw $this->createNotFoundException('Credentials not found');
+            throw new NotFoundHttpException('Credentials not found');
         }
 
         $this->denyAccessUnlessGranted('DELETE', $credentials);

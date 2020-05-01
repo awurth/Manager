@@ -2,7 +2,6 @@
 
 namespace App\Action\ProjectGroup;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
@@ -20,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/groups/new", name="app_project_group_create")
  */
-class CreateProjectGroupAction extends AbstractAction
+class CreateProjectGroupAction
 {
     use RoutingTrait;
     use SecurityTrait;

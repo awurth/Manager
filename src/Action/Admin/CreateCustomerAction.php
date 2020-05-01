@@ -2,7 +2,6 @@
 
 namespace App\Action\Admin;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
@@ -19,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/customers/new", name="app_admin_customer_create")
  */
-class CreateCustomerAction extends AbstractAction
+class CreateCustomerAction
 {
     use RoutingTrait;
     use SecurityTrait;

@@ -2,18 +2,18 @@
 
 namespace App\Action\Project;
 
-use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Repository\ProjectRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/project/{slug}/environments", name="app_project_environment_list")
  */
-class ListProjectEnvironmentsAction extends AbstractAction
+class ListProjectEnvironmentsAction
 {
     use SecurityTrait;
     use TwigTrait;
@@ -32,7 +32,7 @@ class ListProjectEnvironmentsAction extends AbstractAction
         $project = $this->projectRepository->findOneBy(['slug' => $slug]);
 
         if (!$project) {
-            throw $this->createNotFoundException('Project not found');
+            throw new NotFoundHttpException('Project not found');
         }
 
         $this->denyAccessUnlessGranted('MEMBER', $project);

@@ -2,7 +2,6 @@
 
 namespace App\Action\Project;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Repository\ProjectRepository;
@@ -10,12 +9,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/project/{slug}/delete", name="app_project_delete")
  */
-class DeleteProjectAction extends AbstractAction
+class DeleteProjectAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -42,7 +42,7 @@ class DeleteProjectAction extends AbstractAction
         $project = $this->projectRepository->findOneBy(['slug' => $slug]);
 
         if (!$project) {
-            throw $this->createNotFoundException('Project not found');
+            throw new NotFoundHttpException('Project not found');
         }
 
         $this->denyAccessUnlessGranted('DELETE', $project);

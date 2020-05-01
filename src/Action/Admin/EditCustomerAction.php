@@ -2,7 +2,6 @@
 
 namespace App\Action\Admin;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
@@ -14,12 +13,13 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/customers/{id}/edit", requirements={"id": "\d+"}, name="app_admin_customer_edit")
  */
-class EditCustomerAction extends AbstractAction
+class EditCustomerAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -51,7 +51,7 @@ class EditCustomerAction extends AbstractAction
         $customer = $this->customerRepository->find($id);
 
         if (!$customer) {
-            throw $this->createNotFoundException('Customer not found');
+            throw new NotFoundHttpException('Customer not found');
         }
 
         $model = new EditCustomer($customer);

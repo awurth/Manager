@@ -2,11 +2,9 @@
 
 namespace App\Action\Admin;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
-use App\Entity\ProjectType;
 use App\Form\Model\EditProjectType;
 use App\Form\Type\EditProjectTypeType;
 use App\Repository\ProjectTypeRepository;
@@ -20,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/projects/type/{id}/edit", requirements={"id": "\d+"}, name="app_admin_project_type_edit")
  */
-class EditProjectTypeAction extends AbstractAction
+class EditProjectTypeAction
 {
     use RoutingTrait;
     use SecurityTrait;

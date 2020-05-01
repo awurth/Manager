@@ -2,7 +2,6 @@
 
 namespace App\Action\Admin;
 
-use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/", name="app_admin")
  */
-class AdminAction extends AbstractAction
+class AdminAction
 {
     use SecurityTrait;
     use TwigTrait;

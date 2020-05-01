@@ -2,7 +2,6 @@
 
 namespace App\Action\Admin;
 
-use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Repository\UserRepository;
@@ -12,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/users", name="app_admin_user_list")
  */
-class ListUsersAction extends AbstractAction
+class ListUsersAction
 {
     use SecurityTrait;
     use TwigTrait;

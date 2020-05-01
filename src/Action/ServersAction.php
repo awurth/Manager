@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/servers", name="app_servers")
  */
-class ServersAction extends AbstractAction
+class ServersAction
 {
     use SecurityTrait;
     use TwigTrait;

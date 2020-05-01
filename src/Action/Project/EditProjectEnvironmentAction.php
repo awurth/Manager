@@ -2,7 +2,6 @@
 
 namespace App\Action\Project;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
@@ -15,12 +14,13 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/project/{slug}/environment/{id}/edit", requirements={"id": "\d+"}, name="app_project_environment_edit")
  */
-class EditProjectEnvironmentAction extends AbstractAction
+class EditProjectEnvironmentAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -54,13 +54,13 @@ class EditProjectEnvironmentAction extends AbstractAction
         $project = $this->projectRepository->findOneBy(['slug' => $slug]);
 
         if (!$project) {
-            throw $this->createNotFoundException('Project not found');
+            throw new NotFoundHttpException('Project not found');
         }
 
         $environment = $this->projectEnvironmentRepository->find($id);
 
         if (!$environment) {
-            throw $this->createNotFoundException('Project environment not found');
+            throw new NotFoundHttpException('Project environment not found');
         }
 
         $this->denyAccessUnlessGranted('MEMBER', $project);

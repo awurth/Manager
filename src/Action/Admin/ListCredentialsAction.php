@@ -2,7 +2,6 @@
 
 namespace App\Action\Admin;
 
-use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Repository\CredentialsRepository;
@@ -12,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/credentials", name="app_admin_credentials_list")
  */
-class ListCredentialsAction extends AbstractAction
+class ListCredentialsAction
 {
     use SecurityTrait;
     use TwigTrait;

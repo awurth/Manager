@@ -2,19 +2,19 @@
 
 namespace App\Action\Admin;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Repository\ProjectTypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/projects/type/{id}/delete", requirements={"id": "\d+"}, name="app_admin_project_type_delete")
  */
-class DeleteProjectTypeAction extends AbstractAction
+class DeleteProjectTypeAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -42,7 +42,7 @@ class DeleteProjectTypeAction extends AbstractAction
         $projectType = $this->projectTypeRepository->find($id);
 
         if (!$projectType) {
-            throw $this->createNotFoundException('Project type not found');
+            throw new NotFoundHttpException('Project type not found');
         }
 
         $this->entityManager->remove($projectType);

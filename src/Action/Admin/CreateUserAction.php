@@ -2,7 +2,6 @@
 
 namespace App\Action\Admin;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
@@ -20,7 +19,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * @Route("/users/new", name="app_admin_user_create")
  */
-class CreateUserAction extends AbstractAction
+class CreateUserAction
 {
     use RoutingTrait;
     use SecurityTrait;

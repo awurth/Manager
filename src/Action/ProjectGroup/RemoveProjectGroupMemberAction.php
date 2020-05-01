@@ -2,7 +2,6 @@
 
 namespace App\Action\ProjectGroup;
 
-use App\Action\AbstractAction;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Entity\ProjectGroupMember;
@@ -11,12 +10,13 @@ use App\Repository\ProjectGroupRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/group/{slug}/member/{id}/remove", requirements={"id": "\d+"}, name="app_project_group_member_remove")
  */
-class RemoveProjectGroupMemberAction extends AbstractAction
+class RemoveProjectGroupMemberAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -46,7 +46,7 @@ class RemoveProjectGroupMemberAction extends AbstractAction
         $group = $this->projectGroupRepository->findOneBy(['slug' => $slug]);
 
         if (!$group) {
-            throw $this->createNotFoundException('Group not found');
+            throw new NotFoundHttpException('Group not found');
         }
 
         $this->denyAccessUnlessGranted('MEMBER', $group);
@@ -54,7 +54,7 @@ class RemoveProjectGroupMemberAction extends AbstractAction
         $member = $this->projectGroupMemberRepository->find($id);
 
         if (!$member) {
-            throw $this->createNotFoundException('Group member not found');
+            throw new NotFoundHttpException('Group member not found');
         }
 
         $user = $this->getUser();

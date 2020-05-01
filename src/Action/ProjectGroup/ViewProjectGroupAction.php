@@ -2,17 +2,17 @@
 
 namespace App\Action\ProjectGroup;
 
-use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Repository\ProjectGroupRepository;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/group/{slug}", name="app_project_group_view")
  */
-class ViewProjectGroupAction extends AbstractAction
+class ViewProjectGroupAction
 {
     use SecurityTrait;
     use TwigTrait;
@@ -31,7 +31,7 @@ class ViewProjectGroupAction extends AbstractAction
         $group = $this->projectGroupRepository->findOneBy(['slug' => $slug]);
 
         if (!$group) {
-            throw $this->createNotFoundException('Project group not found');
+            throw new NotFoundHttpException('Project group not found');
         }
 
         $this->denyAccessUnlessGranted('GUEST', $group);

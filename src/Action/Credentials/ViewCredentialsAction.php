@@ -2,17 +2,17 @@
 
 namespace App\Action\Credentials;
 
-use App\Action\AbstractAction;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Repository\CredentialsRepository;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/credentials/{id}", requirements={"id": "\d+"}, name="app_credentials_view")
  */
-class ViewCredentialsAction extends AbstractAction
+class ViewCredentialsAction
 {
     use SecurityTrait;
     use TwigTrait;
@@ -31,7 +31,7 @@ class ViewCredentialsAction extends AbstractAction
         $credentials = $this->credentialsRepository->find($id);
 
         if (!$credentials) {
-            throw $this->createNotFoundException('Credentials not found');
+            throw new NotFoundHttpException('Credentials not found');
         }
 
         $this->denyAccessUnlessGranted('VIEW', $credentials);
