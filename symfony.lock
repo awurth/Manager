@@ -117,6 +117,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.3"
     },
+    "mhujer/breadcrumbs-bundle": {
+        "version": "1.5.2"
+    },
     "monolog/monolog": {
         "version": "1.25.3"
     },
@@ -399,6 +402,9 @@
     },
     "symfony/string": {
         "version": "v5.0.2"
+    },
+    "symfony/templating": {
+        "version": "v5.0.8"
     },
     "symfony/translation": {
         "version": "3.3",
