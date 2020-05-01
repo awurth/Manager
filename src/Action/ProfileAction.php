@@ -10,6 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProfileAction extends AbstractAction
 {
+    use SecurityTrait;
+
     public function __invoke(): Response
     {
         $this->denyAccessUnlessLoggedIn();

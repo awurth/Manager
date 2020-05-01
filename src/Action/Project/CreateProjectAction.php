@@ -3,6 +3,7 @@
 namespace App\Action\Project;
 
 use App\Action\AbstractAction;
+use App\Action\SecurityTrait;
 use App\Entity\Project;
 use App\Entity\ProjectMember;
 use App\Form\Type\CreateProjectType;
@@ -19,6 +20,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CreateProjectAction extends AbstractAction
 {
+    use SecurityTrait;
+
     private $formFactory;
     private $flashBag;
     private $entityManager;

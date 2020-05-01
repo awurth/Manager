@@ -3,6 +3,7 @@
 namespace App\Action\Admin;
 
 use App\Action\AbstractAction;
+use App\Action\SecurityTrait;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ListUsersAction extends AbstractAction
 {
+    use SecurityTrait;
+
     private $userRepository;
 
     public function __construct(UserRepository $userRepository)

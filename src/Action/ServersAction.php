@@ -12,6 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ServersAction extends AbstractAction
 {
+    use SecurityTrait;
+
     private $serverRepository;
 
     public function __construct(ServerRepository $serverRepository)

@@ -3,6 +3,7 @@
 namespace App\Action\Project;
 
 use App\Action\AbstractAction;
+use App\Action\SecurityTrait;
 use App\Entity\ProjectEnvironment;
 use App\Form\Type\CreateProjectEnvironmentType;
 use App\Form\Model\CreateProjectEnvironment;
@@ -19,6 +20,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AddProjectEnvironmentAction extends AbstractAction
 {
+    use SecurityTrait;
+
     private $entityManager;
     private $flashBag;
     private $formFactory;

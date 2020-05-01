@@ -3,6 +3,7 @@
 namespace App\Action\Admin;
 
 use App\Action\AbstractAction;
+use App\Action\SecurityTrait;
 use App\Entity\User;
 use App\Form\Type\CreateUserType;
 use App\Form\Model\CreateUser;
@@ -19,6 +20,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class CreateUserAction extends AbstractAction
 {
+    use SecurityTrait;
+
     private $entityManager;
     private $flashBag;
     private $formFactory;

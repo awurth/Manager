@@ -3,6 +3,7 @@
 namespace App\Action\Admin;
 
 use App\Action\AbstractAction;
+use App\Action\SecurityTrait;
 use App\Repository\ProjectTypeRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ListProjectTypesAction extends AbstractAction
 {
+    use SecurityTrait;
+
     private $projectTypeRepository;
 
     public function __construct(ProjectTypeRepository $projectTypeRepository)

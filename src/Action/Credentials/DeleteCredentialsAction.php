@@ -3,6 +3,7 @@
 namespace App\Action\Credentials;
 
 use App\Action\AbstractAction;
+use App\Action\SecurityTrait;
 use App\Repository\CredentialsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DeleteCredentialsAction extends AbstractAction
 {
+    use SecurityTrait;
+
     private $credentialsRepository;
     private $entityManager;
     private $flashBag;

@@ -3,6 +3,7 @@
 namespace App\Action\Project;
 
 use App\Action\AbstractAction;
+use App\Action\SecurityTrait;
 use App\Form\Type\EditProjectType;
 use App\Form\Model\EditProject;
 use App\Repository\ProjectRepository;
@@ -18,6 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class EditProjectAction extends AbstractAction
 {
+    use SecurityTrait;
+
     private $entityManager;
     private $flashBag;
     private $formFactory;

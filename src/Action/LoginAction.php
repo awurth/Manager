@@ -13,6 +13,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  */
 class LoginAction extends AbstractAction
 {
+    use SecurityTrait;
+
     private $authenticationUtils;
     private $formFactory;
 

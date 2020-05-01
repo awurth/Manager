@@ -3,6 +3,7 @@
 namespace App\Action\Admin;
 
 use App\Action\AbstractAction;
+use App\Action\SecurityTrait;
 use App\Repository\CredentialsRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ListCredentialsAction extends AbstractAction
 {
+    use SecurityTrait;
+
     private $credentialsRepository;
 
     public function __construct(CredentialsRepository $credentialsRepository)

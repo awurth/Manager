@@ -3,6 +3,7 @@
 namespace App\Action\ProjectGroup;
 
 use App\Action\AbstractAction;
+use App\Action\SecurityTrait;
 use App\Entity\ProjectGroupMember;
 use App\Form\Type\AddProjectGroupMemberType;
 use App\Form\Model\AddProjectGroupMember;
@@ -19,6 +20,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProjectGroupMembersAction extends AbstractAction
 {
+    use SecurityTrait;
+
     private $entityManager;
     private $flashBag;
     private $formFactory;

@@ -3,6 +3,7 @@
 namespace App\Action\Credentials;
 
 use App\Action\AbstractAction;
+use App\Action\SecurityTrait;
 use App\Entity\Credentials;
 use App\Entity\CredentialsUser;
 use App\Form\Type\CreateCredentialsType;
@@ -19,6 +20,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CreateCredentialsAction extends AbstractAction
 {
+    use SecurityTrait;
+
     private $entityManager;
     private $flashBag;
     private $formFactory;

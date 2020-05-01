@@ -3,6 +3,7 @@
 namespace App\Action\Credentials;
 
 use App\Action\AbstractAction;
+use App\Action\SecurityTrait;
 use App\Form\Type\EditCredentialsType;
 use App\Form\Model\EditCredentials;
 use App\Repository\CredentialsRepository;
@@ -18,6 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class EditCredentialsAction extends AbstractAction
 {
+    use SecurityTrait;
+
     private $credentialsRepository;
     private $entityManager;
     private $flashBag;
