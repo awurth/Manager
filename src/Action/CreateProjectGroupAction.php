@@ -1,10 +1,7 @@
 <?php
 
-namespace App\Action\ProjectGroup;
+namespace App\Action;
 
-use App\Action\RoutingTrait;
-use App\Action\SecurityTrait;
-use App\Action\TwigTrait;
 use App\Entity\ProjectGroup;
 use App\Entity\ProjectGroupMember;
 use App\Form\Type\Action\CreateProjectGroupType;

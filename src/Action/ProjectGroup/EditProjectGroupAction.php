@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/group/{slug}/edit", name="app_project_group_edit")
+ * @Route("/edit", name="app_project_group_edit")
  */
 class EditProjectGroupAction extends AbstractProjectGroupAction
 {

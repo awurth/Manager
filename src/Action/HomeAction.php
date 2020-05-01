@@ -2,7 +2,6 @@
 
 namespace App\Action;
 
-use App\Action\Project\ListProjectsAction;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;

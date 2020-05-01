@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Action\Project;
+namespace App\Action;
 
-use App\Action\SecurityTrait;
-use App\Action\TwigTrait;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 

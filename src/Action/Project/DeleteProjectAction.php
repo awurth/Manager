@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/group/{projectGroupSlug}/project/{projectSlug}/delete", name="app_project_delete")
+ * @Route("/delete", name="app_project_delete")
  */
 class DeleteProjectAction extends AbstractProjectAction
 {

@@ -6,3 +6,4 @@ admin_actions:
     resource: ../../src/Action/Admin/
     type: annotation
     prefix: /admin
+    trailing_slash_on_root: false

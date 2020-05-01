@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/group/{projectGroupSlug}/project/{projectSlug}/member/{id}/remove", requirements={"id": "\d+"}, name="app_project_member_remove")
+ * @Route("/member/{id}/remove", requirements={"id": "\d+"}, name="app_project_member_remove")
  */
 class RemoveProjectMemberAction extends AbstractProjectAction
 {

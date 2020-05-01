@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/group/{slug}", name="app_project_group_view")
+ * @Route("/", name="app_project_group_view")
  */
 class ViewProjectGroupAction extends AbstractProjectGroupAction
 {

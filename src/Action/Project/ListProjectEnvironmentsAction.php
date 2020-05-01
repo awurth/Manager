@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/group/{projectGroupSlug}/project/{projectSlug}/environments", name="app_project_environment_list")
+ * @Route("/environments", name="app_project_environment_list")
  */
 class ListProjectEnvironmentsAction extends AbstractProjectAction
 {

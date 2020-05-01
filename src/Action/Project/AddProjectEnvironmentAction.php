@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/group/{projectGroupSlug}/project/{projectSlug}/environments/new", name="app_project_environment_add")
+ * @Route("/environments/new", name="app_project_environment_add")
  */
 class AddProjectEnvironmentAction extends AbstractProjectAction
 {

@@ -1,3 +1,15 @@
 #index:
 #    path: /
 #    controller: App\Action\DefaultAction
+
+app_project_group:
+    resource: ../src/Action/ProjectGroup/
+    type: annotation
+    prefix: /{slug}
+    trailing_slash_on_root: false
+
+app_project:
+    resource: ../src/Action/Project/
+    type: annotation
+    prefix: /{projectGroupSlug}/{projectSlug}
+    trailing_slash_on_root: false
