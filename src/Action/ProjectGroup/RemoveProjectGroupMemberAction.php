@@ -3,6 +3,7 @@
 namespace App\Action\ProjectGroup;
 
 use App\Action\AbstractAction;
+use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Entity\ProjectGroupMember;
 use App\Repository\ProjectGroupMemberRepository;
@@ -17,6 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RemoveProjectGroupMemberAction extends AbstractAction
 {
+    use RoutingTrait;
     use SecurityTrait;
 
     private $entityManager;

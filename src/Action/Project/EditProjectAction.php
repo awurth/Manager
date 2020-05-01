@@ -3,6 +3,7 @@
 namespace App\Action\Project;
 
 use App\Action\AbstractAction;
+use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Form\Type\EditProjectType;
@@ -20,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class EditProjectAction extends AbstractAction
 {
+    use RoutingTrait;
     use SecurityTrait;
     use TwigTrait;
 

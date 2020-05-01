@@ -3,6 +3,7 @@
 namespace App\Action\Credentials;
 
 use App\Action\AbstractAction;
+use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Entity\Credentials;
@@ -21,6 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CreateCredentialsAction extends AbstractAction
 {
+    use RoutingTrait;
     use SecurityTrait;
     use TwigTrait;
 

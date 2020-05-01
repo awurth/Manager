@@ -13,6 +13,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  */
 class LoginAction extends AbstractAction
 {
+    use RoutingTrait;
     use SecurityTrait;
     use TwigTrait;
 

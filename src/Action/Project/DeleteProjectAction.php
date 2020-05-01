@@ -3,6 +3,7 @@
 namespace App\Action\Project;
 
 use App\Action\AbstractAction;
+use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DeleteProjectAction extends AbstractAction
 {
+    use RoutingTrait;
     use SecurityTrait;
 
     private $entityManager;

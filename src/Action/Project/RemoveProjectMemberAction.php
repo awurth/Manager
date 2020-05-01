@@ -3,6 +3,7 @@
 namespace App\Action\Project;
 
 use App\Action\AbstractAction;
+use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Entity\ProjectMember;
 use App\Repository\ProjectMemberRepository;
@@ -17,6 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RemoveProjectMemberAction extends AbstractAction
 {
+    use RoutingTrait;
     use SecurityTrait;
 
     private $entityManager;
