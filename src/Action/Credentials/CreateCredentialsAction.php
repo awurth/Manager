@@ -7,7 +7,7 @@ use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Entity\Credentials;
 use App\Entity\CredentialsUser;
-use App\Form\Type\CreateCredentialsType;
+use App\Form\Type\Action\CreateCredentialsType;
 use App\Form\Model\CreateCredentials;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;

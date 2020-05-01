@@ -58,12 +58,18 @@ class ProjectGroup
      */
     private $members;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="projectGroup", cascade={"persist"})
+     */
+    private $projects;
+
     public function __construct(string $slug, string $name)
     {
         $this->slug = $slug;
         $this->name = $name;
 
         $this->members = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -173,6 +179,37 @@ class ProjectGroup
             // set the owning side to null (unless already changed)
             if ($member->getProjectGroup() === $this) {
                 $member->setProjectGroup(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setProjectGroup($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        if ($this->projects->contains($project)) {
+            $this->projects->removeElement($project);
+            // set the owning side to null (unless already changed)
+            if ($project->getProjectGroup() === $this) {
+                $project->setProjectGroup(null);
             }
         }
 

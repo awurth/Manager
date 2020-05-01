@@ -20,6 +20,12 @@ class Project
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProjectGroup", inversedBy="projects")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $projectGroup;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ProjectType", inversedBy="projects")
      */
     private $type;
@@ -85,6 +91,18 @@ class Project
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getProjectGroup(): ?ProjectGroup
+    {
+        return $this->projectGroup;
+    }
+
+    public function setProjectGroup(?ProjectGroup $projectGroup): self
+    {
+        $this->projectGroup = $projectGroup;
+
+        return $this;
     }
 
     public function getType(): ?ProjectType

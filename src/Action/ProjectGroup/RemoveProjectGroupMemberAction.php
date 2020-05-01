@@ -60,9 +60,10 @@ class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
 
         if ($member->getUser() === $user) {
             $this->flashBag->add('success', 'flash.success.project_group.member.leave');
-        } else {
-            $this->flashBag->add('success', 'flash.success.project_group.member.remove');
+            return $this->redirectToRoute('app_home');
         }
+
+        $this->flashBag->add('success', 'flash.success.project_group.member.remove');
 
         return $this->redirectToRoute('app_project_group_members', ['slug' => $this->projectGroup->getSlug()]);
     }

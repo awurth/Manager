@@ -5,7 +5,7 @@ namespace App\Action\Admin;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
-use App\Form\Type\EditCustomerType;
+use App\Form\Type\Action\EditCustomerType;
 use App\Form\Model\EditCustomer;
 use App\Repository\CustomerRepository;
 use Doctrine\ORM\EntityManagerInterface;

@@ -4,7 +4,7 @@ namespace App\Action\ProjectGroup;
 
 use App\Action\RoutingTrait;
 use App\Action\TwigTrait;
-use App\Form\Type\EditProjectGroupType;
+use App\Form\Type\Action\EditProjectGroupType;
 use App\Form\Model\EditProjectGroup;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;

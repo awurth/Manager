@@ -2,42 +2,25 @@
 
 namespace App\Action\Project;
 
-use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
-use App\Repository\ProjectRepository;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/project/{slug}", name="app_project_view")
+ * @Route("/group/{projectGroupSlug}/project/{projectSlug}", name="app_project_view")
  */
-class ViewProjectAction
+class ViewProjectAction extends AbstractProjectAction
 {
-    use SecurityTrait;
     use TwigTrait;
 
-    private $projectRepository;
-
-    public function __construct(ProjectRepository $projectRepository)
+    public function __invoke(string $projectGroupSlug, string $projectSlug): Response
     {
-        $this->projectRepository = $projectRepository;
-    }
+        $this->preInvoke($projectGroupSlug, $projectSlug);
 
-    public function __invoke(string $slug): Response
-    {
-        $this->denyAccessUnlessLoggedIn();
-
-        $project = $this->projectRepository->findOneBy(['slug' => $slug]);
-
-        if (!$project) {
-            throw new NotFoundHttpException('Project not found');
-        }
-
-        $this->denyAccessUnlessGranted('GUEST', $project);
+        $this->denyAccessUnlessGranted('GUEST', $this->project);
 
         return $this->renderPage('view-project', 'app/project/view.html.twig', [
-            'project' => $project
+            'project' => $this->project
         ]);
     }
 }

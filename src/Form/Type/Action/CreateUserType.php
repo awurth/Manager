@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Form\Type;
+namespace App\Form\Type\Action;
 
 use App\Form\Model\CreateUser;
+use App\Form\Type\GenderType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;

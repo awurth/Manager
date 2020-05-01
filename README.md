@@ -8,7 +8,6 @@
 - Display servers of current user only
 - Pagination
 - Project environments
-- Associate projects to groups
 - Change password
 
 - Remove EntityType fields

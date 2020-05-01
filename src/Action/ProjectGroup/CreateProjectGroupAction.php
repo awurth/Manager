@@ -7,7 +7,7 @@ use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Entity\ProjectGroup;
 use App\Entity\ProjectGroupMember;
-use App\Form\Type\CreateProjectGroupType;
+use App\Form\Type\Action\CreateProjectGroupType;
 use App\Form\Model\CreateProjectGroup;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;

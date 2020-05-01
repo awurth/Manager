@@ -5,7 +5,7 @@ namespace App\Action\Credentials;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
-use App\Form\Type\EditCredentialsType;
+use App\Form\Type\Action\EditCredentialsType;
 use App\Form\Model\EditCredentials;
 use App\Repository\CredentialsRepository;
 use Doctrine\ORM\EntityManagerInterface;

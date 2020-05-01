@@ -7,7 +7,7 @@ use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Entity\Project;
 use App\Entity\ProjectMember;
-use App\Form\Type\CreateProjectType;
+use App\Form\Type\Action\CreateProjectType;
 use App\Form\Model\CreateProject;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -49,6 +49,7 @@ class CreateProjectAction
             $project = (new Project($model->slug, $model->name))
                 ->setDescription($model->description)
                 ->setImageFilename($model->imageFilename)
+                ->setProjectGroup($model->projectGroup)
                 ->setType($model->type);
 
             $project->addMember(
@@ -63,7 +64,8 @@ class CreateProjectAction
             $this->flashBag->add('success', 'flash.success.project.create');
 
             return $this->redirectToRoute('app_project_view', [
-                'slug' => $project->getSlug()
+                'projectGroupSlug' => $project->getProjectGroup()->getSlug(),
+                'projectSlug' => $project->getSlug()
             ]);
         }
 

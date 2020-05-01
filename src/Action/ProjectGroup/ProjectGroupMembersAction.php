@@ -5,7 +5,7 @@ namespace App\Action\ProjectGroup;
 use App\Action\RoutingTrait;
 use App\Action\TwigTrait;
 use App\Entity\ProjectGroupMember;
-use App\Form\Type\AddProjectGroupMemberType;
+use App\Form\Type\Action\AddProjectGroupMemberType;
 use App\Form\Model\AddProjectGroupMember;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;

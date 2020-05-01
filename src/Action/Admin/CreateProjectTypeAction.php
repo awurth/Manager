@@ -7,7 +7,7 @@ use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Entity\ProjectType;
 use App\Form\Model\CreateProjectType;
-use App\Form\Type\CreateProjectTypeType;
+use App\Form\Type\Action\CreateProjectTypeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;

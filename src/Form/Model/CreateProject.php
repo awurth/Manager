@@ -14,6 +14,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class CreateProject
 {
+    /**
+     * @Assert\NotBlank()
+     */
+    public $projectGroup;
+
     public $type;
 
     /**

@@ -3,12 +3,10 @@
 namespace App\Action\Project;
 
 use App\Action\RoutingTrait;
-use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
-use App\Form\Type\EditProjectEnvironmentType;
+use App\Form\Type\Action\EditProjectEnvironmentType;
 use App\Form\Model\EditProjectEnvironment;
 use App\Repository\ProjectEnvironmentRepository;
-use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,44 +16,34 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/project/{slug}/environment/{id}/edit", requirements={"id": "\d+"}, name="app_project_environment_edit")
+ * @Route("/group/{projectGroupSlug}/project/{projectSlug}/environment/{id}/edit", requirements={"id": "\d+"}, name="app_project_environment_edit")
  */
-class EditProjectEnvironmentAction
+class EditProjectEnvironmentAction extends AbstractProjectAction
 {
     use RoutingTrait;
-    use SecurityTrait;
     use TwigTrait;
 
     private $entityManager;
     private $flashBag;
     private $formFactory;
     private $projectEnvironmentRepository;
-    private $projectRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FlashBagInterface $flashBag,
         FormFactoryInterface $formFactory,
-        ProjectEnvironmentRepository $projectEnvironmentRepository,
-        ProjectRepository $projectRepository
+        ProjectEnvironmentRepository $projectEnvironmentRepository
     )
     {
         $this->entityManager = $entityManager;
         $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
         $this->projectEnvironmentRepository = $projectEnvironmentRepository;
-        $this->projectRepository = $projectRepository;
     }
 
-    public function __invoke(Request $request, string $slug, int $id): Response
+    public function __invoke(Request $request, string $projectGroupSlug, string $projectSlug, int $id): Response
     {
-        $this->denyAccessUnlessLoggedIn();
-
-        $project = $this->projectRepository->findOneBy(['slug' => $slug]);
-
-        if (!$project) {
-            throw new NotFoundHttpException('Project not found');
-        }
+        $this->preInvoke($projectGroupSlug, $projectSlug);
 
         $environment = $this->projectEnvironmentRepository->find($id);
 
@@ -63,7 +51,7 @@ class EditProjectEnvironmentAction
             throw new NotFoundHttpException('Project environment not found');
         }
 
-        $this->denyAccessUnlessGranted('MEMBER', $project);
+        $this->denyAccessUnlessGranted('MEMBER', $this->project);
 
         $model = new EditProjectEnvironment($environment);
         $form = $this->formFactory->create(EditProjectEnvironmentType::class, $model);
@@ -82,7 +70,10 @@ class EditProjectEnvironmentAction
 
             $this->flashBag->add('success', 'flash.success.project.environment.edit');
 
-            return $this->redirectToRoute('app_project_environment_list', ['slug' => $project->getSlug()]);
+            return $this->redirectToRoute('app_project_environment_list', [
+                'projectGroupSlug' => $this->projectGroup->getSlug(),
+                'projectSlug' => $this->project->getSlug()
+            ]);
         }
 
         return $this->renderPage('edit-project-environment', 'app/project/edit_environment.html.twig', [

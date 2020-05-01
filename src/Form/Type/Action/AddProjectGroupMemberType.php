@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\Type;
+namespace App\Form\Type\Action;
 
 use App\Entity\ProjectGroupMember;
 use App\Entity\User;

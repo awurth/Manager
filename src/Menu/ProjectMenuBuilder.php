@@ -46,7 +46,8 @@ class ProjectMenuBuilder
                 'label' => $project->getName(),
                 'route' => 'app_project_view',
                 'routeParameters' => [
-                    'slug' => $project->getSlug()
+                    'projectGroupSlug' => $project->getProjectGroup()->getSlug(),
+                    'projectSlug' => $project->getSlug()
                 ]
             ]);
 
@@ -58,7 +59,8 @@ class ProjectMenuBuilder
                 'label' => 'project.overview',
                 'route' => 'app_project_view',
                 'routeParameters' => [
-                    'slug' => $project->getSlug()
+                    'projectGroupSlug' => $project->getProjectGroup()->getSlug(),
+                    'projectSlug' => $project->getSlug()
                 ]
             ]);
 
@@ -74,7 +76,8 @@ class ProjectMenuBuilder
                 'label' => 'project.environments',
                 'route' => 'app_project_environment_list',
                 'routeParameters' => [
-                    'slug' => $project->getSlug()
+                    'projectGroupSlug' => $project->getProjectGroup()->getSlug(),
+                    'projectSlug' => $project->getSlug()
                 ]
             ]);
 
@@ -86,7 +89,8 @@ class ProjectMenuBuilder
                 'label' => 'project.members',
                 'route' => 'app_project_members',
                 'routeParameters' => [
-                    'slug' => $project->getSlug()
+                    'projectGroupSlug' => $project->getProjectGroup()->getSlug(),
+                    'projectSlug' => $project->getSlug()
                 ]
             ]);
 
@@ -99,7 +103,8 @@ class ProjectMenuBuilder
                     'label' => 'project.settings',
                     'route' => 'app_project_edit',
                     'routeParameters' => [
-                        'slug' => $project->getSlug()
+                        'projectGroupSlug' => $project->getProjectGroup()->getSlug(),
+                        'projectSlug' => $project->getSlug()
                     ]
                 ]);
         }
@@ -110,6 +115,6 @@ class ProjectMenuBuilder
     private function getProject(): Project
     {
         $params = $this->requestStack->getCurrentRequest()->attributes->get('_route_params');
-        return $this->projectRepository->findOneBy(['slug' => $params['slug']]);
+        return $this->projectRepository->findOneBy(['slug' => $params['projectSlug']]);
     }
 }

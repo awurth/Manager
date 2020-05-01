@@ -6,7 +6,7 @@ use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Entity\User;
-use App\Form\Type\CreateUserType;
+use App\Form\Type\Action\CreateUserType;
 use App\Form\Model\CreateUser;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;

@@ -6,7 +6,7 @@ use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Entity\Customer;
-use App\Form\Type\CreateCustomerType;
+use App\Form\Type\Action\CreateCustomerType;
 use App\Form\Model\CreateCustomer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;

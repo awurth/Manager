@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\Type;
+namespace App\Form\Type\Action;
 
 use App\Form\Model\EditCustomer;
 use Symfony\Component\Form\AbstractType;

@@ -6,7 +6,7 @@ use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Form\Model\EditProjectType;
-use App\Form\Type\EditProjectTypeType;
+use App\Form\Type\Action\EditProjectTypeType;
 use App\Repository\ProjectTypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
