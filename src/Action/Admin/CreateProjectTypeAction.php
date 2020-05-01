@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/projects/types/new", name="app_admin_project_type_create")
  */
-class CreateProjectTypeAction
+class CreateProjectTypeAction extends AbstractAdminAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -58,5 +58,14 @@ class CreateProjectTypeAction
         return $this->renderPage('admin-create-project-type', 'app/admin/create_project_type.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    protected function configureBreadcrumbs(): void
+    {
+        parent::configureBreadcrumbs();
+
+        $this->breadcrumbs
+            ->addRouteItem('breadcrumb.admin.project_type.list', 'app_admin_project_type_list')
+            ->addItem('breadcrumb.admin.project_type.create');
     }
 }

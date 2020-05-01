@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/projects", name="app_admin_project_list")
  */
-class ListProjectsAction
+class ListProjectsAction extends AbstractAdminAction
 {
     use SecurityTrait;
     use TwigTrait;
@@ -33,5 +33,12 @@ class ListProjectsAction
         return $this->renderPage('admin-list-projects', 'app/admin/list_projects.html.twig', [
             'projects' => $projects
         ]);
+    }
+
+    protected function configureBreadcrumbs(): void
+    {
+        parent::configureBreadcrumbs();
+
+        $this->breadcrumbs->addItem('breadcrumb.admin.project.list');
     }
 }

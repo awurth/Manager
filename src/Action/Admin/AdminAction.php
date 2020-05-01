@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/", name="app_admin")
  */
-class AdminAction
+class AdminAction extends AbstractAdminAction
 {
     use SecurityTrait;
     use TwigTrait;
@@ -21,5 +21,12 @@ class AdminAction
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         return $this->renderPage('admin', 'app/admin/admin.html.twig');
+    }
+
+    protected function configureBreadcrumbs(): void
+    {
+        parent::configureBreadcrumbs();
+
+        $this->breadcrumbs->addItem('breadcrumb.admin.dashboard');
     }
 }

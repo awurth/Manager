@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/customers/new", name="app_admin_customer_create")
  */
-class CreateCustomerAction
+class CreateCustomerAction extends AbstractAdminAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -63,5 +63,14 @@ class CreateCustomerAction
         return $this->renderPage('admin-create-customer', 'app/admin/create_customer.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    protected function configureBreadcrumbs(): void
+    {
+        parent::configureBreadcrumbs();
+
+        $this->breadcrumbs
+            ->addRouteItem('breadcrumb.admin.customer.list', 'app_admin_customer_list')
+            ->addItem('breadcrumb.admin.customer.create');
     }
 }

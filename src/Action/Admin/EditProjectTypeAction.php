@@ -13,12 +13,13 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/projects/type/{id}/edit", requirements={"id": "\d+"}, name="app_admin_project_type_edit")
  */
-class EditProjectTypeAction
+class EditProjectTypeAction extends AbstractAdminAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -49,6 +50,12 @@ class EditProjectTypeAction
 
         $projectType = $this->projectTypeRepository->find($id);
 
+        if (!$projectType) {
+            throw new NotFoundHttpException('Project type not found');
+        }
+
+        $this->breadcrumbs->addItem($projectType->getName(), '', [], false);
+
         $model = new EditProjectType($projectType);
         $form = $this->formFactory->create(EditProjectTypeType::class, $model);
         $form->handleRequest($request);
@@ -68,5 +75,12 @@ class EditProjectTypeAction
             'form' => $form->createView(),
             'type' => $projectType
         ]);
+    }
+
+    protected function configureBreadcrumbs(): void
+    {
+        parent::configureBreadcrumbs();
+
+        $this->breadcrumbs->addRouteItem('breadcrumb.admin.project_type.list', 'app_admin_project_type_list');
     }
 }

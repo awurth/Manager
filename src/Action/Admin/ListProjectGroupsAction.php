@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/groups", name="app_admin_project_group_list")
  */
-class ListProjectGroupsAction
+class ListProjectGroupsAction extends AbstractAdminAction
 {
     use SecurityTrait;
     use TwigTrait;
@@ -33,5 +33,12 @@ class ListProjectGroupsAction
         return $this->renderPage('admin-list-project-groups', 'app/admin/list_project_groups.html.twig', [
             'groups' => $groups
         ]);
+    }
+
+    protected function configureBreadcrumbs(): void
+    {
+        parent::configureBreadcrumbs();
+
+        $this->breadcrumbs->addItem('breadcrumb.admin.project_group.list');
     }
 }

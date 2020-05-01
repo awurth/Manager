@@ -1,25 +1,23 @@
 {% extends 'app/layout.html.twig' %}
 
-{% block body %}
-  <div class="container mx-auto p-4">
-    <div class="page-title">
-      <h1>Profil</h1>
-    </div>
-    <div class="grid grid-cols-2 gap-4">
-      <div class="px-4 py-2 border border-gray-300 shadow">
-        <h2 class="font-bold mb-2">Clés SSH</h2>
-        <ul>
-          {% for ssh_key in app.user.sshKeys %}
-            <li class="p-3 border-b last:border-b-0">
-              <strong>{{ ssh_key.name }}</strong>
-              <span>{{ ssh_key.value }}</span>
-              <span class="block">
-                Ajoutée {{ ssh_key.createdAt|diffForHumans }}
-              </span>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
+{% block page_content %}
+  <div class="page-title">
+    <h1>Profil</h1>
+  </div>
+  <div class="grid grid-cols-2 gap-4">
+    <div class="px-4 py-2 border border-gray-300 shadow">
+      <h2 class="font-bold mb-2">Clés SSH</h2>
+      <ul>
+        {% for ssh_key in app.user.sshKeys %}
+          <li class="p-3 border-b last:border-b-0">
+            <strong>{{ ssh_key.name }}</strong>
+            <span>{{ ssh_key.value }}</span>
+            <span class="block">
+              Ajoutée {{ ssh_key.createdAt|diffForHumans }}
+            </span>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 {% endblock %}

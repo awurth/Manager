@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/users", name="app_admin_user_list")
  */
-class ListUsersAction
+class ListUsersAction extends AbstractAdminAction
 {
     use SecurityTrait;
     use TwigTrait;
@@ -33,5 +33,12 @@ class ListUsersAction
         return $this->renderPage('admin-list-users', 'app/admin/list_users.html.twig', [
             'users' => $users
         ]);
+    }
+
+    protected function configureBreadcrumbs(): void
+    {
+        parent::configureBreadcrumbs();
+
+        $this->breadcrumbs->addItem('breadcrumb.admin.user.list');
     }
 }

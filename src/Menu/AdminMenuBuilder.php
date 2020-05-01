@@ -88,7 +88,11 @@ class AdminMenuBuilder
         $menu
             ->addChild('Customers', [
                 'extras' => [
-                    'icon' => 'fas fa-user-tie'
+                    'icon' => 'fas fa-user-tie',
+                    'routes' => [
+                        'app_admin_customer_create',
+                        'app_admin_customer_edit'
+                    ]
                 ],
                 'label' => 'admin.customers',
                 'route' => 'app_admin_customer_list'

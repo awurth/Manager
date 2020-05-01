@@ -2,42 +2,30 @@
 
 namespace App\Action\ProjectGroup;
 
-use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
-use App\Repository\ProjectGroupRepository;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/group/{slug}", name="app_project_group_view")
  */
-class ViewProjectGroupAction
+class ViewProjectGroupAction extends AbstractProjectGroupAction
 {
-    use SecurityTrait;
     use TwigTrait;
-
-    private $projectGroupRepository;
-
-    public function __construct(ProjectGroupRepository $projectGroupRepository)
-    {
-        $this->projectGroupRepository = $projectGroupRepository;
-    }
 
     public function __invoke(string $slug): Response
     {
-        $this->denyAccessUnlessLoggedIn();
+        $this->preInvoke($slug);
 
-        $group = $this->projectGroupRepository->findOneBy(['slug' => $slug]);
-
-        if (!$group) {
-            throw new NotFoundHttpException('Project group not found');
-        }
-
-        $this->denyAccessUnlessGranted('GUEST', $group);
+        $this->denyAccessUnlessGranted('GUEST', $this->projectGroup);
 
         return $this->renderPage('view-project-group', 'app/project_group/view.html.twig', [
-            'group' => $group
+            'group' => $this->projectGroup
         ]);
+    }
+
+    protected function configureBreadcrumbs(): void
+    {
+        $this->breadcrumbs->addItem('breadcrumb.project_group.overview');
     }
 }

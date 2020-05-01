@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * @Route("/users/new", name="app_admin_user_create")
  */
-class CreateUserAction
+class CreateUserAction extends AbstractAdminAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -67,5 +67,14 @@ class CreateUserAction
         return $this->renderPage('admin-create-user', 'app/admin/create_user.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    protected function configureBreadcrumbs(): void
+    {
+        parent::configureBreadcrumbs();
+
+        $this->breadcrumbs
+            ->addRouteItem('breadcrumb.admin.user.list', 'app_admin_user_list')
+            ->addItem('breadcrumb.admin.user.create');
     }
 }

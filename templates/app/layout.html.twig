@@ -22,7 +22,18 @@
   {{ include('app/_flash.html.twig') }}
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+  {% block page_container %}
+    <div class="container mx-auto px-4">
+      {% block breadcrumb %}
+        {% if wo_breadcrumbs_exists() %}
+          {{ wo_render_breadcrumbs() }}
+        {% endif %}
+      {% endblock %}
+      {% block page_content %}{% endblock %}
+    </div>
+  {% endblock %}
+{% endblock %}
 
 {% block javascripts %}
   {{ encore_entry_script_tags('app') }}

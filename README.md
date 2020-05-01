@@ -3,10 +3,8 @@
 ## TODO
 
 ### App
-- Breadcrumb
 - Style selects
 - Display project image
-- User creation command
 - Display servers of current user only
 - Pagination
 - Project environments

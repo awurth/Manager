@@ -1,16 +1,14 @@
 {% extends 'app/layout.html.twig' %}
 
-{% block body %}
-  <div class="container mx-auto p-4">
-    <div class="page-title">
-      <h1>Serveurs</h1>
-    </div>
-    <ul class="mt-4">
-      {% for server in servers %}
-        <li>
-          <a href="#">{{ server.name }}</a>
-        </li>
-      {% endfor %}
-    </ul>
+{% block page_content %}
+  <div class="page-title">
+    <h1>Serveurs</h1>
   </div>
+  <ul class="mt-4">
+    {% for server in servers %}
+      <li>
+        <a href="#">{{ server.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
 {% endblock %}

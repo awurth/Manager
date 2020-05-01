@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/customers/{id}/edit", requirements={"id": "\d+"}, name="app_admin_customer_edit")
  */
-class EditCustomerAction
+class EditCustomerAction extends AbstractAdminAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -54,6 +54,8 @@ class EditCustomerAction
             throw new NotFoundHttpException('Customer not found');
         }
 
+        $this->breadcrumbs->addItem($customer->getName(), '', [], false);
+
         $model = new EditCustomer($customer);
         $form = $this->formFactory->create(EditCustomerType::class, $model);
         $form->handleRequest($request);
@@ -79,5 +81,12 @@ class EditCustomerAction
             'customer' => $customer,
             'form' => $form->createView()
         ]);
+    }
+
+    protected function configureBreadcrumbs(): void
+    {
+        parent::configureBreadcrumbs();
+
+        $this->breadcrumbs->addRouteItem('breadcrumb.admin.customer.list', 'app_admin_customer_list');
     }
 }

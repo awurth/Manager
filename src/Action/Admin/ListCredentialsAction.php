@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/credentials", name="app_admin_credentials_list")
  */
-class ListCredentialsAction
+class ListCredentialsAction extends AbstractAdminAction
 {
     use SecurityTrait;
     use TwigTrait;
@@ -33,5 +33,12 @@ class ListCredentialsAction
         return $this->renderPage('admin-list-credentials', 'app/admin/list_credentials.html.twig', [
             'credentials' => $credentials
         ]);
+    }
+
+    protected function configureBreadcrumbs(): void
+    {
+        parent::configureBreadcrumbs();
+
+        $this->breadcrumbs->addItem('breadcrumb.admin.credentials.list');
     }
 }

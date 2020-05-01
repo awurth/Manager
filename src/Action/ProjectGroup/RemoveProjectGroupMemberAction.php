@@ -3,10 +3,8 @@
 namespace App\Action\ProjectGroup;
 
 use App\Action\RoutingTrait;
-use App\Action\SecurityTrait;
 use App\Entity\ProjectGroupMember;
 use App\Repository\ProjectGroupMemberRepository;
-use App\Repository\ProjectGroupRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -16,40 +14,30 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/group/{slug}/member/{id}/remove", requirements={"id": "\d+"}, name="app_project_group_member_remove")
  */
-class RemoveProjectGroupMemberAction
+class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
 {
     use RoutingTrait;
-    use SecurityTrait;
 
     private $entityManager;
     private $flashBag;
     private $projectGroupMemberRepository;
-    private $projectGroupRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FlashBagInterface $flashBag,
-        ProjectGroupMemberRepository $projectGroupMemberRepository,
-        ProjectGroupRepository $projectGroupRepository
+        ProjectGroupMemberRepository $projectGroupMemberRepository
     )
     {
         $this->entityManager = $entityManager;
         $this->flashBag = $flashBag;
         $this->projectGroupMemberRepository = $projectGroupMemberRepository;
-        $this->projectGroupRepository = $projectGroupRepository;
     }
 
     public function __invoke(string $slug, int $id): Response
     {
-        $this->denyAccessUnlessLoggedIn();
+        $this->preInvoke($slug, false);
 
-        $group = $this->projectGroupRepository->findOneBy(['slug' => $slug]);
-
-        if (!$group) {
-            throw new NotFoundHttpException('Group not found');
-        }
-
-        $this->denyAccessUnlessGranted('MEMBER', $group);
+        $this->denyAccessUnlessGranted('MEMBER', $this->projectGroup);
 
         $member = $this->projectGroupMemberRepository->find($id);
 
@@ -76,6 +64,6 @@ class RemoveProjectGroupMemberAction
             $this->flashBag->add('success', 'flash.success.project_group.member.remove');
         }
 
-        return $this->redirectToRoute('app_project_group_members', ['slug' => $group->getSlug()]);
+        return $this->redirectToRoute('app_project_group_members', ['slug' => $this->projectGroup->getSlug()]);
     }
 }

@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 @import "components/alert";
+@import "components/breadcrumb";
 @import "components/button";
 @import "components/form";
 @import "topbar";
 @import "sidebar";
 
 .page-title {
-  @apply pb-3 mb-4 border-b font-bold;
+  @apply py-3 mb-4 border-b font-bold;
   h1 {
     @apply text-2xl;
   }

@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/customers", name="app_admin_customer_list")
  */
-class ListCustomersAction
+class ListCustomersAction extends AbstractAdminAction
 {
     use SecurityTrait;
     use TwigTrait;
@@ -33,5 +33,12 @@ class ListCustomersAction
         return $this->renderPage('admin-list-customers', 'app/admin/list_customers.html.twig', [
             'customers' => $customers
         ]);
+    }
+
+    protected function configureBreadcrumbs(): void
+    {
+        parent::configureBreadcrumbs();
+
+        $this->breadcrumbs->addItem('breadcrumb.admin.customer.list');
     }
 }

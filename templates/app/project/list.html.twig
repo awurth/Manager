@@ -1,33 +1,31 @@
 {% extends 'app/layout.html.twig' %}
 
-{% block body %}
-  <div class="container mx-auto p-4">
-    <div class="page-title">
-      <h1>Projets</h1>
-    </div>
-    {% if is_granted('ROLE_PROJECT_CREATE') %}
-      <a class="btn success" href="{{ path('app_project_create') }}">Nouveau projet</a>
-    {% endif %}
-    <ul class="flex flex-col mt-4">
-      {% for project in projects %}
-        <li class="flex py-3 border-b last:border-b-0">
-          <div class="flex w-12 h-12 mr-4">
-            <a href="{{ path('app_project_view', { slug: project.slug }) }}" class="block w-full h-full">
-              {% if project.imageFilename %}
-                <img class="w-full" src="{{ vich_uploader_asset(project, 'imageFile') }}" alt="{{ project.name }}">
-              {% else %}
-                <div class="flex flex-wrap justify-center w-full h-full bg-gray-300 rounded">
-                  <span class="self-center font-bold">{{ project|first|capitalize }}</span>
-                </div>
-              {% endif %}
-            </a>
-          </div>
-          <div class="flex flex-auto items-center">
-            <a class="mr-auto text-sm font-bold" href="{{ path('app_project_view', { slug: project.slug }) }}">{{ project.name }}</a>
-            <span class="text-sm text-gray-600">Dernière mise à jour {{ project.updatedAt|diffForHumans }}</span>
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
+{% block page_content %}
+  <div class="page-title">
+    <h1>Projets</h1>
   </div>
+  {% if is_granted('ROLE_PROJECT_CREATE') %}
+    <a class="btn success" href="{{ path('app_project_create') }}">Nouveau projet</a>
+  {% endif %}
+  <ul class="flex flex-col mt-4">
+    {% for project in projects %}
+      <li class="flex py-3 border-b last:border-b-0">
+        <div class="flex w-12 h-12 mr-4">
+          <a href="{{ path('app_project_view', { slug: project.slug }) }}" class="block w-full h-full">
+            {% if project.imageFilename %}
+              <img class="w-full" src="{{ vich_uploader_asset(project, 'imageFile') }}" alt="{{ project.name }}">
+            {% else %}
+              <div class="flex flex-wrap justify-center w-full h-full bg-gray-300 rounded">
+                <span class="self-center font-bold">{{ project|first|capitalize }}</span>
+              </div>
+            {% endif %}
+          </a>
+        </div>
+        <div class="flex flex-auto items-center">
+          <a class="mr-auto text-sm font-bold" href="{{ path('app_project_view', { slug: project.slug }) }}">{{ project.name }}</a>
+          <span class="text-sm text-gray-600">Dernière mise à jour {{ project.updatedAt|diffForHumans }}</span>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
 {% endblock %}

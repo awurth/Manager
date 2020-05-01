@@ -9,6 +9,30 @@ admin:
     project_types: Types
     users: Utilisateurs
 
+breadcrumb:
+    admin:
+        administration: Administration
+        credentials:
+            list: Identifiants
+        customer:
+            create: Nouveau client
+            list: Clients
+        dashboard: Vue d'ensemble
+        project:
+            list: Projets
+        project_group:
+            list: Groupes
+        project_type:
+            create: Nouveau type de projet
+            list: Types de projets
+        user:
+            create: Nouvel utilisateur
+            list: Utilisateurs
+    project_group:
+        edit: Paramètres
+        members: Membres
+        overview: Vue d'ensemble
+
 project:
     environments: Environnements
     member:
