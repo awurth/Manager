@@ -5,7 +5,7 @@ import 'select2/dist/css/select2.css';
 
 import $ from 'jquery';
 import 'select2';
-import Dropdown from './dropdown';
+import Dropdown from './components/dropdown';
 
 document.addEventListener('DOMContentLoaded', () => {
   new Dropdown('.dropdown');

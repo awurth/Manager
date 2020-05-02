@@ -1,5 +1,10 @@
 {% extends 'app/layout.html.twig' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+{% endblock %}
+
 {% block topbar %}{% endblock %}
 
 {% block html_class %}h-full{% endblock %}
@@ -47,4 +52,28 @@
       </form>
     </div>
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <script>
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#ffffff",
+          "text": "#404040"
+        },
+        "button": {
+          "background": "#48bb78",
+          "text": "#ffffff"
+        }
+      },
+      "content": {
+        "message": "Nous utilisons des cookies pour vous assurer la meilleure expérience sur notre site.",
+        "dismiss": "D'accord !",
+        "link": "En savoir plus"
+      }
+    });
+  </script>
 {% endblock %}
