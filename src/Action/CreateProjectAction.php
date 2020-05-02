@@ -6,6 +6,7 @@ use App\Entity\Project;
 use App\Entity\ProjectMember;
 use App\Form\Type\Action\CreateProjectType;
 use App\Form\Model\CreateProject;
+use App\Upload\StorageInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,15 +23,22 @@ class CreateProjectAction
     use SecurityTrait;
     use TwigTrait;
 
+    private $entityManager;
     private $formFactory;
     private $flashBag;
-    private $entityManager;
+    private $projectLogoStorage;
 
-    public function __construct(EntityManagerInterface $entityManager, FlashBagInterface $flashBag, FormFactoryInterface $formFactory)
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        FlashBagInterface $flashBag,
+        FormFactoryInterface $formFactory,
+        StorageInterface $projectLogoStorage
+    )
     {
+        $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
         $this->flashBag = $flashBag;
-        $this->entityManager = $entityManager;
+        $this->projectLogoStorage = $projectLogoStorage;
     }
 
     public function __invoke(Request $request): Response
@@ -45,7 +53,6 @@ class CreateProjectAction
         if ($form->isSubmitted() && $form->isValid()) {
             $project = (new Project($model->slug, $model->name))
                 ->setDescription($model->description)
-                ->setImageFilename($model->imageFilename)
                 ->setProjectGroup($model->projectGroup)
                 ->setType($model->type);
 
@@ -54,6 +61,8 @@ class CreateProjectAction
                     ->setUser($this->getUser())
                     ->setAccessLevel(ProjectMember::ACCESS_LEVEL_OWNER)
             );
+
+            $this->projectLogoStorage->upload($model->logoFile, $project);
 
             $this->entityManager->persist($project);
             $this->entityManager->flush();

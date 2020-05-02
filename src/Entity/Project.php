@@ -62,7 +62,7 @@ class Project
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $imageFilename;
+    private $logoFilename;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectEnvironment", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -177,14 +177,14 @@ class Project
         return $this;
     }
 
-    public function getImageFilename(): ?string
+    public function getLogoFilename(): ?string
     {
-        return $this->imageFilename;
+        return $this->logoFilename;
     }
 
-    public function setImageFilename(?string $imageFilename): self
+    public function setLogoFilename(?string $logoFilename): self
     {
-        $this->imageFilename = $imageFilename;
+        $this->logoFilename = $logoFilename;
 
         return $this;
     }

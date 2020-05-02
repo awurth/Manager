@@ -6,6 +6,7 @@ use App\Action\RoutingTrait;
 use App\Action\TwigTrait;
 use App\Form\Type\Action\EditProjectType;
 use App\Form\Model\EditProject;
+use App\Upload\StorageInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,16 +25,19 @@ class EditProjectAction extends AbstractProjectAction
     private $entityManager;
     private $flashBag;
     private $formFactory;
+    private $projectLogoStorage;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FlashBagInterface $flashBag,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        StorageInterface $projectLogoStorage
     )
     {
         $this->entityManager = $entityManager;
         $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
+        $this->projectLogoStorage = $projectLogoStorage;
     }
 
     public function __invoke(Request $request, string $projectGroupSlug, string $projectSlug): Response
@@ -52,8 +56,8 @@ class EditProjectAction extends AbstractProjectAction
                 ->setName($model->name)
                 ->setType($model->type);
 
-            if ($model->imageFilename) {
-                $this->project->setImageFilename($model->imageFilename);
+            if ($model->logoFile) {
+                $this->projectLogoStorage->upload($model->logoFile, $this->project);
             }
 
             $this->entityManager->persist($this->project);

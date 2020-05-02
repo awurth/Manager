@@ -1,7 +1,3 @@
-#index:
-#    path: /
-#    controller: App\Action\DefaultAction
-
 app_project_group:
     resource: ../src/Action/ProjectGroup/
     type: annotation

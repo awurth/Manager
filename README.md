@@ -4,11 +4,12 @@
 
 ### App
 - Style selects
-- Display project image
+- Display project logo
 - Display servers of current user only
 - Pagination
 - Project environments
 - Change password
+- Search
 
 - Remove EntityType fields
 - Project Environment Voter

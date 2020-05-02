@@ -1,6 +1,6 @@
 /public/.htaccess
-/public/uploads/project/*
-!/public/uploads/project/.gitignore
+/public/uploads/project/logo/*
+!/public/uploads/project/logo/.gitignore
 
 ###> symfony/framework-bundle ###
 /.env.local

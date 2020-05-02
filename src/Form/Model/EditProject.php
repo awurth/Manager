@@ -4,12 +4,9 @@ namespace App\Form\Model;
 
 use App\Entity\Project;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
-/**
- * @Vich\Uploadable()
- */
 class EditProject
 {
     public $type;
@@ -21,16 +18,12 @@ class EditProject
 
     public $description;
 
-    public $imageFilename;
-
     /**
-     * @var File
-     *
-     * @Vich\UploadableField(mapping="project_image", fileNameProperty="imageFilename")
+     * @var UploadedFile|File
      *
      * @Assert\Image()
      */
-    public $imageFile;
+    public $logoFile;
 
     public function __construct(Project $project)
     {

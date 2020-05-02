@@ -6,10 +6,10 @@ use App\Entity\ProjectType;
 use App\Form\Model\EditProject;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class EditProjectType extends AbstractType
 {
@@ -20,7 +20,7 @@ class EditProjectType extends AbstractType
             ->add('description', TextareaType::class, [
                 'required' => false
             ])
-            ->add('imageFile', VichImageType::class, [
+            ->add('logoFile', FileType::class, [
                 'required' => false
             ])
             ->add('type', EntityType::class, [
