@@ -71,4 +71,9 @@ class EditProjectAction extends AbstractProjectAction
             'form' => $form->createView()
         ]);
     }
+
+    protected function configureBreadcrumbs(): void
+    {
+        $this->breadcrumbs->addItem('breadcrumb.project.edit');
+    }
 }

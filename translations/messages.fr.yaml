@@ -28,6 +28,13 @@ breadcrumb:
         user:
             create: Nouvel utilisateur
             list: Utilisateurs
+    project:
+        edit: Paramètres
+        environment:
+            create: Nouvel environnement
+            list: Environnements
+        members: Membres
+        overview: Vue d'ensemble
     project_group:
         edit: Paramètres
         members: Membres

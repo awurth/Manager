@@ -43,6 +43,13 @@ class AddProjectEnvironmentAction extends AbstractProjectAction
 
         $this->denyAccessUnlessGranted('MEMBER', $this->project);
 
+        $this->breadcrumbs
+            ->addRouteItem('breadcrumb.project.environment.list', 'app_project_environment_list', [
+                'projectGroupSlug' => $this->projectGroup->getSlug(),
+                'projectSlug' => $this->project->getSlug()
+            ])
+            ->addItem('breadcrumb.project.environment.create');
+
         $model = new CreateProjectEnvironment();
         $form = $this->formFactory->create(CreateProjectEnvironmentType::class, $model);
         $form->handleRequest($request);

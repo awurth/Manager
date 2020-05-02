@@ -24,4 +24,9 @@ class ListProjectEnvironmentsAction extends AbstractProjectAction
             'project' => $this->project
         ]);
     }
+
+    protected function configureBreadcrumbs(): void
+    {
+        $this->breadcrumbs->addItem('breadcrumb.project.environment.list');
+    }
 }
