@@ -2,9 +2,12 @@
 
 namespace App\Action\Admin;
 
+use App\Action\PaginationTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Repository\UserRepository;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ListUsersAction extends AbstractAdminAction
 {
+    use PaginationTrait;
     use SecurityTrait;
     use TwigTrait;
 
@@ -23,15 +27,16 @@ class ListUsersAction extends AbstractAdminAction
         $this->userRepository = $userRepository;
     }
 
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $users = $this->userRepository->findAll();
+        $pager = $this->paginate($this->getQueryBuilder(), $request);
 
         return $this->renderPage('admin-list-users', 'app/admin/list_users.html.twig', [
-            'users' => $users
+            'users' => $pager->getCurrentPageResults(),
+            'pager' => $pager
         ]);
     }
 
@@ -40,5 +45,11 @@ class ListUsersAction extends AbstractAdminAction
         parent::configureBreadcrumbs();
 
         $this->breadcrumbs->addItem('breadcrumb.admin.user.list');
+    }
+
+    private function getQueryBuilder(): QueryBuilder
+    {
+        return $this->userRepository->createQueryBuilder('u')
+            ->orderBy('u.createdAt', 'DESC');
     }
 }
