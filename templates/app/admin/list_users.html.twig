@@ -1,15 +1,45 @@
 {% extends 'app/admin/layout.html.twig' %}
 
 {% block page_content %}
-  <div class="page-title">
-    <h1>Utilisateurs</h1>
-  </div>
-  <a class="btn success mb-4" href="{{ path('app_admin_user_create') }}">Nouvel utilisateur</a>
-  <ul class="list-disc list-inside">
-    {% for user in users %}
-      <li class="mb-4">
-        {{ user.email }}
-      </li>
-    {% endfor %}
-  </ul>
+  <a class="btn success btn-sm mt-4 mb-4 font-bold" href="{{ path('app_admin_user_create') }}">
+    <i class="fas fa-user-plus"></i>
+    Nouvel utilisateur
+  </a>
+  <table class="w-full text-sm text-gray-700">
+    <thead>
+      <tr class="border-b text-xs">
+        <th class="pl-4 py-3 text-left font-normal whitespace-no-wrap w-1">ID</th>
+        <th class="px-4 py-3 text-left font-normal">Nom</th>
+        <th class="px-4 py-3 text-left font-normal">Date d'inscription</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr class="border-b last:border-b-0">
+          <td class="pl-4 py-2">{{ user.id }}</td>
+          <td class="px-4 py-2">
+            <div class="inline-block align-middle mr-2">
+              <a href="#" class="flex flex-wrap justify-center w-10 h-10 bg-gray-300 rounded-full">
+                <span class="self-center font-bold">
+                  {{ user.firstname|first|capitalize }}{{ user.lastname|first|capitalize }}
+                </span>
+              </a>
+            </div>
+            <div class="inline-block align-middle">
+              <a class="font-bold text-gray-900" href="#">{{ user.firstname }} {{ user.lastname }}</a>
+              <div>
+                <a class="hover:underline" href="mailto:{{ user.email }}">{{ user.email }}</a>
+              </div>
+            </div>
+          </td>
+          <td class="px-4 py-2">{{ user.createdAt|diffForHumans }}</td>
+          <td class="px-4 py-2 text-right">
+            {#<a class="btn btn-sm" href="#">Éditer</a>
+            <a class="btn danger btn-sm" href="#">Supprimer</a>#}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
