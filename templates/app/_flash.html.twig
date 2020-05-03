@@ -5,7 +5,7 @@
       {% for label, messages in flashes %}
         {% for message in messages %}
           <div class="alert {{ label }} mb-2" role="alert">
-            <p>{{ message|trans }}</p>
+            <p class="text-xs">{{ message|trans }}</p>
           </div>
         {% endfor %}
       {% endfor %}
