@@ -6,6 +6,7 @@
         "ext-apcu": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "babdev/pagerfanta-bundle": "^2.2",
         "gedmo/doctrine-extensions": "^2.4",
         "knplabs/knp-menu-bundle": "^3.0",
         "mhujer/breadcrumbs-bundle": "^1.5",
