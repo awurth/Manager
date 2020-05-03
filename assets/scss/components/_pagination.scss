@@ -1,0 +1,26 @@
+.pagination {
+  @apply py-2;
+  a, span {
+    @apply px-3 py-1 border text-sm text-gray-900;
+    display: inline-block;
+    margin-left: -1px;
+    &:first-child {
+      @apply rounded-l;
+      margin-left: 0;
+    }
+    &:last-child {
+      @apply rounded-r;
+    }
+  }
+  a {
+    &:hover {
+      @apply bg-gray-200;
+    }
+  }
+  .current {
+    @apply bg-green-500 border-green-500 font-bold text-white;
+  }
+  .disabled {
+    @apply bg-gray-100 opacity-50;
+  }
+}
