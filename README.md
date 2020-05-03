@@ -20,7 +20,7 @@
 - Manage SSH keys
 
 ## Ideas
-- GDPR Cookie consent + data removal
+- GDPR data removal
 - Use Uppy for uploads
 - Associate a color to project types and display it in the project overview page
 - Star/Favorite projects/groups/servers/...
