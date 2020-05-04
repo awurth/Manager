@@ -2,9 +2,12 @@
 
 namespace App\Action\Admin;
 
+use App\Action\PaginationTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Repository\CredentialsRepository;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ListCredentialsAction extends AbstractAdminAction
 {
+    use PaginationTrait;
     use SecurityTrait;
     use TwigTrait;
 
@@ -23,15 +27,16 @@ class ListCredentialsAction extends AbstractAdminAction
         $this->credentialsRepository = $credentialsRepository;
     }
 
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $credentials = $this->credentialsRepository->findAll();
+        $pager = $this->paginate($this->getQueryBuilder(), $request);
 
         return $this->renderPage('admin-list-credentials', 'app/admin/list_credentials.html.twig', [
-            'credentials' => $credentials
+            'credentials' => $pager->getCurrentPageResults(),
+            'pager' => $pager
         ]);
     }
 
@@ -40,5 +45,11 @@ class ListCredentialsAction extends AbstractAdminAction
         parent::configureBreadcrumbs();
 
         $this->breadcrumbs->addItem('breadcrumb.admin.credentials.list');
+    }
+
+    private function getQueryBuilder(): QueryBuilder
+    {
+        return $this->credentialsRepository->createQueryBuilder('c')
+            ->orderBy('c.name');
     }
 }
