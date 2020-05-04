@@ -1,7 +1,7 @@
 {% extends 'app/admin/layout.html.twig' %}
 
 {% block page_content %}
-  <a class="btn success btn-sm mt-4 mb-4 font-bold" href="{{ path('app_admin_user_create') }}">
+  <a class="btn success text-sm mt-4 mb-4 font-bold" href="{{ path('app_admin_user_create') }}">
     <i class="fas fa-user-plus"></i>
     Nouvel utilisateur
   </a>
@@ -42,7 +42,9 @@
       {% endfor %}
     </tbody>
   </table>
-  <div class="pagination text-center">
-    {{ pagerfanta(pager) }}
-  </div>
+  {% if pager.haveToPaginate %}
+    <div class="pagination text-center">
+      {{ pagerfanta(pager) }}
+    </div>
+  {% endif %}
 {% endblock %}
