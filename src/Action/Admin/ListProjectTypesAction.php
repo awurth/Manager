@@ -2,9 +2,12 @@
 
 namespace App\Action\Admin;
 
+use App\Action\PaginationTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Repository\ProjectTypeRepository;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ListProjectTypesAction extends AbstractAdminAction
 {
+    use PaginationTrait;
     use SecurityTrait;
     use TwigTrait;
 
@@ -23,15 +27,16 @@ class ListProjectTypesAction extends AbstractAdminAction
         $this->projectTypeRepository = $projectTypeRepository;
     }
 
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $types = $this->projectTypeRepository->findAll();
+        $pager = $this->paginate($this->getQueryBuilder(), $request);
 
         return $this->renderPage('admin-list-project-types', 'app/admin/list_project_types.html.twig', [
-            'types' => $types
+            'types' => $pager->getCurrentPageResults(),
+            'pager' => $pager
         ]);
     }
 
@@ -40,5 +45,11 @@ class ListProjectTypesAction extends AbstractAdminAction
         parent::configureBreadcrumbs();
 
         $this->breadcrumbs->addItem('breadcrumb.admin.project_type.list');
+    }
+
+    private function getQueryBuilder(): QueryBuilder
+    {
+        return $this->projectTypeRepository->createQueryBuilder('t')
+            ->orderBy('t.name');
     }
 }
