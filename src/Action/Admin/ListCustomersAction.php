@@ -2,9 +2,12 @@
 
 namespace App\Action\Admin;
 
+use App\Action\PaginationTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Repository\CustomerRepository;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ListCustomersAction extends AbstractAdminAction
 {
+    use PaginationTrait;
     use SecurityTrait;
     use TwigTrait;
 
@@ -23,15 +27,16 @@ class ListCustomersAction extends AbstractAdminAction
         $this->customerRepository = $customerRepository;
     }
 
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $customers = $this->customerRepository->findAll();
+        $pager = $this->paginate($this->getQueryBuilder(), $request);
 
         return $this->renderPage('admin-list-customers', 'app/admin/list_customers.html.twig', [
-            'customers' => $customers
+            'customers' => $pager->getCurrentPageResults(),
+            'pager' => $pager
         ]);
     }
 
@@ -40,5 +45,11 @@ class ListCustomersAction extends AbstractAdminAction
         parent::configureBreadcrumbs();
 
         $this->breadcrumbs->addItem('breadcrumb.admin.customer.list');
+    }
+
+    private function getQueryBuilder(): QueryBuilder
+    {
+        return $this->customerRepository->createQueryBuilder('c')
+            ->orderBy('c.createdAt', 'DESC');
     }
 }

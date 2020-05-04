@@ -1,18 +1,38 @@
 {% extends 'app/admin/layout.html.twig' %}
 
 {% block page_content %}
-  <div class="page-title">
-    <h1>Clients</h1>
-  </div>
-  <a class="btn success mb-4" href="{{ path('app_admin_customer_create') }}">Nouveau client</a>
-  <ul class="list-disc list-inside">
-    {% for customer in customers %}
-      <li class="mb-4">
-        <strong>{{ customer.name }}</strong>
-        <a class="btn" href="{{ path('app_admin_customer_edit', { id: customer.id }) }}">
-          <i class="fas fa-edit"></i>
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+  <a class="btn success text-sm mt-4 mb-4 font-bold" href="{{ path('app_admin_customer_create') }}">
+    <i class="fas fa-plus"></i>
+    Nouveau client
+  </a>
+  <table class="w-full text-sm text-gray-700">
+    <thead>
+      <tr class="border-b text-xs">
+        <th class="px-4 py-3 text-left font-normal">Nom</th>
+        <th class="px-4 py-3 text-left font-normal">Date de création</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for customer in customers %}
+        <tr class="border-b last:border-b-0">
+          <td class="px-4 py-2">
+            <a class="font-bold text-gray-900" href="#">{{ customer.name }}</a>
+            <div>
+              <a class="hover:underline" href="mailto:{{ customer.email }}">{{ customer.email }}</a>
+            </div>
+          </td>
+          <td class="px-4 py-2">{{ customer.createdAt|diffForHumans }}</td>
+          <td class="px-4 py-2 text-right">
+            <a class="btn btn-sm" href="{{ path('app_admin_customer_edit', { id: customer.id }) }}">Éditer</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if pager.haveToPaginate %}
+    <div class="pagination text-center">
+      {{ pagerfanta(pager) }}
+    </div>
+  {% endif %}
 {% endblock %}
