@@ -84,6 +84,11 @@ class User implements UserInterface
     private $projectMembers;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ServerMember", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true))
+     */
+    private $serverMembers;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\CredentialsUser", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $credentialsUsers;
@@ -95,6 +100,7 @@ class User implements UserInterface
         $this->cryptographicKeys = new ArrayCollection();
         $this->projectGroupMembers = new ArrayCollection();
         $this->projectMembers = new ArrayCollection();
+        $this->serverMembers = new ArrayCollection();
         $this->credentialsUsers = new ArrayCollection();
     }
 
@@ -387,6 +393,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($projectMember->getUser() === $this) {
                 $projectMember->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ServerMember[]
+     */
+    public function getServerMembers(): Collection
+    {
+        return $this->serverMembers;
+    }
+
+    public function addServerMember(ServerMember $serverMember): self
+    {
+        if (!$this->serverMembers->contains($serverMember)) {
+            $this->serverMembers[] = $serverMember;
+            $serverMember->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeServerMember(ServerMember $serverMember): self
+    {
+        if ($this->serverMembers->contains($serverMember)) {
+            $this->serverMembers->removeElement($serverMember);
+            // set the owning side to null (unless already changed)
+            if ($serverMember->getUser() === $this) {
+                $serverMember->setUser(null);
             }
         }
 

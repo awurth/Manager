@@ -58,12 +58,18 @@ class Server
      */
     private $projectEnvironments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ServerMember", mappedBy="server", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $members;
+
     public function __construct(string $name)
     {
         $this->name = $name;
 
         $this->users = new ArrayCollection();
         $this->projectEnvironments = new ArrayCollection();
+        $this->members = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -192,6 +198,37 @@ class Server
             // set the owning side to null (unless already changed)
             if ($projectEnvironment->getServer() === $this) {
                 $projectEnvironment->setServer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ServerMember[]
+     */
+    public function getMembers(): Collection
+    {
+        return $this->members;
+    }
+
+    public function addMember(ServerMember $member): self
+    {
+        if (!$this->members->contains($member)) {
+            $this->members[] = $member;
+            $member->setServer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMember(ServerMember $member): self
+    {
+        if ($this->members->contains($member)) {
+            $this->members->removeElement($member);
+            // set the owning side to null (unless already changed)
+            if ($member->getServer() === $this) {
+                $member->setServer(null);
             }
         }
 
