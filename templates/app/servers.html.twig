@@ -4,11 +4,21 @@
   <div class="page-title">
     <h1>Serveurs</h1>
   </div>
-  <ul class="mt-4">
+  <table class="w-full text-sm text-gray-700">
+    <tbody>
     {% for server in servers %}
-      <li>
-        <a href="#">{{ server.name }}</a>
-      </li>
+      <tr class="border-b last:border-b-0">
+        <td class="px-4 py-2">
+          <a class="font-bold text-gray-900" href="#">{{ server.name }}</a>
+        </td>
+        <td class="px-4 py-2 text-right">{{ server.createdAt|diffForHumans }}</td>
+      </tr>
     {% endfor %}
-  </ul>
+    </tbody>
+  </table>
+  {% if pager.haveToPaginate %}
+    <div class="pagination text-center">
+      {{ pagerfanta(pager) }}
+    </div>
+  {% endif %}
 {% endblock %}
