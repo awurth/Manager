@@ -24,7 +24,7 @@
           <td class="px-4 py-2">Créé {{ project.createdAt|diffForHumans }}</td>
           <td class="px-4 py-2 text-right">
             <a class="btn btn-sm" href="{{ path('app_project_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">Éditer</a>
-            <a class="btn danger btn-sm ml-2" href="{{ path('app_project_delete', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">Supprimer</a>
+            <a class="btn danger btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce projet ?" href="{{ path('app_project_delete', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">Supprimer</a>
           </td>
         </tr>
       {% endfor %}
