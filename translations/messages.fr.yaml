@@ -39,6 +39,8 @@ breadcrumb:
         edit: Paramètres
         members: Membres
         overview: Vue d'ensemble
+    server:
+        overview: Vue d'ensemble
 
 project:
     environments: Environnements
@@ -60,6 +62,9 @@ project_group:
     members: Membres
     overview: Groupe
     settings: Paramètres
+
+server:
+    overview: Serveur
 
 flash:
     success:

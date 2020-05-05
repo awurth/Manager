@@ -1,0 +1,10 @@
+{% extends 'app/layout.html.twig' %}
+
+{% block body_class %}with-sidebar{% endblock %}
+
+{% block body %}
+  {% block sidebar %}
+    {{ include('app/sidebar/_server_sidebar.html.twig') }}
+  {% endblock %}
+  {{ parent() }}
+{% endblock %}

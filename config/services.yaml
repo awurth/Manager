@@ -47,6 +47,10 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: create, alias: project }
 
+    App\Menu\ServerMenuBuilder:
+        tags:
+            - { name: knp_menu.menu_builder, method: create, alias: server }
+
     app.upload.mapping.project_logo:
         class: App\Upload\Mapping\Mapping
         arguments:
