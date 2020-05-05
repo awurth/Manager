@@ -92,5 +92,7 @@ flash:
                 add: Membre(s) ajouté(s) avec succès
                 leave: Vous avez quitté le groupe
                 remove: Membre supprimé avec succès
+        server:
+            create: Serveur créé avec succès
         user:
             create: Utilisateur créé avec succès

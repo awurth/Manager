@@ -4,6 +4,9 @@
   <div class="page-title">
     <h1>Serveurs</h1>
   </div>
+  {% if is_granted('ROLE_SERVER_CREATE') %}
+    <a class="btn success" href="{{ path('app_server_create') }}">Nouveau serveur</a>
+  {% endif %}
   <table class="w-full text-sm text-gray-700">
     <tbody>
     {% for server in servers %}

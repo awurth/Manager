@@ -30,7 +30,7 @@ class ListServersAction
 
         $pager = $this->paginate($this->getQueryBuilder(), $request);
 
-        return $this->renderPage('list-servers', 'app/servers.html.twig', [
+        return $this->renderPage('list-servers', 'app/server/list.html.twig', [
             'servers' => $pager->getCurrentPageResults(),
             'pager' => $pager
         ]);

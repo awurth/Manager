@@ -9,6 +9,7 @@ security:
             - ROLE_CREDENTIALS_CREATE
             - ROLE_PROJECT_CREATE
             - ROLE_PROJECT_GROUP_CREATE
+            - ROLE_SERVER_CREATE
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
