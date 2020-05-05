@@ -17,4 +17,9 @@
       </li>
     {% endfor %}
   </ul>
+  {% if pager.haveToPaginate %}
+    <div class="pagination text-center">
+      {{ pagerfanta(pager) }}
+    </div>
+  {% endif %}
 {% endblock %}
