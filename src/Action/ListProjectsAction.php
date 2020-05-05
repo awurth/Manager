@@ -2,7 +2,10 @@
 
 namespace App\Action;
 
+use App\Repository\ProjectRepository;
 use App\Upload\StorageInterface;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -11,23 +14,38 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ListProjectsAction
 {
+    use PaginationTrait;
     use SecurityTrait;
     use TwigTrait;
 
     private $projectLogoStorage;
+    private $projectRepository;
 
-    public function __construct(StorageInterface $projectLogoStorage)
+    public function __construct(ProjectRepository $projectRepository, StorageInterface $projectLogoStorage)
     {
+        $this->projectRepository = $projectRepository;
         $this->projectLogoStorage = $projectLogoStorage;
     }
 
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
         $this->denyAccessUnlessLoggedIn();
 
+        $pager = $this->paginate($this->getQueryBuilder(), $request);
+
         return $this->renderPage('list-projects', 'app/project/list.html.twig', [
-            'projects' => $this->getUser()->getProjects(),
-            'projectLogoStorage' => $this->projectLogoStorage
+            'projects' => $pager->getCurrentPageResults(),
+            'projectLogoStorage' => $this->projectLogoStorage,
+            'pager' => $pager
         ]);
+    }
+
+    private function getQueryBuilder(): QueryBuilder
+    {
+        return $this->projectRepository->createQueryBuilder('p')
+            ->join('p.members', 'm')
+            ->where('m.user = :user')
+            ->setParameter('user', $this->getUser())
+            ->orderBy('p.createdAt', 'DESC');
     }
 }
