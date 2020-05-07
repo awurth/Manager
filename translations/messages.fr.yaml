@@ -40,6 +40,7 @@ breadcrumb:
         members: Membres
         overview: Vue d'ensemble
     server:
+        list: Serveurs
         overview: Vue d'ensemble
 
 project:

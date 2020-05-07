@@ -43,6 +43,8 @@ abstract class AbstractServerAction
                 [],
                 false
             );
+
+            $this->breadcrumbs->prependRouteItem('breadcrumb.server.list', 'app_server_list');
         }
     }
 
