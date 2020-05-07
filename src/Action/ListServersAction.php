@@ -39,6 +39,9 @@ class ListServersAction
     private function getQueryBuilder(): QueryBuilder
     {
         return $this->serverRepository->createQueryBuilder('s')
+            ->join('s.members', 'm')
+            ->where('m.user = :user')
+            ->setParameter('user', $this->getUser())
             ->orderBy('s.createdAt', 'DESC');
     }
 }
