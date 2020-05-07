@@ -17,7 +17,7 @@
       {% for customer in customers %}
         <tr class="border-b last:border-b-0">
           <td class="px-4 py-2">
-            <a class="font-bold text-gray-900" href="#">{{ customer.name }}</a>
+            <a class="font-bold text-gray-900" href="{{ path('app_admin_customer_edit', { id: customer.id }) }}">{{ customer.name }}</a>
             <div>
               <a class="hover:underline" href="mailto:{{ customer.email }}">{{ customer.email }}</a>
             </div>
@@ -25,6 +25,7 @@
           <td class="px-4 py-2">{{ customer.createdAt|diffForHumans }}</td>
           <td class="px-4 py-2 text-right">
             <a class="btn btn-sm" href="{{ path('app_admin_customer_edit', { id: customer.id }) }}">Éditer</a>
+            <a class="btn danger btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce client ?" href="{{ path('app_admin_customer_delete', { id: customer.id }) }}">Supprimer</a>
           </td>
         </tr>
       {% endfor %}

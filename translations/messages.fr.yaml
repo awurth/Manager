@@ -78,6 +78,7 @@ flash:
         customer:
             create: Client créé avec succès
             edit: Client mis à jour avec succès
+            delete: Client supprimé avec succès
         project:
             create: Projet créé avec succès
             delete: Projet supprimé avec succès

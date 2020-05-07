@@ -21,6 +21,7 @@ class ProjectGroup
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="projectGroups")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $customer;
 
