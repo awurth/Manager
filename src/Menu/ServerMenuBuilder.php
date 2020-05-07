@@ -62,18 +62,44 @@ class ServerMenuBuilder
                 ]
             ]);
 
+        $menu
+            ->addChild('Users', [
+                'extras' => [
+                    'icon' => 'fas fa-terminal'
+                ],
+                'label' => 'server.users',
+                'route' => 'app_home',
+                /*'route' => 'app_server_users',
+                'routeParameters' => [
+                    'id' => $server->getId()
+                ]*/
+            ]);
 
-        /*$menu
+        $menu
+            ->addChild('Environments', [
+                'extras' => [
+                    'icon' => 'fas fa-code-branch'
+                ],
+                'label' => 'server.environments',
+                'route' => 'app_home',
+                /*'route' => 'app_server_environments',
+                'routeParameters' => [
+                    'id' => $server->getId()
+                ]*/
+            ]);
+
+        $menu
             ->addChild('Members', [
                 'extras' => [
                     'icon' => 'fas fa-users'
                 ],
                 'label' => 'server.members',
-                'route' => 'app_server_members',
+                'route' => 'app_home',
+                /*'route' => 'app_server_members',
                 'routeParameters' => [
                     'id' => $server->getId()
-                ]
-            ]);*/
+                ]*/
+            ]);
 
         if ($this->authorizationChecker->isGranted('EDIT', $server)) {
             $menu

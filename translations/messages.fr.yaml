@@ -66,8 +66,11 @@ project_group:
     settings: Paramètres
 
 server:
+    environments: Environnements
+    members: Membres
     overview: Serveur
     settings: Paramètres
+    users: Utilisateurs
 
 flash:
     success:

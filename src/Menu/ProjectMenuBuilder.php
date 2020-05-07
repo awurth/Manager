@@ -67,7 +67,7 @@ class ProjectMenuBuilder
         $menu
             ->addChild('Environments', [
                 'extras' => [
-                    'icon' => 'fas fa-server',
+                    'icon' => 'fas fa-code-branch',
                     'routes' => [
                         'app_project_environment_add',
                         'app_project_environment_edit'
