@@ -88,17 +88,19 @@ class ServerMenuBuilder
                 ]*/
             ]);
 
-        $menu
-            ->addChild('Members', [
-                'extras' => [
-                    'icon' => 'fas fa-users'
-                ],
-                'label' => 'server.members',
-                'route' => 'app_server_members',
-                'routeParameters' => [
-                    'id' => $server->getId()
-                ]
-            ]);
+        if ($this->authorizationChecker->isGranted('MEMBER', $server)) {
+            $menu
+                ->addChild('Members', [
+                    'extras' => [
+                        'icon' => 'fas fa-users'
+                    ],
+                    'label' => 'server.members',
+                    'route' => 'app_server_members',
+                    'routeParameters' => [
+                        'id' => $server->getId()
+                    ]
+                ]);
+        }
 
         if ($this->authorizationChecker->isGranted('EDIT', $server)) {
             $menu

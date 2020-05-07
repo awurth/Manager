@@ -81,18 +81,20 @@ class ProjectMenuBuilder
                 ]
             ]);
 
-        $menu
-            ->addChild('Members', [
-                'extras' => [
-                    'icon' => 'fas fa-users'
-                ],
-                'label' => 'project.members',
-                'route' => 'app_project_members',
-                'routeParameters' => [
-                    'projectGroupSlug' => $project->getProjectGroup()->getSlug(),
-                    'projectSlug' => $project->getSlug()
-                ]
-            ]);
+        if ($this->authorizationChecker->isGranted('MEMBER', $project)) {
+            $menu
+                ->addChild('Members', [
+                    'extras' => [
+                        'icon' => 'fas fa-users'
+                    ],
+                    'label' => 'project.members',
+                    'route' => 'app_project_members',
+                    'routeParameters' => [
+                        'projectGroupSlug' => $project->getProjectGroup()->getSlug(),
+                        'projectSlug' => $project->getSlug()
+                    ]
+                ]);
+        }
 
         if ($this->authorizationChecker->isGranted('EDIT', $project)) {
             $menu
