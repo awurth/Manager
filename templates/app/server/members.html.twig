@@ -2,7 +2,7 @@
 
 {% block page_content %}
   <div class="page-title">
-    <h1>Membres</h1>
+    <h3>Ajouter un membre</h3>
   </div>
   {{ form_start(form) }}
     {{ form_row(form.user) }}
@@ -11,19 +11,56 @@
     <button type="submit" class="btn success mt-4">Ajouter</button>
   {{ form_end(form) }}
   <h2 class="mb-3 mt-6 text-lg font-bold">Membres existants</h2>
-  {% if server.members|length %}
-    <ul class="list-disc list-inside">
-      {% for member in server.members %}
-        <li class="mb-4">
-          <strong>{{ member.user.email }}</strong>
-          <small class="border rounded p-1 ml-2 text-gray-700">{{ member|access_level_label }}</small>
-          {% if member.accessLevel != constant('App\\Entity\\ServerMember::ACCESS_LEVEL_OWNER') %}
-            <a class="p-2 ml-2 bg-red-600 hover:bg-red-700 rounded text-xs text-white" data-confirm="Êtes-vous sûr de vouloir supprimer ce membre ?" href="{{ path('app_server_member_remove', { id: server.id, memberId: member.id }) }}">
-              <i class="fas fa-trash"></i>
-            </a>
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
+  {% if members|length %}
+    <table class="w-full text-sm text-gray-700">
+      <thead>
+        <tr class="border-b text-xs">
+          <th class="px-4 py-3 text-left font-normal">Nom</th>
+          <th class="px-4 py-3 font-normal">Niveau d'accès</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for member in members %}
+          <tr class="border-b last:border-b-0">
+            <td class="px-4 py-2">
+              <div class="inline-block align-middle mr-2">
+                <a class="flex flex-wrap justify-center w-10 h-10 bg-gray-300 rounded-full" href="#">
+                  <span class="self-center font-bold">
+                    {{ member.user.firstname|first|capitalize }}{{ member.user.lastname|first|capitalize }}
+                  </span>
+                </a>
+              </div>
+              <div class="inline-block align-middle">
+                <a class="font-bold text-gray-900" href="#">{{ member.user.firstname }} {{ member.user.lastname }}</a>
+                {% if member.user == app.user %}
+                  <small class="p-1 rounded bg-green-600 text-white font-bold">Moi</small>
+                {% endif %}
+                <div>
+                  <a class="hover:underline" href="mailto:{{ member.user.email }}">{{ member.user.email }}</a>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-2 text-center">
+              <small class="border rounded p-1 text-gray-700">{{ member|access_level_label }}</small>
+            </td>
+            <td class="px-4 py-2 text-center">Rejoint {{ member.createdAt|diffForHumans }}</td>
+            <td class="px-4 py-2 text-right">
+              {% if member.accessLevel != constant('App\\Entity\\ServerMember::ACCESS_LEVEL_OWNER') %}
+                <a class="btn danger btn-sm" data-confirm="Êtes-vous sûr de vouloir supprimer ce membre ?" href="{{ path('app_server_member_remove', { id: server.id, memberId: member.id }) }}">
+                  <i class="fas fa-trash"></i>
+                </a>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if pager.haveToPaginate %}
+      <div class="pagination text-center">
+        {{ pagerfanta(pager) }}
+      </div>
+    {% endif %}
   {% endif %}
 {% endblock %}
