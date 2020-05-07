@@ -94,11 +94,10 @@ class ServerMenuBuilder
                     'icon' => 'fas fa-users'
                 ],
                 'label' => 'server.members',
-                'route' => 'app_home',
-                /*'route' => 'app_server_members',
+                'route' => 'app_server_members',
                 'routeParameters' => [
                     'id' => $server->getId()
-                ]*/
+                ]
             ]);
 
         if ($this->authorizationChecker->isGranted('EDIT', $server)) {

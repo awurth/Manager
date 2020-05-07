@@ -4,6 +4,7 @@ namespace App\Twig;
 
 use App\Entity\ProjectGroupMember;
 use App\Entity\ProjectMember;
+use App\Entity\ServerMember;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -20,6 +21,12 @@ class AccessLevelLabelExtension extends AbstractExtension
         ProjectMember::ACCESS_LEVEL_GUEST => 'project.member.access_level.guest',
         ProjectMember::ACCESS_LEVEL_MEMBER => 'project.member.access_level.member',
         ProjectMember::ACCESS_LEVEL_OWNER => 'project.member.access_level.owner'
+    ];
+
+    private const ACCESS_LEVELS_SERVER_MEMBER = [
+        ServerMember::ACCESS_LEVEL_GUEST => 'server.member.access_level.guest',
+        ServerMember::ACCESS_LEVEL_MEMBER => 'server.member.access_level.member',
+        ServerMember::ACCESS_LEVEL_OWNER => 'server.member.access_level.owner'
     ];
 
     private $translator;
@@ -43,6 +50,8 @@ class AccessLevelLabelExtension extends AbstractExtension
             $label = self::ACCESS_LEVELS_PROJECT_GROUP_MEMBER[$entity->getAccessLevel()] ?? null;
         } elseif ($entity instanceof ProjectMember) {
             $label = self::ACCESS_LEVELS_PROJECT_MEMBER[$entity->getAccessLevel()] ?? null;
+        } elseif ($entity instanceof ServerMember) {
+            $label = self::ACCESS_LEVELS_SERVER_MEMBER[$entity->getAccessLevel()] ?? null;
         }
 
         return $label ? $this->translator->trans($label) : null;

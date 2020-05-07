@@ -42,6 +42,7 @@ breadcrumb:
     server:
         edit: Paramètres
         list: Serveurs
+        members: Membres
         overview: Vue d'ensemble
 
 project:
@@ -67,6 +68,11 @@ project_group:
 
 server:
     environments: Environnements
+    member:
+        access_level:
+            guest: Invité
+            member: Membre
+            owner: Propriétaire
     members: Membres
     overview: Serveur
     settings: Paramètres
@@ -107,5 +113,7 @@ flash:
         server:
             create: Serveur créé avec succès
             edit: Server mis à jour avec succès
+            member:
+                add: Membre(s) ajouté(s) avec succès
         user:
             create: Utilisateur créé avec succès
