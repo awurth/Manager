@@ -18,7 +18,7 @@
           <strong>{{ member.user.email }}</strong>
           <small class="border rounded p-1 ml-2 text-gray-700">{{ member|access_level_label }}</small>
           {% if member.accessLevel != constant('App\\Entity\\ServerMember::ACCESS_LEVEL_OWNER') %}
-            <a class="p-2 ml-2 bg-red-600 hover:bg-red-700 rounded text-xs text-white" href="#">
+            <a class="p-2 ml-2 bg-red-600 hover:bg-red-700 rounded text-xs text-white" data-confirm="Êtes-vous sûr de vouloir supprimer ce membre ?" href="{{ path('app_server_member_remove', { id: server.id, memberId: member.id }) }}">
               <i class="fas fa-trash"></i>
             </a>
           {% endif %}
