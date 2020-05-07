@@ -75,7 +75,7 @@ class ServerMenuBuilder
                 ]
             ]);*/
 
-        /*if ($this->authorizationChecker->isGranted('EDIT', $server)) {
+        if ($this->authorizationChecker->isGranted('EDIT', $server)) {
             $menu
                 ->addChild('Settings', [
                     'extras' => [
@@ -87,7 +87,7 @@ class ServerMenuBuilder
                         'id' => $server->getId()
                     ]
                 ]);
-        }*/
+        }
 
         return $menu;
     }

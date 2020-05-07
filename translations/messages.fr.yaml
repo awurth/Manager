@@ -40,6 +40,7 @@ breadcrumb:
         members: Membres
         overview: Vue d'ensemble
     server:
+        edit: Paramètres
         list: Serveurs
         overview: Vue d'ensemble
 
@@ -66,6 +67,7 @@ project_group:
 
 server:
     overview: Serveur
+    settings: Paramètres
 
 flash:
     success:
@@ -100,5 +102,6 @@ flash:
                 remove: Membre supprimé avec succès
         server:
             create: Serveur créé avec succès
+            edit: Server mis à jour avec succès
         user:
             create: Utilisateur créé avec succès
