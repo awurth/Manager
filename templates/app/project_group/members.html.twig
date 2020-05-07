@@ -17,7 +17,7 @@
         <li class="mb-4">
           <strong>{{ member.user.email }}</strong>
           <small class="border rounded p-1 ml-2 text-gray-700">{{ member|access_level_label }}</small>
-          {% if member.accessLevel != constant('App\\Entity\\ProjectMember::ACCESS_LEVEL_OWNER') %}
+          {% if member.accessLevel != constant('App\\Entity\\ProjectGroupMember::ACCESS_LEVEL_OWNER') %}
             <a class="p-2 ml-2 bg-red-600 hover:bg-red-700 rounded text-xs text-white" href="{{ path('app_project_group_member_remove', { slug: group.slug, id: member.id }) }}">
               <i class="fas fa-trash"></i>
             </a>
