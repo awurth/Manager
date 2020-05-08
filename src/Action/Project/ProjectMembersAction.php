@@ -2,12 +2,15 @@
 
 namespace App\Action\Project;
 
+use App\Action\PaginationTrait;
 use App\Action\RoutingTrait;
 use App\Action\TwigTrait;
 use App\Entity\ProjectMember;
 use App\Form\Model\AddProjectMember;
 use App\Form\Type\Action\AddProjectMemberType;
+use App\Repository\ProjectMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,22 +22,26 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProjectMembersAction extends AbstractProjectAction
 {
+    use PaginationTrait;
     use RoutingTrait;
     use TwigTrait;
 
     private $entityManager;
     private $flashBag;
     private $formFactory;
+    private $projectMemberRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FlashBagInterface $flashBag,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        ProjectMemberRepository $projectMemberRepository
     )
     {
         $this->entityManager = $entityManager;
         $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
+        $this->projectMemberRepository = $projectMemberRepository;
     }
 
     public function __invoke(Request $request, string $projectGroupSlug, string $projectSlug): Response
@@ -65,14 +72,28 @@ class ProjectMembersAction extends AbstractProjectAction
             ]);
         }
 
+        $pager = $this->paginate($this->getQueryBuilder(), $request);
+
         return $this->renderPage('project-members', 'app/project/members.html.twig', [
             'form' => $form->createView(),
-            'project' => $this->project
+            'project' => $this->project,
+            'members' => $pager->getCurrentPageResults(),
+            'pager' => $pager
         ]);
     }
 
     protected function configureBreadcrumbs(): void
     {
         $this->breadcrumbs->addItem('breadcrumb.project.members');
+    }
+
+    private function getQueryBuilder(): QueryBuilder
+    {
+        return $this->projectMemberRepository->createQueryBuilder('m')
+            ->join('m.user', 'u')->addSelect('u')
+            ->where('m.project = :project')
+            ->setParameter('project', $this->project)
+            ->orderBy('m.accessLevel', 'DESC')
+            ->addOrderBy('m.createdAt', 'DESC');
     }
 }
