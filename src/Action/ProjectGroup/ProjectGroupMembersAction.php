@@ -2,12 +2,15 @@
 
 namespace App\Action\ProjectGroup;
 
+use App\Action\PaginationTrait;
 use App\Action\RoutingTrait;
 use App\Action\TwigTrait;
 use App\Entity\ProjectGroupMember;
 use App\Form\Type\Action\AddProjectGroupMemberType;
 use App\Form\Model\AddProjectGroupMember;
+use App\Repository\ProjectGroupMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,22 +22,26 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProjectGroupMembersAction extends AbstractProjectGroupAction
 {
+    use PaginationTrait;
     use RoutingTrait;
     use TwigTrait;
 
     private $entityManager;
     private $flashBag;
     private $formFactory;
+    private $projectGroupMemberRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FlashBagInterface $flashBag,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        ProjectGroupMemberRepository $projectGroupMemberRepository
     )
     {
         $this->entityManager = $entityManager;
         $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
+        $this->projectGroupMemberRepository = $projectGroupMemberRepository;
     }
 
     public function __invoke(Request $request, string $slug): Response
@@ -62,14 +69,28 @@ class ProjectGroupMembersAction extends AbstractProjectGroupAction
             return $this->redirectToRoute('app_project_group_members', ['slug' => $this->projectGroup->getSlug()]);
         }
 
+        $pager = $this->paginate($this->getQueryBuilder(), $request);
+
         return $this->renderPage('project-group-members', 'app/project_group/members.html.twig', [
             'form' => $form->createView(),
-            'group' => $this->projectGroup
+            'group' => $this->projectGroup,
+            'members' => $pager->getCurrentPageResults(),
+            'pager' => $pager
         ]);
     }
 
     protected function configureBreadcrumbs(): void
     {
         $this->breadcrumbs->addItem('breadcrumb.project_group.members');
+    }
+
+    private function getQueryBuilder(): QueryBuilder
+    {
+        return $this->projectGroupMemberRepository->createQueryBuilder('m')
+            ->join('m.user', 'u')->addSelect('u')
+            ->where('m.projectGroup = :group')
+            ->setParameter('group', $this->projectGroup)
+            ->orderBy('m.accessLevel', 'DESC')
+            ->addOrderBy('m.createdAt', 'DESC');
     }
 }
