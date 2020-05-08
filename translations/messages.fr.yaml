@@ -7,6 +7,7 @@ admin:
     project_groups: Groupes
     projects: Projets
     project_types: Types
+    servers: Serveurs
     users: Utilisateurs
 
 breadcrumb:
@@ -25,6 +26,8 @@ breadcrumb:
         project_type:
             create: Nouveau type de projet
             list: Types de projets
+        server:
+            list: Serveurs
         user:
             create: Nouvel utilisateur
             list: Utilisateurs

@@ -1,0 +1,29 @@
+{% extends 'app/admin/layout.html.twig' %}
+
+{% block page_content %}
+  <a class="btn success text-sm mt-4 mb-4 font-bold" href="{{ path('app_server_create') }}">
+    <i class="fas fa-plus"></i>
+    Nouveau serveur
+  </a>
+  <table class="w-full text-sm text-gray-700">
+    <tbody>
+      {% for server in servers %}
+        <tr class="border-b last:border-b-0">
+          <td class="px-4 py-2">
+            <a class="font-bold text-gray-900" href="{{ path('app_server_view', { id: server.id }) }}">{{ server.name }}</a>
+          </td>
+          <td class="px-4 py-2">Créé {{ server.createdAt|diffForHumans }}</td>
+          <td class="px-4 py-2 text-right">
+            <a class="btn btn-sm" href="{{ path('app_server_edit', { id: server.id }) }}">Éditer</a>
+            <a class="btn danger btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce serveur ?" href="#">Supprimer</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if pager.haveToPaginate %}
+    <div class="pagination text-center">
+      {{ pagerfanta(pager) }}
+    </div>
+  {% endif %}
+{% endblock %}

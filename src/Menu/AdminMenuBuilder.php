@@ -32,18 +32,6 @@ class AdminMenuBuilder
             ]);
 
         $menu
-            ->addChild('Users', [
-                'extras' => [
-                    'icon' => 'fas fa-users',
-                    'routes' => [
-                        'app_admin_user_create'
-                    ]
-                ],
-                'label' => 'admin.users',
-                'route' => 'app_admin_user_list'
-            ]);
-
-        $menu
             ->addChild('Project Groups', [
                 'extras' => [
                     'icon' => 'fas fa-object-group'
@@ -77,6 +65,15 @@ class AdminMenuBuilder
         ]);
 
         $menu
+            ->addChild('Servers', [
+                'extras' => [
+                    'icon' => 'fas fa-server'
+                ],
+                'label' => 'admin.servers',
+                'route' => 'app_admin_server_list'
+            ]);
+
+        $menu
             ->addChild('Credentials', [
                 'extras' => [
                     'icon' => 'fas fa-key'
@@ -96,6 +93,18 @@ class AdminMenuBuilder
                 ],
                 'label' => 'admin.customers',
                 'route' => 'app_admin_customer_list'
+            ]);
+
+        $menu
+            ->addChild('Users', [
+                'extras' => [
+                    'icon' => 'fas fa-users',
+                    'routes' => [
+                        'app_admin_user_create'
+                    ]
+                ],
+                'label' => 'admin.users',
+                'route' => 'app_admin_user_list'
             ]);
 
         return $menu;
