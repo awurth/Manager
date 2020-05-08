@@ -55,7 +55,7 @@ class AdminMenuBuilder
         $menu
             ->addChild('Projects', [
                 'extras' => [
-                    'icon' => 'fas fa-tasks'
+                    'icon' => 'fas fa-code'
                 ],
                 'label' => 'admin.projects',
                 'route' => 'app_admin_project_list'
