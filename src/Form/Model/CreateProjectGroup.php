@@ -2,8 +2,12 @@
 
 namespace App\Form\Model;
 
+use App\Validator\UniqueProjectGroupSlug;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @UniqueProjectGroupSlug()
+ */
 class CreateProjectGroup
 {
     public $customer;
