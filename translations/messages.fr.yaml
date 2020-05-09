@@ -117,6 +117,7 @@ flash:
                 remove: Membre supprimé avec succès
         server:
             create: Serveur créé avec succès
+            delete: Serveur supprimé avec succès
             edit: Server mis à jour avec succès
             member:
                 add: Membre(s) ajouté(s) avec succès
