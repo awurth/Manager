@@ -109,6 +109,7 @@ flash:
         project_group:
             change_slug: URL modifiée avec succès
             create: Groupe créé avec succès
+            delete: Groupe supprimé avec succès
             edit: Groupe mis à jour avec succès
             member:
                 add: Membre(s) ajouté(s) avec succès

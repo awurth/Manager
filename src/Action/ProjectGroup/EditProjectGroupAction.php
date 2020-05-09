@@ -64,6 +64,7 @@ class EditProjectGroupAction extends AbstractProjectGroupAction
         }
 
         return $this->renderPage('edit-project-group', 'app/project_group/edit.html.twig', [
+            'group' => $this->projectGroup,
             'editForm' => $this->editForm->createView(),
             'slugChangeForm' => $this->slugChangeForm->createView()
         ]);

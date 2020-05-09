@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/groups", name="app_group_list")
+ * @Route("/groups", name="app_project_group_list")
  */
 class ListProjectGroupsAction
 {
