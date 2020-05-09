@@ -107,6 +107,7 @@ flash:
                 delete: Type de projet supprimé avec succès
                 edit: Type de projet mis à jour avec succès
         project_group:
+            change_slug: URL modifiée avec succès
             create: Groupe créé avec succès
             edit: Groupe mis à jour avec succès
             member:

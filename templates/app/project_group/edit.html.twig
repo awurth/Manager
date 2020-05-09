@@ -2,10 +2,17 @@
 
 {% block page_content %}
   <div class="page-title">
-    <h1>Paramètres</h1>
+    <h2>Général</h2>
   </div>
-  {{ form_start(form) }}
-    {{ form_rest(form) }}
+  {{ form_start(editForm) }}
+    {{ form_rest(editForm) }}
     <button type="submit" class="btn success mt-4">Enregistrer</button>
-  {{ form_end(form) }}
+  {{ form_end(editForm) }}
+  <div class="page-title mt-4">
+    <h2>Changer l'URL</h2>
+  </div>
+  {{ form_start(slugChangeForm) }}
+    {{ form_rest(slugChangeForm) }}
+    <button type="submit" class="btn success mt-4">Changer l'URL</button>
+  {{ form_end(slugChangeForm) }}
 {% endblock %}
