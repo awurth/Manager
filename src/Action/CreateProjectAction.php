@@ -62,7 +62,9 @@ class CreateProjectAction
                     ->setAccessLevel(ProjectMember::ACCESS_LEVEL_OWNER)
             );
 
-            $this->projectLogoStorage->upload($model->logoFile, $project);
+            if ($model->logoFile) {
+                $this->projectLogoStorage->upload($model->logoFile, $project);
+            }
 
             $this->entityManager->persist($project);
             $this->entityManager->flush();
