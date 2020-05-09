@@ -14,6 +14,7 @@
         "lodash": "^4.17.15",
         "lodash-decorators": "^6.0.1",
         "select2": "^4.1.0-beta.0",
+        "slugify": "^1.4.0",
         "tailwindcss": "^1.2.0"
     },
     "devDependencies": {

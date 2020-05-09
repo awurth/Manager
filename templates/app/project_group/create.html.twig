@@ -9,3 +9,9 @@
     <button type="submit" class="btn success mt-4">Créer</button>
   {{ form_end(form) }}
 {% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('create-project-group') }}
+{% endblock %}
+

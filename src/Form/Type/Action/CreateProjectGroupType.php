@@ -15,8 +15,8 @@ class CreateProjectGroupType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('slug')
             ->add('name')
+            ->add('slug')
             ->add('description', TextareaType::class, [
                 'required' => false
             ])

@@ -8,6 +8,8 @@ Encore
   .setOutputPath('public/build/')
   .setPublicPath('/build')
   .addEntry('app', './assets/ts/main.ts')
+  .addEntry('create-project', './assets/ts/pages/create-project.ts')
+  .addEntry('create-project-group', './assets/ts/pages/create-project-group.ts')
   .splitEntryChunks()
   .enableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
