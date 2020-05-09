@@ -72,6 +72,7 @@ class EditProjectAction extends AbstractProjectAction
         }
 
         return $this->renderPage('edit-project', 'app/project/edit.html.twig', [
+            'project' => $this->project,
             'form' => $form->createView()
         ]);
     }
