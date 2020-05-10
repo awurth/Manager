@@ -53,7 +53,7 @@ class EditProjectGroupAction extends AbstractProjectGroupAction
     {
         $this->preInvoke($slug);
 
-        $this->denyAccessUnlessGranted('MEMBER', $this->projectGroup);
+        $this->denyAccessUnlessGranted('EDIT', $this->projectGroup);
 
         if ($response = $this->handleEditForm($request)) {
             return $response;

@@ -26,7 +26,7 @@ class ProjectGroupVoter extends Voter
 
     protected function supports($attribute, $subject): bool
     {
-        return (array_key_exists($attribute, self::ACCESS_LEVELS) || 'DELETE')
+        return (array_key_exists($attribute, self::ACCESS_LEVELS) || in_array($attribute, ['DELETE', 'EDIT', 'VIEW']))
             && $subject instanceof ProjectGroup;
     }
 
@@ -51,6 +51,18 @@ class ProjectGroupVoter extends Voter
 
         if (!$groupMember = $this->getGroupMember($user, $subject)) {
             return false;
+        }
+
+        if ($accessLevel = self::ACCESS_LEVELS[$attribute] ?? null) {
+            return $groupMember->getAccessLevel() >= $accessLevel;
+        }
+
+        switch ($attribute) {
+            case 'DELETE':
+            case 'EDIT':
+                return $groupMember->getAccessLevel() >= ProjectGroupMember::ACCESS_LEVEL_OWNER;
+            case 'VIEW':
+                return $groupMember->getAccessLevel() >= ProjectGroupMember::ACCESS_LEVEL_MEMBER;
         }
 
         if ('DELETE' === $attribute) {

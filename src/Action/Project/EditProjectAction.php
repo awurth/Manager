@@ -44,7 +44,7 @@ class EditProjectAction extends AbstractProjectAction
     {
         $this->preInvoke($projectGroupSlug, $projectSlug);
 
-        $this->denyAccessUnlessGranted('MEMBER', $this->project);
+        $this->denyAccessUnlessGranted('EDIT', $this->project);
 
         $model = new EditProject($this->project);
         $form = $this->formFactory->create(EditProjectType::class, $model);

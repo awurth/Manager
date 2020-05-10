@@ -26,7 +26,7 @@ class ServerVoter extends Voter
 
     protected function supports($attribute, $subject): bool
     {
-        return (array_key_exists($attribute, self::ACCESS_LEVELS) || 'DELETE')
+        return (array_key_exists($attribute, self::ACCESS_LEVELS) || in_array($attribute, ['DELETE', 'EDIT', 'VIEW']))
             && $subject instanceof Server;
     }
 
@@ -53,8 +53,16 @@ class ServerVoter extends Voter
             return false;
         }
 
-        if ('DELETE' === $attribute) {
-            return $serverMember->getAccessLevel() >= ServerMember::ACCESS_LEVEL_OWNER;
+        if ($accessLevel = self::ACCESS_LEVELS[$attribute] ?? null) {
+            return $serverMember->getAccessLevel() >= $accessLevel;
+        }
+
+        switch ($attribute) {
+            case 'DELETE':
+            case 'EDIT':
+                return $serverMember->getAccessLevel() >= ServerMember::ACCESS_LEVEL_OWNER;
+            case 'VIEW':
+                return $serverMember->getAccessLevel() >= ServerMember::ACCESS_LEVEL_MEMBER;
         }
 
         return $serverMember->getAccessLevel() >= self::ACCESS_LEVELS[$attribute];

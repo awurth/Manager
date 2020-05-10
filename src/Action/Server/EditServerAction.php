@@ -36,7 +36,7 @@ class EditServerAction extends AbstractServerAction
     {
         $this->preInvoke($id);
 
-        $this->denyAccessUnlessGranted('MEMBER', $this->server);
+        $this->denyAccessUnlessGranted('EDIT', $this->server);
 
         $model = new EditServer($this->server);
         $form = $this->formFactory->create(EditServerType::class, $model);
