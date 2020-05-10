@@ -46,13 +46,16 @@
           <div class="text-right">
             <a
               class="btn btn-sm"
+              title="Éditer"
               href="{{ path('app_project_environment_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: environment.id }) }}"
             >
               <i class="fas fa-edit"></i>
             </a>
             <a
               class="btn danger btn-sm"
-              href="#"
+              data-confirm="Êtes-vous sûr de vouloir supprimer cet environnement ?"
+              title="Supprimer"
+              href="{{ path('app_project_environment_remove', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: environment.id }) }}"
             >
               <i class="fas fa-trash"></i>
             </a>
