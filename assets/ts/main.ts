@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new Dropdown('.dropdown');
   new LinkClickConfirmation();
   $('select').select2();
-  $(':checkbox').iCheck({
+  $(':checkbox,:radio').iCheck({
     checkboxClass: 'icheckbox_flat',
     radioClass: 'iradio_flat'
   });
