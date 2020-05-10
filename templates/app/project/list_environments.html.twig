@@ -4,17 +4,61 @@
   <div class="page-title">
     <h1>Environnements</h1>
   </div>
-  <a class="btn success mb-4" href="{{ path('app_project_environment_add', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">Nouvel environnement</a>
+  {% if is_granted('MEMBER', project) %}
+    <a
+      class="btn success text-sm mb-4"
+      href="{{ path('app_project_environment_add', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}"
+    >
+      <i class="fas fa-plus"></i>
+      Nouvel environnement
+    </a>
+  {% endif %}
   {% if project.environments|length %}
-    <ul class="list-disc list-inside">
+    <div class="grid grid-cols-2 gap-4">
       {% for environment in project.environments %}
-        <li class="mb-4">
-          <strong>{{ environment.name }}</strong>
-          <a class="btn" href="{{ path('app_project_environment_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: environment.id }) }}">
-            <i class="fas fa-edit"></i>
-          </a>
-        </li>
+        <div class="px-4 py-2 border border-gray-300 shadow">
+          <h2 class="font-bold text-xl mb-2">{{ environment.name }}</h2>
+          {% if environment.description %}
+            <p class="text-sm text-gray-600 px-4 py-2 mb-2 bg-gray-100 border-l-2">{{ environment.description }}</p>
+          {% endif %}
+          <ul>
+            <li class="mb-2">
+              <a class="text-sm text-gray-700" href="{{ path('app_server_view', { id: environment.server.id }) }}">
+                <i class="fas fa-server mr-1"></i>
+                <span>{{ environment.server.name }}</span>
+              </a>
+            </li>
+            {% if environment.path %}
+              <li class="text-sm text-gray-700 mb-2">
+                <i class="far fa-folder-open"></i>
+                <span>{{ environment.path }}</span>
+              </li>
+            {% endif %}
+            {% if environment.url %}
+              <li class="mb-2">
+                <a class="text-sm text-gray-700 hover:underline" href="{{ environment.url }}">
+                  <i class="fas fa-link"></i>
+                  <span>{{ environment.url }}</span>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+          <div class="text-right">
+            <a
+              class="btn btn-sm"
+              href="{{ path('app_project_environment_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: environment.id }) }}"
+            >
+              <i class="fas fa-edit"></i>
+            </a>
+            <a
+              class="btn danger btn-sm"
+              href="#"
+            >
+              <i class="fas fa-trash"></i>
+            </a>
+          </div>
+        </div>
       {% endfor %}
-    </ul>
+    </div>
   {% endif %}
 {% endblock %}
