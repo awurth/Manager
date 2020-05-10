@@ -4,6 +4,7 @@ namespace App\Security\Voter;
 
 use App\Entity\Server;
 use App\Entity\ServerMember;
+use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -39,6 +40,7 @@ class ServerVoter extends Voter
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
+        /** @var User $user */
         $user = $token->getUser();
 
         if (!$user instanceof UserInterface) {
@@ -49,7 +51,7 @@ class ServerVoter extends Voter
             return true;
         }
 
-        if (!$serverMember = $this->getServerMember($user, $subject)) {
+        if (!$serverMember = $subject->getMemberByUser($user)) {
             return false;
         }
 
@@ -65,17 +67,6 @@ class ServerVoter extends Voter
                 return $serverMember->getAccessLevel() >= ServerMember::ACCESS_LEVEL_MEMBER;
         }
 
-        return $serverMember->getAccessLevel() >= self::ACCESS_LEVELS[$attribute];
-    }
-
-    private function getServerMember(UserInterface $user, Server $server): ?ServerMember
-    {
-        foreach ($server->getMembers() as $serverMember) {
-            if ($serverMember->getUser() === $user) {
-                return $serverMember;
-            }
-        }
-
-        return null;
+        return false;
     }
 }

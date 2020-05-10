@@ -4,6 +4,7 @@ namespace App\Security\Voter;
 
 use App\Entity\ProjectGroup;
 use App\Entity\ProjectGroupMember;
+use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -39,6 +40,7 @@ class ProjectGroupVoter extends Voter
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
+        /** @var User $user */
         $user = $token->getUser();
 
         if (!$user instanceof UserInterface) {
@@ -49,7 +51,7 @@ class ProjectGroupVoter extends Voter
             return true;
         }
 
-        if (!$groupMember = $this->getGroupMember($user, $subject)) {
+        if (!$groupMember = $subject->getMemberByUser($user)) {
             return false;
         }
 
@@ -69,17 +71,6 @@ class ProjectGroupVoter extends Voter
             return $groupMember->getAccessLevel() >= ProjectGroupMember::ACCESS_LEVEL_OWNER;
         }
 
-        return $groupMember->getAccessLevel() >= self::ACCESS_LEVELS[$attribute];
-    }
-
-    private function getGroupMember(UserInterface $user, ProjectGroup $group): ?ProjectGroupMember
-    {
-        foreach ($group->getMembers() as $groupMember) {
-            if ($groupMember->getUser() === $user) {
-                return $groupMember;
-            }
-        }
-
-        return null;
+        return false;
     }
 }

@@ -77,6 +77,17 @@ class Server
         return $this->getName();
     }
 
+    public function getMemberByUser(User $user): ?ServerMember
+    {
+        foreach ($this->getMembers() as $member) {
+            if ($member->getUser() === $user) {
+                return $member;
+            }
+        }
+
+        return null;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -78,6 +78,17 @@ class ProjectGroup
         return $this->getName();
     }
 
+    public function getMemberByUser(User $user): ?ProjectGroupMember
+    {
+        foreach ($this->getMembers() as $member) {
+            if ($member->getUser() === $user) {
+                return $member;
+            }
+        }
+
+        return null;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

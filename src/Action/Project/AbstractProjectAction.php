@@ -65,14 +65,18 @@ abstract class AbstractProjectAction
                 false
             );
 
-            $this->breadcrumbs->prependRouteItem(
-                $this->projectGroup->getName(),
-                'app_project_group_view',
-                ['slug' => $this->projectGroup->getSlug()],
-                RouterInterface::ABSOLUTE_PATH,
-                [],
-                false
-            );
+            if ($this->isGranted('VIEW', $this->projectGroup)) {
+                $this->breadcrumbs->prependRouteItem(
+                    $this->projectGroup->getName(),
+                    'app_project_group_view',
+                    ['slug' => $this->projectGroup->getSlug()],
+                    RouterInterface::ABSOLUTE_PATH,
+                    [],
+                    false
+                );
+            } else {
+                $this->breadcrumbs->prependItem($this->projectGroup->getName(), '', [], false);
+            }
         }
     }
 
