@@ -813,6 +813,11 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/icheck@^0.8.29":
+  version "0.8.29"
+  resolved "https://registry.yarnpkg.com/@types/icheck/-/icheck-0.8.29.tgz#2633a76e2c3572300f5c8258dda2d207fc1bdc28"
+  integrity sha512-x1bcbTyyC2TC1C9cjH9umh98l9ZYweGf8+yb+6mEhXImefqbXrzeEq/uwfC3nCLC9cRjACLTcDtpECgz2zFDrQ==
+
 "@types/jquery@*", "@types/jquery@^3.3.31":
   version "3.3.38"
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.38.tgz#6385f1e1b30bd2bff55ae8ee75ea42a999cc3608"
@@ -3570,6 +3575,11 @@ https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
+
+icheck@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/icheck/-/icheck-1.0.2.tgz#06d08da3d47ae448c153b2639b86e9ad7fdf7128"
+  integrity sha1-BtCNo9R65EjBU7Jjm4bprX/fcSg=
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"

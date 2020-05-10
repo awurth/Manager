@@ -9,7 +9,9 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.13.0",
+        "@types/icheck": "^0.8.29",
         "@types/select2": "^4.0.48",
+        "icheck": "^1.0.2",
         "jquery": "^3.5.0",
         "lodash": "^4.17.15",
         "lodash-decorators": "^6.0.1",
