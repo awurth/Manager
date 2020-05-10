@@ -35,6 +35,11 @@ class Server
     private $operatingSystem;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $sshPort;
+
+    /**
      * @ORM\Column(type="datetime")
      *
      * @Gedmo\Timestampable(on="create")
@@ -125,6 +130,18 @@ class Server
     public function setOperatingSystem(?string $operatingSystem): self
     {
         $this->operatingSystem = $operatingSystem;
+
+        return $this;
+    }
+
+    public function getSshPort(): ?int
+    {
+        return $this->sshPort;
+    }
+
+    public function setSshPort(?int $sshPort): self
+    {
+        $this->sshPort = $sshPort;
 
         return $this;
     }
