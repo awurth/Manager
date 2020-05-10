@@ -5,29 +5,39 @@
     <h1>Projets</h1>
   </div>
   {% if is_granted('ROLE_PROJECT_CREATE') %}
-    <a class="btn success" href="{{ path('app_project_create') }}">Nouveau projet</a>
+    <a class="btn success mb-4" href="{{ path('app_project_create') }}">Nouveau projet</a>
   {% endif %}
-  <ul class="flex flex-col mt-4">
-    {% for project in projects %}
-      <li class="flex py-3 border-b last:border-b-0">
-        <div class="flex w-12 h-12 mr-4">
-          <a href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}" class="block w-full h-full">
-            {% if project.logoFilename %}
-              <img class="max-w-full max-h-full rounded" src="{{ projectLogoStorage.resolveUri(project) }}" alt="{{ project.name }}">
-            {% else %}
-              <div class="flex flex-wrap justify-center w-full h-full bg-gray-300 rounded">
-                <span class="self-center font-bold">{{ project|first|capitalize }}</span>
-              </div>
-            {% endif %}
-          </a>
-        </div>
-        <div class="flex flex-auto items-center">
-          <a class="mr-auto text-sm font-bold" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">{{ project.name }}</a>
-          <span class="text-sm text-gray-600">Dernière mise à jour {{ project.updatedAt|diffForHumans }}</span>
-        </div>
-      </li>
-    {% endfor %}
-  </ul>
+  <table class="w-full text-sm text-gray-700">
+    <tbody>
+      {% for project in projects %}
+        <tr class="border-b last:border-b-0">
+          <td class="px-4 py-2">
+            <div class="inline-block align-middle mr-2">
+              {% if project.logoFilename %}
+                <a class="flex flex-wrap content-center justify-center w-10 h-10 rounded overflow-hidden" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">
+                  <img class="max-w-full max-h-full" src="{{ projectLogoStorage.resolveUri(project) }}" alt="{{ project.name }}">
+                </a>
+              {% else %}
+                <a class="flex flex-wrap justify-center w-10 h-10 bg-gray-300 rounded" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">
+                    <span class="self-center font-bold">
+                      {{ project.name|first|capitalize }}
+                    </span>
+                </a>
+              {% endif %}
+            </div>
+            <div class="inline-block align-middle">
+              <a href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">
+                <span class="text-gray-700">{{ project.projectGroup.name }} /</span>
+                <span class="font-bold text-gray-900">{{ project.name }}</span>
+              </a>
+              <small class="access-level-label ml-2">{{ project.memberByUser(app.user)|access_level_label }}</small>
+            </div>
+          </td>
+          <td class="px-4 py-2 text-right">Créé {{ project.createdAt|diffForHumans }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
   {% if pager.haveToPaginate %}
     <div class="pagination text-center">
       {{ pagerfanta(pager) }}
