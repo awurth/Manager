@@ -47,10 +47,23 @@
           <td class="px-4 py-2">Créé {{ project.createdAt|diffForHumans }}</td>
           <td class="px-4 py-2 text-right">
             {% if is_granted('EDIT', project) %}
-              <a class="btn btn-sm" href="{{ path('app_project_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">Éditer</a>
+              <a
+                class="btn btn-sm"
+                title="Éditer"
+                href="{{ path('app_project_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}"
+              >
+                <i class="fas fa-edit"></i>
+              </a>
             {% endif %}
             {% if is_granted('DELETE', project) %}
-              <a class="btn danger btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce projet ?" href="{{ path('app_project_delete', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">Supprimer</a>
+              <a
+                class="btn danger btn-sm ml-2"
+                data-confirm="Êtes-vous sûr de vouloir supprimer ce projet ?"
+                title="Supprimer"
+                href="{{ path('app_project_delete', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}"
+              >
+                <i class="fas fa-trash"></i>
+              </a>
             {% endif %}
           </td>
         </tr>
