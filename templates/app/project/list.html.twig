@@ -13,7 +13,7 @@
         <div class="flex w-12 h-12 mr-4">
           <a href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}" class="block w-full h-full">
             {% if project.logoFilename %}
-              <img class="w-full rounded" src="{{ projectLogoStorage.resolveUri(project) }}" alt="{{ project.name }}">
+              <img class="max-w-full max-h-full rounded" src="{{ projectLogoStorage.resolveUri(project) }}" alt="{{ project.name }}">
             {% else %}
               <div class="flex flex-wrap justify-center w-full h-full bg-gray-300 rounded">
                 <span class="self-center font-bold">{{ project|first|capitalize }}</span>

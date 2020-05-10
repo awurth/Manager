@@ -19,4 +19,47 @@
       </div>
     {% endif %}
   </div>
+  <div class="page-title">
+    <h2>Projets</h2>
+  </div>
+  <table class="w-full text-sm text-gray-700">
+    <tbody>
+      {% for project in projects %}
+        <tr class="border-b last:border-b-0">
+          <td class="px-4 py-2">
+            <div class="inline-block align-middle mr-2">
+              {% if project.logoFilename %}
+                <a class="flex flex-wrap justify-center w-10 h-10 rounded" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">
+                  <img class="max-w-full max-h-full rounded" src="{{ projectLogoStorage.resolveUri(project) }}" alt="{{ project.name }}">
+                </a>
+              {% else %}
+                <a class="flex flex-wrap justify-center w-10 h-10 bg-gray-300 rounded" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">
+                  <span class="self-center font-bold">
+                    {{ project.name|first|capitalize }}
+                  </span>
+                </a>
+              {% endif %}
+            </div>
+            <div class="inline-block align-middle">
+              <a class="font-bold text-gray-900" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">{{ project.name }}</a>
+            </div>
+          </td>
+          <td class="px-4 py-2">Créé {{ project.createdAt|diffForHumans }}</td>
+          <td class="px-4 py-2 text-right">
+            {% if is_granted('EDIT', project) %}
+              <a class="btn btn-sm" href="{{ path('app_project_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">Éditer</a>
+            {% endif %}
+            {% if is_granted('DELETE', project) %}
+              <a class="btn danger btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce projet ?" href="{{ path('app_project_delete', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">Supprimer</a>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if pager.haveToPaginate %}
+    <div class="pagination text-center">
+      {{ pagerfanta(pager) }}
+    </div>
+  {% endif %}
 {% endblock %}

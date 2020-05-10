@@ -2,7 +2,12 @@
 
 namespace App\Action\ProjectGroup;
 
+use App\Action\PaginationTrait;
 use App\Action\TwigTrait;
+use App\Repository\ProjectRepository;
+use App\Upload\StorageInterface;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -11,21 +16,44 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ViewProjectGroupAction extends AbstractProjectGroupAction
 {
+    use PaginationTrait;
     use TwigTrait;
 
-    public function __invoke(string $slug): Response
+    private $projectLogoStorage;
+    private $projectRepository;
+
+    public function __construct(StorageInterface $projectLogoStorage, ProjectRepository $projectRepository)
+    {
+        $this->projectLogoStorage = $projectLogoStorage;
+        $this->projectRepository = $projectRepository;
+    }
+
+    public function __invoke(Request $request, string $slug): Response
     {
         $this->preInvoke($slug);
 
         $this->denyAccessUnlessGranted('GUEST', $this->projectGroup);
 
+        $pager = $this->paginate($this->getQueryBuilder(), $request);
+
         return $this->renderPage('view-project-group', 'app/project_group/view.html.twig', [
-            'group' => $this->projectGroup
+            'group' => $this->projectGroup,
+            'projects' => $pager->getCurrentPageResults(),
+            'pager' => $pager,
+            'projectLogoStorage' => $this->projectLogoStorage
         ]);
     }
 
     protected function configureBreadcrumbs(): void
     {
         $this->breadcrumbs->addItem('breadcrumb.project_group.overview');
+    }
+
+    private function getQueryBuilder(): QueryBuilder
+    {
+        return $this->projectRepository->createQueryBuilder('p')
+            ->where('p.projectGroup = :group')
+            ->setParameter('group', $this->projectGroup)
+            ->orderBy('p.createdAt', 'DESC');
     }
 }
