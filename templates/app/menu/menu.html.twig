@@ -9,6 +9,11 @@
     {% if item.extras.identicon is defined %}
       <span class="identicon">{{ item.extras.identicon }}</span>
     {% endif %}
+    {% if item.extras.image is defined %}
+      <span class="image">
+        <img src="{{ item.extras.image }}" alt="{{ block('label') }}">
+      </span>
+    {% endif %}
     <span>{{ block('label') }}</span>
   </a>
 {% endblock %}

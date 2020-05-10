@@ -4,6 +4,7 @@ namespace App\Menu;
 
 use App\Entity\Project;
 use App\Repository\ProjectRepository;
+use App\Upload\StorageInterface;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -13,18 +14,21 @@ class ProjectMenuBuilder
 {
     private $authorizationChecker;
     private $factory;
+    private $projectLogoStorage;
     private $projectRepository;
     private $requestStack;
 
     public function __construct(
         AuthorizationCheckerInterface $authorizationChecker,
         FactoryInterface $factory,
+        StorageInterface $projectLogoStorage,
         ProjectRepository $projectRepository,
         RequestStack $requestStack
     )
     {
         $this->authorizationChecker = $authorizationChecker;
         $this->factory = $factory;
+        $this->projectLogoStorage = $projectLogoStorage;
         $this->projectRepository = $projectRepository;
         $this->requestStack = $requestStack;
     }
@@ -34,15 +38,19 @@ class ProjectMenuBuilder
         $project = $this->getProject();
         $menu = $this->factory->createItem('Project Menu');
 
+        $headerExtras = ['translation_domain' => false];
+        if ($project->getLogoFilename()) {
+            $headerExtras['image'] = $this->projectLogoStorage->resolveUri($project);
+        } else {
+            $headerExtras['identicon'] = substr($project->getName(), 0, 1);
+        }
+
         $menu
             ->addChild('Project', [
                 'attributes' => [
                     'class' => 'header'
                 ],
-                'extras' => [
-                    'identicon' => substr($project->getName(), 0, 1),
-                    'translation_domain' => false
-                ],
+                'extras' => $headerExtras,
                 'label' => $project->getName(),
                 'route' => 'app_project_view',
                 'routeParameters' => [
