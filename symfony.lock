@@ -99,6 +99,9 @@
     "gedmo/doctrine-extensions": {
         "version": "v2.4.38"
     },
+    "hackzilla/password-generator": {
+        "version": "1.5.0"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
