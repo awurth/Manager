@@ -1,3 +1,6 @@
+gender_female: Femme
+gender_male: Homme
+gender_neutral: Neutre
 select_customer: Sélectionnez un client
 select_project_type: Sélectionnez un type
 
@@ -81,6 +84,11 @@ server:
     settings: Paramètres
     users: Utilisateurs
 
+user:
+    role:
+        admin: Admin
+        user: Utilisateur
+
 flash:
     success:
         credentials:
@@ -126,3 +134,87 @@ flash:
                 remove: Membre supprimé avec succès
         user:
             create: Utilisateur créé avec succès
+
+form:
+    label:
+        add_project_member_user: Utilisateur
+        add_project_member_accessLevel: Niveau d'accès
+        add_project_group_member_user: Utilisateur
+        add_project_group_member_accessLevel: Niveau d'accès
+        add_server_member_user: Utilisateur
+        add_server_member_accessLevel: Niveau d'accès
+        change_project_group_slug_slug: URL
+        create_credentials_name: Nom
+        create_credentials_username: Identifiant
+        create_credentials_email: Adresse email
+        create_credentials_password: Mot de passe
+        create_credentials_website: Site web
+        create_credentials_description: Description
+        create_credentials_users: Utilisateurs
+        create_customer_name: Nom
+        create_customer_address: Adresse
+        create_customer_postcode: Code postal
+        create_customer_city: Ville
+        create_customer_phone: Téléphone
+        create_customer_email: Adresse email
+        create_project_projectGroup: Groupe
+        create_project_name: Nom
+        create_project_slug: URL
+        create_project_description: Description
+        create_project_logoFile: Logo
+        create_project_type: Type
+        create_project_environment_server: Serveur
+        create_project_environment_name: Nom
+        create_project_environment_path: Emplacement
+        create_project_environment_url: URL
+        create_project_environment_description: Description
+        create_project_group_name: Nom
+        create_project_group_slug: URL
+        create_project_group_description: Description
+        create_project_group_customer: Client
+        create_project_type_name: Nom
+        create_server_name: Nom
+        create_server_ip: Adresse IP
+        create_server_operatingSystem: Système d'exploitation
+        create_server_sshPort: Port SSH
+        create_user_email: Adresse email
+        create_user_plainPassword: Mot de passe
+        create_user_role: Permissions
+        create_user_gender: Genre
+        create_user_firstname: Prénom
+        create_user_lastname: Nom
+        edit_credentials_name: Nom
+        edit_credentials_username: Identifiant
+        edit_credentials_email: Adresse email
+        edit_credentials_password: Mot de passe
+        edit_credentials_website: Site web
+        edit_credentials_description: Description
+        edit_credentials_users: Utilisateurs
+        edit_customer_name: Nom
+        edit_customer_address: Adresse
+        edit_customer_postcode: Code postal
+        edit_customer_city: Ville
+        edit_customer_phone: Téléphone
+        edit_customer_email: Adresse email
+        edit_project_name: Nom
+        edit_project_description: Description
+        edit_project_logoFile: Logo
+        edit_project_type: Type
+        edit_project_environment_server: Serveur
+        edit_project_environment_name: Nom
+        edit_project_environment_path: Emplacement
+        edit_project_environment_url: URL
+        edit_project_environment_description: Description
+        edit_project_group_name: Nom
+        edit_project_group_description: Description
+        edit_project_group_customer: Client
+        edit_project_type_name: Nom
+        edit_server_name: Nom
+        edit_server_ip: Adresse IP
+        edit_server_operatingSystem: Système d'exploitation
+        edit_server_sshPort: Port SSH
+        generate_password_lowercase: Minuscules
+        generate_password_uppercase: Majuscules
+        generate_password_numbers: Chiffres
+        generate_password_symbols: Caractères spéciaux
+        generate_password_length: Longueur
