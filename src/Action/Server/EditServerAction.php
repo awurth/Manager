@@ -46,7 +46,8 @@ class EditServerAction extends AbstractServerAction
             $this->server
                 ->setName($model->name)
                 ->setIp($model->ip)
-                ->setOperatingSystem($model->operatingSystem);
+                ->setOperatingSystem($model->operatingSystem)
+                ->setSshPort($model->sshPort);
 
             $this->entityManager->persist($this->server);
             $this->entityManager->flush();

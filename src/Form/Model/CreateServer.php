@@ -22,4 +22,10 @@ class CreateServer
      * @Assert\Length(max=255)
      */
     public $operatingSystem;
+
+    /**
+     * @Assert\Type("int")
+     * @Assert\Range(min=1, max=65536)
+     */
+    public $sshPort;
 }

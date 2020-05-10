@@ -49,7 +49,8 @@ class CreateServerAction
         if ($form->isSubmitted() && $form->isValid()) {
             $server = (new Server($model->name))
                 ->setIp($model->ip)
-                ->setOperatingSystem($model->operatingSystem);
+                ->setOperatingSystem($model->operatingSystem)
+                ->setSshPort($model->sshPort);
 
             $server->addMember(
                 (new ServerMember())

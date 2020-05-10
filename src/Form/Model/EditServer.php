@@ -24,10 +24,17 @@ class EditServer
      */
     public $operatingSystem;
 
+    /**
+     * @Assert\Type("int")
+     * @Assert\Range(min=1, max=65536)
+     */
+    public $sshPort;
+
     public function __construct(Server $server)
     {
         $this->name = $server->getName();
         $this->ip = $server->getIp();
         $this->operatingSystem = $server->getOperatingSystem();
+        $this->sshPort = $server->getSshPort();
     }
 }
