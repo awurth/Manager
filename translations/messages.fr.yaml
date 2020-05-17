@@ -51,6 +51,9 @@ breadcrumb:
         members: Membres
         overview: Vue d'ensemble
 
+profile:
+    general: Profil
+
 project:
     environments: Environnements
     member:

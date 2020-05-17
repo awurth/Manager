@@ -59,7 +59,7 @@ class ProfileAction
             return $this->redirectToRoute('app_profile');
         }
 
-        return $this->renderPage('profile', 'app/profile.html.twig', [
+        return $this->renderPage('profile', 'app/profile/profile.html.twig', [
             'form' => $form->createView()
         ]);
     }
