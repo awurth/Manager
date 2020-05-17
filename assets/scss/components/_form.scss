@@ -46,6 +46,9 @@ label {
 .icheckbox_flat,
 .iradio_flat {
   display: inline-block;
+  + label.required::after {
+    content: "";
+  }
 }
 
 .iradio_flat {
