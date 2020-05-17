@@ -22,9 +22,8 @@ class UserFixtures extends Fixture
             return;
         }
 
-        $user = (new User('admin@pilipili-web.com'))
-            ->setRoles(['ROLE_ADMIN'])
-            ->setGender(User::GENDER_NEUTRAL);
+        $user = (new User('admin@pilipili-web.com', 'Admin', 'Pilipili'))
+            ->setRoles(['ROLE_ADMIN']);
 
         $user->setPassword($this->passwordEncoder->encodePassword($user, 'admin'));
 

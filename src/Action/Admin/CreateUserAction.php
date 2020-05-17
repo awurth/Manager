@@ -48,10 +48,8 @@ class CreateUserAction extends AbstractAdminAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = (new User($model->email))
+            $user = (new User($model->email, $model->firstname, $model->lastname))
                 ->setGender($model->gender)
-                ->setFirstname($model->firstname)
-                ->setLastname($model->lastname)
                 ->addRole($model->role);
 
             $user->setPassword($this->userPasswordEncoder->encodePassword($user, $model->plainPassword));

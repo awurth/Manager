@@ -2,31 +2,20 @@
 
 namespace App\Form\Model;
 
+use App\Entity\User;
 use App\Validator\UniqueUserEmail;
-use Rollerworks\Component\PasswordStrength\Validator\Constraints\PasswordStrength;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @UniqueUserEmail()
  */
-class CreateUser
+class EditProfile
 {
-    public const VALID_ROLES = [
-        'ROLE_ADMIN',
-        'ROLE_USER'
-    ];
-
     /**
      * @Assert\NotBlank()
      * @Assert\Email()
      */
     public $email;
-
-    /**
-     * @Assert\NotBlank()
-     * @PasswordStrength(4)
-     */
-    public $plainPassword;
 
     /**
      * @Assert\NotBlank()
@@ -45,9 +34,19 @@ class CreateUser
      */
     public $lastname;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Choice(choices=CreateUser::VALID_ROLES)
-     */
-    public $role;
+    private $user;
+
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+        $this->email = $user->getEmail();
+        $this->gender = $user->getGender();
+        $this->firstname = $user->getFirstname();
+        $this->lastname = $user->getLastname();
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
 }

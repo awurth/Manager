@@ -4,20 +4,8 @@
   <div class="page-title">
     <h1>Profil</h1>
   </div>
-  <div class="grid grid-cols-2 gap-4">
-    <div class="px-4 py-2 border border-gray-300 shadow">
-      <h2 class="font-bold mb-2">Clés SSH</h2>
-      <ul>
-        {% for ssh_key in app.user.sshKeys %}
-          <li class="p-3 border-b last:border-b-0">
-            <strong>{{ ssh_key.name }}</strong>
-            <span>{{ ssh_key.value }}</span>
-            <span class="block">
-              Ajoutée {{ ssh_key.createdAt|diffForHumans }}
-            </span>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
+  {{ form_start(form) }}
+    {{ form_rest(form) }}
+    <button type="submit" class="btn success mt-4">Enregistrer</button>
+  {{ form_end(form) }}
 {% endblock %}

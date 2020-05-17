@@ -45,12 +45,12 @@ class User implements UserInterface
     private $gender = self::GENDER_NEUTRAL;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $lastname;
 
@@ -93,9 +93,11 @@ class User implements UserInterface
      */
     private $credentialsUsers;
 
-    public function __construct(string $email)
+    public function __construct(string $email, string $firstname, string $lastname)
     {
         $this->email = $email;
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
 
         $this->cryptographicKeys = new ArrayCollection();
         $this->projectGroupMembers = new ArrayCollection();
@@ -258,24 +260,24 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getFirstname(): ?string
+    public function getFirstname(): string
     {
         return $this->firstname;
     }
 
-    public function setFirstname(?string $firstname): self
+    public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
 
         return $this;
     }
 
-    public function getLastname(): ?string
+    public function getLastname(): string
     {
         return $this->lastname;
     }
 
-    public function setLastname(?string $lastname): self
+    public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
 
