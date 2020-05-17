@@ -5,9 +5,9 @@ namespace App\Action\Admin;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
-use App\Entity\Customer;
-use App\Form\Type\Action\CreateCustomerType;
-use App\Form\Model\CreateCustomer;
+use App\Entity\Client;
+use App\Form\Type\Action\CreateClientType;
+use App\Form\Model\CreateClient;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/customers/new", name="app_admin_customer_create")
+ * @Route("/clients/new", name="app_admin_client_create")
  */
-class CreateCustomerAction extends AbstractAdminAction
+class CreateClientAction extends AbstractAdminAction
 {
     use RoutingTrait;
     use SecurityTrait;
@@ -40,27 +40,27 @@ class CreateCustomerAction extends AbstractAdminAction
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $model = new CreateCustomer();
-        $form = $this->formFactory->create(CreateCustomerType::class, $model);
+        $model = new CreateClient();
+        $form = $this->formFactory->create(CreateClientType::class, $model);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $customer = (new Customer($model->name))
+            $client = (new Client($model->name))
                 ->setAddress($model->address)
                 ->setPostcode($model->postcode)
                 ->setCity($model->city)
                 ->setPhone($model->phone)
                 ->setEmail($model->email);
 
-            $this->entityManager->persist($customer);
+            $this->entityManager->persist($client);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.customer.create');
+            $this->flashBag->add('success', 'flash.success.client.create');
 
-            return $this->redirectToRoute('app_admin_customer_list');
+            return $this->redirectToRoute('app_admin_client_list');
         }
 
-        return $this->renderPage('admin-create-customer', 'app/admin/create_customer.html.twig', [
+        return $this->renderPage('admin-create-client', 'app/admin/create_client.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -70,7 +70,7 @@ class CreateCustomerAction extends AbstractAdminAction
         parent::configureBreadcrumbs();
 
         $this->breadcrumbs
-            ->addRouteItem('breadcrumb.admin.customer.list', 'app_admin_customer_list')
-            ->addItem('breadcrumb.admin.customer.create');
+            ->addRouteItem('breadcrumb.admin.client.list', 'app_admin_client_list')
+            ->addItem('breadcrumb.admin.client.create');
     }
 }

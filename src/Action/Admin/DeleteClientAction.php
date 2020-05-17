@@ -4,7 +4,7 @@ namespace App\Action\Admin;
 
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
-use App\Repository\CustomerRepository;
+use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -12,26 +12,26 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/customer/{id}/delete", requirements={"id": "\d+"}, name="app_admin_customer_delete")
+ * @Route("/client/{id}/delete", requirements={"id": "\d+"}, name="app_admin_client_delete")
  */
-class DeleteCustomerAction
+class DeleteClientAction
 {
     use RoutingTrait;
     use SecurityTrait;
 
     private $entityManager;
     private $flashBag;
-    private $customerRepository;
+    private $clientRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FlashBagInterface $flashBag,
-        CustomerRepository $customerRepository
+        ClientRepository $clientRepository
     )
     {
         $this->entityManager = $entityManager;
         $this->flashBag = $flashBag;
-        $this->customerRepository = $customerRepository;
+        $this->clientRepository = $clientRepository;
     }
 
     public function __invoke(int $id): Response
@@ -39,17 +39,17 @@ class DeleteCustomerAction
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $customer = $this->customerRepository->find($id);
+        $client = $this->clientRepository->find($id);
 
-        if (!$customer) {
-            throw new NotFoundHttpException('Customer not found');
+        if (!$client) {
+            throw new NotFoundHttpException('Client not found');
         }
 
-        $this->entityManager->remove($customer);
+        $this->entityManager->remove($client);
         $this->entityManager->flush();
 
-        $this->flashBag->add('success', 'flash.success.customer.delete');
+        $this->flashBag->add('success', 'flash.success.client.delete');
 
-        return $this->redirectToRoute('app_admin_customer_list');
+        return $this->redirectToRoute('app_admin_client_list');
     }
 }

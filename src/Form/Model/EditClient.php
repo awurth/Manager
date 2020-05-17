@@ -2,9 +2,10 @@
 
 namespace App\Form\Model;
 
+use App\Entity\Client;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateCustomer
+class EditClient
 {
     /**
      * @Assert\NotBlank()
@@ -37,4 +38,14 @@ class CreateCustomer
      * @Assert\Length(max=255)
      */
     public $email;
+
+    public function __construct(Client $client)
+    {
+        $this->name = $client->getName();
+        $this->address = $client->getAddress();
+        $this->postcode = $client->getPostcode();
+        $this->city = $client->getCity();
+        $this->phone = $client->getPhone();
+        $this->email = $client->getEmail();
+    }
 }

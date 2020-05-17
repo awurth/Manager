@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class EditProjectGroup
 {
-    public $customer;
+    public $client;
 
     /**
      * @Assert\NotBlank()
@@ -19,7 +19,7 @@ class EditProjectGroup
 
     public function __construct(ProjectGroup $projectGroup)
     {
-        $this->customer = $projectGroup->getCustomer();
+        $this->client = $projectGroup->getClient();
         $this->name = $projectGroup->getName();
         $this->description = $projectGroup->getDescription();
     }

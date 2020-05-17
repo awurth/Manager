@@ -44,7 +44,7 @@ class CreateProjectGroupAction
 
         if ($form->isSubmitted() && $form->isValid()) {
             $group = (new ProjectGroup($model->slug, $model->name))
-                ->setCustomer($model->customer)
+                ->setClient($model->client)
                 ->setDescription($model->description);
 
             $group->addMember(

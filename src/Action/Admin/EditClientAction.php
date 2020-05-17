@@ -5,9 +5,9 @@ namespace App\Action\Admin;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
-use App\Form\Type\Action\EditCustomerType;
-use App\Form\Model\EditCustomer;
-use App\Repository\CustomerRepository;
+use App\Form\Type\Action\EditClientType;
+use App\Form\Model\EditClient;
+use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,27 +17,27 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/customers/{id}/edit", requirements={"id": "\d+"}, name="app_admin_customer_edit")
+ * @Route("/client/{id}/edit", requirements={"id": "\d+"}, name="app_admin_client_edit")
  */
-class EditCustomerAction extends AbstractAdminAction
+class EditClientAction extends AbstractAdminAction
 {
     use RoutingTrait;
     use SecurityTrait;
     use TwigTrait;
 
-    private $customerRepository;
+    private $clientRepository;
     private $entityManager;
     private $flashBag;
     private $formFactory;
 
     public function __construct(
-        CustomerRepository $customerRepository,
+        ClientRepository $clientRepository,
         EntityManagerInterface $entityManager,
         FlashBagInterface $flashBag,
         FormFactoryInterface $formFactory
     )
     {
-        $this->customerRepository = $customerRepository;
+        $this->clientRepository = $clientRepository;
         $this->entityManager = $entityManager;
         $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
@@ -48,20 +48,20 @@ class EditCustomerAction extends AbstractAdminAction
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $customer = $this->customerRepository->find($id);
+        $client = $this->clientRepository->find($id);
 
-        if (!$customer) {
-            throw new NotFoundHttpException('Customer not found');
+        if (!$client) {
+            throw new NotFoundHttpException('Client not found');
         }
 
-        $this->breadcrumbs->addItem($customer->getName(), '', [], false);
+        $this->breadcrumbs->addItem($client->getName(), '', [], false);
 
-        $model = new EditCustomer($customer);
-        $form = $this->formFactory->create(EditCustomerType::class, $model);
+        $model = new EditClient($client);
+        $form = $this->formFactory->create(EditClientType::class, $model);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $customer
+            $client
                 ->setName($model->name)
                 ->setAddress($model->address)
                 ->setPostcode($model->postcode)
@@ -69,16 +69,16 @@ class EditCustomerAction extends AbstractAdminAction
                 ->setPhone($model->phone)
                 ->setEmail($model->email);
 
-            $this->entityManager->persist($customer);
+            $this->entityManager->persist($client);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.customer.edit');
+            $this->flashBag->add('success', 'flash.success.client.edit');
 
-            return $this->redirectToRoute('app_admin_customer_list');
+            return $this->redirectToRoute('app_admin_client_list');
         }
 
-        return $this->renderPage('admin-edit-customer', 'app/admin/edit_customer.html.twig', [
-            'customer' => $customer,
+        return $this->renderPage('admin-edit-client', 'app/admin/edit_client.html.twig', [
+            'client' => $client,
             'form' => $form->createView()
         ]);
     }
@@ -87,6 +87,6 @@ class EditCustomerAction extends AbstractAdminAction
     {
         parent::configureBreadcrumbs();
 
-        $this->breadcrumbs->addRouteItem('breadcrumb.admin.customer.list', 'app_admin_customer_list');
+        $this->breadcrumbs->addRouteItem('breadcrumb.admin.client.list', 'app_admin_client_list');
     }
 }

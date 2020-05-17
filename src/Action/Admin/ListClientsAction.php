@@ -5,26 +5,26 @@ namespace App\Action\Admin;
 use App\Action\PaginationTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
-use App\Repository\CustomerRepository;
+use App\Repository\ClientRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/customers", name="app_admin_customer_list")
+ * @Route("/clients", name="app_admin_client_list")
  */
-class ListCustomersAction extends AbstractAdminAction
+class ListClientsAction extends AbstractAdminAction
 {
     use PaginationTrait;
     use SecurityTrait;
     use TwigTrait;
 
-    private $customerRepository;
+    private $clientRepository;
 
-    public function __construct(CustomerRepository $customerRepository)
+    public function __construct(ClientRepository $clientRepository)
     {
-        $this->customerRepository = $customerRepository;
+        $this->clientRepository = $clientRepository;
     }
 
     public function __invoke(Request $request): Response
@@ -34,8 +34,8 @@ class ListCustomersAction extends AbstractAdminAction
 
         $pager = $this->paginate($this->getQueryBuilder(), $request);
 
-        return $this->renderPage('admin-list-customers', 'app/admin/list_customers.html.twig', [
-            'customers' => $pager->getCurrentPageResults(),
+        return $this->renderPage('admin-list-clients', 'app/admin/list_clients.html.twig', [
+            'clients' => $pager->getCurrentPageResults(),
             'pager' => $pager
         ]);
     }
@@ -44,12 +44,12 @@ class ListCustomersAction extends AbstractAdminAction
     {
         parent::configureBreadcrumbs();
 
-        $this->breadcrumbs->addItem('breadcrumb.admin.customer.list');
+        $this->breadcrumbs->addItem('breadcrumb.admin.client.list');
     }
 
     private function getQueryBuilder(): QueryBuilder
     {
-        return $this->customerRepository->createQueryBuilder('c')
+        return $this->clientRepository->createQueryBuilder('c')
             ->orderBy('c.createdAt', 'DESC');
     }
 }

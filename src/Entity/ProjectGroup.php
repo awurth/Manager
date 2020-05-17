@@ -20,10 +20,10 @@ class ProjectGroup
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="projectGroups")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="projectGroups")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
-    private $customer;
+    private $client;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
@@ -94,14 +94,14 @@ class ProjectGroup
         return $this->id;
     }
 
-    public function getCustomer(): ?Customer
+    public function getClient(): ?Client
     {
-        return $this->customer;
+        return $this->client;
     }
 
-    public function setCustomer(?Customer $customer): self
+    public function setClient(?Client $client): self
     {
-        $this->customer = $customer;
+        $this->client = $client;
 
         return $this;
     }

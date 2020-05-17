@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CreateProjectGroup
 {
-    public $customer;
+    public $client;
 
     /**
      * @Assert\NotBlank()

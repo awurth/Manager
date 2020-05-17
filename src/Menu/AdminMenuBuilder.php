@@ -83,16 +83,16 @@ class AdminMenuBuilder
             ]);
 
         $menu
-            ->addChild('Customers', [
+            ->addChild('Clients', [
                 'extras' => [
                     'icon' => 'fas fa-user-tie',
                     'routes' => [
-                        'app_admin_customer_create',
-                        'app_admin_customer_edit'
+                        'app_admin_client_create',
+                        'app_admin_client_edit'
                     ]
                 ],
-                'label' => 'admin.customers',
-                'route' => 'app_admin_customer_list'
+                'label' => 'admin.clients',
+                'route' => 'app_admin_client_list'
             ]);
 
         $menu

@@ -86,7 +86,7 @@ class EditProjectGroupAction extends AbstractProjectGroupAction
         }
 
         $this->projectGroup
-            ->setCustomer($model->customer)
+            ->setClient($model->client)
             ->setDescription($model->description)
             ->setName($model->name);
 

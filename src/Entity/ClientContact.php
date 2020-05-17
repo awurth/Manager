@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CustomerContactRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ClientContactRepository")
  */
-class CustomerContact
+class ClientContact
 {
     /**
      * @ORM\Id()
@@ -18,10 +18,10 @@ class CustomerContact
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="contacts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="contacts")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $customer;
+    private $client;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -72,14 +72,14 @@ class CustomerContact
         return $this->id;
     }
 
-    public function getCustomer(): ?Customer
+    public function getClient(): ?Client
     {
-        return $this->customer;
+        return $this->client;
     }
 
-    public function setCustomer(?Customer $customer): self
+    public function setClient(?Client $client): self
     {
-        $this->customer = $customer;
+        $this->client = $client;
 
         return $this;
     }

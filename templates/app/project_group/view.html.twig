@@ -8,14 +8,14 @@
     <p class="mb-4">{{ group.description }}</p>
   {% endif %}
   <div class="grid grid-cols-2 gap-4">
-    {% if group.customer %}
+    {% if group.client %}
       <div class="px-4 py-2 border border-gray-300 shadow">
         <h2 class="font-bold mb-2">Client</h2>
-        <p>{{ group.customer.name }}</p>
-        <p>{{ group.customer.address }}</p>
-        <p>{{ group.customer.postcode }} {{ group.customer.city }}</p>
-        {% if group.customer.phone %}<p>{{ group.customer.phone }}</p>{% endif %}
-        {% if group.customer.email %}<p>{{ group.customer.email }}</p>{% endif %}
+        <p>{{ group.client.name }}</p>
+        <p>{{ group.client.address }}</p>
+        <p>{{ group.client.postcode }} {{ group.client.city }}</p>
+        {% if group.client.phone %}<p>{{ group.client.phone }}</p>{% endif %}
+        {% if group.client.email %}<p>{{ group.client.email }}</p>{% endif %}
       </div>
     {% endif %}
   </div>

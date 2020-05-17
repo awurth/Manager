@@ -1,12 +1,12 @@
 gender_female: Femme
 gender_male: Homme
 gender_neutral: Neutre
-select_customer: Sélectionnez un client
+select_client: Sélectionnez un client
 select_project_type: Sélectionnez un type
 
 admin:
     credentials: Identifiants
-    customers: Clients
+    clients: Clients
     project_groups: Groupes
     projects: Projets
     project_types: Types
@@ -18,7 +18,7 @@ breadcrumb:
         administration: Administration
         credentials:
             list: Identifiants
-        customer:
+        client:
             create: Nouveau client
             list: Clients
         dashboard: Vue d'ensemble
@@ -95,7 +95,7 @@ flash:
             create: Identifiants créés avec succès
             edit: Identifiants mis à jour avec succès
             delete: Identifiants supprimés avec succès
-        customer:
+        client:
             create: Client créé avec succès
             edit: Client mis à jour avec succès
             delete: Client supprimé avec succès
@@ -150,6 +150,13 @@ form:
 
         change_project_group_slug_slug: URL
 
+        create_client_name: Nom
+        create_client_address: Adresse
+        create_client_postcode: Code postal
+        create_client_city: Ville
+        create_client_phone: Téléphone
+        create_client_email: Adresse email
+
         create_credentials_name: Nom
         create_credentials_username: Identifiant
         create_credentials_email: Adresse email
@@ -157,13 +164,6 @@ form:
         create_credentials_website: Site web
         create_credentials_description: Description
         create_credentials_users: Utilisateurs
-
-        create_customer_name: Nom
-        create_customer_address: Adresse
-        create_customer_postcode: Code postal
-        create_customer_city: Ville
-        create_customer_phone: Téléphone
-        create_customer_email: Adresse email
 
         create_project_projectGroup: Groupe
         create_project_name: Nom
@@ -181,7 +181,7 @@ form:
         create_project_group_name: Nom
         create_project_group_slug: URL
         create_project_group_description: Description
-        create_project_group_customer: Client
+        create_project_group_client: Client
         create_project_type_name: Nom
 
         create_server_name: Nom
@@ -196,6 +196,13 @@ form:
         create_user_firstname: Prénom
         create_user_lastname: Nom
 
+        edit_client_name: Nom
+        edit_client_address: Adresse
+        edit_client_postcode: Code postal
+        edit_client_city: Ville
+        edit_client_phone: Téléphone
+        edit_client_email: Adresse email
+
         edit_credentials_name: Nom
         edit_credentials_username: Identifiant
         edit_credentials_email: Adresse email
@@ -203,13 +210,6 @@ form:
         edit_credentials_website: Site web
         edit_credentials_description: Description
         edit_credentials_users: Utilisateurs
-
-        edit_customer_name: Nom
-        edit_customer_address: Adresse
-        edit_customer_postcode: Code postal
-        edit_customer_city: Ville
-        edit_customer_phone: Téléphone
-        edit_customer_email: Adresse email
 
         edit_profile_email: Adresse email
         edit_profile_firstname: Prénom
@@ -229,7 +229,7 @@ form:
 
         edit_project_group_name: Nom
         edit_project_group_description: Description
-        edit_project_group_customer: Client
+        edit_project_group_client: Client
 
         edit_project_type_name: Nom
 

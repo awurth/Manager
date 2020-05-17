@@ -2,7 +2,7 @@
 
 namespace App\Form\Type\Action;
 
-use App\Entity\Customer;
+use App\Entity\Client;
 use App\Form\Model\EditProjectGroup;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -19,9 +19,9 @@ class EditProjectGroupType extends AbstractType
             ->add('description', TextareaType::class, [
                 'required' => false
             ])
-            ->add('customer', EntityType::class, [
-                'class' => Customer::class,
-                'placeholder' => 'select_customer',
+            ->add('client', EntityType::class, [
+                'class' => Client::class,
+                'placeholder' => 'select_client',
                 'required' => false
             ]);
     }

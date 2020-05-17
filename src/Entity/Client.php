@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
  */
-class Customer
+class Client
 {
     /**
      * @ORM\Id()
@@ -64,12 +64,12 @@ class Customer
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CustomerContact", mappedBy="customer", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\ClientContact", mappedBy="client", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $contacts;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectGroup", mappedBy="customer", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectGroup", mappedBy="client", cascade={"persist"})
      */
     private $projectGroups;
 
@@ -188,30 +188,30 @@ class Customer
     }
 
     /**
-     * @return Collection|CustomerContact[]
+     * @return Collection|ClientContact[]
      */
     public function getContacts(): Collection
     {
         return $this->contacts;
     }
 
-    public function addContact(CustomerContact $contact): self
+    public function addContact(ClientContact $contact): self
     {
         if (!$this->contacts->contains($contact)) {
             $this->contacts[] = $contact;
-            $contact->setCustomer($this);
+            $contact->setClient($this);
         }
 
         return $this;
     }
 
-    public function removeContact(CustomerContact $contact): self
+    public function removeContact(ClientContact $contact): self
     {
         if ($this->contacts->contains($contact)) {
             $this->contacts->removeElement($contact);
             // set the owning side to null (unless already changed)
-            if ($contact->getCustomer() === $this) {
-                $contact->setCustomer(null);
+            if ($contact->getClient() === $this) {
+                $contact->setClient(null);
             }
         }
 
@@ -230,7 +230,7 @@ class Customer
     {
         if (!$this->projectGroups->contains($projectGroup)) {
             $this->projectGroups[] = $projectGroup;
-            $projectGroup->setCustomer($this);
+            $projectGroup->setClient($this);
         }
 
         return $this;
@@ -241,8 +241,8 @@ class Customer
         if ($this->projectGroups->contains($projectGroup)) {
             $this->projectGroups->removeElement($projectGroup);
             // set the owning side to null (unless already changed)
-            if ($projectGroup->getCustomer() === $this) {
-                $projectGroup->setCustomer(null);
+            if ($projectGroup->getClient() === $this) {
+                $projectGroup->setClient(null);
             }
         }
 
