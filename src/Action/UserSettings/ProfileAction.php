@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/profile", name="app_profile")
+ * @Route("/", name="app_profile")
  */
 class ProfileAction extends AbstractUserSettingsAction
 {

@@ -35,8 +35,9 @@ breadcrumb:
             create: Nouvel utilisateur
             list: Utilisateurs
     user_settings:
-        user_settings: Paramètres utilisateur
+        password: Mot de passe
         profile: Profil
+        user_settings: Paramètres utilisateur
     project:
         edit: Paramètres
         environment:
@@ -93,6 +94,7 @@ user:
         user: Utilisateur
 
 user_settings:
+    password: Mot de passe
     profile: Profil
 
 flash:
@@ -105,6 +107,8 @@ flash:
             create: Client créé avec succès
             edit: Client mis à jour avec succès
             delete: Client supprimé avec succès
+        password:
+            change: Mot de passe mis à jour avec succès
         profile:
             edit: Profil mis à jour avec succès
         project:
@@ -153,6 +157,10 @@ form:
 
         add_server_member_user: Utilisateur
         add_server_member_accessLevel: Niveau d'accès
+
+        change_password_currentPassword: Mot de passe actuel
+        change_password_newPassword_first: Nouveau mot de passe
+        change_password_newPassword_second: Confirmation du mot de passe
 
         change_project_group_slug_slug: URL
 

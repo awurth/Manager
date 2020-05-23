@@ -1,3 +1,9 @@
+app_user_settings:
+    resource: ../src/Action/UserSettings/
+    type: annotation
+    prefix: /profile
+    trailing_slash_on_root: false
+
 app_server:
     resource: ../src/Action/Server/
     type: annotation

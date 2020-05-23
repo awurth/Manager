@@ -47,6 +47,15 @@ class UserSettingsMenuBuilder
                 'route' => 'app_profile'
             ]);
 
+        $menu
+            ->addChild('Password', [
+                'extras' => [
+                    'icon' => 'fas fa-lock'
+                ],
+                'label' => 'user_settings.password',
+                'route' => 'app_change_password'
+            ]);
+
         return $menu;
     }
 }
