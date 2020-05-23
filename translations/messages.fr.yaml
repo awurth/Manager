@@ -34,6 +34,9 @@ breadcrumb:
         user:
             create: Nouvel utilisateur
             list: Utilisateurs
+    user_settings:
+        user_settings: Paramètres utilisateur
+        profile: Profil
     project:
         edit: Paramètres
         environment:
@@ -50,9 +53,6 @@ breadcrumb:
         list: Serveurs
         members: Membres
         overview: Vue d'ensemble
-
-profile:
-    general: Profil
 
 project:
     environments: Environnements
@@ -91,6 +91,9 @@ user:
     role:
         admin: Admin
         user: Utilisateur
+
+user_settings:
+    profile: Profil
 
 flash:
     success:

@@ -7,7 +7,7 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\Security\Core\Security;
 
-class ProfileMenuBuilder
+class UserSettingsMenuBuilder
 {
     private $factory;
     private $security;
@@ -23,10 +23,10 @@ class ProfileMenuBuilder
         /** @var User $user */
         $user = $this->security->getUser();
 
-        $menu = $this->factory->createItem('Profile Menu');
+        $menu = $this->factory->createItem('User Settings Menu');
 
         $menu
-            ->addChild('Profile', [
+            ->addChild('User Settings', [
                 'attributes' => [
                     'class' => 'header'
                 ],
@@ -39,11 +39,11 @@ class ProfileMenuBuilder
             ]);
 
         $menu
-            ->addChild('General', [
+            ->addChild('Profile', [
                 'extras' => [
                     'icon' => 'fas fa-user-circle'
                 ],
-                'label' => 'profile.general',
+                'label' => 'user_settings.profile',
                 'route' => 'app_profile'
             ]);
 

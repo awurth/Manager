@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Action\Profile;
+namespace App\Action\UserSettings;
 
 use App\Action\RoutingTrait;
-use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Form\Model\EditProfile;
 use App\Form\Type\Action\EditProfileType;
@@ -17,10 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/profile", name="app_profile")
  */
-class ProfileAction
+class ProfileAction extends AbstractUserSettingsAction
 {
     use RoutingTrait;
-    use SecurityTrait;
     use TwigTrait;
 
     private $entityManager;
@@ -36,7 +34,7 @@ class ProfileAction
 
     public function __invoke(Request $request): Response
     {
-        $this->denyAccessUnlessLoggedIn();
+        $this->preInvoke();
 
         $user = $this->getUser();
 
@@ -59,8 +57,13 @@ class ProfileAction
             return $this->redirectToRoute('app_profile');
         }
 
-        return $this->renderPage('profile', 'app/profile/profile.html.twig', [
+        return $this->renderPage('profile', 'app/user_settings/profile.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    protected function configureBreadcrumbs(): void
+    {
+        $this->breadcrumbs->addItem('breadcrumb.user_settings.profile');
     }
 }
