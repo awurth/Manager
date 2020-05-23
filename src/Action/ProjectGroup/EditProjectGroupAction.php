@@ -100,7 +100,7 @@ class EditProjectGroupAction extends AbstractProjectGroupAction
 
     private function handleSlugChangeForm(Request $request): ?Response
     {
-        $model = new ChangeProjectGroupSlug();
+        $model = new ChangeProjectGroupSlug($this->projectGroup);
         $this->slugChangeForm = $this->formFactory->create(ChangeProjectGroupSlugType::class, $model);
         $this->slugChangeForm->handleRequest($request);
 
