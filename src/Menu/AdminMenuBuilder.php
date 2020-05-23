@@ -24,7 +24,7 @@ class AdminMenuBuilder
                     'class' => 'header'
                 ],
                 'extras' => [
-                    'icon' => 'fas fa-wrench',
+                    'icon' => 'fas fa-tools',
                     'translation_domain' => false
                 ],
                 'label' => 'Administration',
