@@ -10,7 +10,7 @@
   <ul class="flex ml-auto">
     <li class="flex">
       <form id="search_bar" class="flex py-1" action="{{ path('app_search') }}">
-        <input type="search" name="search" placeholder="Rechercher..." value="{{ app.request.query.get('search') }}">
+        <input type="text" name="search" placeholder="Rechercher..." value="{{ app.request.query.get('search') }}">
       </form>
     </li>
     {% if is_granted('ROLE_ADMIN') %}

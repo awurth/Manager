@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
 
     const form = event.currentTarget as HTMLFormElement;
-    const input = form.querySelector('input[type="search"]') as HTMLInputElement;
+    const input = form.querySelector('input[type="text"]') as HTMLInputElement;
 
     if (input.value.length > 2) {
       form.submit();
