@@ -1,0 +1,12 @@
+<table class="w-full text-sm text-gray-700">
+  <tbody>
+    {% for server in servers %}
+      <tr class="border-b last:border-b-0">
+        <td class="px-4 py-2">
+          <a class="font-bold text-gray-900" href="{{ path('app_server_view', { id: server.id }) }}">{{ server.name }}</a>
+        </td>
+        <td class="px-4 py-2 text-right">Créé {{ server.createdAt|diffForHumans }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

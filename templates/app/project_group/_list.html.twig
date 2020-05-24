@@ -1,0 +1,22 @@
+<table class="w-full text-sm text-gray-700">
+  <tbody>
+    {% for group in groups %}
+      <tr class="border-b last:border-b-0">
+        <td class="px-4 py-2">
+          <div class="inline-block align-middle mr-2">
+            <a class="flex flex-wrap justify-center w-10 h-10 bg-gray-300 rounded" href="{{ path('app_project_group_view', { slug: group.slug }) }}">
+              <span class="self-center font-bold">
+                {{ group.name|first|capitalize }}
+              </span>
+            </a>
+          </div>
+          <div class="inline-block align-middle">
+            <a class="font-bold text-gray-900" href="{{ path('app_project_group_view', { slug: group.slug }) }}">{{ group.name }}</a>
+            <small class="access-level-label ml-2">{{ group.memberByUser(app.user)|access_level_label }}</small>
+          </div>
+        </td>
+        <td class="px-4 py-2 text-right">Créé {{ group.createdAt|diffForHumans }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

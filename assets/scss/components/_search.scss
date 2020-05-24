@@ -1,0 +1,23 @@
+#search_bar {
+  input[type="search"] {
+    @apply text-sm text-white;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: transparent;
+    padding: 0 0.5rem;
+    margin: 0;
+    transition: background-color 0.25s, color 0.25s;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+    }
+    &:focus {
+      @apply bg-white text-gray-900;
+      &::placeholder {
+        @apply text-gray-500;
+      }
+    }
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+      transition: color 0.25s;
+    }
+  }
+}

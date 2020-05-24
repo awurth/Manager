@@ -1,0 +1,19 @@
+{% extends 'app/layout.html.twig' %}
+
+{% block page_content %}
+  <div class="page-title">
+    <h1>Rechercher</h1>
+  </div>
+  {% if projects %}
+    <h2 class="text-xl font-bold">Projets</h2>
+    {{ include('app/project/_list.html.twig') }}
+  {% endif %}
+  {% if groups %}
+    <h2 class="text-xl font-bold">Groupes</h2>
+    {{ include('app/project_group/_list.html.twig') }}
+  {% endif %}
+  {% if servers %}
+    <h2 class="text-xl font-bold">Serveurs</h2>
+    {{ include('app/server/_list.html.twig') }}
+  {% endif %}
+{% endblock %}

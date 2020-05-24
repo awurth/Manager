@@ -7,18 +7,7 @@
   {% if is_granted('ROLE_SERVER_CREATE') %}
     <a class="btn success mb-4" href="{{ path('app_server_create') }}">Nouveau serveur</a>
   {% endif %}
-  <table class="w-full text-sm text-gray-700">
-    <tbody>
-    {% for server in servers %}
-      <tr class="border-b last:border-b-0">
-        <td class="px-4 py-2">
-          <a class="font-bold text-gray-900" href="{{ path('app_server_view', { id: server.id }) }}">{{ server.name }}</a>
-        </td>
-        <td class="px-4 py-2 text-right">{{ server.createdAt|diffForHumans }}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+  {{ include('app/server/_list.html.twig') }}
   {% if pager.haveToPaginate %}
     <div class="pagination text-center">
       {{ pagerfanta(pager) }}
