@@ -1,0 +1,7 @@
+awurth_upload:
+    mappings:
+        project_logo:
+            uri_prefix: /uploads/project/logo
+            upload_destination: '%kernel.project_dir%/public/uploads/project/logo'
+            property_path: logoFilename
+            namer: Awurth\UploadBundle\Naming\UniqidNamer

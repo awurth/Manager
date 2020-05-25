@@ -3,7 +3,6 @@
 namespace App\Action;
 
 use App\Repository\ProjectRepository;
-use App\Upload\StorageInterface;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,13 +17,11 @@ class ListProjectsAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $projectLogoStorage;
     private $projectRepository;
 
-    public function __construct(ProjectRepository $projectRepository, StorageInterface $projectLogoStorage)
+    public function __construct(ProjectRepository $projectRepository)
     {
         $this->projectRepository = $projectRepository;
-        $this->projectLogoStorage = $projectLogoStorage;
     }
 
     public function __invoke(Request $request): Response
@@ -35,7 +32,6 @@ class ListProjectsAction
 
         return $this->renderPage('list-projects', 'app/project/list.html.twig', [
             'projects' => $pager->getCurrentPageResults(),
-            'projectLogoStorage' => $this->projectLogoStorage,
             'pager' => $pager
         ]);
     }

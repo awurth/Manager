@@ -14,7 +14,6 @@ services:
         bind:
             $locale: '%locale%'
             $projectDir: '%kernel.project_dir%'
-            App\Upload\StorageInterface $projectLogoStorage: '@app.upload.storage.project_logo'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -54,16 +53,3 @@ services:
     App\Menu\ServerMenuBuilder:
         tags:
             - { name: knp_menu.menu_builder, method: create, alias: server }
-
-    app.upload.mapping.project_logo:
-        class: App\Upload\Mapping\Mapping
-        arguments:
-            - '@App\Upload\Naming\UniqidNamer'
-            - 'App\Entity\Project'
-            - '%kernel.project_dir%/public/uploads/project/logo'
-            - '/uploads/project/logo'
-            - 'logoFilename'
-
-    app.upload.storage.project_logo:
-        class: App\Upload\Storage
-        arguments: ['@property_accessor', '@app.upload.mapping.project_logo']

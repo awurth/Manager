@@ -5,7 +5,6 @@ namespace App\Action\ProjectGroup;
 use App\Action\PaginationTrait;
 use App\Action\TwigTrait;
 use App\Repository\ProjectRepository;
-use App\Upload\StorageInterface;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,12 +18,10 @@ class ViewProjectGroupAction extends AbstractProjectGroupAction
     use PaginationTrait;
     use TwigTrait;
 
-    private $projectLogoStorage;
     private $projectRepository;
 
-    public function __construct(StorageInterface $projectLogoStorage, ProjectRepository $projectRepository)
+    public function __construct(ProjectRepository $projectRepository)
     {
-        $this->projectLogoStorage = $projectLogoStorage;
         $this->projectRepository = $projectRepository;
     }
 
@@ -39,8 +36,7 @@ class ViewProjectGroupAction extends AbstractProjectGroupAction
         return $this->renderPage('view-project-group', 'app/project_group/view.html.twig', [
             'group' => $this->projectGroup,
             'projects' => $pager->getCurrentPageResults(),
-            'pager' => $pager,
-            'projectLogoStorage' => $this->projectLogoStorage
+            'pager' => $pager
         ]);
     }
 

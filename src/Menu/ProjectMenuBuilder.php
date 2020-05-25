@@ -4,7 +4,7 @@ namespace App\Menu;
 
 use App\Entity\Project;
 use App\Repository\ProjectRepository;
-use App\Upload\StorageInterface;
+use Awurth\UploadBundle\Storage\StorageInterface;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -14,23 +14,23 @@ class ProjectMenuBuilder
 {
     private $authorizationChecker;
     private $factory;
-    private $projectLogoStorage;
     private $projectRepository;
     private $requestStack;
+    private $uploader;
 
     public function __construct(
         AuthorizationCheckerInterface $authorizationChecker,
         FactoryInterface $factory,
-        StorageInterface $projectLogoStorage,
         ProjectRepository $projectRepository,
-        RequestStack $requestStack
+        RequestStack $requestStack,
+        StorageInterface $uploader
     )
     {
         $this->authorizationChecker = $authorizationChecker;
         $this->factory = $factory;
-        $this->projectLogoStorage = $projectLogoStorage;
         $this->projectRepository = $projectRepository;
         $this->requestStack = $requestStack;
+        $this->uploader = $uploader;
     }
 
     public function create(array $options): ItemInterface
@@ -40,7 +40,7 @@ class ProjectMenuBuilder
 
         $headerExtras = ['translation_domain' => false];
         if ($project->getLogoFilename()) {
-            $headerExtras['image'] = $this->projectLogoStorage->resolveUri($project);
+            $headerExtras['image'] = $this->uploader->resolveUri($project, 'project_logo');
         } else {
             $headerExtras['identicon'] = substr($project->getName(), 0, 1);
         }

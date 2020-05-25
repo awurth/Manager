@@ -6,7 +6,7 @@ use App\Entity\Project;
 use App\Entity\ProjectMember;
 use App\Form\Type\Action\CreateProjectType;
 use App\Form\Model\CreateProject;
-use App\Upload\StorageInterface;
+use Awurth\UploadBundle\Storage\StorageInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,19 +26,19 @@ class CreateProjectAction
     private $entityManager;
     private $formFactory;
     private $flashBag;
-    private $projectLogoStorage;
+    private $uploader;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FlashBagInterface $flashBag,
         FormFactoryInterface $formFactory,
-        StorageInterface $projectLogoStorage
+        StorageInterface $uploader
     )
     {
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
         $this->flashBag = $flashBag;
-        $this->projectLogoStorage = $projectLogoStorage;
+        $this->uploader = $uploader;
     }
 
     public function __invoke(Request $request): Response
@@ -63,7 +63,7 @@ class CreateProjectAction
             );
 
             if ($model->logoFile) {
-                $this->projectLogoStorage->upload($model->logoFile, $project);
+                $this->uploader->upload($model->logoFile, $project, 'project_logo');
             }
 
             $this->entityManager->persist($project);

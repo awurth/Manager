@@ -6,6 +6,7 @@
         "ext-apcu": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "awurth/upload-bundle": "^0.1.0",
         "babdev/pagerfanta-bundle": "^2.2",
         "gedmo/doctrine-extensions": "^2.4",
         "hackzilla/password-generator": "^1.5",

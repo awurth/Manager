@@ -30,7 +30,7 @@
             <div class="inline-block align-middle mr-2">
               {% if project.logoFilename %}
                 <a class="flex flex-wrap content-center justify-center w-10 h-10 rounded overflow-hidden" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">
-                  <img class="max-w-full max-h-full" src="{{ projectLogoStorage.resolveUri(project) }}" alt="{{ project.name }}">
+                  <img class="max-w-full max-h-full" src="{{ uploaded_asset(project, 'project_logo') }}" alt="{{ project.name }}">
                 </a>
               {% else %}
                 <a class="flex flex-wrap justify-center w-10 h-10 bg-gray-300 rounded" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">

@@ -5,7 +5,6 @@ namespace App\Action;
 use App\Repository\ProjectGroupRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\ServerRepository;
-use App\Upload\StorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,21 +18,18 @@ class SearchAction
     use TwigTrait;
 
     private $projectGroupRepository;
-    private $projectLogoStorage;
     private $projectRepository;
     private $serverRepository;
 
     public function __construct(
         ProjectGroupRepository $projectGroupRepository,
         ProjectRepository $projectRepository,
-        ServerRepository $serverRepository,
-        StorageInterface $projectLogoStorage
+        ServerRepository $serverRepository
     )
     {
         $this->projectGroupRepository = $projectGroupRepository;
         $this->projectRepository = $projectRepository;
         $this->serverRepository = $serverRepository;
-        $this->projectLogoStorage = $projectLogoStorage;
     }
 
     public function __invoke(Request $request): Response
@@ -50,7 +46,6 @@ class SearchAction
         }
 
         return $this->renderPage('search', 'app/search.html.twig', [
-            'projectLogoStorage' => $this->projectLogoStorage,
             'groups' => $groups,
             'projects' => $projects,
             'servers' => $servers
