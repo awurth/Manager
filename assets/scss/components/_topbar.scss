@@ -3,7 +3,7 @@ body {
 }
 
 header.topbar {
-  @apply bg-indigo-500;
+  @apply bg-primary-500;
   height: 3.5rem;
   left: 0;
   position: fixed;
@@ -18,7 +18,7 @@ header.topbar {
         font-weight: bold;
         transition: background-color 0.25s, color 0.25s;
         &:hover {
-          @apply bg-white text-indigo-500;
+          @apply bg-white text-primary-500;
         }
       }
     }
