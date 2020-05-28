@@ -42,7 +42,7 @@ class GeneratePasswordAction
             $password = $generator->generatePassword();
         }
 
-        return $this->renderPage('generate-password', 'app/generate-password.html.twig', [
+        return $this->renderPage('generate-password', 'app/generate_password.html.twig', [
             'form' => $form->createView(),
             'password' => $password
         ]);
