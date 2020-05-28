@@ -1,9 +1,10 @@
 body {
-  margin-top: 2.625rem;
+  margin-top: 3.5rem;
 }
 
 header.topbar {
-  @apply bg-red-900;
+  @apply bg-indigo-500;
+  height: 3.5rem;
   left: 0;
   position: fixed;
   right: 0;
@@ -11,12 +12,13 @@ header.topbar {
   > ul {
     > li {
       > a, button {
-        @apply p-2 m-1 text-xs text-gray-100 rounded;
+        @apply p-2 m-1 text-xs text-gray-100 rounded-full outline-none;
         align-items: center;
         display: flex;
         font-weight: bold;
+        transition: background-color 0.25s, color 0.25s;
         &:hover {
-          @apply bg-white text-red-900;
+          @apply bg-white text-indigo-500;
         }
       }
     }
@@ -30,7 +32,7 @@ header.topbar {
     min-width: 15rem;
     position: absolute;
     right: 0;
-    top: 2.75rem;
+    top: 3.5rem;
     &.open {
       display: block;
     }

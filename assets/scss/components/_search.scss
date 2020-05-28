@@ -1,6 +1,6 @@
 #search_bar {
   input[type="text"] {
-    @apply text-sm text-white;
+    @apply rounded-full font-bold text-sm text-white;
     background-color: rgba(255, 255, 255, 0.15);
     border-color: transparent;
     padding: 0 0.5rem;

@@ -6,7 +6,7 @@ nav.sidebar {
   bottom: 0;
   left: 0;
   position: fixed;
-  top: 2.625rem;
+  top: 3.5rem;
   width: 15.625rem;
   > ul {
     > li {
@@ -29,9 +29,9 @@ nav.sidebar {
         }
         &.current, &.current_ancestor {
           @apply bg-gray-200;
-          box-shadow: inset 4px 0 0 theme('colors.red.800');
+          box-shadow: inset 4px 0 0 theme('colors.indigo.400');
           > a {
-            @apply text-red-900 font-bold;
+            @apply text-indigo-500 font-bold;
           }
         }
       }
@@ -42,7 +42,7 @@ nav.sidebar {
           display: flex;
           padding: 0.5rem 1rem;
           .identicon {
-            @apply bg-gray-300 w-12 h-12 rounded text-base;
+            @apply bg-gray-300 text-gray-900 w-12 h-12 rounded text-base;
             align-items: center;
             display: flex;
             justify-content: center;
@@ -89,7 +89,7 @@ nav.sidebar {
             }
             &.current {
               > a {
-                @apply bg-gray-300 text-red-900 font-bold;
+                @apply bg-gray-300 text-indigo-500 font-bold;
               }
             }
           }
