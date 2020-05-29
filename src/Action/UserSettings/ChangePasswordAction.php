@@ -61,7 +61,7 @@ class ChangePasswordAction extends AbstractUserSettingsAction
             return $this->redirectToRoute('app_change_password');
         }
 
-        return $this->renderPage('change-password', 'app/user_settings/change-password.html.twig', [
+        return $this->renderPage('change-password', 'app/user_settings/change_password.html.twig', [
             'form' => $form->createView()
         ]);
     }
