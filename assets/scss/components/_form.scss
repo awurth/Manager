@@ -1,5 +1,5 @@
 input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"], input[type="search"], textarea {
-  @apply appearance-none block w-full bg-white rounded border border-gray-400 text-base px-4 py-2 mb-3;
+  @apply appearance-none block w-full bg-white rounded border-2 border-gray-400 text-base px-4 py-2 mb-3;
   &:focus {
     @apply outline-none border-primary-500;
   }
@@ -27,14 +27,14 @@ select {
 }
 
 label {
-  @apply inline-block mb-2 font-bold;
+  @apply inline-block mb-1 uppercase font-bold text-xs text-gray-700;
   &.required {
     &::after {
       content: " *";
     }
   }
   input[type="checkbox"] + &, input[type="radio"] + & {
-    @apply font-normal;
+    @apply font-normal normal-case;
     &.required {
       &::after {
         content: "";
@@ -46,8 +46,11 @@ label {
 .icheckbox_flat,
 .iradio_flat {
   display: inline-block;
-  + label.required::after {
-    content: "";
+  + label {
+    @apply font-medium normal-case text-sm;
+    &.required::after {
+      content: "";
+    }
   }
 }
 

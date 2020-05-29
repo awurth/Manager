@@ -8,7 +8,7 @@
     <p class="mb-4">{{ project.description }}</p>
   {% endif %}
   <div class="grid grid-cols-2 gap-4">
-    <div class="px-4 py-2 border border-gray-300 shadow">
+    <div class="card">
       <h2 class="font-bold mb-2">Environnements</h2>
       <ul>
         {% for environment in project.environments %}
@@ -16,7 +16,7 @@
         {% endfor %}
       </ul>
     </div>
-    <div class="px-4 py-2 border border-gray-300 shadow">
+    <div class="card">
       <h2 class="font-bold mb-2">Liens</h2>
       <ul>
         <li>Gitlab</li>

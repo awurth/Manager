@@ -3,6 +3,7 @@ body.with-sidebar {
 }
 
 nav.sidebar {
+  @apply shadow-lg;
   bottom: 0;
   left: 0;
   position: fixed;
@@ -42,7 +43,7 @@ nav.sidebar {
           display: flex;
           padding: 0.5rem 1rem;
           .identicon {
-            @apply bg-gray-300 text-gray-900 w-12 h-12 rounded text-base;
+            @apply bg-gray-300 text-gray-900 w-12 h-12 rounded-lg text-base;
             align-items: center;
             display: flex;
             justify-content: center;

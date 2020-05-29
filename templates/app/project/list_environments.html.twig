@@ -1,12 +1,9 @@
 {% extends 'app/project/layout.html.twig' %}
 
 {% block page_content %}
-  <div class="page-title">
-    <h1>Environnements</h1>
-  </div>
   {% if is_granted('MEMBER', project) %}
     <a
-      class="btn success text-sm mb-4"
+      class="btn success text-sm my-4"
       href="{{ path('app_project_environment_add', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}"
     >
       <i class="fas fa-plus"></i>
@@ -16,10 +13,10 @@
   {% if project.environments|length %}
     <div class="grid grid-cols-2 gap-4">
       {% for environment in project.environments %}
-        <div class="px-4 py-2 border border-gray-300 shadow">
-          <h2 class="font-bold text-xl mb-2">{{ environment.name }}</h2>
+        <div class="card">
+          <h2 class="text-gray-900 text-lg font-medium mb-3">{{ environment.name }}</h2>
           {% if environment.description %}
-            <p class="text-sm text-gray-600 px-4 py-2 mb-2 bg-gray-100 border-l-2">{{ environment.description }}</p>
+            <p class="text-sm text-gray-600 mb-3">{{ environment.description }}</p>
           {% endif %}
           <ul>
             <li class="mb-2">
