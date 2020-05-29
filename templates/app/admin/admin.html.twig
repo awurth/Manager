@@ -1,7 +1,36 @@
 {% extends 'app/admin/layout.html.twig' %}
 
 {% block page_content %}
-  <div class="page-title">
-    <h1>Administration</h1>
-  </div>
+  <section class="text-gray-700 body-font">
+    <div class="flex flex-wrap text-center">
+      <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+        <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+          <i class="fas fa-object-group text-5xl text-indigo-500 mb-3 inline-block"></i>
+          <h2 class="title-font font-medium text-3xl text-gray-900">{{ groupsCount }}</h2>
+          <p class="leading-relaxed">Groupes</p>
+        </div>
+      </div>
+      <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+        <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+          <i class="fas fa-code text-5xl text-indigo-500 mb-3 inline-block"></i>
+          <h2 class="title-font font-medium text-3xl text-gray-900">{{ projectsCount }}</h2>
+          <p class="leading-relaxed">Projets</p>
+        </div>
+      </div>
+      <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+        <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+          <i class="fas fa-server text-5xl text-indigo-500 mb-3 inline-block"></i>
+          <h2 class="title-font font-medium text-3xl text-gray-900">{{ serversCount }}</h2>
+          <p class="leading-relaxed">Serveurs</p>
+        </div>
+      </div>
+      <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+        <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+          <i class="fas fa-user-tie text-5xl text-indigo-500 mb-3 inline-block"></i>
+          <h2 class="title-font font-medium text-3xl text-gray-900">{{ clientsCount }}</h2>
+          <p class="leading-relaxed">Clients</p>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}
