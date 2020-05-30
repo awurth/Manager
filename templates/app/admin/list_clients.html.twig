@@ -7,9 +7,9 @@
   </a>
   <table class="w-full text-sm text-gray-700">
     <thead>
-      <tr class="border-b text-xs">
-        <th class="px-4 py-3 text-left font-normal">Nom</th>
-        <th class="px-4 py-3 text-left font-normal">Date de création</th>
+      <tr>
+        <th class="text-left">Nom</th>
+        <th>Date de création</th>
         <th></th>
       </tr>
     </thead>
@@ -22,7 +22,7 @@
               <a class="hover:underline" href="mailto:{{ client.email }}">{{ client.email }}</a>
             </div>
           </td>
-          <td class="px-4 py-2">{{ client.createdAt|diffForHumans }}</td>
+          <td class="px-4 py-2 text-center">{{ client.createdAt|diffForHumans }}</td>
           <td class="px-4 py-2 text-right">
             <a class="btn btn-sm" href="{{ path('app_admin_client_edit', { id: client.id }) }}">Éditer</a>
             <a class="btn btn-danger-o btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce client ?" href="{{ path('app_admin_client_delete', { id: client.id }) }}">Supprimer</a>

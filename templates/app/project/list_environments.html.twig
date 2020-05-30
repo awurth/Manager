@@ -3,7 +3,7 @@
 {% block page_content %}
   {% if is_granted('MEMBER', project) %}
     <a
-      class="btn btn-success text-sm my-4"
+      class="btn btn-success-o text-sm my-4"
       href="{{ path('app_project_environment_add', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}"
     >
       <i class="fas fa-plus"></i>

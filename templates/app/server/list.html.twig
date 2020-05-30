@@ -5,7 +5,7 @@
     <h1>Serveurs</h1>
   </div>
   {% if is_granted('ROLE_SERVER_CREATE') %}
-    <a class="btn btn-success mb-4" href="{{ path('app_server_create') }}">Nouveau serveur</a>
+    <a class="btn btn-success-o mb-4" href="{{ path('app_server_create') }}">Nouveau serveur</a>
   {% endif %}
   {{ include('app/server/_list.html.twig') }}
   {% if pager.haveToPaginate %}

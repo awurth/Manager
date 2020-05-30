@@ -1,3 +1,7 @@
 .text-xxs {
   font-size: 0.675rem;
 }
+
+.wrap-content {
+  @apply whitespace-no-wrap w-1;
+}

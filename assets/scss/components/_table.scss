@@ -1,0 +1,9 @@
+th {
+  @apply px-4 py-3 tracking-wider font-medium text-gray-900 text-sm bg-gray-200;
+  &:first-child {
+    @apply rounded-l;
+  }
+  &:last-child {
+    @apply rounded-r;
+  }
+}

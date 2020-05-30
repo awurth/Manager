@@ -5,7 +5,7 @@
     <span class="identicon w-48 h-48 text-3xl font-bold mb-2">
       {{ app.user.firstname|first|capitalize }}{{ app.user.lastname|first|capitalize }}
     </span>
-    <span class="block text-2xl font-bold">{{ app.user.firstname }} {{ app.user.lastname }}</span>
+    <span class="block text-2xl text-gray-700 font-bold">{{ app.user.firstname }} {{ app.user.lastname }}</span>
   </div>
   <div class="flex justify-center">
     {{ form_start(form, { attr: { class: 'w-1/2' } }) }}
