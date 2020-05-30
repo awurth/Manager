@@ -57,7 +57,7 @@ nav.sidebar {
             transition: background-color 0.25s, color 0.25s;
           }
           .image {
-            @apply bg-white w-12 h-12 rounded;
+            @apply bg-white w-12 h-12 rounded-full;
             align-items: center;
             display: flex;
             justify-content: center;
