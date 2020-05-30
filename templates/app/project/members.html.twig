@@ -49,7 +49,7 @@
             <td class="px-4 py-2 text-right">
               {% if member.accessLevel != constant('App\\Entity\\ProjectMember::ACCESS_LEVEL_OWNER') %}
                 <a class="btn btn-danger btn-sm" data-confirm="Êtes-vous sûr de vouloir supprimer ce membre ?" href="{{ path('app_project_member_remove', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: member.id }) }}">
-                  <i class="fas fa-trash"></i>
+                  Supprimer
                 </a>
               {% endif %}
             </td>

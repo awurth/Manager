@@ -30,7 +30,7 @@
     <tbody>
       {% for project in projects %}
         <tr class="border-b-2 last:border-b-0">
-          <td class="px-4 py-2">
+          <td class="px-4 py-3">
             <div class="inline-block align-middle mr-2">
               {{ project_identicon(project, 'w-10 h-10') }}
             </div>
@@ -38,15 +38,15 @@
               <a class="font-bold text-gray-900" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">{{ project.name }}</a>
             </div>
           </td>
-          <td class="px-4 py-2">Créé {{ project.createdAt|diffForHumans }}</td>
-          <td class="px-4 py-2 text-right">
+          <td class="px-4 py-3">Créé {{ project.createdAt|diffForHumans }}</td>
+          <td class="px-4 py-3 text-right">
             {% if is_granted('EDIT', project) %}
               <a
                 class="btn btn-sm"
                 title="Éditer"
                 href="{{ path('app_project_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}"
               >
-                <i class="fas fa-edit"></i>
+                Éditer
               </a>
             {% endif %}
             {% if is_granted('DELETE', project) %}
@@ -56,7 +56,7 @@
                 title="Supprimer"
                 href="{{ path('app_project_delete', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}"
               >
-                <i class="fas fa-trash"></i>
+                Supprimer
               </a>
             {% endif %}
           </td>
