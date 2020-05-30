@@ -37,16 +37,16 @@
         },
         {
             "name": "babdev/pagerfanta-bundle",
-            "version": "v2.2.1",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BabDev/BabDevPagerfantaBundle.git",
-                "reference": "90e07eea762d8b1b5955d08f8fdd91731189d6e1"
+                "reference": "16e62c115adc81eb54325926482523c1167e9548"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BabDev/BabDevPagerfantaBundle/zipball/90e07eea762d8b1b5955d08f8fdd91731189d6e1",
-                "reference": "90e07eea762d8b1b5955d08f8fdd91731189d6e1",
+                "url": "https://api.github.com/repos/BabDev/BabDevPagerfantaBundle/zipball/16e62c115adc81eb54325926482523c1167e9548",
+                "reference": "16e62c115adc81eb54325926482523c1167e9548",
                 "shasum": ""
             },
             "require": {
@@ -54,6 +54,7 @@
                 "php": "^7.2",
                 "symfony/config": "^3.4 || ^4.4 || ^5.0",
                 "symfony/dependency-injection": "^3.4 || ^4.4 || ^5.0",
+                "symfony/deprecation-contracts": "^2.1",
                 "symfony/http-foundation": "^3.4 || ^4.4 || ^5.0",
                 "symfony/http-kernel": "^3.4 || ^4.4 || ^5.0",
                 "symfony/property-access": "^3.4 || ^4.4 || ^5.0",
@@ -106,7 +107,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-04-20T22:23:43+00:00"
+            "time": "2020-05-29T19:02:44+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1409,20 +1410,20 @@
         },
         {
             "name": "doctrine/sql-formatter",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/sql-formatter.git",
-                "reference": "490ed58757f1af4cf13b3285287ff960533acb83"
+                "reference": "5458bdcf176f6a53292e3f0cc73f292d6302fb0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/490ed58757f1af4cf13b3285287ff960533acb83",
-                "reference": "490ed58757f1af4cf13b3285287ff960533acb83",
+                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/5458bdcf176f6a53292e3f0cc73f292d6302fb0f",
+                "reference": "5458bdcf176f6a53292e3f0cc73f292d6302fb0f",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.4"
@@ -1458,7 +1459,7 @@
                 "highlight",
                 "sql"
             ],
-            "time": "2020-05-22T11:49:26+00:00"
+            "time": "2020-05-29T18:32:49+00:00"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -3331,6 +3332,66 @@
                 }
             ],
             "time": "2020-04-28T17:58:55+00:00"
+        },
+        {
+            "name": "symfony/deprecation-contracts",
+            "version": "v2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/deprecation-contracts.git",
+                "reference": "dd99cb3a0aff6cadd2a8d7d7ed72c2161e218337"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/dd99cb3a0aff6cadd2a8d7d7ed72c2161e218337",
+                "reference": "dd99cb3a0aff6cadd2a8d7d7ed72c2161e218337",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "function.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "A generic function and convention to trigger deprecation notices",
+            "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-05-27T08:34:37+00:00"
         },
         {
             "name": "symfony/doctrine-bridge",
