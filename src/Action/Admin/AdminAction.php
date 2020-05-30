@@ -45,7 +45,7 @@ class AdminAction extends AbstractAdminAction
         $groupsCount = $this->projectGroupRepository->count([]);
         $projectsCount = $this->projectRepository->count([]);
         $serversCount = $this->serverRepository->count([]);
-        $clientsCount = $this->serverRepository->count([]);
+        $clientsCount = $this->clientRepository->count([]);
 
         return $this->renderPage('admin', 'app/admin/admin.html.twig', [
             'groupsCount' => $groupsCount,
