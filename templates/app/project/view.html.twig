@@ -1,12 +1,15 @@
+{% from 'app/project/_identicon.html.twig' import identicon %}
+
 {% extends 'app/project/layout.html.twig' %}
 
 {% block page_content %}
-  <div class="page-title">
-    <h1>{{ project.name }}</h1>
+  <div class="flex items-center mx-auto border-b pb-10 mt-4 mb-10 border-gray-200">
+    {{ identicon(project, 'w-32 h-32 mr-10 text-2xl') }}
+    <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
+      <h2 class="text-gray-900 text-lg title-font font-medium mb-2">{{ project.name }}</h2>
+      <p class="leading-relaxed text-base">{{ project.description }}</p>
+    </div>
   </div>
-  {% if project.description %}
-    <p class="mb-4">{{ project.description }}</p>
-  {% endif %}
   <div class="grid grid-cols-2 gap-4">
     <div class="card">
       <h2 class="font-bold mb-2">Environnements</h2>

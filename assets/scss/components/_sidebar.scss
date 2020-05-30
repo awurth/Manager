@@ -49,13 +49,8 @@ nav.sidebar {
             }
           }
           .identicon {
-            @apply w-12 h-12 rounded-full text-base bg-primary-500 text-white;
-            align-items: center;
-            display: flex;
-            flex-shrink: 0;
-            justify-content: center;
+            @apply w-12 h-12 text-base bg-primary-500 text-white;
             margin-right: 0.5rem;
-            text-transform: uppercase;
             transition: background-color 0.25s, color 0.25s;
           }
           .image {

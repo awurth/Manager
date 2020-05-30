@@ -2,7 +2,7 @@
 
 {% block page_content %}
   <div class="flex items-center flex-col my-6">
-    <span class="flex justify-center items-center w-48 h-48 rounded-full bg-gray-300 text-3xl text-gray-900 font-bold mb-2">
+    <span class="identicon w-48 h-48 text-3xl font-bold mb-2">
       {{ app.user.firstname|first|capitalize }}{{ app.user.lastname|first|capitalize }}
     </span>
     <span class="block text-2xl font-bold">{{ app.user.firstname }} {{ app.user.lastname }}</span>

@@ -1,0 +1,7 @@
+.identicon {
+  @apply inline-flex flex-shrink-0 items-center justify-center overflow-hidden rounded-full uppercase bg-gray-100 text-gray-500;
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}

@@ -1,20 +1,20 @@
 {% extends 'app/admin/layout.html.twig' %}
 
 {% block page_content %}
-  <a class="btn btn-success text-sm mt-4 mb-4 font-bold" href="{{ path('app_admin_project_type_create') }}">
+  <a class="btn btn-success-o text-sm mt-4 mb-4 font-bold" href="{{ path('app_admin_project_type_create') }}">
     <i class="fas fa-plus"></i>
     Nouveau type de projet
   </a>
   <table class="w-full text-sm text-gray-700">
     <tbody>
       {% for type in types %}
-        <tr class="border-b last:border-b-0">
+        <tr class="border-b-2 last:border-b-0">
           <td class="px-4 py-2">
             <a class="font-bold text-gray-900" href="{{ path('app_admin_project_type_edit', { id: type.id }) }}">{{ type.name }}</a>
           </td>
           <td class="px-4 py-2 text-right">
             <a class="btn btn-sm" href="{{ path('app_admin_project_type_edit', { id: type.id }) }}">Éditer</a>
-            <a class="btn btn-danger btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce type de projet ?" href="{{ path('app_admin_project_type_delete', { id: type.id }) }}">Supprimer</a>
+            <a class="btn btn-danger-o btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce type de projet ?" href="{{ path('app_admin_project_type_delete', { id: type.id }) }}">Supprimer</a>
           </td>
         </tr>
       {% endfor %}

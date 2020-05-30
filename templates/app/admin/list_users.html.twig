@@ -1,42 +1,40 @@
 {% extends 'app/admin/layout.html.twig' %}
 
 {% block page_content %}
-  <a class="btn btn-success text-sm mt-4 mb-4 font-bold" href="{{ path('app_admin_user_create') }}">
+  <a class="btn btn-success-o text-sm mt-4 mb-4 font-bold" href="{{ path('app_admin_user_create') }}">
     <i class="fas fa-user-plus"></i>
     Nouvel utilisateur
   </a>
   <table class="w-full text-sm text-gray-700">
     <thead>
-      <tr class="border-b text-xs">
-        <th class="pl-4 py-3 text-left font-normal whitespace-no-wrap w-1">ID</th>
-        <th class="px-4 py-3 text-left font-normal">Nom</th>
-        <th class="px-4 py-3 text-left font-normal">Date d'inscription</th>
-        <th></th>
+      <tr>
+        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-l whitespace-no-wrap w-1">ID</th>
+        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm text-left bg-gray-200">Nom</th>
+        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Date d'inscription</th>
+        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-r"></th>
       </tr>
     </thead>
     <tbody>
       {% for user in users %}
-        <tr class="border-b last:border-b-0">
-          <td class="pl-4 py-2">{{ user.id }}</td>
-          <td class="px-4 py-2">
-            <div class="inline-block align-middle mr-2">
-              <a class="flex flex-wrap justify-center w-10 h-10 bg-gray-300 rounded-full" href="#">
-                <span class="self-center font-bold">
-                  {{ user.firstname|first|capitalize }}{{ user.lastname|first|capitalize }}
-                </span>
-              </a>
-            </div>
+        <tr class="border-b-2 last:border-b-0">
+          <td class="pl-4 py-3">{{ user.id }}</td>
+          <td class="px-4 py-3">
+            <a class="identicon w-10 h-10 mr-2" href="#">
+              <span class="self-center font-bold">
+                {{ user.firstname|first|capitalize }}{{ user.lastname|first|capitalize }}
+              </span>
+            </a>
             <div class="inline-block align-middle">
-              <a class="font-bold text-gray-900" href="#">{{ user.firstname }} {{ user.lastname }}</a>
+              <a class="font-bold text-gray-700" href="#">{{ user.firstname }} {{ user.lastname }}</a>
               <div>
                 <a class="hover:underline" href="mailto:{{ user.email }}">{{ user.email }}</a>
               </div>
             </div>
           </td>
-          <td class="px-4 py-2">{{ user.createdAt|diffForHumans }}</td>
-          <td class="px-4 py-2 text-right">
+          <td class="px-4 py-3 text-center">{{ user.createdAt|diffForHumans }}</td>
+          <td class="px-4 py-3 text-right">
             {#<a class="btn btn-sm" href="#">Éditer</a>
-            <a class="btn btn-danger btn-sm" href="#">Supprimer</a>#}
+            <a class="btn btn-danger-o btn-sm" href="#">Supprimer</a>#}
           </td>
         </tr>
       {% endfor %}

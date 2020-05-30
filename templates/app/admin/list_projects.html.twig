@@ -1,22 +1,18 @@
+{% from 'app/project/_identicon.html.twig' import identicon %}
+
 {% extends 'app/admin/layout.html.twig' %}
 
 {% block page_content %}
-  <a class="btn btn-success text-sm mt-4 mb-4 font-bold" href="{{ path('app_project_create') }}">
+  <a class="btn btn-success-o text-sm mt-4 mb-4 font-bold" href="{{ path('app_project_create') }}">
     <i class="fas fa-plus"></i>
     Nouveau projet
   </a>
   <table class="w-full text-sm text-gray-700">
     <tbody>
       {% for project in projects %}
-        <tr class="border-b last:border-b-0">
+        <tr class="border-b-2 last:border-b-0">
           <td class="px-4 py-2">
-            <div class="inline-block align-middle mr-2">
-              <a class="flex flex-wrap justify-center w-10 h-10 bg-gray-300 rounded" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">
-                <span class="self-center font-bold">
-                  {{ project.name|first|capitalize }}
-                </span>
-              </a>
-            </div>
+            {{ identicon(project, 'w-10 h-10 mr-2') }}
             <div class="inline-block align-middle">
               <a class="font-bold text-gray-900" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">{{ project.name }}</a>
             </div>

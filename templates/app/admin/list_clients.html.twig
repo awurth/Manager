@@ -1,7 +1,7 @@
 {% extends 'app/admin/layout.html.twig' %}
 
 {% block page_content %}
-  <a class="btn btn-success text-sm mt-4 mb-4 font-bold" href="{{ path('app_admin_client_create') }}">
+  <a class="btn btn-success-o text-sm mt-4 mb-4 font-bold" href="{{ path('app_admin_client_create') }}">
     <i class="fas fa-plus"></i>
     Nouveau client
   </a>
@@ -15,7 +15,7 @@
     </thead>
     <tbody>
       {% for client in clients %}
-        <tr class="border-b last:border-b-0">
+        <tr class="border-b-2 last:border-b-0">
           <td class="px-4 py-2">
             <a class="font-bold text-gray-900" href="{{ path('app_admin_client_edit', { id: client.id }) }}">{{ client.name }}</a>
             <div>
@@ -25,7 +25,7 @@
           <td class="px-4 py-2">{{ client.createdAt|diffForHumans }}</td>
           <td class="px-4 py-2 text-right">
             <a class="btn btn-sm" href="{{ path('app_admin_client_edit', { id: client.id }) }}">Éditer</a>
-            <a class="btn btn-danger btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce client ?" href="{{ path('app_admin_client_delete', { id: client.id }) }}">Supprimer</a>
+            <a class="btn btn-danger-o btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce client ?" href="{{ path('app_admin_client_delete', { id: client.id }) }}">Supprimer</a>
           </td>
         </tr>
       {% endfor %}

@@ -1,0 +1,13 @@
+{% macro identicon(project, classes) %}
+  {% if project.logoFilename %}
+    <div class="identicon {{ classes }}">
+      <img src="{{ uploaded_asset(project, 'project_logo') }}" alt="{{ project.name }}">
+    </div>
+  {% else %}
+    <div class="identicon {{ classes }}">
+      <span class="self-center font-bold">
+        {{ project.name|first|capitalize }}
+      </span>
+    </div>
+  {% endif %}
+{% endmacro %}

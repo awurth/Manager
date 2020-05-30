@@ -1,12 +1,16 @@
+{% from 'app/project_group/_identicon.html.twig' import identicon as group_identicon %}
+{% from 'app/project/_identicon.html.twig' import identicon as project_identicon %}
+
 {% extends 'app/project_group/layout.html.twig' %}
 
 {% block page_content %}
-  <div class="page-title">
-    <h1>{{ group.name }}</h1>
+  <div class="flex items-center mx-auto border-b pb-10 mt-4 mb-10 border-gray-200">
+    {{ group_identicon(group, 'w-32 h-32 mr-10 text-2xl') }}
+    <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
+      <h2 class="text-gray-900 text-lg title-font font-medium mb-2">{{ group.name }}</h2>
+      <p class="leading-relaxed text-base">{{ group.description }}</p>
+    </div>
   </div>
-  {% if group.description %}
-    <p class="mb-4">{{ group.description }}</p>
-  {% endif %}
   <div class="grid grid-cols-2 gap-4">
     {% if group.client %}
       <div class="px-4 py-2 border border-gray-300 shadow">
@@ -25,20 +29,10 @@
   <table class="w-full text-sm text-gray-700">
     <tbody>
       {% for project in projects %}
-        <tr class="border-b last:border-b-0">
+        <tr class="border-b-2 last:border-b-0">
           <td class="px-4 py-2">
             <div class="inline-block align-middle mr-2">
-              {% if project.logoFilename %}
-                <a class="flex flex-wrap content-center justify-center w-10 h-10 rounded overflow-hidden" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">
-                  <img class="max-w-full max-h-full" src="{{ uploaded_asset(project, 'project_logo') }}" alt="{{ project.name }}">
-                </a>
-              {% else %}
-                <a class="flex flex-wrap justify-center w-10 h-10 bg-gray-300 rounded" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">
-                  <span class="self-center font-bold">
-                    {{ project.name|first|capitalize }}
-                  </span>
-                </a>
-              {% endif %}
+              {{ project_identicon(project, 'w-10 h-10') }}
             </div>
             <div class="inline-block align-middle">
               <a class="font-bold text-gray-900" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">{{ project.name }}</a>

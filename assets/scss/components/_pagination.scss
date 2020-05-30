@@ -1,7 +1,7 @@
 .pagination {
   @apply py-2;
   a, span {
-    @apply px-3 py-1 border text-sm text-gray-900;
+    @apply px-4 py-2 border text-sm text-gray-700;
     display: inline-block;
     margin-left: -1px;
     &:first-child {

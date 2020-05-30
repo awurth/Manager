@@ -2,9 +2,9 @@
   @apply py-3 border-b;
   display: flex;
   > li {
-    @apply text-xs text-gray-700;
+    @apply text-sm text-gray-700;
     &:last-child {
-      @apply font-bold text-black;
+      @apply font-bold;
     }
   }
   .separator {

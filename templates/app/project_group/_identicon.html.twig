@@ -1,0 +1,7 @@
+{% macro identicon(group, classes) %}
+  <div class="identicon {{ classes }}">
+    <span class="self-center font-bold">
+      {{ group.name|first|capitalize }}
+    </span>
+  </div>
+{% endmacro %}

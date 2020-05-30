@@ -1,7 +1,7 @@
 <table class="w-full text-sm text-gray-700">
   <tbody>
     {% for group in groups %}
-      <tr class="border-b last:border-b-0">
+      <tr class="border-b-2 last:border-b-0">
         <td class="px-4 py-2">
           <div class="inline-block align-middle mr-2">
             <a class="flex flex-wrap justify-center w-10 h-10 bg-gray-300 rounded" href="{{ path('app_project_group_view', { slug: group.slug }) }}">
