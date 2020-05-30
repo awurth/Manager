@@ -57,7 +57,7 @@
             {% endif %}
             {% if is_granted('DELETE', project) %}
               <a
-                class="btn danger btn-sm ml-2"
+                class="btn btn-danger btn-sm ml-2"
                 data-confirm="Êtes-vous sûr de vouloir supprimer ce projet ?"
                 title="Supprimer"
                 href="{{ path('app_project_delete', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}"

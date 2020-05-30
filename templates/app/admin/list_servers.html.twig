@@ -1,7 +1,7 @@
 {% extends 'app/admin/layout.html.twig' %}
 
 {% block page_content %}
-  <a class="btn success text-sm mt-4 mb-4 font-bold" href="{{ path('app_server_create') }}">
+  <a class="btn btn-success text-sm mt-4 mb-4 font-bold" href="{{ path('app_server_create') }}">
     <i class="fas fa-plus"></i>
     Nouveau serveur
   </a>
@@ -15,7 +15,7 @@
           <td class="px-4 py-2">Créé {{ server.createdAt|diffForHumans }}</td>
           <td class="px-4 py-2 text-right">
             <a class="btn btn-sm" href="{{ path('app_server_edit', { id: server.id }) }}">Éditer</a>
-            <a class="btn danger btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce serveur ?" href="#">Supprimer</a>
+            <a class="btn btn-danger btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce serveur ?" href="#">Supprimer</a>
           </td>
         </tr>
       {% endfor %}

@@ -18,7 +18,7 @@
     }
   }
   .current {
-    @apply bg-green-500 border-green-500 font-bold text-white;
+    @apply bg-primary-500 border-primary-500 font-bold text-white;
   }
   .disabled {
     @apply bg-gray-100 opacity-50;

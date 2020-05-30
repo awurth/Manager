@@ -8,7 +8,7 @@
     {{ form_row(form.user) }}
     {{ form_row(form.accessLevel) }}
     {{ form_rest(form) }}
-    <button type="submit" class="btn success mt-4">Ajouter</button>
+    <button type="submit" class="btn btn-success mt-4">Ajouter</button>
   {{ form_end(form) }}
   <h2 class="mb-3 mt-6 text-lg font-bold">Membres existants</h2>
   {% if members|length %}
@@ -48,7 +48,7 @@
             <td class="px-4 py-2 text-center">Rejoint {{ member.createdAt|diffForHumans }}</td>
             <td class="px-4 py-2 text-right">
               {% if member.accessLevel != constant('App\\Entity\\ProjectMember::ACCESS_LEVEL_OWNER') %}
-                <a class="btn danger btn-sm" data-confirm="Êtes-vous sûr de vouloir supprimer ce membre ?" href="{{ path('app_project_member_remove', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: member.id }) }}">
+                <a class="btn btn-danger btn-sm" data-confirm="Êtes-vous sûr de vouloir supprimer ce membre ?" href="{{ path('app_project_member_remove', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: member.id }) }}">
                   <i class="fas fa-trash"></i>
                 </a>
               {% endif %}

@@ -6,7 +6,7 @@
   </div>
   {{ form_start(form) }}
   {{ form_rest(form) }}
-  <button type="submit" class="btn success mt-4">Enregistrer</button>
+  <button type="submit" class="btn btn-success mt-4">Enregistrer</button>
   {{ form_end(form) }}
   {% if is_granted('DELETE', server) %}
     <div class="page-title mt-4">
@@ -14,6 +14,6 @@
     </div>
     <p>Supprimer ce serveur supprimera aussi toutes les données associées.</p>
     <p><strong>Cette action est irréversible !</strong></p>
-    <a class="btn danger btn-sm mt-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce serveur ?" href="{{ path('app_server_delete', { id: server.id }) }}">Supprimer</a>
+    <a class="btn btn-danger btn-sm mt-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce serveur ?" href="{{ path('app_server_delete', { id: server.id }) }}">Supprimer</a>
   {% endif %}
 {% endblock %}

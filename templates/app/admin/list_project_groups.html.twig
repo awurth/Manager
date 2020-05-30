@@ -1,7 +1,7 @@
 {% extends 'app/admin/layout.html.twig' %}
 
 {% block page_content %}
-  <a class="btn success text-sm mt-4 mb-4 font-bold" href="{{ path('app_project_group_create') }}">
+  <a class="btn btn-success text-sm mt-4 mb-4 font-bold" href="{{ path('app_project_group_create') }}">
     <i class="fas fa-plus"></i>
     Nouveau groupe
   </a>
@@ -24,7 +24,7 @@
           <td class="px-4 py-2">Créé {{ group.createdAt|diffForHumans }}</td>
           <td class="px-4 py-2 text-right">
             <a class="btn btn-sm" href="{{ path('app_project_group_edit', { slug: group.slug }) }}">Éditer</a>
-            <a class="btn danger btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce groupe ?" href="{{ path('app_project_group_delete', { slug: group.slug }) }}">Supprimer</a>
+            <a class="btn btn-danger btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce groupe ?" href="{{ path('app_project_group_delete', { slug: group.slug }) }}">Supprimer</a>
           </td>
         </tr>
       {% endfor %}
