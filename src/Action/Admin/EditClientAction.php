@@ -54,8 +54,6 @@ class EditClientAction extends AbstractAdminAction
             throw new NotFoundHttpException('Client not found');
         }
 
-        $this->breadcrumbs->addItem($client->getName(), '', [], false);
-
         $model = new EditClient($client);
         $form = $this->formFactory->create(EditClientType::class, $model);
         $form->handleRequest($request);
@@ -76,6 +74,8 @@ class EditClientAction extends AbstractAdminAction
 
             return $this->redirectToRoute('app_admin_client_list');
         }
+
+        $this->breadcrumbs->addItem($client->getName(), '', [], false);
 
         return $this->renderPage('admin-edit-client', 'app/admin/edit_client.html.twig', [
             'client' => $client,

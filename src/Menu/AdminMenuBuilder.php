@@ -107,6 +107,18 @@ class AdminMenuBuilder
                 'route' => 'app_admin_user_list'
             ]);
 
+        $menu
+            ->addChild('Link Types', [
+                'extras' => [
+                    'icon' => 'fas fa-link',
+                    /*'routes' => [
+                        'app_admin_user_create'
+                    ]*/
+                ],
+                'label' => 'admin.link_types',
+                'route' => 'app_admin_link_type_list'
+            ]);
+
         return $menu;
     }
 }

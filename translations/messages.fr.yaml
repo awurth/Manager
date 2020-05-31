@@ -7,6 +7,7 @@ select_project_type: Sélectionnez un type
 admin:
     credentials: Identifiants
     clients: Clients
+    link_types: Types de liens
     project_groups: Groupes
     projects: Projets
     project_types: Types
@@ -22,6 +23,9 @@ breadcrumb:
             create: Nouveau client
             list: Clients
         dashboard: Vue d'ensemble
+        link_type:
+            create: Nouveau type de lien
+            list: Types de liens
         project:
             list: Projets
         project_group:
@@ -107,6 +111,10 @@ flash:
             create: Client créé avec succès
             edit: Client mis à jour avec succès
             delete: Client supprimé avec succès
+        link_type:
+            create: Type de lien créé avec succès
+            edit: Type de lien mis à jour avec succès
+            delete: Type de lien supprimé avec succès
         password:
             change: Mot de passe mis à jour avec succès
         profile:
@@ -179,6 +187,11 @@ form:
         create_credentials_description: Description
         create_credentials_users: Utilisateurs
 
+        create_link_type_name: Nom
+        create_link_type_color: Couleur
+        create_link_type_uriPrefix: Préfixe URL
+        create_link_type_iconFile: Icône
+
         create_project_projectGroup: Groupe
         create_project_name: Nom
         create_project_slug: URL
@@ -224,6 +237,11 @@ form:
         edit_credentials_website: Site web
         edit_credentials_description: Description
         edit_credentials_users: Utilisateurs
+
+        edit_link_type_name: Nom
+        edit_link_type_color: Couleur
+        edit_link_type_uriPrefix: Préfixe URL
+        edit_link_type_iconFile: Icône
 
         edit_profile_email: Adresse email
         edit_profile_firstname: Prénom

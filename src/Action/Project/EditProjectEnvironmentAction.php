@@ -53,13 +53,6 @@ class EditProjectEnvironmentAction extends AbstractProjectAction
 
         $this->denyAccessUnlessGranted('MEMBER', $this->project);
 
-        $this->breadcrumbs
-            ->addRouteItem('breadcrumb.project.environment.list', 'app_project_environment_list', [
-                'projectGroupSlug' => $this->projectGroup->getSlug(),
-                'projectSlug' => $this->project->getSlug()
-            ])
-            ->addItem($environment->getName(), '', [], false);
-
         $model = new EditProjectEnvironment($environment);
         $form = $this->formFactory->create(EditProjectEnvironmentType::class, $model);
         $form->handleRequest($request);
@@ -82,6 +75,13 @@ class EditProjectEnvironmentAction extends AbstractProjectAction
                 'projectSlug' => $this->project->getSlug()
             ]);
         }
+
+        $this->breadcrumbs
+            ->addRouteItem('breadcrumb.project.environment.list', 'app_project_environment_list', [
+                'projectGroupSlug' => $this->projectGroup->getSlug(),
+                'projectSlug' => $this->project->getSlug()
+            ])
+            ->addItem($environment->getName(), '', [], false);
 
         return $this->renderPage('edit-project-environment', 'app/project/edit_environment.html.twig', [
             'environment' => $environment,

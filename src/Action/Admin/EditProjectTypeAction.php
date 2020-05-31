@@ -54,8 +54,6 @@ class EditProjectTypeAction extends AbstractAdminAction
             throw new NotFoundHttpException('Project type not found');
         }
 
-        $this->breadcrumbs->addItem($projectType->getName(), '', [], false);
-
         $model = new EditProjectType($projectType);
         $form = $this->formFactory->create(EditProjectTypeType::class, $model);
         $form->handleRequest($request);
@@ -70,6 +68,8 @@ class EditProjectTypeAction extends AbstractAdminAction
 
             return $this->redirectToRoute('app_admin_project_type_list');
         }
+
+        $this->breadcrumbs->addItem($projectType->getName(), '', [], false);
 
         return $this->renderPage('admin-edit-project-type', 'app/admin/edit_project_type.html.twig', [
             'form' => $form->createView(),

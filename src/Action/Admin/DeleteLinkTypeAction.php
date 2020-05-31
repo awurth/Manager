@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Action\Admin;
+
+use App\Action\RoutingTrait;
+use App\Action\SecurityTrait;
+use App\Repository\LinkTypeRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * @Route("/link-type/{id}/delete", requirements={"id": "\d+"}, name="app_admin_link_type_delete")
+ */
+class DeleteLinkTypeAction
+{
+    use RoutingTrait;
+    use SecurityTrait;
+
+    private $entityManager;
+    private $flashBag;
+    private $linkTypeRepository;
+
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        FlashBagInterface $flashBag,
+        LinkTypeRepository $linkTypeRepository
+    )
+    {
+        $this->entityManager = $entityManager;
+        $this->flashBag = $flashBag;
+        $this->linkTypeRepository = $linkTypeRepository;
+    }
+
+    public function __invoke(int $id): Response
+    {
+        $this->denyAccessUnlessLoggedIn();
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $linkType = $this->linkTypeRepository->find($id);
+
+        if (!$linkType) {
+            throw new NotFoundHttpException('Link type not found');
+        }
+
+        $this->entityManager->remove($linkType);
+        $this->entityManager->flush();
+
+        $this->flashBag->add('success', 'flash.success.link_type.delete');
+
+        return $this->redirectToRoute('app_admin_link_type_list');
+    }
+}

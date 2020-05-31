@@ -5,3 +5,8 @@ awurth_upload:
             upload_destination: '%kernel.project_dir%/public/uploads/project/logo'
             property_path: logoFilename
             namer: Awurth\UploadBundle\Naming\UniqidNamer
+        link_type_icon:
+            uri_prefix: /uploads/link-type
+            upload_destination: '%kernel.project_dir%/public/uploads/link-type'
+            property_path: iconFilename
+            namer: Awurth\UploadBundle\Naming\UniqidNamer
