@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Form\Type\Action;
+namespace App\Form\Type\Action\Admin;
 
-use App\Form\Model\EditClient;
+use App\Form\Model\Admin\EditClient;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;

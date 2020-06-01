@@ -7,7 +7,7 @@ use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Entity\LinkType;
 use App\Form\Model\Admin\CreateLinkType;
-use App\Form\Type\Action\CreateLinkTypeType;
+use App\Form\Type\Action\Admin\CreateLinkTypeType;
 use Awurth\UploadBundle\Storage\StorageInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Form\Type\Action;
+namespace App\Form\Type\Action\Admin;
 
-use App\Form\Model\EditProjectType;
+use App\Form\Model\Admin\CreateProjectType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditProjectTypeType extends AbstractType
+class CreateProjectTypeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -17,7 +17,7 @@ class EditProjectTypeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => EditProjectType::class
+            'data_class' => CreateProjectType::class
         ]);
     }
 }

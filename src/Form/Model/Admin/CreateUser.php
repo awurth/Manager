@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\Model;
+namespace App\Form\Model\Admin;
 
 use App\Validator\UniqueUserEmail;
 use Rollerworks\Component\PasswordStrength\Validator\Constraints\PasswordStrength;

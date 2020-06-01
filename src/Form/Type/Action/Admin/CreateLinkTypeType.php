@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Form\Type\Action;
+namespace App\Form\Type\Action\Admin;
 
-use App\Form\Model\Admin\EditLinkType;
+use App\Form\Model\Admin\CreateLinkType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditLinkTypeType extends AbstractType
+class CreateLinkTypeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -30,7 +30,7 @@ class EditLinkTypeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => EditLinkType::class
+            'data_class' => CreateLinkType::class
         ]);
     }
 }
