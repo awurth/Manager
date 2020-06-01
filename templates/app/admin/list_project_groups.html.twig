@@ -7,18 +7,18 @@
     <i class="fas fa-plus"></i>
     Nouveau groupe
   </a>
-  <table class="w-full text-sm text-gray-700">
+  <table>
     <tbody>
       {% for group in groups %}
-        <tr class="border-b-2 last:border-b-0">
-          <td class="px-4 py-2">
+        <tr>
+          <td>
             {{ identicon(group, 'w-10 h-10 mr-2') }}
             <div class="inline-block align-middle">
               <a class="font-bold text-gray-900" href="{{ path('app_project_group_view', { slug: group.slug }) }}">{{ group.name }}</a>
             </div>
           </td>
-          <td class="px-4 py-2">Créé {{ group.createdAt|diffForHumans }}</td>
-          <td class="px-4 py-2 text-right">
+          <td>Créé {{ group.createdAt|diffForHumans }}</td>
+          <td class="text-right">
             <a class="btn btn-sm" href="{{ path('app_project_group_edit', { slug: group.slug }) }}">Éditer</a>
             <a class="btn btn-danger-o btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce groupe ?" href="{{ path('app_project_group_delete', { slug: group.slug }) }}">Supprimer</a>
           </td>

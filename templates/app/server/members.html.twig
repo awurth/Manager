@@ -12,7 +12,7 @@
   {{ form_end(form) }}
   <h2 class="mb-3 mt-6 text-lg font-bold">Membres existants</h2>
   {% if members|length %}
-    <table class="w-full text-sm text-gray-700">
+    <table>
       <thead>
         <tr>
           <th class="text-left">Nom</th>
@@ -23,8 +23,8 @@
       </thead>
       <tbody>
         {% for member in members %}
-          <tr class="border-b-2 last:border-b-0">
-            <td class="px-4 py-3">
+          <tr>
+            <td>
               <div class="inline-block align-middle mr-2">
                 <a class="flex flex-wrap justify-center w-10 h-10 bg-gray-300 rounded-full" href="#">
                   <span class="self-center font-bold">
@@ -42,11 +42,11 @@
                 </div>
               </div>
             </td>
-            <td class="px-4 py-2 text-center">
+            <td class="text-center">
               <small class="access-level-label">{{ member|access_level_label }}</small>
             </td>
-            <td class="px-4 py-2 text-center">Rejoint {{ member.createdAt|diffForHumans }}</td>
-            <td class="px-4 py-2 text-right">
+            <td class="text-center">Rejoint {{ member.createdAt|diffForHumans }}</td>
+            <td class="text-right">
               {% if member.accessLevel != constant('App\\Entity\\ServerMember::ACCESS_LEVEL_OWNER') %}
                 <a class="btn btn-danger btn-sm" data-confirm="Êtes-vous sûr de vouloir supprimer ce membre ?" href="{{ path('app_server_member_remove', { id: server.id, memberId: member.id }) }}">
                   Supprimer

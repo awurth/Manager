@@ -26,11 +26,11 @@
   <div class="page-title">
     <h2>Projets</h2>
   </div>
-  <table class="w-full text-sm text-gray-700">
+  <table>
     <tbody>
       {% for project in projects %}
-        <tr class="border-b-2 last:border-b-0">
-          <td class="px-4 py-3">
+        <tr>
+          <td>
             <div class="inline-block align-middle mr-2">
               {{ project_identicon(project, 'w-10 h-10') }}
             </div>
@@ -38,8 +38,8 @@
               <a class="font-bold text-gray-900" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">{{ project.name }}</a>
             </div>
           </td>
-          <td class="px-4 py-3">Créé {{ project.createdAt|diffForHumans }}</td>
-          <td class="px-4 py-3 text-right">
+          <td>Créé {{ project.createdAt|diffForHumans }}</td>
+          <td class="text-right">
             {% if is_granted('EDIT', project) %}
               <a
                 class="btn btn-sm"

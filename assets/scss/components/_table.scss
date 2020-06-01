@@ -1,3 +1,15 @@
+table {
+  @apply w-full text-sm text-gray-700;
+}
+
+tbody {
+  tr {
+    &:not(:last-child) {
+      @apply border-b-2;
+    }
+  }
+}
+
 th {
   @apply px-4 py-3 tracking-wider font-medium text-gray-900 text-sm bg-gray-200;
   &:first-child {
@@ -6,4 +18,8 @@ th {
   &:last-child {
     @apply rounded-r;
   }
+}
+
+td {
+  @apply px-4 py-3;
 }

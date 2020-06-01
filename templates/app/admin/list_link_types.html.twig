@@ -5,7 +5,7 @@
     <i class="fas fa-plus"></i>
     Nouveau type de lien
   </a>
-  <table class="w-full text-sm text-gray-700">
+  <table>
     <thead>
       <tr>
         <th class="text-left">Nom</th>
@@ -16,8 +16,8 @@
     </thead>
     <tbody>
       {% for type in types %}
-        <tr class="border-b-2 last:border-b-0">
-          <td class="px-4 py-3">
+        <tr>
+          <td>
             {% if type.iconFilename %}
               <span class="inline-block align-middle w-8 h-8 mr-2">
                 <img class="max-h-full" src="{{ uploaded_asset(type, 'link_type_icon') }}" alt="{{ type.name }}">
@@ -27,15 +27,15 @@
             {% endif %}
             <a class="font-bold inline-block align-middle" href="{{ path('app_admin_link_type_edit', { id: type.id }) }}">{{ type.name }}</a>
           </td>
-          <td class="px-4 py-3">
+          <td>
             <a href="{{ path('app_admin_link_type_edit', { id: type.id }) }}">{{ type.uriPrefix }}</a>
           </td>
-          <td class="px-4 py-3 flex align-center justify-center">
+          <td class="flex align-center justify-center">
             {% if type.color %}
               <a href="{{ path('app_admin_link_type_edit', { id: type.id }) }}" class="w-24 h-8 rounded-full" style="background-color: {{ type.color }};"></a>
             {% endif %}
           </td>
-          <td class="px-4 py-3 text-right">
+          <td class="text-right">
             <a class="btn btn-sm" href="{{ path('app_admin_link_type_edit', { id: type.id }) }}">Éditer</a>
             <a class="btn btn-danger-o btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce type de projet ?" href="{{ path('app_admin_link_type_delete', { id: type.id }) }}">Supprimer</a>
           </td>

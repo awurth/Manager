@@ -5,7 +5,7 @@
     <i class="fas fa-plus"></i>
     Nouveau client
   </a>
-  <table class="w-full text-sm text-gray-700">
+  <table>
     <thead>
       <tr>
         <th class="text-left">Nom</th>
@@ -15,15 +15,15 @@
     </thead>
     <tbody>
       {% for client in clients %}
-        <tr class="border-b-2 last:border-b-0">
-          <td class="px-4 py-2">
+        <tr>
+          <td>
             <a class="font-bold text-gray-900" href="{{ path('app_admin_client_edit', { id: client.id }) }}">{{ client.name }}</a>
             <div>
               <a class="hover:underline" href="mailto:{{ client.email }}">{{ client.email }}</a>
             </div>
           </td>
-          <td class="px-4 py-2 text-center">{{ client.createdAt|diffForHumans }}</td>
-          <td class="px-4 py-2 text-right">
+          <td class="text-center">{{ client.createdAt|diffForHumans }}</td>
+          <td class="text-right">
             <a class="btn btn-sm" href="{{ path('app_admin_client_edit', { id: client.id }) }}">Éditer</a>
             <a class="btn btn-danger-o btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce client ?" href="{{ path('app_admin_client_delete', { id: client.id }) }}">Supprimer</a>
           </td>

@@ -7,18 +7,18 @@
     <i class="fas fa-plus"></i>
     Nouveau projet
   </a>
-  <table class="w-full text-sm text-gray-700">
+  <table>
     <tbody>
       {% for project in projects %}
-        <tr class="border-b-2 last:border-b-0">
-          <td class="px-4 py-2">
+        <tr>
+          <td>
             {{ identicon(project, 'w-10 h-10 mr-2') }}
             <div class="inline-block align-middle">
               <a class="font-bold text-gray-900" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">{{ project.name }}</a>
             </div>
           </td>
-          <td class="px-4 py-2">Créé {{ project.createdAt|diffForHumans }}</td>
-          <td class="px-4 py-2 text-right">
+          <td>Créé {{ project.createdAt|diffForHumans }}</td>
+          <td class="text-right">
             <a class="btn btn-sm" href="{{ path('app_project_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">Éditer</a>
             <a class="btn btn-danger-o btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce projet ?" href="{{ path('app_project_delete', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">Supprimer</a>
           </td>

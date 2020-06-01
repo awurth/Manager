@@ -10,11 +10,11 @@
       Nouveau lien
     </a>
   {% endif %}
-  <table class="w-full text-sm text-gray-700">
+  <table>
     <tbody>
       {% for link in links %}
-        <tr class="border-b-2 last:border-b-0">
-          <td class="px-4 py-3">
+        <tr>
+          <td>
             <a class="font-bold" href="{{ path('app_project_link_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: link.id }) }}">
               {% if link.linkType and link.linkType.iconFilename %}
                 <span class="inline-block align-middle w-8 h-8 mr-2">
@@ -28,10 +28,10 @@
               {{ link.name }}
             </a>
           </td>
-          <td class="px-4 py-3 text-right">
+          <td class="text-right">
             <a href="{{ link.uri }}">{{ link.uri }}</a>
           </td>
-          <td class="px-4 py-3 text-right">
+          <td class="text-right">
             <a class="btn btn-sm" href="{{ path('app_project_link_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: link.id }) }}">Éditer</a>
             <a class="btn btn-danger-o btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce lien ?" href="{{ path('app_project_link_remove', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: link.id }) }}">Supprimer</a>
           </td>

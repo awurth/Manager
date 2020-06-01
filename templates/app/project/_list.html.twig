@@ -1,10 +1,10 @@
 {% from 'app/project/_identicon.html.twig' import identicon %}
 
-<table class="w-full text-sm text-gray-700">
+<table>
   <tbody>
     {% for project in projects %}
-      <tr class="border-b-2 last:border-b-0">
-        <td class="px-4 py-2">
+      <tr>
+        <td>
           <div class="inline-block align-middle mr-2">
             {{ identicon(project, 'w-10 h-10') }}
           </div>
@@ -16,7 +16,7 @@
             <small class="access-level-label ml-2">{{ project.memberByUser(app.user)|access_level_label }}</small>
           </div>
         </td>
-        <td class="px-4 py-2 text-right">Créé {{ project.createdAt|diffForHumans }}</td>
+        <td class="text-right">Créé {{ project.createdAt|diffForHumans }}</td>
       </tr>
     {% endfor %}
   </tbody>
