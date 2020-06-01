@@ -110,13 +110,31 @@ class ProjectMenuBuilder
                     'extras' => [
                         'icon' => 'fas fa-cog'
                     ],
-                    'label' => 'project.settings',
+                    'label' => 'project.settings.settings',
                     'route' => 'app_project_edit',
                     'routeParameters' => [
                         'projectGroupSlug' => $project->getProjectGroup()->getSlug(),
                         'projectSlug' => $project->getSlug()
                     ]
                 ]);
+
+            $menu['Settings']->addChild('General', [
+                'label' => 'project.settings.general',
+                'route' => 'app_project_edit',
+                'routeParameters' => [
+                    'projectGroupSlug' => $project->getProjectGroup()->getSlug(),
+                    'projectSlug' => $project->getSlug()
+                ]
+            ]);
+
+            $menu['Settings']->addChild('Links', [
+                'label' => 'project.settings.links',
+                'route' => 'app_project_link_list',
+                'routeParameters' => [
+                    'projectGroupSlug' => $project->getProjectGroup()->getSlug(),
+                    'projectSlug' => $project->getSlug()
+                ]
+            ]);
         }
 
         return $menu;

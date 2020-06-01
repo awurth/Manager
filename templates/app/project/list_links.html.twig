@@ -1,0 +1,47 @@
+{% extends 'app/project/layout.html.twig' %}
+
+{% block page_content %}
+  {% if is_granted('MEMBER', project) %}
+    <a
+      class="btn btn-success-o font-bold text-sm my-4"
+      href="{{ path('app_project_link_add', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}"
+    >
+      <i class="fas fa-plus"></i>
+      Nouveau lien
+    </a>
+  {% endif %}
+  <table class="w-full text-sm text-gray-700">
+    <tbody>
+      {% for link in links %}
+        <tr class="border-b-2 last:border-b-0">
+          <td class="px-4 py-3">
+            <a class="font-bold" href="{{ path('app_project_link_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: link.id }) }}">
+              {% if link.linkType and link.linkType.iconFilename %}
+                <span class="inline-block align-middle w-8 h-8 mr-2">
+                  <img class="max-h-full" src="{{ uploaded_asset(link.linkType, 'link_type_icon') }}" alt="{{ link.linkType.name }}">
+                </span>
+              {% else %}
+                <span class="inline-block w-8 mr-2 text-center">
+                  <i class="fas fa-link"></i>
+                </span>
+              {% endif %}
+              {{ link.name }}
+            </a>
+          </td>
+          <td class="px-4 py-3 text-right">
+            <a href="{{ link.uri }}">{{ link.uri }}</a>
+          </td>
+          <td class="px-4 py-3 text-right">
+            <a class="btn btn-sm" href="{{ path('app_project_link_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: link.id }) }}">Éditer</a>
+            <a class="btn btn-danger-o btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce lien ?" href="{{ path('app_project_link_remove', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: link.id }) }}">Supprimer</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if pager.haveToPaginate %}
+    <div class="pagination text-center">
+      {{ pagerfanta(pager) }}
+    </div>
+  {% endif %}
+{% endblock %}

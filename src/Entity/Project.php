@@ -74,6 +74,11 @@ class Project
      */
     private $members;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Link::class, mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $links;
+
     public function __construct(string $slug, string $name)
     {
         $this->slug = $slug;
@@ -81,6 +86,7 @@ class Project
 
         $this->environments = new ArrayCollection();
         $this->members = new ArrayCollection();
+        $this->links = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -256,6 +262,37 @@ class Project
             // set the owning side to null (unless already changed)
             if ($member->getProject() === $this) {
                 $member->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Link[]
+     */
+    public function getLinks(): Collection
+    {
+        return $this->links;
+    }
+
+    public function addLink(Link $link): self
+    {
+        if (!$this->links->contains($link)) {
+            $this->links[] = $link;
+            $link->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLink(Link $link): self
+    {
+        if ($this->links->contains($link)) {
+            $this->links->removeElement($link);
+            // set the owning side to null (unless already changed)
+            if ($link->getProject() === $this) {
+                $link->setProject(null);
             }
         }
 

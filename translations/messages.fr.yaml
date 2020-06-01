@@ -47,6 +47,9 @@ breadcrumb:
         environment:
             create: Nouvel environnement
             list: Environnements
+        link:
+            create: Nouveau lien
+            list: Liens
         members: Membres
         overview: Vue d'ensemble
     project_group:
@@ -68,7 +71,10 @@ project:
             owner: Propriétaire
     members: Membres
     overview: Projet
-    settings: Paramètres
+    settings:
+        general: Général
+        links: Liens
+        settings: Paramètres
 
 project_group:
     member:
@@ -127,6 +133,10 @@ flash:
                 create: Environnement créé avec succès
                 edit: Environnement mis à jour avec succès
                 remove: Environnement supprimé avec succès
+            link:
+                create: Lien créé avec succès
+                edit: Lien mis à jour avec succès
+                remove: Lien supprimé avec succès
             member:
                 add: Membre(s) ajouté(s) avec succès
                 leave: Vous avez quitté le projet
@@ -157,11 +167,21 @@ flash:
 
 form:
     label:
-        add_project_member_user: Utilisateur
-        add_project_member_accessLevel: Niveau d'accès
+        add_project_environment_server: Serveur
+        add_project_environment_name: Nom
+        add_project_environment_path: Emplacement
+        add_project_environment_url: URL
+        add_project_environment_description: Description
+
+        add_project_link_linkType: Type de lien
+        add_project_link_name: Nom
+        add_project_link_uri: URL
 
         add_project_group_member_user: Utilisateur
         add_project_group_member_accessLevel: Niveau d'accès
+
+        add_project_member_user: Utilisateur
+        add_project_member_accessLevel: Niveau d'accès
 
         add_server_member_user: Utilisateur
         add_server_member_accessLevel: Niveau d'accès
@@ -198,12 +218,6 @@ form:
         create_project_description: Description
         create_project_logoFile: Logo
         create_project_type: Type
-
-        create_project_environment_server: Serveur
-        create_project_environment_name: Nom
-        create_project_environment_path: Emplacement
-        create_project_environment_url: URL
-        create_project_environment_description: Description
 
         create_project_group_name: Nom
         create_project_group_slug: URL
@@ -262,6 +276,10 @@ form:
         edit_project_group_name: Nom
         edit_project_group_description: Description
         edit_project_group_client: Client
+
+        edit_project_link_linkType: Type de lien
+        edit_project_link_name: Nom
+        edit_project_link_uri: URL
 
         edit_project_type_name: Nom
 

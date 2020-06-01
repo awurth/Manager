@@ -3,7 +3,7 @@
 namespace App\Action\Project;
 
 use App\Action\RoutingTrait;
-use App\Repository\ProjectEnvironmentRepository;
+use App\Repository\LinkRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,25 +12,25 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/environment/{id}/remove", requirements={"id": "\d+"}, name="app_project_environment_remove")
+ * @Route("/link/{id}/remove", requirements={"id": "\d+"}, name="app_project_link_remove")
  */
-class RemoveProjectEnvironmentAction extends AbstractProjectAction
+class RemoveProjectLinkAction extends AbstractProjectAction
 {
     use RoutingTrait;
 
     private $entityManager;
     private $flashBag;
-    private $projectEnvironmentRepository;
+    private $linkRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FlashBagInterface $flashBag,
-        ProjectEnvironmentRepository $projectEnvironmentRepository
+        LinkRepository $linkRepository
     )
     {
         $this->entityManager = $entityManager;
         $this->flashBag = $flashBag;
-        $this->projectEnvironmentRepository = $projectEnvironmentRepository;
+        $this->linkRepository = $linkRepository;
     }
 
     public function __invoke(Request $request, string $projectGroupSlug, string $projectSlug, int $id): Response
@@ -39,22 +39,22 @@ class RemoveProjectEnvironmentAction extends AbstractProjectAction
 
         $this->denyAccessUnlessGranted('MEMBER', $this->project);
 
-        $environment = $this->projectEnvironmentRepository->find($id);
+        $link = $this->linkRepository->find($id);
 
-        if (!$environment) {
-            throw new NotFoundHttpException('Project environment not found');
+        if (!$link) {
+            throw new NotFoundHttpException('Project link not found');
         }
 
-        if ($environment->getProject() !== $this->project) {
-            throw $this->createAccessDeniedException('The environment does not belong to the current project');
+        if ($link->getProject() !== $this->project) {
+            throw $this->createAccessDeniedException('The link does not belong to the current project');
         }
 
-        $this->entityManager->remove($environment);
+        $this->entityManager->remove($link);
         $this->entityManager->flush();
 
-        $this->flashBag->add('success', 'flash.success.project.environment.remove');
+        $this->flashBag->add('success', 'flash.success.project.link.remove');
 
-        return $this->redirectToRoute('app_project_environment_list', [
+        return $this->redirectToRoute('app_project_link_list', [
             'projectGroupSlug' => $this->projectGroup->getSlug(),
             'projectSlug' => $this->project->getSlug()
         ]);
