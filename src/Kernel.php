@@ -2,14 +2,19 @@
 
 namespace App;
 
+use App\Routing\ChainEntityUrlGenerator;
+use App\Routing\EntityUrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
+use Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
-class Kernel extends BaseKernel
+class Kernel extends BaseKernel implements CompilerPassInterface
 {
     use MicroKernelTrait;
 
@@ -51,5 +56,32 @@ class Kernel extends BaseKernel
         $routes->import($confDir.'/{routes}/'.$this->environment.'/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
+    }
+
+    protected function build(ContainerBuilder $container): void
+    {
+        $container->registerForAutoconfiguration(EntityUrlGeneratorInterface::class)
+            ->addTag('app.entity_url_generator');
+    }
+
+    public function process(ContainerBuilder $container): void
+    {
+        $this->processEntityUrlGenerators($container);
+    }
+
+    private function processEntityUrlGenerators(ContainerBuilder $container): void
+    {
+        $generators = [];
+        foreach ($container->findTaggedServiceIds('app.entity_url_generator') as $id => $tags) {
+            if ($id !== ChainEntityUrlGenerator::class) {
+                $generators[] = new Reference($id);
+            }
+        }
+
+        $generators = new IteratorArgument($generators);
+
+        $definition = $container->getDefinition(ChainEntityUrlGenerator::class);
+        $definition->setArgument(0, $generators);
+        $container->setAlias(EntityUrlGeneratorInterface::class, ChainEntityUrlGenerator::class);
     }
 }
