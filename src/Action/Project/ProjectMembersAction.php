@@ -2,6 +2,7 @@
 
 namespace App\Action\Project;
 
+use App\Action\FlashTrait;
 use App\Action\PaginationTrait;
 use App\Action\RoutingTrait;
 use App\Action\TwigTrait;
@@ -14,7 +15,6 @@ use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -22,24 +22,22 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProjectMembersAction extends AbstractProjectAction
 {
+    use FlashTrait;
     use PaginationTrait;
     use RoutingTrait;
     use TwigTrait;
 
     private $entityManager;
-    private $flashBag;
     private $formFactory;
     private $projectMemberRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag,
         FormFactoryInterface $formFactory,
         ProjectMemberRepository $projectMemberRepository
     )
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
         $this->projectMemberRepository = $projectMemberRepository;
     }
@@ -64,7 +62,7 @@ class ProjectMembersAction extends AbstractProjectAction
             $this->entityManager->persist($this->project);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.project.member.add');
+            $this->flash('success', 'flash.success.project.member.add');
 
             return $this->redirectToRoute('app_project_members', [
                 'projectGroupSlug' => $this->projectGroup->getSlug(),

@@ -2,6 +2,7 @@
 
 namespace App\Action\Admin;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
@@ -13,7 +14,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -21,24 +21,22 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CreateLinkTypeAction extends AbstractAdminAction
 {
+    use FlashTrait;
     use RoutingTrait;
     use SecurityTrait;
     use TwigTrait;
 
     private $entityManager;
-    private $flashBag;
     private $formFactory;
     private $uploader;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag,
         FormFactoryInterface $formFactory,
         StorageInterface $uploader
     )
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
         $this->uploader = $uploader;
     }
@@ -64,7 +62,7 @@ class CreateLinkTypeAction extends AbstractAdminAction
             $this->entityManager->persist($linkType);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.link_type.create');
+            $this->flash('success', 'flash.success.link_type.create');
 
             return $this->redirectToRoute('app_admin_link_type_list');
         }

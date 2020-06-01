@@ -2,9 +2,9 @@
 
 namespace App\Action\Project;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Action\TwigTrait;
-use App\Entity\Link;
 use App\Form\Model\EditProjectLink;
 use App\Form\Type\Action\EditProjectLinkType;
 use App\Repository\LinkRepository;
@@ -12,7 +12,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,23 +20,21 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class EditProjectLinkAction extends AbstractProjectAction
 {
+    use FlashTrait;
     use RoutingTrait;
     use TwigTrait;
 
     private $entityManager;
-    private $flashBag;
     private $formFactory;
     private $linkRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag,
         FormFactoryInterface $formFactory,
         LinkRepository $linkRepository
     )
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
         $this->linkRepository = $linkRepository;
     }
@@ -71,7 +68,7 @@ class EditProjectLinkAction extends AbstractProjectAction
             $this->entityManager->persist($link);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.project.link.edit');
+            $this->flash('success', 'flash.success.project.link.edit');
 
             return $this->redirectToRoute('app_project_link_list', [
                 'projectGroupSlug' => $this->projectGroup->getSlug(),

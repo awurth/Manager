@@ -2,10 +2,10 @@
 
 namespace App\Action\ProjectGroup;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -13,15 +13,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DeleteProjectGroupAction extends AbstractProjectGroupAction
 {
+    use FlashTrait;
     use RoutingTrait;
 
     private $entityManager;
-    private $flashBag;
 
-    public function __construct(EntityManagerInterface $entityManager, FlashBagInterface $flashBag)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
     }
 
     public function __invoke(string $slug): Response
@@ -33,7 +32,7 @@ class DeleteProjectGroupAction extends AbstractProjectGroupAction
         $this->entityManager->remove($this->projectGroup);
         $this->entityManager->flush();
 
-        $this->flashBag->add('success', 'flash.success.project_group.delete');
+        $this->flash('success', 'flash.success.project_group.delete');
 
         return $this->redirectToRoute('app_project_group_list');
     }

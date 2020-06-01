@@ -2,12 +2,12 @@
 
 namespace App\Action\Project;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Repository\ProjectEnvironmentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,20 +16,15 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RemoveProjectEnvironmentAction extends AbstractProjectAction
 {
+    use FlashTrait;
     use RoutingTrait;
 
     private $entityManager;
-    private $flashBag;
     private $projectEnvironmentRepository;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag,
-        ProjectEnvironmentRepository $projectEnvironmentRepository
-    )
+    public function __construct(EntityManagerInterface $entityManager, ProjectEnvironmentRepository $projectEnvironmentRepository)
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->projectEnvironmentRepository = $projectEnvironmentRepository;
     }
 
@@ -52,7 +47,7 @@ class RemoveProjectEnvironmentAction extends AbstractProjectAction
         $this->entityManager->remove($environment);
         $this->entityManager->flush();
 
-        $this->flashBag->add('success', 'flash.success.project.environment.remove');
+        $this->flash('success', 'flash.success.project.environment.remove');
 
         return $this->redirectToRoute('app_project_environment_list', [
             'projectGroupSlug' => $this->projectGroup->getSlug(),

@@ -2,13 +2,13 @@
 
 namespace App\Action\Credentials;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Repository\CredentialsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,22 +17,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DeleteCredentialsAction
 {
+    use FlashTrait;
     use RoutingTrait;
     use SecurityTrait;
 
     private $credentialsRepository;
     private $entityManager;
-    private $flashBag;
 
     public function __construct(
         CredentialsRepository $credentialsRepository,
-        EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag
+        EntityManagerInterface $entityManager
     )
     {
         $this->credentialsRepository = $credentialsRepository;
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
     }
 
     public function __invoke(Request $request, int $id): Response
@@ -50,7 +48,7 @@ class DeleteCredentialsAction
         $this->entityManager->remove($credentials);
         $this->entityManager->flush();
 
-        $this->flashBag->add('success', 'flash.success.credentials.delete');
+        $this->flash('success', 'flash.success.credentials.delete');
 
         return $this->redirectToRoute('app_credentials_list');
     }

@@ -2,12 +2,12 @@
 
 namespace App\Action\Admin;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Repository\LinkTypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,21 +16,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DeleteLinkTypeAction
 {
+    use FlashTrait;
     use RoutingTrait;
     use SecurityTrait;
 
     private $entityManager;
-    private $flashBag;
     private $linkTypeRepository;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag,
-        LinkTypeRepository $linkTypeRepository
-    )
+    public function __construct(EntityManagerInterface $entityManager, LinkTypeRepository $linkTypeRepository)
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->linkTypeRepository = $linkTypeRepository;
     }
 
@@ -48,7 +43,7 @@ class DeleteLinkTypeAction
         $this->entityManager->remove($linkType);
         $this->entityManager->flush();
 
-        $this->flashBag->add('success', 'flash.success.link_type.delete');
+        $this->flash('success', 'flash.success.link_type.delete');
 
         return $this->redirectToRoute('app_admin_link_type_list');
     }

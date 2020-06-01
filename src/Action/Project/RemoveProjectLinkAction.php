@@ -2,12 +2,12 @@
 
 namespace App\Action\Project;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Repository\LinkRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,20 +16,15 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RemoveProjectLinkAction extends AbstractProjectAction
 {
+    use FlashTrait;
     use RoutingTrait;
 
     private $entityManager;
-    private $flashBag;
     private $linkRepository;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag,
-        LinkRepository $linkRepository
-    )
+    public function __construct(EntityManagerInterface $entityManager, LinkRepository $linkRepository)
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->linkRepository = $linkRepository;
     }
 
@@ -52,7 +47,7 @@ class RemoveProjectLinkAction extends AbstractProjectAction
         $this->entityManager->remove($link);
         $this->entityManager->flush();
 
-        $this->flashBag->add('success', 'flash.success.project.link.remove');
+        $this->flash('success', 'flash.success.project.link.remove');
 
         return $this->redirectToRoute('app_project_link_list', [
             'projectGroupSlug' => $this->projectGroup->getSlug(),

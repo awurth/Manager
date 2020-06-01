@@ -2,12 +2,12 @@
 
 namespace App\Action\Admin;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,21 +16,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DeleteClientAction
 {
+    use FlashTrait;
     use RoutingTrait;
     use SecurityTrait;
 
     private $entityManager;
-    private $flashBag;
     private $clientRepository;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag,
-        ClientRepository $clientRepository
-    )
+    public function __construct(EntityManagerInterface $entityManager, ClientRepository $clientRepository)
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->clientRepository = $clientRepository;
     }
 
@@ -48,7 +43,7 @@ class DeleteClientAction
         $this->entityManager->remove($client);
         $this->entityManager->flush();
 
-        $this->flashBag->add('success', 'flash.success.client.delete');
+        $this->flash('success', 'flash.success.client.delete');
 
         return $this->redirectToRoute('app_admin_client_list');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Action\Credentials;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
@@ -12,7 +13,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,25 +21,23 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class EditCredentialsAction
 {
+    use FlashTrait;
     use RoutingTrait;
     use SecurityTrait;
     use TwigTrait;
 
     private $credentialsRepository;
     private $entityManager;
-    private $flashBag;
     private $formFactory;
 
     public function __construct(
         CredentialsRepository $credentialsRepository,
         EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag,
         FormFactoryInterface $formFactory
     )
     {
         $this->credentialsRepository = $credentialsRepository;
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
     }
 
@@ -73,7 +71,7 @@ class EditCredentialsAction
             $this->entityManager->persist($credentials);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.credentials.edit');
+            $this->flash('success', 'flash.success.credentials.edit');
 
             return $this->redirectToRoute('app_credentials_list');
         }

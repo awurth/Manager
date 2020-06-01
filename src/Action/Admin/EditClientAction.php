@@ -2,6 +2,7 @@
 
 namespace App\Action\Admin;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
@@ -12,7 +13,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,25 +21,23 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class EditClientAction extends AbstractAdminAction
 {
+    use FlashTrait;
     use RoutingTrait;
     use SecurityTrait;
     use TwigTrait;
 
     private $clientRepository;
     private $entityManager;
-    private $flashBag;
     private $formFactory;
 
     public function __construct(
         ClientRepository $clientRepository,
         EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag,
         FormFactoryInterface $formFactory
     )
     {
         $this->clientRepository = $clientRepository;
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
     }
 
@@ -70,7 +68,7 @@ class EditClientAction extends AbstractAdminAction
             $this->entityManager->persist($client);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.client.edit');
+            $this->flash('success', 'flash.success.client.edit');
 
             return $this->redirectToRoute('app_admin_client_list');
         }

@@ -2,6 +2,7 @@
 
 namespace App\Action\Admin;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
@@ -12,7 +13,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -21,19 +21,18 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class CreateUserAction extends AbstractAdminAction
 {
+    use FlashTrait;
     use RoutingTrait;
     use SecurityTrait;
     use TwigTrait;
 
     private $entityManager;
-    private $flashBag;
     private $formFactory;
     private $userPasswordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, FlashBagInterface $flashBag, FormFactoryInterface $formFactory, UserPasswordEncoderInterface $userPasswordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, UserPasswordEncoderInterface $userPasswordEncoder)
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
         $this->userPasswordEncoder = $userPasswordEncoder;
     }
@@ -57,7 +56,7 @@ class CreateUserAction extends AbstractAdminAction
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.user.create');
+            $this->flash('success', 'flash.success.user.create');
 
             return $this->redirectToRoute('app_admin_user_list');
         }

@@ -2,6 +2,7 @@
 
 namespace App\Action\Admin;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
@@ -13,7 +14,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,26 +22,24 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class EditLinkTypeAction extends AbstractAdminAction
 {
+    use FlashTrait;
     use RoutingTrait;
     use SecurityTrait;
     use TwigTrait;
 
     private $entityManager;
-    private $flashBag;
     private $formFactory;
     private $linkTypeRepository;
     private $uploader;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag,
         FormFactoryInterface $formFactory,
         LinkTypeRepository $linkTypeRepository,
         StorageInterface $uploader
     )
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
         $this->linkTypeRepository = $linkTypeRepository;
         $this->uploader = $uploader;
@@ -75,7 +73,7 @@ class EditLinkTypeAction extends AbstractAdminAction
             $this->entityManager->persist($linkType);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.link_type.edit');
+            $this->flash('success', 'flash.success.link_type.edit');
 
             return $this->redirectToRoute('app_admin_link_type_list');
         }

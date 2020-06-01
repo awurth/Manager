@@ -10,7 +10,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -18,18 +17,17 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CreateProjectGroupAction
 {
+    use FlashTrait;
     use RoutingTrait;
     use SecurityTrait;
     use TwigTrait;
 
     private $formFactory;
-    private $flashBag;
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager, FlashBagInterface $flashBag, FormFactoryInterface $formFactory)
+    public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory)
     {
         $this->formFactory = $formFactory;
-        $this->flashBag = $flashBag;
         $this->entityManager = $entityManager;
     }
 
@@ -56,7 +54,7 @@ class CreateProjectGroupAction
             $this->entityManager->persist($group);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.project_group.create');
+            $this->flash('success', 'flash.success.project_group.create');
 
             return $this->redirectToRoute('app_project_group_view', [
                 'slug' => $group->getSlug()

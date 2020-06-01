@@ -2,6 +2,7 @@
 
 namespace App\Action\Server;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Action\TwigTrait;
 use App\Form\Model\EditServer;
@@ -10,7 +11,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -18,17 +18,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class EditServerAction extends AbstractServerAction
 {
+    use FlashTrait;
     use RoutingTrait;
     use TwigTrait;
 
     private $entityManager;
-    private $flashBag;
     private $formFactory;
 
-    public function __construct(EntityManagerInterface $entityManager, FlashBagInterface $flashBag, FormFactoryInterface $formFactory)
+    public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory)
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
     }
 
@@ -52,7 +51,7 @@ class EditServerAction extends AbstractServerAction
             $this->entityManager->persist($this->server);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.server.edit');
+            $this->flash('success', 'flash.success.server.edit');
 
             return $this->redirectToRoute('app_server_edit', ['id' => $this->server->getId()]);
         }

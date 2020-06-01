@@ -2,10 +2,10 @@
 
 namespace App\Action\Server;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -13,15 +13,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DeleteServerAction extends AbstractServerAction
 {
+    use FlashTrait;
     use RoutingTrait;
 
     private $entityManager;
-    private $flashBag;
 
-    public function __construct(EntityManagerInterface $entityManager, FlashBagInterface $flashBag)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
     }
 
     public function __invoke(int $id): Response
@@ -33,7 +32,7 @@ class DeleteServerAction extends AbstractServerAction
         $this->entityManager->remove($this->server);
         $this->entityManager->flush();
 
-        $this->flashBag->add('success', 'flash.success.server.delete');
+        $this->flash('success', 'flash.success.server.delete');
 
         return $this->redirectToRoute('app_server_list');
     }

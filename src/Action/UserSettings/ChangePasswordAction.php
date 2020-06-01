@@ -2,6 +2,7 @@
 
 namespace App\Action\UserSettings;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Action\TwigTrait;
 use App\Form\Model\ChangePassword;
@@ -10,7 +11,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -19,23 +19,21 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class ChangePasswordAction extends AbstractUserSettingsAction
 {
+    use FlashTrait;
     use RoutingTrait;
     use TwigTrait;
 
     private $entityManager;
-    private $flashBag;
     private $formFactory;
     private $userPasswordEncoder;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag,
         FormFactoryInterface $formFactory,
         UserPasswordEncoderInterface $userPasswordEncoder
     )
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->formFactory = $formFactory;
         $this->userPasswordEncoder = $userPasswordEncoder;
     }
@@ -56,7 +54,7 @@ class ChangePasswordAction extends AbstractUserSettingsAction
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.password.change');
+            $this->flash('success', 'flash.success.password.change');
 
             return $this->redirectToRoute('app_change_password');
         }

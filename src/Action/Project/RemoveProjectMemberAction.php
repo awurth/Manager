@@ -2,12 +2,12 @@
 
 namespace App\Action\Project;
 
+use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Entity\ProjectMember;
 use App\Repository\ProjectMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,20 +16,15 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RemoveProjectMemberAction extends AbstractProjectAction
 {
+    use FlashTrait;
     use RoutingTrait;
 
     private $entityManager;
-    private $flashBag;
     private $projectMemberRepository;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag,
-        ProjectMemberRepository $projectMemberRepository
-    )
+    public function __construct(EntityManagerInterface $entityManager, ProjectMemberRepository $projectMemberRepository)
     {
         $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
         $this->projectMemberRepository = $projectMemberRepository;
     }
 
@@ -59,11 +54,11 @@ class RemoveProjectMemberAction extends AbstractProjectAction
         $this->entityManager->flush();
 
         if ($member->getUser() === $user) {
-            $this->flashBag->add('success', 'flash.success.project.member.leave');
+            $this->flash('success', 'flash.success.project.member.leave');
             return $this->redirectToRoute('app_home');
         }
 
-        $this->flashBag->add('success', 'flash.success.project.member.remove');
+        $this->flash('success', 'flash.success.project.member.remove');
 
         return $this->redirectToRoute('app_project_members', [
             'projectGroupSlug' => $this->projectGroup->getSlug(),

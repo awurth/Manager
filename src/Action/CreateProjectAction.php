@@ -11,7 +11,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -19,25 +18,23 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CreateProjectAction
 {
+    use FlashTrait;
     use RoutingTrait;
     use SecurityTrait;
     use TwigTrait;
 
     private $entityManager;
     private $formFactory;
-    private $flashBag;
     private $uploader;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag,
         FormFactoryInterface $formFactory,
         StorageInterface $uploader
     )
     {
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
-        $this->flashBag = $flashBag;
         $this->uploader = $uploader;
     }
 
@@ -69,7 +66,7 @@ class CreateProjectAction
             $this->entityManager->persist($project);
             $this->entityManager->flush();
 
-            $this->flashBag->add('success', 'flash.success.project.create');
+            $this->flash('success', 'flash.success.project.create');
 
             return $this->redirectToRoute('app_project_view', [
                 'projectGroupSlug' => $project->getProjectGroup()->getSlug(),
