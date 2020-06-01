@@ -14,13 +14,13 @@
           <td>
             {{ identicon(group, 'w-10 h-10 mr-2') }}
             <div class="inline-block align-middle">
-              <a class="font-bold text-gray-900" href="{{ path('app_project_group_view', { slug: group.slug }) }}">{{ group.name }}</a>
+              <a class="font-bold text-gray-900" href="{{ path_to(group, 'view') }}">{{ group.name }}</a>
             </div>
           </td>
           <td>Créé {{ group.createdAt|diffForHumans }}</td>
           <td class="text-right">
-            <a class="btn btn-sm" href="{{ path('app_project_group_edit', { slug: group.slug }) }}">Éditer</a>
-            <a class="btn btn-danger-o btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce groupe ?" href="{{ path('app_project_group_delete', { slug: group.slug }) }}">Supprimer</a>
+            <a class="btn btn-sm" href="{{ path_to(group, 'edit') }}">Éditer</a>
+            <a class="btn btn-danger-o btn-sm ml-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce groupe ?" href="{{ path_to(group, 'delete') }}">Supprimer</a>
           </td>
         </tr>
       {% endfor %}

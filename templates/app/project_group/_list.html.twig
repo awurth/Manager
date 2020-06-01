@@ -7,7 +7,7 @@
         <td>
           {{ identicon(group, 'w-10 h-10 mr-2') }}
           <div class="inline-block align-middle">
-            <a class="font-bold text-gray-900" href="{{ path('app_project_group_view', { slug: group.slug }) }}">{{ group.name }}</a>
+            <a class="font-bold text-gray-900" href="{{ path_to(group, 'view') }}">{{ group.name }}</a>
             <small class="access-level-label ml-2">{{ group.memberByUser(app.user)|access_level_label }}</small>
           </div>
         </td>

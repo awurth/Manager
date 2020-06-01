@@ -2,10 +2,7 @@
 
 {% block page_content %}
   {% if is_granted('MEMBER', project) %}
-    <a
-      class="btn btn-success-o font-bold text-sm my-4"
-      href="{{ path('app_project_environment_add', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}"
-    >
+    <a class="btn btn-success-o font-bold text-sm my-4" href="{{ path_to(project, 'environment_add') }}">
       <i class="fas fa-plus"></i>
       Nouvel environnement
     </a>
@@ -44,7 +41,7 @@
             <a
               class="btn btn-sm"
               title="Éditer"
-              href="{{ path('app_project_environment_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: environment.id }) }}"
+              href="{{ path_to(project, 'environment_edit', { id: environment.id }) }}"
             >
               Éditer
             </a>
@@ -52,7 +49,7 @@
               class="btn btn-danger-o btn-sm"
               data-confirm="Êtes-vous sûr de vouloir supprimer cet environnement ?"
               title="Supprimer"
-              href="{{ path('app_project_environment_remove', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug, id: environment.id }) }}"
+              href="{{ path_to(project, 'environment_remove', { id: environment.id }) }}"
             >
               Supprimer
             </a>

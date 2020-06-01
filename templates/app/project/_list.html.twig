@@ -9,7 +9,7 @@
             {{ identicon(project, 'w-10 h-10') }}
           </div>
           <div class="inline-block align-middle">
-            <a href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">
+            <a href="{{ path_to(project, 'view') }}">
               <span class="text-gray-700">{{ project.projectGroup.name }} /</span>
               <span class="font-bold text-gray-900">{{ project.name }}</span>
             </a>

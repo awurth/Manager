@@ -21,6 +21,6 @@
     </div>
     <p>Supprimer ce groupe supprimera aussi tous ses projets, et toutes les données associées.</p>
     <p><strong>Cette action est irréversible !</strong></p>
-    <a class="btn btn-danger btn-sm mt-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce groupe ?" href="{{ path('app_project_group_delete', { slug: group.slug }) }}">Supprimer</a>
+    <a class="btn btn-danger btn-sm mt-2" data-confirm="Êtes-vous sûr de vouloir supprimer ce groupe ?" href="{{ path_to(group, 'delete') }}">Supprimer</a>
   {% endif %}
 {% endblock %}

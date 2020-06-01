@@ -14,7 +14,7 @@
     <a
       class="btn btn-danger btn-sm mt-2"
       data-confirm="Êtes-vous sûr de vouloir supprimer ce projet ?"
-      href="{{ path('app_project_delete', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">
+      href="{{ path_to(project, 'delete') }}">
       Supprimer
     </a>
   {% endif %}

@@ -35,7 +35,7 @@
               {{ project_identicon(project, 'w-10 h-10') }}
             </div>
             <div class="inline-block align-middle">
-              <a class="font-bold text-gray-900" href="{{ path('app_project_view', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}">{{ project.name }}</a>
+              <a class="font-bold text-gray-900" href="{{ path_to(project, 'view') }}">{{ project.name }}</a>
             </div>
           </td>
           <td>Créé {{ project.createdAt|diffForHumans }}</td>
@@ -44,17 +44,17 @@
               <a
                 class="btn btn-sm"
                 title="Éditer"
-                href="{{ path('app_project_edit', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}"
+                href="{{ path_to(project, 'edit') }}"
               >
                 Éditer
               </a>
             {% endif %}
             {% if is_granted('DELETE', project) %}
               <a
-                class="btn btn-danger btn-sm ml-2"
+                class="btn btn-danger-o btn-sm ml-2"
                 data-confirm="Êtes-vous sûr de vouloir supprimer ce projet ?"
                 title="Supprimer"
-                href="{{ path('app_project_delete', { projectGroupSlug: project.projectGroup.slug, projectSlug: project.slug }) }}"
+                href="{{ path_to(project, 'delete') }}"
               >
                 Supprimer
               </a>
