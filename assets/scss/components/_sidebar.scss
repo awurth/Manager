@@ -114,7 +114,7 @@ nav.sidebar {
           top: 0;
           > li {
             > a {
-              @apply block px-4 py-2 text-sm rounded-full;
+              @apply block px-4 py-2 text-sm rounded-full font-medium;
               &:hover {
                 @apply bg-primary-500;
               }
