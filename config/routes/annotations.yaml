@@ -7,3 +7,7 @@ admin_actions:
     type: annotation
     prefix: /admin
     trailing_slash_on_root: false
+
+kernel:
+    resource: ../../src/Kernel.php
+    type: annotation
