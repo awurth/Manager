@@ -6,8 +6,13 @@
       {{ form_row(form.linkType, { attr: { class: 'link-link-type' } }) }}
     </div>
     {{ form_row(form.name) }}
-    {{ form_row(form.uri) }}
+    {{ form_row(form.uri, { attr: { class: 'link-uri' } }) }}
     {{ form_rest(form) }}
     <button type="submit" class="btn btn-primary mt-4">Enregistrer</button>
   {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('link-form') }}
 {% endblock %}

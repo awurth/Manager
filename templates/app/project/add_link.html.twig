@@ -11,3 +11,8 @@
     <button type="submit" class="btn btn-primary mt-4">Ajouter</button>
   {{ form_end(form) }}
 {% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('link-form') }}
+{% endblock %}

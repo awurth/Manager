@@ -10,6 +10,7 @@ Encore
   .addEntry('app', './assets/ts/main.ts')
   .addEntry('create-project', './assets/ts/pages/create-project.ts')
   .addEntry('create-project-group', './assets/ts/pages/create-project-group.ts')
+  .addEntry('link-form', './assets/ts/pages/link-form.ts')
   .splitEntryChunks()
   .enableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
