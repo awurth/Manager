@@ -2,6 +2,7 @@
 
 namespace App\Form\Type;
 
+use App\Entity\LinkType;
 use App\Repository\LinkTypeRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,8 +21,12 @@ class LinkTypeChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => $this->getChoices(),
+            'choice_attr' => static function (LinkType $linkType) {
+                return ['data-uri-prefix' => $linkType->getUriPrefix()];
+            },
             'choice_label' => 'name',
-            'choice_value' => 'id'
+            'choice_value' => 'id',
+            'choice_translation_domain' => false
         ]);
     }
 

@@ -23,6 +23,7 @@ Encore
   .autoProvidejQuery()
   .enableSassLoader()
   .enableTypeScriptLoader()
+  .enableReactPreset()
   .enablePostCssLoader()
   .enableEslintLoader(options => {
     options.configFile = './.eslintrc.js';

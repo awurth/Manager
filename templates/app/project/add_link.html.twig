@@ -3,10 +3,10 @@
 {% block page_content %}
   {{ form_start(form, { attr: { class: 'mt-4' } }) }}
     <div class="mb-2">
-      {{ form_row(form.linkType) }}
+      {{ form_row(form.linkType, { attr: { class: 'link-link-type' } }) }}
     </div>
     {{ form_row(form.name) }}
-    {{ form_row(form.uri) }}
+    {{ form_row(form.uri, { attr: { class: 'link-uri' } }) }}
     {{ form_rest(form) }}
     <button type="submit" class="btn btn-primary mt-4">Ajouter</button>
   {{ form_end(form) }}
