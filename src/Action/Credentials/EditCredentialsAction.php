@@ -66,7 +66,7 @@ class EditCredentialsAction
                 ->setWebsite($model->website)
                 ->setDescription($model->description);
 
-            $credentials->setUsers($model->users);
+            $credentials->setUsers($model->users, $this->getUser());
 
             $this->entityManager->persist($credentials);
             $this->entityManager->flush();

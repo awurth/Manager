@@ -84,10 +84,10 @@ class Credentials
     /**
      * @param User[] $users
      */
-    public function setUsers(array $users): void
+    public function setUsers(array $users, User $currentUser): void
     {
         foreach ($this->getCredentialsUsers() as $credentialsUser) {
-            if (!in_array($credentialsUser->getUser(), $users, true)) {
+            if ($credentialsUser->getUser() !== $currentUser && !in_array($credentialsUser->getUser(), $users, true)) {
                 $this->removeCredentialsUser($credentialsUser);
             }
         }
