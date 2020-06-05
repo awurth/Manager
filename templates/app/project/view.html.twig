@@ -10,7 +10,11 @@
       <p class="leading-relaxed text-base">{{ project.description }}</p>
       <div class="flex flex-wrap mt-3">
         {% for link in project.links %}
-          <a class="flex items-center text-xs text-gray-800 mr-4" href="{{ link.uri }}">
+          <a
+            class="flex items-center border-2 rounded-full text-xs font-medium text-gray-800 px-2 py-1 mr-2"
+            href="{{ link.uri }}"
+            {% if link.linkType %}style="border-color: {{ link.linkType.color }};"{% endif %}
+          >
             {% if link.linkType and link.linkType.iconFilename %}
               <span class="flex items-center justify-center w-4 h-4 mr-1">
                 <img class="max-h-full" src="{{ uploaded_asset(link.linkType, 'link_type_icon') }}" alt="{{ link.linkType.name }}">
