@@ -19,6 +19,7 @@ class Link
 
     /**
      * @ORM\ManyToOne(targetEntity=LinkType::class)
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $linkType;
 
