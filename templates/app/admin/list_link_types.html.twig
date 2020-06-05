@@ -18,14 +18,16 @@
       {% for type in types %}
         <tr>
           <td>
-            {% if type.iconFilename %}
-              <span class="inline-block align-middle w-8 h-8 mr-2">
-                <img class="max-h-full" src="{{ uploaded_asset(type, 'link_type_icon') }}" alt="{{ type.name }}">
-              </span>
-            {% else %}
-              <i class="fas fa-link mr-2"></i>
-            {% endif %}
-            <a class="font-bold inline-block align-middle" href="{{ path('app_admin_link_type_edit', { id: type.id }) }}">{{ type.name }}</a>
+            <a class="flex items-center font-bold" href="{{ path('app_admin_link_type_edit', { id: type.id }) }}">
+              {% if type.iconFilename %}
+                <span class="flex items-center justify-center w-8 h-8 mr-2">
+                  <img class="max-h-full" src="{{ uploaded_asset(type, 'link_type_icon') }}" alt="{{ type.name }}">
+                </span>
+              {% else %}
+                <i class="fas fa-link w-8 mr-2 text-center"></i>
+              {% endif %}
+              {{ type.name }}
+            </a>
           </td>
           <td>
             <a href="{{ path('app_admin_link_type_edit', { id: type.id }) }}">{{ type.uriPrefix }}</a>

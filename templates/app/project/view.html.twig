@@ -8,6 +8,20 @@
     <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
       <h2 class="text-gray-900 text-lg title-font font-medium mb-2">{{ project.name }}</h2>
       <p class="leading-relaxed text-base">{{ project.description }}</p>
+      <div class="flex flex-wrap mt-3">
+        {% for link in project.links %}
+          <a class="flex items-center text-xs text-gray-800 mr-4" href="{{ link.uri }}">
+            {% if link.linkType and link.linkType.iconFilename %}
+              <span class="flex items-center justify-center w-4 h-4 mr-1">
+                <img class="max-h-full" src="{{ uploaded_asset(link.linkType, 'link_type_icon') }}" alt="{{ link.linkType.name }}">
+              </span>
+            {% else %}
+              <i class="fas fa-link text-gray-900 mr-1"></i>
+            {% endif %}
+            {{ link.name }}
+          </a>
+        {% endfor %}
+      </div>
     </div>
   </div>
   <div class="grid grid-cols-2 gap-4">
