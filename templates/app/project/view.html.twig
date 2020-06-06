@@ -28,20 +28,6 @@
       </div>
     </div>
   </div>
-  <div class="grid grid-cols-2 gap-4">
-    <div class="card">
-      <h2 class="font-bold mb-2">Environnements</h2>
-      <ul>
-        {% for environment in project.environments %}
-          <li>{{ environment.name }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-    <div class="card">
-      <h2 class="font-bold mb-2">Liens</h2>
-      <ul>
-        <li>Gitlab</li>
-      </ul>
-    </div>
-  </div>
+  <p>Lister les environnements avec leurs liens</p>
+  <p>Afficher le client du groupe</p>
 {% endblock %}
