@@ -46,7 +46,7 @@
       </a>
     </li>
     <li class="dropdown">
-      <button class="relative" type="button">
+      <button class="dropdown-toggle relative" type="button">
         <span class="absolute right-0 mr-6 flex flex-wrap justify-center w-6 h-6 bg-white rounded-full">
           <span class="self-center text-xxs text-primary-500">
             {{ app.user.firstname|first|capitalize }}{{ app.user.lastname|first|capitalize }}
@@ -57,20 +57,20 @@
         </span>
         <i class="fas fa-angle-down"></i>
       </button>
-      <div class="menu">
-        <ul class="text-gray-700">
+      <div class="dropdown-menu">
+        <ul>
           <li>
-            <a class="px-4 py-2" href="{{ path('app_profile') }}">Paramètres</a>
+            <a href="{{ path('app_profile') }}">Paramètres</a>
           </li>
           <li>
-            <a class="px-4 py-2" href="{{ path('app_change_password') }}">Changer de mot de passe</a>
+            <a href="{{ path('app_change_password') }}">Changer de mot de passe</a>
           </li>
           <li>
-            <a class="px-4 py-2" href="{{ path('app_generate_password') }}">Générer un mot de passe</a>
+            <a href="{{ path('app_generate_password') }}">Générer un mot de passe</a>
           </li>
           <li class="divider"></li>
           <li>
-            <a class="px-4 py-2" href="{{ path('app_logout') }}">Déconnexion</a>
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
           </li>
         </ul>
       </div>

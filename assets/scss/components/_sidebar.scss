@@ -42,7 +42,7 @@ nav.sidebar {
           align-items: center;
           display: flex;
           overflow: hidden;
-          padding: 0.5rem 1rem;
+          padding: 0.5rem;
           &:hover {
             > i, .identicon {
               @apply bg-white text-primary-500;

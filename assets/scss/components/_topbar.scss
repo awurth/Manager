@@ -3,19 +3,18 @@ body {
 }
 
 header.topbar {
-  @apply bg-primary-500;
+  @apply fixed bg-primary-500;
   height: 3.5rem;
   left: 0;
-  position: fixed;
   right: 0;
   top: 0;
+  z-index: 9999;
   > ul {
     > li {
       > a, button {
-        @apply p-2 m-1 text-xs text-gray-100 rounded-full outline-none;
+        @apply p-2 m-1 font-bold text-xs text-gray-100 rounded-full outline-none;
         align-items: center;
         display: flex;
-        font-weight: bold;
         transition: background-color 0.25s, color 0.25s;
         &:hover {
           @apply bg-white text-primary-500;
@@ -23,29 +22,13 @@ header.topbar {
       }
     }
   }
-  .dropdown {
-    position: relative;
-  }
-  .menu {
-    @apply py-2 bg-white border shadow rounded;
-    display: none;
+  .dropdown-menu {
     min-width: 15rem;
-    position: absolute;
-    right: 0;
     top: 3.5rem;
-    &.open {
-      display: block;
-    }
     ul {
       li {
-        &.divider {
-          @apply bg-gray-300;
-          height: 1px;
-          margin: 0.25rem 0;
-        }
         a {
           @apply text-sm;
-          display: block;
           &:hover {
             @apply bg-gray-200;
           }

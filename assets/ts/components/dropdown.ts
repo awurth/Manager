@@ -14,7 +14,7 @@ export default class Dropdown {
 
   public closeAll (): void {
     this.dropdowns.forEach((dropdown: Element) => {
-      const menu = dropdown.querySelector('.menu');
+      const menu = dropdown.querySelector('.dropdown-menu');
       if (menu) {
         menu.classList.remove('open');
       }
@@ -42,7 +42,7 @@ export default class Dropdown {
   @bind
   private onDropdownClick (event: MouseEvent): void {
     const dropdown = event.currentTarget as Element;
-    const menu = dropdown.querySelector('.menu');
+    const menu = dropdown.querySelector('.dropdown-menu');
     const isOpen = menu && menu.classList.contains('open');
 
     this.closeAll();

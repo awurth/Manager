@@ -1,61 +1,71 @@
 .btn {
   @apply inline-block px-4 py-2 rounded-full border text-gray-900;
   transition: background-color 0.25s, color 0.25s;
-  &:hover {
-    @apply bg-gray-300;
+  &:hover, &:focus {
+    @apply bg-gray-300 outline-none;
   }
-  &.btn-sm {
-    @apply px-3 py-1 text-sm;
+}
+
+.btn-sm {
+  @apply px-3 py-1 text-sm;
+}
+
+.btn-xs {
+  @apply px-2 py-1 text-xs;
+}
+
+.btn-primary {
+  @apply bg-primary-500 border-primary-500 text-white;
+  &:hover, &:focus {
+    @apply bg-primary-600 border-primary-600;
   }
-  &.btn-xs {
-    @apply px-2 py-1 text-xs;
+}
+
+.btn-primary-o {
+  @apply bg-white border-primary-500 text-primary-500;
+  &:hover, &:focus {
+    @apply bg-primary-500 text-white;
   }
-  &.btn-primary {
-    @apply bg-primary-500 border-primary-500 text-white;
-    &:hover {
-      @apply bg-primary-600 border-primary-600;
-    }
+}
+
+.btn-success {
+  @apply bg-green-500 border-green-500 text-white;
+  &:hover, &:focus {
+    @apply bg-green-600 border-green-600;
   }
-  &.btn-primary-o {
-    @apply bg-white border-primary-500 text-primary-500;
-    &:hover {
-      @apply bg-primary-500 text-white;
-    }
+}
+
+.btn-success-o {
+  @apply bg-white border-green-500 text-green-500;
+  &:hover, &:focus {
+    @apply bg-green-500 text-white;
   }
-  &.btn-success {
-    @apply bg-green-500 border-green-500 text-white;
-    &:hover {
-      @apply bg-green-600 border-green-600;
-    }
+}
+
+.btn-danger {
+  @apply bg-red-500 border-red-500 text-white;
+  &:hover, &:focus {
+    @apply bg-red-600 border-red-600;
   }
-  &.btn-success-o {
-    @apply bg-white border-green-500 text-green-500;
-    &:hover {
-      @apply bg-green-500 text-white;
-    }
+}
+
+.btn-danger-o {
+  @apply bg-white border-red-500 text-red-500;
+  &:hover, &:focus {
+    @apply bg-red-500 text-white;
   }
-  &.btn-danger {
-    @apply bg-red-500 border-red-500 text-white;
-    &:hover {
-      @apply bg-red-600 border-red-600;
-    }
+}
+
+.btn-warning {
+  @apply bg-orange-500 border-orange-500 text-white;
+  &:hover, &:focus {
+    @apply bg-orange-600 border-orange-600;
   }
-  &.btn-danger-o {
-    @apply bg-white border-red-500 text-red-500;
-    &:hover {
-      @apply bg-red-500 text-white;
-    }
-  }
-  &.btn-warning {
-    @apply bg-orange-500 border-orange-500 text-white;
-    &:hover {
-      @apply bg-orange-600 border-orange-600;
-    }
-  }
-  &.btn-warning-o {
-    @apply bg-white border-orange-500 text-orange-500;
-    &:hover {
-      @apply bg-orange-500 text-white;
-    }
+}
+
+.btn-warning-o {
+  @apply bg-white border-orange-500 text-orange-500;
+  &:hover, &:focus {
+    @apply bg-orange-500 text-white;
   }
 }

@@ -1,0 +1,32 @@
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  @apply absolute bg-white shadow rounded-lg text-gray-700;
+  display: none;
+  min-width: 12rem;
+  right: 0;
+  top: 2.5rem;
+  z-index: 9999;
+  &.open {
+    display: block;
+  }
+  ul {
+    li {
+      @apply m-1;
+      &.divider {
+        @apply bg-gray-300;
+        height: 1px;
+        margin: 0.25rem 0;
+      }
+      a {
+        @apply block px-4 py-2 text-xs font-medium rounded-full;
+        transition: background-color 0.25s, color 0.25s;
+        &:hover {
+          @apply bg-gray-200 text-gray-800;
+        }
+      }
+    }
+  }
+}
