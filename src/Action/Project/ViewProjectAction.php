@@ -20,7 +20,8 @@ class ViewProjectAction extends AbstractProjectAction
         $this->denyAccessUnlessGranted('GUEST', $this->project);
 
         return $this->renderPage('view-project', 'app/project/view.html.twig', [
-            'project' => $this->project
+            'project' => $this->project,
+            'member' => $this->project->getMemberByUser($this->getUser())
         ]);
     }
 

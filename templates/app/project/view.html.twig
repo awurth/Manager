@@ -6,28 +6,50 @@
   <div class="flex items-center mx-auto border-b pb-10 mt-4 mb-10 border-gray-200">
     {{ identicon(project, 'w-32 h-32 mr-10 text-2xl') }}
     <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-      <h2 class="text-gray-900 text-lg title-font font-medium mb-2">{{ project.name }}</h2>
-      <p class="leading-relaxed text-base">{{ project.description }}</p>
-      <div class="flex flex-wrap mt-3">
-        {% for link in project.links %}
-          <a
-            class="flex items-center border-2 rounded-full text-xs font-medium text-gray-800 px-2 py-1 mr-2"
-            href="{{ link.uri }}"
-            {% if link.linkType %}style="border-color: {{ link.linkType.color }};"{% endif %}
-          >
-            {% if link.linkType and link.linkType.iconFilename %}
-              <span class="flex items-center justify-center w-4 h-4 mr-1">
-                <img class="max-h-full" src="{{ uploaded_asset(link.linkType, 'link_type_icon') }}" alt="{{ link.linkType.name }}">
-              </span>
-            {% else %}
-              <i class="fas fa-link text-gray-900 mr-1"></i>
-            {% endif %}
-            {{ link.name }}
-          </a>
-        {% endfor %}
+      <div class="flex items-center justify-between">
+        <h2 class="text-gray-900 text-lg title-font font-medium mb-2">{{ project.name }}</h2>
+        {% if not is_granted('OWNER', project) %}
+          <div class="dropdown">
+            <button class="dropdown-toggle btn btn-sm text-gray-700">
+              <i class="fas fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu">
+              <ul>
+                <li>
+                  <a data-confirm="Êtes-vous sûr de vouloir quitter ce projet ?" href="{{ path_to(project, 'member_remove', { id: member.id }) }}">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Quitter le projet
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        {% endif %}
       </div>
+      <p class="leading-relaxed text-base">{{ project.description }}</p>
+      {% if project.links|length %}
+        <div class="flex flex-wrap mt-3">
+          {% for link in project.links %}
+            <a
+              class="flex items-center border-2 rounded-full text-xs font-medium text-gray-800 px-2 py-1 mr-2"
+              href="{{ link.uri }}"
+              {% if link.linkType %}style="border-color: {{ link.linkType.color }};"{% endif %}
+            >
+              {% if link.linkType and link.linkType.iconFilename %}
+                <span class="flex items-center justify-center w-4 h-4 mr-1">
+                  <img class="max-h-full" src="{{ uploaded_asset(link.linkType, 'link_type_icon') }}" alt="{{ link.linkType.name }}">
+                </span>
+              {% else %}
+                <i class="fas fa-link text-gray-900 mr-1"></i>
+              {% endif %}
+              {{ link.name }}
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
   </div>
   <p>Lister les environnements avec leurs liens</p>
   <p>Afficher le client du groupe</p>
+  <p>Afficher le niveau d'accès</p>
 {% endblock %}

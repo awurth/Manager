@@ -35,6 +35,7 @@ class ViewProjectGroupAction extends AbstractProjectGroupAction
 
         return $this->renderPage('view-project-group', 'app/project_group/view.html.twig', [
             'group' => $this->projectGroup,
+            'member' => $this->projectGroup->getMemberByUser($this->getUser()),
             'projects' => $pager->getCurrentPageResults(),
             'pager' => $pager
         ]);

@@ -108,6 +108,10 @@ user_settings:
     profile: Profil
 
 flash:
+    error:
+        project_group_owner_leave: Vous ne pouvez pas quitter ce groupe car vous en être le propriétaire. Transférez la propriété à un autre utilisateur, puis rééssayez.
+        project_owner_leave: Vous ne pouvez pas quitter ce projet car vous en être le propriétaire. Transférez la propriété à un autre utilisateur, puis rééssayez.
+        server_owner_leave: Vous ne pouvez pas quitter ce serveur car vous en être le propriétaire. Transférez la propriété à un autre utilisateur, puis rééssayez.
     success:
         credentials:
             create: Identifiants créés avec succès

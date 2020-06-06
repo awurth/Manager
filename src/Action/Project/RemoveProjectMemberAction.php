@@ -6,6 +6,7 @@ use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Entity\ProjectMember;
 use App\Repository\ProjectMemberRepository;
+use App\Routing\EntityUrlGeneratorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -20,11 +21,17 @@ class RemoveProjectMemberAction extends AbstractProjectAction
     use RoutingTrait;
 
     private $entityManager;
+    private $entityUrlGenerator;
     private $projectMemberRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, ProjectMemberRepository $projectMemberRepository)
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        EntityUrlGeneratorInterface $entityUrlGenerator,
+        ProjectMemberRepository $projectMemberRepository
+    )
     {
         $this->entityManager = $entityManager;
+        $this->entityUrlGenerator = $entityUrlGenerator;
         $this->projectMemberRepository = $projectMemberRepository;
     }
 
@@ -47,7 +54,8 @@ class RemoveProjectMemberAction extends AbstractProjectAction
                 throw $this->createAccessDeniedException('You cannot remove the project\'s owner.');
             }
 
-            throw $this->createAccessDeniedException('You are the project owner, therefore you cannot leave the project. Transfer the ownership to another user first.');
+            $this->flash('error', 'flash.error.project_owner_leave');
+            return $this->redirect($this->entityUrlGenerator->generate($this->project, 'view'));
         }
 
         $this->entityManager->remove($member);

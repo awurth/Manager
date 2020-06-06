@@ -7,7 +7,26 @@
   <div class="flex items-center mx-auto border-b pb-10 mt-4 mb-10 border-gray-200">
     {{ group_identicon(group, 'w-32 h-32 mr-10 text-2xl') }}
     <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-      <h2 class="text-gray-900 text-lg title-font font-medium mb-2">{{ group.name }}</h2>
+      <div class="flex items-center justify-between">
+        <h2 class="text-gray-900 text-lg title-font font-medium mb-2">{{ group.name }}</h2>
+        {% if not is_granted('OWNER', group) %}
+          <div class="dropdown">
+            <button class="dropdown-toggle btn btn-sm text-gray-700">
+              <i class="fas fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu">
+              <ul>
+                <li>
+                  <a data-confirm="Êtes-vous sûr de vouloir quitter ce groupe ?" href="{{ path_to(group, 'member_remove', { id: member.id }) }}">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Quitter le groupe
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        {% endif %}
+      </div>
       <p class="leading-relaxed text-base">{{ group.description }}</p>
     </div>
   </div>

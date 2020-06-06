@@ -6,6 +6,7 @@ use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Entity\ProjectGroupMember;
 use App\Repository\ProjectGroupMemberRepository;
+use App\Routing\EntityUrlGeneratorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -20,11 +21,17 @@ class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
     use RoutingTrait;
 
     private $entityManager;
+    private $entityUrlGenerator;
     private $projectGroupMemberRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, ProjectGroupMemberRepository $projectGroupMemberRepository)
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        EntityUrlGeneratorInterface $entityUrlGenerator,
+        ProjectGroupMemberRepository $projectGroupMemberRepository
+    )
     {
         $this->entityManager = $entityManager;
+        $this->entityUrlGenerator = $entityUrlGenerator;
         $this->projectGroupMemberRepository = $projectGroupMemberRepository;
     }
 
@@ -47,7 +54,8 @@ class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
                 throw $this->createAccessDeniedException('You cannot remove the group\'s owner.');
             }
 
-            throw $this->createAccessDeniedException('You are the group owner, therefore you cannot leave the group. Transfer the ownership to another user first.');
+            $this->flash('error', 'flash.error.project_group_owner_leave');
+            return $this->redirect($this->entityUrlGenerator->generate($this->projectGroup, 'view'));
         }
 
         $this->entityManager->remove($member);
