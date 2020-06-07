@@ -2,11 +2,11 @@
 
 namespace App\Action\ProjectGroup;
 
+use App\Action\EntityUrlTrait;
 use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Entity\ProjectGroupMember;
 use App\Repository\ProjectGroupMemberRepository;
-use App\Routing\EntityUrlGeneratorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -17,21 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
 {
+    use EntityUrlTrait;
     use FlashTrait;
     use RoutingTrait;
 
     private $entityManager;
-    private $entityUrlGenerator;
     private $projectGroupMemberRepository;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        EntityUrlGeneratorInterface $entityUrlGenerator,
-        ProjectGroupMemberRepository $projectGroupMemberRepository
-    )
+    public function __construct(EntityManagerInterface $entityManager, ProjectGroupMemberRepository $projectGroupMemberRepository)
     {
         $this->entityManager = $entityManager;
-        $this->entityUrlGenerator = $entityUrlGenerator;
         $this->projectGroupMemberRepository = $projectGroupMemberRepository;
     }
 
@@ -55,7 +50,7 @@ class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
             }
 
             $this->flash('error', 'flash.error.project_group_owner_leave');
-            return $this->redirect($this->entityUrlGenerator->generate($this->projectGroup, 'view'));
+            return $this->redirectToEntity($this->projectGroup, 'view');
         }
 
         $this->entityManager->remove($member);

@@ -2,11 +2,11 @@
 
 namespace App\Action\Server;
 
+use App\Action\EntityUrlTrait;
 use App\Action\FlashTrait;
 use App\Action\RoutingTrait;
 use App\Entity\ServerMember;
 use App\Repository\ServerMemberRepository;
-use App\Routing\EntityUrlGeneratorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -17,21 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RemoveServerMemberAction extends AbstractServerAction
 {
+    use EntityUrlTrait;
     use FlashTrait;
     use RoutingTrait;
 
     private $entityManager;
-    private $entityUrlGenerator;
     private $serverMemberRepository;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        EntityUrlGeneratorInterface $entityUrlGenerator,
-        ServerMemberRepository $serverMemberRepository
-    )
+    public function __construct(EntityManagerInterface $entityManager, ServerMemberRepository $serverMemberRepository)
     {
         $this->entityManager = $entityManager;
-        $this->entityUrlGenerator = $entityUrlGenerator;
         $this->serverMemberRepository = $serverMemberRepository;
     }
 
@@ -55,7 +50,7 @@ class RemoveServerMemberAction extends AbstractServerAction
             }
 
             $this->flash('error', 'flash.error.server_owner_leave');
-            return $this->redirect($this->entityUrlGenerator->generate($this->server, 'view'));
+            return $this->redirectToEntity($this->server, 'view');
         }
 
         $this->entityManager->remove($member);
