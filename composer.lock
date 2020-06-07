@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "99823e0e8a947d14735f1e0a0ea46077",
+    "content-hash": "fa27458791489d7278cf9553eb038764",
     "packages": [
         {
             "name": "awurth/upload-bundle",
@@ -36,21 +36,95 @@
             "time": "2020-05-25T17:35:27+00:00"
         },
         {
-            "name": "babdev/pagerfanta-bundle",
-            "version": "v2.3.2",
+            "name": "babdev/pagerfanta",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/BabDev/BabDevPagerfantaBundle.git",
-                "reference": "4caa79e50496845cb06e54014699b28762ce0712"
+                "url": "https://github.com/BabDev/Pagerfanta.git",
+                "reference": "7a5d0d888f77d4af5cf37889bb3ea331675a595c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BabDev/BabDevPagerfantaBundle/zipball/4caa79e50496845cb06e54014699b28762ce0712",
-                "reference": "4caa79e50496845cb06e54014699b28762ce0712",
+                "url": "https://api.github.com/repos/BabDev/Pagerfanta/zipball/7a5d0d888f77d4af5cf37889bb3ea331675a595c",
+                "reference": "7a5d0d888f77d4af5cf37889bb3ea331675a595c",
                 "shasum": ""
             },
             "require": {
-                "pagerfanta/pagerfanta": "^1.1 || ^2.0",
+                "ext-json": "*",
+                "php": "^7.2",
+                "symfony/deprecation-contracts": "^2.1"
+            },
+            "replace": {
+                "pagerfanta/pagerfanta": "*"
+            },
+            "require-dev": {
+                "doctrine/collections": "^1.4",
+                "doctrine/dbal": "^2.5",
+                "doctrine/orm": "^2.5",
+                "doctrine/phpcr-odm": "^1.3",
+                "friendsofphp/php-cs-fixer": "^2.16.3",
+                "jackalope/jackalope-doctrine-dbal": "^1.3",
+                "mandango/mandango": "^1.0@dev",
+                "phpunit/phpunit": "^8.5 || ^9.0",
+                "propel/propel": "^2.0@dev",
+                "propel/propel1": "^1.7",
+                "ruflin/elastica": "^1.3 || ^2.0 || ^3.0 || ^5.0 || ^6.0",
+                "solarium/solarium": "^2.3 || ^3.0 || ^4.0 || ^5.0"
+            },
+            "suggest": {
+                "doctrine/collections": "To use the Doctrine Collection and Selectable adapter.",
+                "doctrine/dbal": "To use the Doctrine DBAL adapters.",
+                "doctrine/mongodb-odm": "To use the Doctrine MongoDB ODM Adapter.",
+                "doctrine/orm": "To use the Doctrine ORM Adapter.",
+                "doctrine/phpcr-odm": "To use the Doctrine PHPCR ODM Adapter.",
+                "solarium/solarium": "To use the SolariumAdapter."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pagerfanta\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Pagination for PHP",
+            "keywords": [
+                "page",
+                "pagination",
+                "paginator",
+                "paging"
+            ],
+            "funding": [
+                {
+                    "url": "https://github.com/mbabker",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-06-06T19:22:10+00:00"
+        },
+        {
+            "name": "babdev/pagerfanta-bundle",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BabDev/BabDevPagerfantaBundle.git",
+                "reference": "d722a0595a6da5e09df00530e6df316543c01b68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BabDev/BabDevPagerfantaBundle/zipball/d722a0595a6da5e09df00530e6df316543c01b68",
+                "reference": "d722a0595a6da5e09df00530e6df316543c01b68",
+                "shasum": ""
+            },
+            "require": {
+                "babdev/pagerfanta": "^2.2.1",
                 "php": "^7.2",
                 "symfony/config": "^3.4 || ^4.4 || ^5.0",
                 "symfony/dependency-injection": "^3.4 || ^4.4 || ^5.0",
@@ -107,7 +181,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-05-31T17:29:47+00:00"
+            "time": "2020-06-06T19:44:52+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1903,6 +1977,71 @@
             "time": "2020-05-20T16:45:56+00:00"
         },
         {
+            "name": "lexik/form-filter-bundle",
+            "version": "v6.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lexik/LexikFormFilterBundle.git",
+                "reference": "4f88c5a16aa3e0093f9597832c4656c9613d2243"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lexik/LexikFormFilterBundle/zipball/4f88c5a16aa3e0093f9597832c4656c9613d2243",
+                "reference": "4f88c5a16aa3e0093f9597832c4656c9613d2243",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^2.4.8",
+                "php": ">=7.0",
+                "symfony/form": "^4.0|^5.0",
+                "symfony/framework-bundle": "^4.0|^5.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^1.8 || ^2.0",
+                "doctrine/mongodb-odm-bundle": "^4.1",
+                "symfony/phpunit-bridge": "^4.0|^5.0",
+                "symfony/var-dumper": "^4.0|^5.0"
+            },
+            "suggest": {
+                "alcaeus/mongo-php-adapter": "Install this package if using the PHP 7 MongoDB Driver"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.x.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lexik\\Bundle\\FormFilterBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cedric Girard",
+                    "email": "c.girard@lexik.fr"
+                },
+                {
+                    "name": "Dev Lexik",
+                    "email": "dev@lexik.fr"
+                }
+            ],
+            "description": "This bundle aim to provide classes to build some form filters and then build a doctrine query from this form filter.",
+            "homepage": "https://github.com/lexik/LexikFormFilterBundle",
+            "keywords": [
+                "bundle",
+                "doctrine",
+                "filter",
+                "form",
+                "symfony"
+            ],
+            "time": "2019-12-12T13:24:34+00:00"
+        },
+        {
             "name": "mhujer/breadcrumbs-bundle",
             "version": "1.5.2",
             "target-dir": "WhiteOctober/BreadcrumbsBundle",
@@ -2267,75 +2406,6 @@
                 "service proxies"
             ],
             "time": "2020-04-13T14:42:16+00:00"
-        },
-        {
-            "name": "pagerfanta/pagerfanta",
-            "version": "v2.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/whiteoctober/Pagerfanta.git",
-                "reference": "a53ff01d521648d9dbca19b93ac6bc75a59b0972"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/a53ff01d521648d9dbca19b93ac6bc75a59b0972",
-                "reference": "a53ff01d521648d9dbca19b93ac6bc75a59b0972",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0"
-            },
-            "require-dev": {
-                "doctrine/orm": "~2.3",
-                "doctrine/phpcr-odm": "1.*",
-                "jackalope/jackalope-doctrine-dbal": "1.*",
-                "jmikola/geojson": "~1.0",
-                "mandango/mandango": "~1.0@dev",
-                "mandango/mondator": "~1.0@dev",
-                "phpunit/phpunit": "^6.5",
-                "propel/propel": "~2.0@dev",
-                "propel/propel1": "~1.6",
-                "ruflin/elastica": "~1.3",
-                "solarium/solarium": "~3.1"
-            },
-            "suggest": {
-                "doctrine/mongodb-odm": "To use the DoctrineODMMongoDBAdapter.",
-                "doctrine/orm": "To use the DoctrineORMAdapter.",
-                "doctrine/phpcr-odm": "To use the DoctrineODMPhpcrAdapter. >= 1.1.0",
-                "mandango/mandango": "To use the MandangoAdapter.",
-                "propel/propel": "To use the Propel2Adapter",
-                "propel/propel1": "To use the PropelAdapter",
-                "solarium/solarium": "To use the SolariumAdapter."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Pagerfanta\\": "src/Pagerfanta/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Pablo Díez",
-                    "email": "pablodip@gmail.com"
-                }
-            ],
-            "description": "Pagination for PHP",
-            "keywords": [
-                "page",
-                "pagination",
-                "paginator",
-                "paging"
-            ],
-            "time": "2019-07-17T20:56:16+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",

@@ -120,6 +120,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.3"
     },
+    "lexik/form-filter-bundle": {
+        "version": "v6.0.1"
+    },
     "mhujer/breadcrumbs-bundle": {
         "version": "1.5.2"
     },

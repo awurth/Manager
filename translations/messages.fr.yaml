@@ -297,3 +297,9 @@ form:
         generate_password_numbers: Chiffres
         generate_password_symbols: Caractères spéciaux
         generate_password_length: Longueur
+
+filter:
+    label:
+        project_description: Description
+        project_type: Type
+        project_name: Nom

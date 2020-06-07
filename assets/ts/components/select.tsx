@@ -64,7 +64,7 @@ export default class Select {
           option.selected = true;
         }
       });
-    } else {
+    } else if (value) {
       const option = this.element.querySelector(`option[value="${value.value}"]`) as HTMLOptionElement;
 
       if (option) {
@@ -94,6 +94,11 @@ export default class Select {
             ...provided,
             borderWidth: 2,
             boxShadow: 'none'
+          }),
+          valueContainer: provided => ({
+            ...provided,
+            paddingBottom: 4,
+            paddingTop: 4
           })
         }}
         theme={theme => ({

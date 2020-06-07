@@ -18,4 +18,5 @@ return [
     WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle::class => ['all' => true],
     BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
     Awurth\UploadBundle\AwurthUploadBundle::class => ['all' => true],
+    Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle::class => ['all' => true],
 ];

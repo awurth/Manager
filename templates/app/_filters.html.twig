@@ -1,0 +1,18 @@
+<div class="filters p-4 mb-4 bg-gray-100 rounded-lg">
+  {{ form_start(filtersForm) }}
+    <div class="flex flex-wrap">
+      {% for field in filtersForm %}
+        <div class="px-2 mb-2 w-1/3">
+          {{ form_row(field) }}
+        </div>
+      {% endfor %}
+    </div>
+    {{ form_rest(filtersForm) }}
+    <div class="px-2 flex justify-end">
+      <button type="submit" class="btn btn-primary btn-sm">
+        <i class="fas fa-filter text-xs"></i>
+        Filtrer
+      </button>
+    </div>
+  {{ form_end(filtersForm) }}
+</div>

@@ -2,8 +2,10 @@
 
 namespace App\Action;
 
+use App\Form\Filter\ProjectType;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,14 +15,17 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ListProjectsAction
 {
+    use FilterTrait;
     use PaginationTrait;
     use SecurityTrait;
     use TwigTrait;
 
+    private $formFactory;
     private $projectRepository;
 
-    public function __construct(ProjectRepository $projectRepository)
+    public function __construct(FormFactoryInterface $formFactory, ProjectRepository $projectRepository)
     {
+        $this->formFactory = $formFactory;
         $this->projectRepository = $projectRepository;
     }
 
@@ -28,11 +33,17 @@ class ListProjectsAction
     {
         $this->denyAccessUnlessLoggedIn();
 
-        $pager = $this->paginate($this->getQueryBuilder(), $request);
+        $filtersForm = $this->formFactory->create(ProjectType::class);
+        $queryBuilder = $this->getQueryBuilder();
+
+        $this->filter($queryBuilder, $filtersForm, $request);
+
+        $pager = $this->paginate($queryBuilder, $request);
 
         return $this->renderPage('list-projects', 'app/project/list.html.twig', [
             'projects' => $pager->getCurrentPageResults(),
-            'pager' => $pager
+            'pager' => $pager,
+            'filtersForm' => $filtersForm->createView()
         ]);
     }
 

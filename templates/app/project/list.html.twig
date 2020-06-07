@@ -1,12 +1,18 @@
 {% extends 'app/layout.html.twig' %}
 
 {% block page_content %}
-  <div class="page-title">
+  <div class="page-title flex mb-2">
     <h1>Projets</h1>
+    {% if is_granted('ROLE_PROJECT_CREATE') %}
+      <div class="flex items-center justify-end ml-auto">
+        <a class="btn btn-success-o border-2 btn-sm font-medium" href="{{ path('app_project_create') }}">
+          <i class="fas fa-plus text-xs"></i>
+          Nouveau projet
+        </a>
+      </div>
+    {% endif %}
   </div>
-  {% if is_granted('ROLE_PROJECT_CREATE') %}
-    <a class="btn btn-success-o mb-4" href="{{ path('app_project_create') }}">Nouveau projet</a>
-  {% endif %}
+  {{ include('app/_filters.html.twig') }}
   {{ include('app/project/_list.html.twig') }}
   {% if pager.haveToPaginate %}
     <div class="pagination text-center">
