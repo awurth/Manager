@@ -24,7 +24,8 @@ class UserProjectGroupChoiceType extends AbstractType
         $resolver->setDefaults([
             'choices' => $this->getChoices(),
             'choice_label' => 'name',
-            'choice_value' => 'id'
+            'choice_value' => 'id',
+            'choice_translation_domain' => false
         ]);
     }
 
