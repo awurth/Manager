@@ -1,21 +1,21 @@
 .alert {
-  @apply inline-flex items-center px-4 py-2 mb-2 leading-none rounded-full;
+  @apply inline-flex items-center px-4 py-2 mb-2 leading-none rounded-full border-2;
   &:last-child {
     @apply mb-0;
   }
   > span {
-    @apply font-bold;
+    @apply font-medium;
   }
   &.success {
-    @apply bg-green-400 text-green-100;
+    @apply border-green-400 text-green-400;
   }
   &.error {
-    @apply bg-red-400 text-red-100;
+    @apply border-red-400 text-red-400;
   }
   &.info {
-    @apply bg-blue-400 text-blue-100;
+    @apply border-blue-400 text-blue-400;
   }
   &.warning {
-    @apply bg-orange-400 text-orange-100;
+    @apply border-orange-400 text-orange-400;
   }
 }
