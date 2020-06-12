@@ -1,6 +1,18 @@
 .page-title {
-  @apply py-3 font-bold text-xl text-gray-700;
-  h1, h2 {
+  @apply py-3 font-bold text-gray-700;
+  h1, h2, h3 {
     @apply inline-block pb-1 pr-6 border-b-4 border-primary-500;
+  }
+  h1 {
+    @apply text-xl;
+  }
+  h2 {
+    @apply text-lg;
+  }
+}
+
+.page-title-danger {
+  h1, h2, h3 {
+    @apply border-red-500;
   }
 }

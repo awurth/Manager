@@ -16,8 +16,8 @@
     <button type="submit" class="btn btn-primary mt-4">Changer l'URL</button>
   {{ form_end(slugChangeForm) }}
   {% if is_granted('DELETE', group) %}
-    <div class="page-title mt-4">
-      <h2>Supprimer le groupe</h2>
+    <div class="page-title page-title-danger mt-4">
+      <h3>Supprimer le groupe</h3>
     </div>
     <p>Supprimer ce groupe supprimera aussi tous ses projets, et toutes les données associées.</p>
     <p><strong>Cette action est irréversible !</strong></p>

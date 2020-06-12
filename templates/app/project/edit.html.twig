@@ -6,8 +6,8 @@
     <button type="submit" class="btn btn-primary mt-4">Enregistrer</button>
   {{ form_end(form) }}
   {% if is_granted('DELETE', project) %}
-    <div class="page-title mt-4">
-      <h2>Supprimer le projet</h2>
+    <div class="page-title page-title-danger mt-4">
+      <h3>Supprimer le projet</h3>
     </div>
     <p>Supprimer ce projet supprimera aussi toutes les données associées.</p>
     <p><strong>Cette action est irréversible !</strong></p>
