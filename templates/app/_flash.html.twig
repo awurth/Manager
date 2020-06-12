@@ -1,10 +1,19 @@
 {% if app.request.hasPreviousSession %}
   {% set flashes = app.flashes(['success', 'warning', 'error', 'info']) %}
   {% if flashes.success or flashes.warning or flashes.error or flashes.info %}
-    <div class="mt-4 mb-4 text-center">
+    <div class="flex flex-col items-center mt-4 mb-4">
       {% for label, messages in flashes %}
         {% for message in messages %}
           <div class="alert {{ label }}" role="alert">
+            {% if label == 'success' %}
+              <i class="fas fa-check-circle mr-2"></i>
+            {% elseif label == 'warning' %}
+              <i class="fas fa-exclamation-circle mr-2"></i>
+            {% elseif label == 'error' %}
+              <i class="fas fa-times-circle mr-2"></i>
+            {% elseif label == 'info' %}
+              <i class="fas fa-info-circle mr-2"></i>
+            {% endif %}
             <span>{{ message|trans }}</span>
           </div>
         {% endfor %}
