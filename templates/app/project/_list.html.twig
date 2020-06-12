@@ -11,7 +11,7 @@
           <div class="inline-block align-middle">
             <a href="{{ path_to(project, 'view') }}">
               <span class="text-gray-700">{{ project.projectGroup.name }} /</span>
-              <span class="font-bold text-gray-900">{{ project.name }}</span>
+              <span class="font-bold text-gray-700">{{ project.name }}</span>
             </a>
             <small class="access-level-label ml-2">{{ project.memberByUser(app.user)|access_level_label }}</small>
           </div>
