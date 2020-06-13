@@ -18,11 +18,11 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        if ($manager->getRepository(User::class)->findOneBy(['email' => 'admin@pilipili-web.com'])) {
+        if ($manager->getRepository(User::class)->findOneBy(['email' => 'contact@alexiswurth.fr'])) {
             return;
         }
 
-        $user = (new User('admin@pilipili-web.com', 'Admin', 'Pilipili'))
+        $user = (new User('contact@alexiswurth.fr', 'Alexis', 'Wurth'))
             ->setRoles(['ROLE_ADMIN']);
 
         $user->setPassword($this->passwordEncoder->encodePassword($user, 'admin'));
