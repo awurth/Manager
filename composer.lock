@@ -4,24 +4,28 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d6695376aac2772046dfb95005c9ae2",
+    "content-hash": "a2dd8989d304fd84c8266f5bbf3da8ec",
     "packages": [
         {
             "name": "awurth/upload-bundle",
-            "version": "v0.1.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/awurth/upload-bundle.git",
-                "reference": "7e01b4a6662923575376b30c866cafc64d5e7e7c"
+                "reference": "b0f1c37bb799a53c54e0e150988df7d5df5084f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/awurth/upload-bundle/zipball/7e01b4a6662923575376b30c866cafc64d5e7e7c",
-                "reference": "7e01b4a6662923575376b30c866cafc64d5e7e7c",
+                "url": "https://api.github.com/repos/awurth/upload-bundle/zipball/b0f1c37bb799a53c54e0e150988df7d5df5084f2",
+                "reference": "b0f1c37bb799a53c54e0e150988df7d5df5084f2",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2"
+                "php": "^7.2",
+                "symfony/dependency-injection": "^4.0|^5.0",
+                "symfony/http-foundation": "^4.0|^5.0",
+                "symfony/http-kernel": "^4.0|^5.0",
+                "symfony/property-access": "^4.0|^5.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -33,7 +37,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2020-05-25T17:35:27+00:00"
+            "time": "2020-07-08T18:40:36+00:00"
         },
         {
             "name": "babdev/pagerfanta",

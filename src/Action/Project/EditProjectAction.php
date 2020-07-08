@@ -55,7 +55,8 @@ class EditProjectAction extends AbstractProjectAction
                 ->setType($model->type);
 
             if ($model->logoFile) {
-                $this->uploader->upload($model->logoFile, $this->project, 'project_logo');
+                $upload = $this->uploader->upload($model->logoFile, $this->project, 'project_logo');
+                $this->project->setLogoFilename($upload->getFilename());
             }
 
             $this->entityManager->persist($this->project);

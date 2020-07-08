@@ -56,7 +56,8 @@ class CreateLinkTypeAction extends AbstractAdminAction
                 ->setUriPrefix($model->uriPrefix);
 
             if ($model->iconFile) {
-                $this->uploader->upload($model->iconFile, $linkType, 'link_type_icon');
+                $upload = $this->uploader->upload($model->iconFile, $linkType, 'link_type_icon');
+                $linkType->setIconFilename($upload->getFilename());
             }
 
             $this->entityManager->persist($linkType);

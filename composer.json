@@ -6,7 +6,7 @@
         "ext-apcu": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "awurth/upload-bundle": "^0.1.0",
+        "awurth/upload-bundle": "^0.2.0",
         "babdev/pagerfanta-bundle": "^2.2",
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/doctrine-migrations-bundle": "^3.0",

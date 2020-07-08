@@ -60,7 +60,8 @@ class CreateProjectAction
             );
 
             if ($model->logoFile) {
-                $this->uploader->upload($model->logoFile, $project, 'project_logo');
+                $upload = $this->uploader->upload($model->logoFile, $project, 'project_logo');
+                $project->setLogoFilename($upload->getFilename());
             }
 
             $this->entityManager->persist($project);
