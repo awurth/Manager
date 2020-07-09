@@ -11,7 +11,6 @@
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
-        "gedmo/doctrine-extensions": "^2.4",
         "hackzilla/password-generator": "^1.5",
         "knplabs/knp-menu-bundle": "^3.0",
         "lexik/form-filter-bundle": "^6.0",

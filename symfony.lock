@@ -8,9 +8,6 @@
     "babdev/pagerfanta-bundle": {
         "version": "v2.2.1"
     },
-    "behat/transliterator": {
-        "version": "v1.2.0"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -104,9 +101,6 @@
     },
     "doctrine/sql-formatter": {
         "version": "1.0.1"
-    },
-    "gedmo/doctrine-extensions": {
-        "version": "v2.4.38"
     },
     "hackzilla/password-generator": {
         "version": "1.5.0"
