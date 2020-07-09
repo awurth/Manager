@@ -53,13 +53,9 @@ class ProjectMembersAction extends AbstractProjectAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->project->addMember(
-                (new ProjectMember())
-                    ->setUser($model->user)
-                    ->setAccessLevel($model->accessLevel)
-            );
+            $member = ProjectMember::createFromProjectMemberAdditionForm($model);
 
-            $this->entityManager->persist($this->project);
+            $this->entityManager->persist($member);
             $this->entityManager->flush();
 
             $this->flash('success', 'flash.success.project.member.add');

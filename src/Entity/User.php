@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
+use App\Form\Model\Admin\CreateUser;
+use App\Form\Model\EditProfile;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -56,15 +60,11 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="datetime")
-     *
-     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
@@ -93,11 +93,12 @@ class User implements UserInterface
      */
     private $credentialsUsers;
 
-    public function __construct(string $email, string $firstname, string $lastname)
+    private function __construct(string $email, string $firstname, string $lastname)
     {
         $this->email = $email;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
+        $this->createdAt = new DateTimeImmutable();
 
         $this->cryptographicKeys = new ArrayCollection();
         $this->projectGroupMembers = new ArrayCollection();
@@ -108,7 +109,27 @@ class User implements UserInterface
 
     public function __toString(): string
     {
-        return $this->getEmail();
+        return $this->email;
+    }
+
+    public static function createFromAdminCreationForm(CreateUser $createUser, UserPasswordEncoderInterface $userPasswordEncoder): self
+    {
+        $user = new self($createUser->email, $createUser->firstname, $createUser->lastname);
+        $user->gender = $createUser->gender;
+        $user->roles[] = $createUser->role;
+
+        $user->password = $userPasswordEncoder->encodePassword($user, $createUser->plainPassword);
+
+        return $user;
+    }
+
+    public function updateFromProfileEditionForm(EditProfile $editProfile): void
+    {
+        $this->email = $editProfile->email;
+        $this->gender = $editProfile->gender;
+        $this->firstname = $editProfile->firstname;
+        $this->lastname = $editProfile->lastname;
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     public function getFullName(): string
@@ -184,57 +205,12 @@ class User implements UserInterface
         return $this->getEmail();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPassword(): string
-    {
-        return (string)$this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
     public function hasRole($role): bool
     {
         return in_array(strtoupper($role), $this->getRoles(), true);
     }
 
-    public function addRole($role): self
+    private function addRole($role): self
     {
         $role = strtoupper($role);
         if ($role === 'ROLE_USER') {
@@ -248,16 +224,33 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getPassword(): string
+    {
+        return (string)$this->password;
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
     public function getGender(): ?int
     {
         return $this->gender;
-    }
-
-    public function setGender(?int $gender): self
-    {
-        $this->gender = $gender;
-
-        return $this;
     }
 
     public function getFirstname(): string
@@ -265,47 +258,19 @@ class User implements UserInterface
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): self
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
     public function getLastname(): string
     {
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): self
-    {
-        $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -316,58 +281,12 @@ class User implements UserInterface
         return $this->cryptographicKeys;
     }
 
-    public function addCryptographicKey(CryptographicKey $cryptographicKey): self
-    {
-        if (!$this->cryptographicKeys->contains($cryptographicKey)) {
-            $this->cryptographicKeys[] = $cryptographicKey;
-            $cryptographicKey->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCryptographicKey(CryptographicKey $cryptographicKey): self
-    {
-        if ($this->cryptographicKeys->contains($cryptographicKey)) {
-            $this->cryptographicKeys->removeElement($cryptographicKey);
-            // set the owning side to null (unless already changed)
-            if ($cryptographicKey->getUser() === $this) {
-                $cryptographicKey->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|ProjectGroupMember[]
      */
     public function getProjectGroupMembers(): Collection
     {
         return $this->projectGroupMembers;
-    }
-
-    public function addProjectGroupMember(ProjectGroupMember $projectGroupMember): self
-    {
-        if (!$this->projectGroupMembers->contains($projectGroupMember)) {
-            $this->projectGroupMembers[] = $projectGroupMember;
-            $projectGroupMember->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProjectGroupMember(ProjectGroupMember $projectGroupMember): self
-    {
-        if ($this->projectGroupMembers->contains($projectGroupMember)) {
-            $this->projectGroupMembers->removeElement($projectGroupMember);
-            // set the owning side to null (unless already changed)
-            if ($projectGroupMember->getUser() === $this) {
-                $projectGroupMember->setUser(null);
-            }
-        }
-
-        return $this;
     }
 
     /**
@@ -378,29 +297,6 @@ class User implements UserInterface
         return $this->projectMembers;
     }
 
-    public function addProjectMember(ProjectMember $projectMember): self
-    {
-        if (!$this->projectMembers->contains($projectMember)) {
-            $this->projectMembers[] = $projectMember;
-            $projectMember->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProjectMember(ProjectMember $projectMember): self
-    {
-        if ($this->projectMembers->contains($projectMember)) {
-            $this->projectMembers->removeElement($projectMember);
-            // set the owning side to null (unless already changed)
-            if ($projectMember->getUser() === $this) {
-                $projectMember->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|ServerMember[]
      */
@@ -409,57 +305,11 @@ class User implements UserInterface
         return $this->serverMembers;
     }
 
-    public function addServerMember(ServerMember $serverMember): self
-    {
-        if (!$this->serverMembers->contains($serverMember)) {
-            $this->serverMembers[] = $serverMember;
-            $serverMember->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeServerMember(ServerMember $serverMember): self
-    {
-        if ($this->serverMembers->contains($serverMember)) {
-            $this->serverMembers->removeElement($serverMember);
-            // set the owning side to null (unless already changed)
-            if ($serverMember->getUser() === $this) {
-                $serverMember->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|CredentialsUser[]
      */
     public function getCredentialsUsers(): Collection
     {
         return $this->credentialsUsers;
-    }
-
-    public function addCredentialsUser(CredentialsUser $credentialsUser): self
-    {
-        if (!$this->credentialsUsers->contains($credentialsUser)) {
-            $this->credentialsUsers[] = $credentialsUser;
-            $credentialsUser->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCredentialsUser(CredentialsUser $credentialsUser): self
-    {
-        if ($this->credentialsUsers->contains($credentialsUser)) {
-            $this->credentialsUsers->removeElement($credentialsUser);
-            // set the owning side to null (unless already changed)
-            if ($credentialsUser->getUser() === $this) {
-                $credentialsUser->setUser(null);
-            }
-        }
-
-        return $this;
     }
 }

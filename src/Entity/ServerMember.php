@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use App\Form\Model\AddServerMember;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServerMemberRepository")
@@ -39,84 +41,67 @@ class ServerMember
     /**
      * @ORM\Column(type="integer")
      */
-    private $accessLevel = self::ACCESS_LEVEL_GUEST;
+    private $accessLevel;
 
     /**
      * @ORM\Column(type="datetime")
-     *
-     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
+
+    private function __construct(Server $server, User $user, int $accessLevel)
+    {
+        $this->server = $server;
+        $this->user = $user;
+        $this->accessLevel = $accessLevel;
+        $this->createdAt = new DateTimeImmutable();
+    }
+
+    public static function createFromServerMemberAdditionForm(AddServerMember $addServerMember): self
+    {
+        return new self(
+            $addServerMember->getServer(),
+            $addServerMember->user,
+            $addServerMember->accessLevel
+        );
+    }
+
+    public static function createOwner(Server $server, User $user): self
+    {
+        return new self($server, $user, self::ACCESS_LEVEL_OWNER);
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAccessLevel(): ?int
+    public function getAccessLevel(): int
     {
         return $this->accessLevel;
     }
 
-    public function setAccessLevel(int $accessLevel): self
-    {
-        $this->accessLevel = $accessLevel;
-
-        return $this;
-    }
-
-    public function getServer(): ?Server
+    public function getServer(): Server
     {
         return $this->server;
     }
 
-    public function setServer(?Server $server): self
-    {
-        $this->server = $server;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

@@ -32,6 +32,11 @@ class ServerUser
      */
     private $password;
 
+    private function __construct(Server $server)
+    {
+        $this->server = $server;
+    }
+
     public function __toString(): string
     {
         return (string)$this->username;
@@ -42,16 +47,9 @@ class ServerUser
         return $this->id;
     }
 
-    public function getServer(): ?Server
+    public function getServer(): Server
     {
         return $this->server;
-    }
-
-    public function setServer(?Server $server): self
-    {
-        $this->server = $server;
-
-        return $this;
     }
 
     public function getUsername(): ?string
@@ -59,22 +57,8 @@ class ServerUser
         return $this->username;
     }
 
-    public function setUsername(?string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
-    }
-
-    public function setPassword(?string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
     }
 }

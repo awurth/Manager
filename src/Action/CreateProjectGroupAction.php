@@ -3,7 +3,6 @@
 namespace App\Action;
 
 use App\Entity\ProjectGroup;
-use App\Entity\ProjectGroupMember;
 use App\Form\Type\Action\CreateProjectGroupType;
 use App\Form\Model\CreateProjectGroup;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,15 +40,7 @@ class CreateProjectGroupAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $group = (new ProjectGroup($model->slug, $model->name))
-                ->setClient($model->client)
-                ->setDescription($model->description);
-
-            $group->addMember(
-                (new ProjectGroupMember())
-                    ->setUser($this->getUser())
-                    ->setAccessLevel(ProjectGroupMember::ACCESS_LEVEL_OWNER)
-            );
+            $group = ProjectGroup::createFromCreationForm($model, $this->getUser());
 
             $this->entityManager->persist($group);
             $this->entityManager->flush();

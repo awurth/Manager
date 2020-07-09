@@ -53,13 +53,9 @@ class ServerMembersAction extends AbstractServerAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->server->addMember(
-                (new ServerMember())
-                    ->setUser($model->user)
-                    ->setAccessLevel($model->accessLevel)
-            );
+            $member = ServerMember::createFromServerMemberAdditionForm($model);
 
-            $this->entityManager->persist($this->server);
+            $this->entityManager->persist($member);
             $this->entityManager->flush();
 
             $this->flash('success', 'flash.success.server.member.add');

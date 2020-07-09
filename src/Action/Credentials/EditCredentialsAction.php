@@ -58,15 +58,7 @@ class EditCredentialsAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $credentials
-                ->setName($model->name)
-                ->setUsername($model->username)
-                ->setEmail($model->email)
-                ->setPassword($model->password)
-                ->setWebsite($model->website)
-                ->setDescription($model->description);
-
-            $credentials->setUsers($model->users, $this->getUser());
+            $credentials->updateFromEditionForm($model, $this->getUser());
 
             $this->entityManager->persist($credentials);
             $this->entityManager->flush();

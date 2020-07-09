@@ -7,7 +7,6 @@ use App\Action\RoutingTrait;
 use App\Action\SecurityTrait;
 use App\Action\TwigTrait;
 use App\Entity\Credentials;
-use App\Entity\CredentialsUser;
 use App\Form\Type\Action\CreateCredentialsType;
 use App\Form\Model\CreateCredentials;
 use Doctrine\ORM\EntityManagerInterface;
@@ -45,24 +44,7 @@ class CreateCredentialsAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $credentials = (new Credentials($model->name, $model->password))
-                ->setUsername($model->username)
-                ->setEmail($model->email)
-                ->setWebsite($model->website)
-                ->setDescription($model->description)
-                ->addCredentialsUser(
-                    (new CredentialsUser())
-                        ->setUser($this->getUser())
-                        ->setAccessLevel(CredentialsUser::ACCESS_LEVEL_OWNER)
-                );
-
-            foreach ($model->users as $user) {
-                $credentials->addCredentialsUser(
-                    (new CredentialsUser())
-                        ->setUser($user)
-                        ->setAccessLevel(CredentialsUser::ACCESS_LEVEL_USER)
-                );
-            }
+            $credentials = Credentials::createFromCreationForm($model, $this->getUser());
 
             $this->entityManager->persist($credentials);
             $this->entityManager->flush();

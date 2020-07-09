@@ -80,10 +80,7 @@ class EditProjectGroupAction extends AbstractProjectGroupAction
             return null;
         }
 
-        $this->projectGroup
-            ->setClient($model->client)
-            ->setDescription($model->description)
-            ->setName($model->name);
+        $this->projectGroup->updateFromEditionForm($model);
 
         $this->entityManager->persist($this->projectGroup);
         $this->entityManager->flush();

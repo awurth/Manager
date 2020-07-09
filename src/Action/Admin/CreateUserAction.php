@@ -47,11 +47,7 @@ class CreateUserAction extends AbstractAdminAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = (new User($model->email, $model->firstname, $model->lastname))
-                ->setGender($model->gender)
-                ->addRole($model->role);
-
-            $user->setPassword($this->userPasswordEncoder->encodePassword($user, $model->plainPassword));
+            $user = User::createFromAdminCreationForm($model, $this->userPasswordEncoder);
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();

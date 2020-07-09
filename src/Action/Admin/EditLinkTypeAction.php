@@ -61,15 +61,7 @@ class EditLinkTypeAction extends AbstractAdminAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $linkType
-                ->setName($model->name)
-                ->setColor($model->color)
-                ->setUriPrefix($model->uriPrefix);
-
-            if ($model->iconFile) {
-                $upload = $this->uploader->upload($model->iconFile, $linkType, 'link_type_icon');
-                $linkType->setIconFilename($upload->getFilename());
-            }
+            $linkType->updateFromAdminEditionForm($model, $this->uploader);
 
             $this->entityManager->persist($linkType);
             $this->entityManager->flush();

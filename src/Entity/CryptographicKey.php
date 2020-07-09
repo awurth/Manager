@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CryptographicKeyRepository")
@@ -42,27 +43,25 @@ class CryptographicKey
 
     /**
      * @ORM\Column(type="datetime")
-     *
-     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
-    public function __construct(string $name, string $value)
+    private function __construct(User $user, string $name, string $value)
     {
+        $this->user = $user;
         $this->name = $name;
         $this->value = $value;
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function __toString(): string
     {
-        return $this->getName();
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -70,28 +69,14 @@ class CryptographicKey
         return $this->id;
     }
 
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getType(): ?string
+    public function getType(): string
     {
         return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
     }
 
     public function getName(): string
@@ -99,46 +84,18 @@ class CryptographicKey
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getValue(): string
     {
         return $this->value;
     }
 
-    public function setValue(string $value): self
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

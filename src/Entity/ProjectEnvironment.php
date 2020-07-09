@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use App\Form\Model\AddProjectEnvironment;
+use App\Form\Model\EditProjectEnvironment;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectEnvironmentRepository")
@@ -51,27 +54,51 @@ class ProjectEnvironment
 
     /**
      * @ORM\Column(type="datetime")
-     *
-     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
-    public function __construct(string $name, string $path)
+    private function __construct(Project $project, Server $server, string $name, string $path)
     {
+        $this->project = $project;
+        $this->server = $server;
         $this->name = $name;
         $this->path = $path;
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function __toString(): string
     {
-        return $this->getName();
+        return $this->name;
+    }
+
+    public static function createFromCreationForm(AddProjectEnvironment $addProjectEnvironment, Project $project): self
+    {
+        $environment = new self(
+            $project,
+            $addProjectEnvironment->server,
+            $addProjectEnvironment->name,
+            $addProjectEnvironment->path
+        );
+
+        $environment->url = $addProjectEnvironment->url;
+        $environment->description = $addProjectEnvironment->description;
+
+        return $environment;
+    }
+
+    public function updateFromEditionForm(EditProjectEnvironment $editProjectEnvironment): void
+    {
+        $this->name = $editProjectEnvironment->name;
+        $this->path = $editProjectEnvironment->path;
+        $this->url = $editProjectEnvironment->url;
+        $this->description = $editProjectEnvironment->description;
+        $this->server = $editProjectEnvironment->server;
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -79,28 +106,14 @@ class ProjectEnvironment
         return $this->id;
     }
 
-    public function getProject(): ?Project
+    public function getProject(): Project
     {
         return $this->project;
     }
 
-    public function setProject(?Project $project): self
-    {
-        $this->project = $project;
-
-        return $this;
-    }
-
-    public function getServer(): ?Server
+    public function getServer(): Server
     {
         return $this->server;
-    }
-
-    public function setServer(?Server $server): self
-    {
-        $this->server = $server;
-
-        return $this;
     }
 
     public function getName(): string
@@ -108,23 +121,9 @@ class ProjectEnvironment
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getPath(): string
     {
         return $this->path;
-    }
-
-    public function setPath(string $path): self
-    {
-        $this->path = $path;
-
-        return $this;
     }
 
     public function getUrl(): ?string
@@ -132,46 +131,18 @@ class ProjectEnvironment
         return $this->url;
     }
 
-    public function setUrl(?string $url): self
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

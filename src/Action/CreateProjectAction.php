@@ -3,7 +3,6 @@
 namespace App\Action;
 
 use App\Entity\Project;
-use App\Entity\ProjectMember;
 use App\Form\Type\Action\CreateProjectType;
 use App\Form\Model\CreateProject;
 use Awurth\UploadBundle\Storage\StorageInterface;
@@ -48,21 +47,7 @@ class CreateProjectAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $project = (new Project($model->slug, $model->name))
-                ->setDescription($model->description)
-                ->setProjectGroup($model->projectGroup)
-                ->setType($model->type);
-
-            $project->addMember(
-                (new ProjectMember())
-                    ->setUser($this->getUser())
-                    ->setAccessLevel(ProjectMember::ACCESS_LEVEL_OWNER)
-            );
-
-            if ($model->logoFile) {
-                $upload = $this->uploader->upload($model->logoFile, $project, 'project_logo');
-                $project->setLogoFilename($upload->getFilename());
-            }
+            $project = Project::createFromCreationForm($model, $this->getUser(), $this->uploader);
 
             $this->entityManager->persist($project);
             $this->entityManager->flush();

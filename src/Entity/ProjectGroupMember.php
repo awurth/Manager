@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use App\Form\Model\AddProjectGroupMember;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectGroupMemberRepository")
@@ -39,84 +41,67 @@ class ProjectGroupMember
     /**
      * @ORM\Column(type="integer")
      */
-    private $accessLevel = self::ACCESS_LEVEL_GUEST;
+    private $accessLevel;
 
     /**
      * @ORM\Column(type="datetime")
-     *
-     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
+
+    private function __construct(ProjectGroup $projectGroup, User $user, int $accessLevel)
+    {
+        $this->projectGroup = $projectGroup;
+        $this->user = $user;
+        $this->accessLevel = $accessLevel;
+        $this->createdAt = new DateTimeImmutable();
+    }
+
+    public static function createFromGroupMemberAdditionForm(AddProjectGroupMember $addProjectGroupMember): self
+    {
+        return new self(
+            $addProjectGroupMember->getProjectGroup(),
+            $addProjectGroupMember->user,
+            $addProjectGroupMember->accessLevel
+        );
+    }
+
+    public static function createOwner(ProjectGroup $projectGroup, User $user): self
+    {
+        return new self($projectGroup, $user, self::ACCESS_LEVEL_OWNER);
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAccessLevel(): ?int
+    public function getAccessLevel(): int
     {
         return $this->accessLevel;
     }
 
-    public function setAccessLevel(int $accessLevel): self
-    {
-        $this->accessLevel = $accessLevel;
-
-        return $this;
-    }
-
-    public function getProjectGroup(): ?ProjectGroup
+    public function getProjectGroup(): ProjectGroup
     {
         return $this->projectGroup;
     }
 
-    public function setProjectGroup(?ProjectGroup $projectGroup): self
-    {
-        $this->projectGroup = $projectGroup;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

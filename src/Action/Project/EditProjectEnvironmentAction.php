@@ -60,12 +60,7 @@ class EditProjectEnvironmentAction extends AbstractProjectAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $environment
-                ->setServer($model->server)
-                ->setName($model->name)
-                ->setPath($model->path)
-                ->setUrl($model->url)
-                ->setDescription($model->description);
+            $environment->updateFromEditionForm($model);
 
             $this->entityManager->persist($environment);
             $this->entityManager->flush();

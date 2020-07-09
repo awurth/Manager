@@ -37,7 +37,24 @@ class CredentialsUser
     /**
      * @ORM\Column(type="integer")
      */
-    private $accessLevel = self::ACCESS_LEVEL_USER;
+    private $accessLevel;
+
+    private function __construct(Credentials $credentials, User $user, int $accessLevel)
+    {
+        $this->credentials = $credentials;
+        $this->user = $user;
+        $this->accessLevel = $accessLevel;
+    }
+
+    public static function createOwner(Credentials $credentials, User $user): self
+    {
+        return new self($credentials, $user, self::ACCESS_LEVEL_OWNER);
+    }
+
+    public static function createUser(Credentials $credentials, User $user): self
+    {
+        return new self($credentials, $user, self::ACCESS_LEVEL_USER);
+    }
 
     public function getId(): ?int
     {
@@ -49,34 +66,13 @@ class CredentialsUser
         return $this->credentials;
     }
 
-    public function setCredentials(?Credentials $credentials): self
-    {
-        $this->credentials = $credentials;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getAccessLevel(): ?int
     {
         return $this->accessLevel;
-    }
-
-    public function setAccessLevel(int $accessLevel): self
-    {
-        $this->accessLevel = $accessLevel;
-
-        return $this;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Form\Model\AddProjectLink;
+use App\Form\Model\EditProjectLink;
 use App\Repository\LinkRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -38,7 +40,7 @@ class Link
      */
     private $uri;
 
-    public function __construct(string $name, string $uri)
+    private function __construct(string $name, string $uri)
     {
         $this->name = $name;
         $this->uri = $uri;
@@ -46,7 +48,23 @@ class Link
 
     public function __toString(): string
     {
-        return $this->getUri();
+        return $this->uri;
+    }
+
+    public static function createFromProjectLinkCreationForm(AddProjectLink $addProjectLink, Project $project): self
+    {
+        $link = new self($addProjectLink->name, $addProjectLink->uri);
+        $link->linkType = $addProjectLink->linkType;
+        $link->project = $project;
+
+        return $link;
+    }
+
+    public function updateFromProjectLinkEditionForm(EditProjectLink $editProjectLink): void
+    {
+        $this->name = $editProjectLink->name;
+        $this->uri = $editProjectLink->uri;
+        $this->linkType = $editProjectLink->linkType;
     }
 
     public function getId(): ?int
@@ -59,23 +77,9 @@ class Link
         return $this->linkType;
     }
 
-    public function setLinkType(?LinkType $linkType): self
-    {
-        $this->linkType = $linkType;
-
-        return $this;
-    }
-
     public function getProject(): ?Project
     {
         return $this->project;
-    }
-
-    public function setProject(?Project $project): self
-    {
-        $this->project = $project;
-
-        return $this;
     }
 
     public function getName(): string
@@ -83,22 +87,8 @@ class Link
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getUri(): string
     {
         return $this->uri;
-    }
-
-    public function setUri(string $uri): self
-    {
-        $this->uri = $uri;
-
-        return $this;
     }
 }

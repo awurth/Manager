@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use App\Form\Model\Admin\CreateUser;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -22,10 +23,14 @@ class UserFixtures extends Fixture
             return;
         }
 
-        $user = (new User('contact@alexiswurth.fr', 'Alexis', 'Wurth'))
-            ->setRoles(['ROLE_ADMIN']);
+        $createUser = new CreateUser();
+        $createUser->email = 'contact@alexiswurth.fr';
+        $createUser->firstname = 'Alexis';
+        $createUser->lastname = 'Wurth';
+        $createUser->role = 'ROLE_ADMIN';
+        $createUser->plainPassword = 'admin';
 
-        $user->setPassword($this->passwordEncoder->encodePassword($user, 'admin'));
+        $user = User::createFromAdminCreationForm($createUser, $this->passwordEncoder);
 
         $manager->persist($user);
         $manager->flush();

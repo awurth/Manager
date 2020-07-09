@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use App\Form\Model\CreateCredentials;
+use App\Form\Model\EditCredentials;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CredentialsRepository")
@@ -51,15 +54,11 @@ class Credentials
 
     /**
      * @ORM\Column(type="datetime")
-     *
-     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
@@ -68,10 +67,11 @@ class Credentials
      */
     private $credentialsUsers;
 
-    public function __construct(string $name, string $password)
+    private function __construct(string $name, string $password)
     {
         $this->name = $name;
         $this->password = $password;
+        $this->createdAt = new DateTimeImmutable();
 
         $this->credentialsUsers = new ArrayCollection();
     }
@@ -81,34 +81,53 @@ class Credentials
         return $this->getName();
     }
 
-    /**
-     * @param User[] $users
-     */
-    public function setUsers(array $users, User $currentUser): void
+    public static function createFromCreationForm(CreateCredentials $createCredentials, User $owner): self
     {
-        foreach ($this->getCredentialsUsers() as $credentialsUser) {
-            if ($credentialsUser->getUser() !== $currentUser && !in_array($credentialsUser->getUser(), $users, true)) {
-                $this->removeCredentialsUser($credentialsUser);
+        $credentials = new self($createCredentials->name, $createCredentials->password);
+        $credentials->username = $createCredentials->username;
+        $credentials->email = $createCredentials->email;
+        $credentials->website = $createCredentials->website;
+        $credentials->description = $createCredentials->description;
+
+        $credentials->credentialsUsers[] = CredentialsUser::createOwner($credentials, $owner);
+        foreach ($createCredentials->users as $user) {
+            $credentials->credentialsUsers[] = CredentialsUser::createUser($credentials, $user);
+        }
+
+        return $credentials;
+    }
+
+    public function updateFromEditionForm(EditCredentials $editCredentials, User $currentUser): void
+    {
+        $this->name = $editCredentials->name;
+        $this->username = $editCredentials->username;
+        $this->password = $editCredentials->password;
+        $this->email = $editCredentials->email;
+        $this->website = $editCredentials->website;
+        $this->description = $editCredentials->description;
+        $this->updatedAt = new DateTimeImmutable();
+
+        foreach ($this->credentialsUsers as $credentialsUser) {
+            if ($credentialsUser->getUser() !== $currentUser && !in_array($credentialsUser->getUser(), $editCredentials->users, true)) {
+                $this->credentialsUsers->removeElement($credentialsUser);
             }
         }
 
-        foreach ($users as $user) {
+        foreach ($editCredentials->users as $user) {
             $alreadyAdded = false;
-            foreach ($this->getCredentialsUsers() as $credentialsUser) {
+            foreach ($this->credentialsUsers as $credentialsUser) {
                 if ($credentialsUser->getUser() === $user) {
                     $alreadyAdded = true;
+                    break;
                 }
             }
 
             if (!$alreadyAdded) {
-                $this->addCredentialsUser(
-                    (new CredentialsUser())
-                        ->setUser($user)
-                        ->setAccessLevel(CredentialsUser::ACCESS_LEVEL_USER)
-                );
+                $this->credentialsUsers[] = CredentialsUser::createUser($this, $user);
             }
         }
     }
+
 
     public function getId(): ?int
     {
@@ -120,23 +139,9 @@ class Credentials
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getUsername(): ?string
     {
         return $this->username;
-    }
-
-    public function setUsername(?string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -144,23 +149,9 @@ class Credentials
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
     public function getPassword(): string
     {
         return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
     }
 
     public function getWebsite(): ?string
@@ -168,47 +159,19 @@ class Credentials
         return $this->website;
     }
 
-    public function setWebsite(?string $website): self
-    {
-        $this->website = $website;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -217,28 +180,5 @@ class Credentials
     public function getCredentialsUsers(): Collection
     {
         return $this->credentialsUsers;
-    }
-
-    public function addCredentialsUser(CredentialsUser $credentialsUser): self
-    {
-        if (!$this->credentialsUsers->contains($credentialsUser)) {
-            $this->credentialsUsers[] = $credentialsUser;
-            $credentialsUser->setCredentials($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCredentialsUser(CredentialsUser $credentialsUser): self
-    {
-        if ($this->credentialsUsers->contains($credentialsUser)) {
-            $this->credentialsUsers->removeElement($credentialsUser);
-            // set the owning side to null (unless already changed)
-            if ($credentialsUser->getCredentials() === $this) {
-                $credentialsUser->setCredentials(null);
-            }
-        }
-
-        return $this;
     }
 }

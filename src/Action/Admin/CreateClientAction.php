@@ -44,12 +44,7 @@ class CreateClientAction extends AbstractAdminAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $client = (new Client($model->name))
-                ->setAddress($model->address)
-                ->setPostcode($model->postcode)
-                ->setCity($model->city)
-                ->setPhone($model->phone)
-                ->setEmail($model->email);
+            $client = Client::createFromAdminCreationForm($model);
 
             $this->entityManager->persist($client);
             $this->entityManager->flush();

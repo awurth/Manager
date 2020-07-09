@@ -57,13 +57,7 @@ class EditClientAction extends AbstractAdminAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $client
-                ->setName($model->name)
-                ->setAddress($model->address)
-                ->setPostcode($model->postcode)
-                ->setCity($model->city)
-                ->setPhone($model->phone)
-                ->setEmail($model->email);
+            $client->updateFromAdminEditionForm($model);
 
             $this->entityManager->persist($client);
             $this->entityManager->flush();

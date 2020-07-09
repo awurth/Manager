@@ -43,12 +43,9 @@ class AddProjectLinkAction extends AbstractProjectAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->project->addLink(
-                (new Link($model->name, $model->uri))
-                    ->setLinkType($model->linkType)
-            );
+            $link = Link::createFromProjectLinkCreationForm($model, $this->project);
 
-            $this->entityManager->persist($this->project);
+            $this->entityManager->persist($link);
             $this->entityManager->flush();
 
             $this->flash('success', 'flash.success.project.link.create');

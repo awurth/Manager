@@ -9,8 +9,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class EditProject
 {
-    public $type;
-
     /**
      * @Assert\NotBlank()
      */
@@ -27,7 +25,6 @@ class EditProject
 
     public function __construct(Project $project)
     {
-        $this->type = $project->getType();
         $this->name = $project->getName();
         $this->description = $project->getDescription();
     }

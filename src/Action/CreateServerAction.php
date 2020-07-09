@@ -41,16 +41,7 @@ class CreateServerAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $server = (new Server($model->name))
-                ->setIp($model->ip)
-                ->setOperatingSystem($model->operatingSystem)
-                ->setSshPort($model->sshPort);
-
-            $server->addMember(
-                (new ServerMember())
-                    ->setUser($this->getUser())
-                    ->setAccessLevel(ServerMember::ACCESS_LEVEL_OWNER)
-            );
+            $server = Server::createFromCreationForm($model, $this->getUser());
 
             $this->entityManager->persist($server);
             $this->entityManager->flush();

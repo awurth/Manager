@@ -42,11 +42,7 @@ class ProfileAction extends AbstractUserSettingsAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user
-                ->setEmail($model->email)
-                ->setGender($model->gender)
-                ->setFirstname($model->firstname)
-                ->setLastname($model->lastname);
+            $user->updateFromProfileEditionForm($model);
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();

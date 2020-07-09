@@ -50,14 +50,9 @@ class AddProjectEnvironmentAction extends AbstractProjectAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->project->addEnvironment(
-                (new ProjectEnvironment($model->name, $model->path))
-                    ->setServer($model->server)
-                    ->setUrl($model->url)
-                    ->setDescription($model->description)
-            );
+            $environment = ProjectEnvironment::createFromCreationForm($model, $this->project);
 
-            $this->entityManager->persist($this->project);
+            $this->entityManager->persist($environment);
             $this->entityManager->flush();
 
             $this->flash('success', 'flash.success.project.environment.create');

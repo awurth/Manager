@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use App\Form\Model\CreateProjectGroup;
+use App\Form\Model\EditProjectGroup;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectGroupRepository")
@@ -42,15 +45,11 @@ class ProjectGroup
 
     /**
      * @ORM\Column(type="datetime")
-     *
-     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
@@ -64,10 +63,11 @@ class ProjectGroup
      */
     private $projects;
 
-    public function __construct(string $slug, string $name)
+    private function __construct(string $slug, string $name)
     {
         $this->slug = $slug;
         $this->name = $name;
+        $this->createdAt = new DateTimeImmutable();
 
         $this->members = new ArrayCollection();
         $this->projects = new ArrayCollection();
@@ -75,7 +75,26 @@ class ProjectGroup
 
     public function __toString(): string
     {
-        return $this->getName();
+        return $this->name;
+    }
+
+    public static function createFromCreationForm(CreateProjectGroup $createProjectGroup, User $owner): self
+    {
+        $projectGroup = new self($createProjectGroup->slug, $createProjectGroup->name);
+        $projectGroup->description = $createProjectGroup->description;
+        $projectGroup->client = $createProjectGroup->client;
+
+        $projectGroup->members[] = ProjectGroupMember::createOwner($projectGroup, $owner);
+
+        return $projectGroup;
+    }
+
+    public function updateFromEditionForm(EditProjectGroup $editProjectGroup): void
+    {
+        $this->name = $editProjectGroup->name;
+        $this->description = $editProjectGroup->description;
+        $this->client = $editProjectGroup->client;
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     public function getMemberByUser(User $user): ?ProjectGroupMember
@@ -99,23 +118,9 @@ class ProjectGroup
         return $this->client;
     }
 
-    public function setClient(?Client $client): self
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
     public function getSlug(): string
     {
         return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
     }
 
     public function getName(): string
@@ -123,47 +128,19 @@ class ProjectGroup
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -174,57 +151,11 @@ class ProjectGroup
         return $this->members;
     }
 
-    public function addMember(ProjectGroupMember $member): self
-    {
-        if (!$this->members->contains($member)) {
-            $this->members[] = $member;
-            $member->setProjectGroup($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMember(ProjectGroupMember $member): self
-    {
-        if ($this->members->contains($member)) {
-            $this->members->removeElement($member);
-            // set the owning side to null (unless already changed)
-            if ($member->getProjectGroup() === $this) {
-                $member->setProjectGroup(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|Project[]
      */
     public function getProjects(): Collection
     {
         return $this->projects;
-    }
-
-    public function addProject(Project $project): self
-    {
-        if (!$this->projects->contains($project)) {
-            $this->projects[] = $project;
-            $project->setProjectGroup($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProject(Project $project): self
-    {
-        if ($this->projects->contains($project)) {
-            $this->projects->removeElement($project);
-            // set the owning side to null (unless already changed)
-            if ($project->getProjectGroup() === $this) {
-                $project->setProjectGroup(null);
-            }
-        }
-
-        return $this;
     }
 }

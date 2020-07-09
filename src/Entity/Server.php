@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use App\Form\Model\CreateServer;
+use App\Form\Model\EditServer;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServerRepository")
@@ -41,15 +44,11 @@ class Server
 
     /**
      * @ORM\Column(type="datetime")
-     *
-     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
@@ -68,18 +67,40 @@ class Server
      */
     private $members;
 
-    public function __construct(string $name)
+    private function __construct(string $name)
     {
         $this->name = $name;
+        $this->createdAt = new DateTimeImmutable();
 
         $this->users = new ArrayCollection();
         $this->projectEnvironments = new ArrayCollection();
         $this->members = new ArrayCollection();
     }
 
+    public static function createFromCreationForm(CreateServer $createServer, User $owner): self
+    {
+        $server = new self($createServer->name);
+        $server->ip = $createServer->ip;
+        $server->operatingSystem = $createServer->operatingSystem;
+        $server->sshPort = $createServer->sshPort;
+
+        $server->members[] = ServerMember::createOwner($server, $owner);
+
+        return $server;
+    }
+
+    public function updateFromEditionForm(EditServer $editServer): void
+    {
+        $this->name = $editServer->name;
+        $this->ip = $editServer->ip;
+        $this->operatingSystem = $editServer->operatingSystem;
+        $this->sshPort = $editServer->sshPort;
+        $this->updatedAt = new DateTimeImmutable();
+    }
+
     public function __toString(): string
     {
-        return $this->getName();
+        return $this->name;
     }
 
     public function getMemberByUser(User $user): ?ServerMember
@@ -103,23 +124,9 @@ class Server
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getIp(): ?string
     {
         return $this->ip;
-    }
-
-    public function setIp(?string $ip): self
-    {
-        $this->ip = $ip;
-
-        return $this;
     }
 
     public function getOperatingSystem(): ?string
@@ -127,47 +134,19 @@ class Server
         return $this->operatingSystem;
     }
 
-    public function setOperatingSystem(?string $operatingSystem): self
-    {
-        $this->operatingSystem = $operatingSystem;
-
-        return $this;
-    }
-
     public function getSshPort(): ?int
     {
         return $this->sshPort;
     }
 
-    public function setSshPort(?int $sshPort): self
-    {
-        $this->sshPort = $sshPort;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -178,29 +157,6 @@ class Server
         return $this->users;
     }
 
-    public function addUser(ServerUser $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setServer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(ServerUser $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            // set the owning side to null (unless already changed)
-            if ($user->getServer() === $this) {
-                $user->setServer(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|ProjectEnvironment[]
      */
@@ -209,57 +165,11 @@ class Server
         return $this->projectEnvironments;
     }
 
-    public function addProjectEnvironment(ProjectEnvironment $projectEnvironment): self
-    {
-        if (!$this->projectEnvironments->contains($projectEnvironment)) {
-            $this->projectEnvironments[] = $projectEnvironment;
-            $projectEnvironment->setServer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProjectEnvironment(ProjectEnvironment $projectEnvironment): self
-    {
-        if ($this->projectEnvironments->contains($projectEnvironment)) {
-            $this->projectEnvironments->removeElement($projectEnvironment);
-            // set the owning side to null (unless already changed)
-            if ($projectEnvironment->getServer() === $this) {
-                $projectEnvironment->setServer(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|ServerMember[]
      */
     public function getMembers(): Collection
     {
         return $this->members;
-    }
-
-    public function addMember(ServerMember $member): self
-    {
-        if (!$this->members->contains($member)) {
-            $this->members[] = $member;
-            $member->setServer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMember(ServerMember $member): self
-    {
-        if ($this->members->contains($member)) {
-            $this->members->removeElement($member);
-            // set the owning side to null (unless already changed)
-            if ($member->getServer() === $this) {
-                $member->setServer(null);
-            }
-        }
-
-        return $this;
     }
 }

@@ -42,11 +42,7 @@ class EditServerAction extends AbstractServerAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->server
-                ->setName($model->name)
-                ->setIp($model->ip)
-                ->setOperatingSystem($model->operatingSystem)
-                ->setSshPort($model->sshPort);
+            $this->server->updateFromEditionForm($model);
 
             $this->entityManager->persist($this->server);
             $this->entityManager->flush();

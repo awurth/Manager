@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use App\Form\Model\Admin\CreateClient;
+use App\Form\Model\Admin\EditClient;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
@@ -51,15 +54,11 @@ class Client
 
     /**
      * @ORM\Column(type="datetime")
-     *
-     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
@@ -73,17 +72,41 @@ class Client
      */
     private $projectGroups;
 
-    public function __construct(string $name)
+    private function __construct(string $name)
     {
         $this->name = $name;
+        $this->createdAt = new DateTimeImmutable();
 
         $this->contacts = new ArrayCollection();
         $this->projectGroups = new ArrayCollection();
     }
 
+    public static function createFromAdminCreationForm(CreateClient $createClient): self
+    {
+        $client = new self($createClient->name);
+        $client->address = $createClient->address;
+        $client->postcode = $createClient->postcode;
+        $client->city = $createClient->city;
+        $client->phone = $createClient->phone;
+        $client->email = $createClient->email;
+
+        return $client;
+    }
+
+    public function updateFromAdminEditionForm(EditClient $editClient): void
+    {
+        $this->name = $editClient->name;
+        $this->address = $editClient->address;
+        $this->postcode = $editClient->postcode;
+        $this->city = $editClient->city;
+        $this->phone = $editClient->phone;
+        $this->email = $editClient->email;
+        $this->updatedAt = new DateTimeImmutable();
+    }
+
     public function __toString(): string
     {
-        return $this->getName();
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -96,23 +119,9 @@ class Client
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getAddress(): ?string
     {
         return $this->address;
-    }
-
-    public function setAddress(?string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
     }
 
     public function getPostcode(): ?string
@@ -120,23 +129,9 @@ class Client
         return $this->postcode;
     }
 
-    public function setPostcode(?string $postcode): self
-    {
-        $this->postcode = $postcode;
-
-        return $this;
-    }
-
     public function getCity(): ?string
     {
         return $this->city;
-    }
-
-    public function setCity(?string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
     }
 
     public function getPhone(): ?string
@@ -144,47 +139,19 @@ class Client
         return $this->phone;
     }
 
-    public function setPhone(?string $phone): self
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -195,57 +162,11 @@ class Client
         return $this->contacts;
     }
 
-    public function addContact(ClientContact $contact): self
-    {
-        if (!$this->contacts->contains($contact)) {
-            $this->contacts[] = $contact;
-            $contact->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeContact(ClientContact $contact): self
-    {
-        if ($this->contacts->contains($contact)) {
-            $this->contacts->removeElement($contact);
-            // set the owning side to null (unless already changed)
-            if ($contact->getClient() === $this) {
-                $contact->setClient(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|ProjectGroup[]
      */
     public function getProjectGroups(): Collection
     {
         return $this->projectGroups;
-    }
-
-    public function addProjectGroup(ProjectGroup $projectGroup): self
-    {
-        if (!$this->projectGroups->contains($projectGroup)) {
-            $this->projectGroups[] = $projectGroup;
-            $projectGroup->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProjectGroup(ProjectGroup $projectGroup): self
-    {
-        if ($this->projectGroups->contains($projectGroup)) {
-            $this->projectGroups->removeElement($projectGroup);
-            // set the owning side to null (unless already changed)
-            if ($projectGroup->getClient() === $this) {
-                $projectGroup->setClient(null);
-            }
-        }
-
-        return $this;
     }
 }

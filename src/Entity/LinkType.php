@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Form\Model\Admin\CreateLinkType;
+use App\Form\Model\Admin\EditLinkType;
 use App\Repository\LinkTypeRepository;
+use Awurth\UploadBundle\Storage\StorageInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,14 +40,40 @@ class LinkType
      */
     private $iconFilename;
 
-    public function __construct(string $name)
+    private function __construct(string $name)
     {
         $this->name = $name;
     }
 
     public function __toString(): string
     {
-        return $this->getName();
+        return $this->name;
+    }
+
+    public static function createFromAdminCreationForm(CreateLinkType $createLinkType, StorageInterface $uploader): self
+    {
+        $linkType = new self($createLinkType->name);
+        $linkType->color = $createLinkType->color;
+        $linkType->uriPrefix = $createLinkType->uriPrefix;
+
+        if ($createLinkType->iconFile) {
+            $upload = $uploader->upload($createLinkType->iconFile, $linkType, 'link_type_icon');
+            $linkType->iconFilename = $upload->getFilename();
+        }
+
+        return $linkType;
+    }
+
+    public function updateFromAdminEditionForm(EditLinkType $editLinkType, StorageInterface $uploader): void
+    {
+        $this->name = $editLinkType->name;
+        $this->color = $editLinkType->color;
+        $this->uriPrefix = $editLinkType->uriPrefix;
+
+        if ($editLinkType->iconFile) {
+            $upload = $uploader->upload($editLinkType->iconFile, $this, 'link_type_icon');
+            $this->iconFilename = $upload->getFilename();
+        }
     }
 
     public function getId(): ?int
@@ -57,23 +86,9 @@ class LinkType
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getColor(): ?string
     {
         return $this->color;
-    }
-
-    public function setColor(?string $color): self
-    {
-        $this->color = $color;
-
-        return $this;
     }
 
     public function getUriPrefix(): ?string
@@ -81,22 +96,8 @@ class LinkType
         return $this->uriPrefix;
     }
 
-    public function setUriPrefix(?string $uriPrefix): self
-    {
-        $this->uriPrefix = $uriPrefix;
-
-        return $this;
-    }
-
     public function getIconFilename(): ?string
     {
         return $this->iconFilename;
-    }
-
-    public function setIconFilename(?string $iconFilename): self
-    {
-        $this->iconFilename = $iconFilename;
-
-        return $this;
     }
 }

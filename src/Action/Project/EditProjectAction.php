@@ -49,15 +49,7 @@ class EditProjectAction extends AbstractProjectAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->project
-                ->setDescription($model->description)
-                ->setName($model->name)
-                ->setType($model->type);
-
-            if ($model->logoFile) {
-                $upload = $this->uploader->upload($model->logoFile, $this->project, 'project_logo');
-                $this->project->setLogoFilename($upload->getFilename());
-            }
+            $this->project->updateFromEditionForm($model, $this->uploader);
 
             $this->entityManager->persist($this->project);
             $this->entityManager->flush();

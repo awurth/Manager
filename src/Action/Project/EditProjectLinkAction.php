@@ -60,10 +60,7 @@ class EditProjectLinkAction extends AbstractProjectAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $link
-                ->setName($model->name)
-                ->setUri($model->uri)
-                ->setLinkType($model->linkType);
+            $link->updateFromProjectLinkEditionForm($model);
 
             $this->entityManager->persist($link);
             $this->entityManager->flush();

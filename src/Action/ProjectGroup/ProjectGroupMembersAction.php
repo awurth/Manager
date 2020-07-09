@@ -53,13 +53,9 @@ class ProjectGroupMembersAction extends AbstractProjectGroupAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->projectGroup->addMember(
-                (new ProjectGroupMember())
-                    ->setUser($model->user)
-                    ->setAccessLevel($model->accessLevel)
-            );
+            $member = ProjectGroupMember::createFromGroupMemberAdditionForm($model);
 
-            $this->entityManager->persist($this->projectGroup);
+            $this->entityManager->persist($member);
             $this->entityManager->flush();
 
             $this->flash('success', 'flash.success.project_group.member.add');

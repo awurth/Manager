@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
+use App\Form\Model\CreateProject;
+use App\Form\Model\EditProject;
+use Awurth\UploadBundle\Storage\StorageInterface;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
@@ -26,11 +30,6 @@ class Project
     private $projectGroup;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ProjectType", inversedBy="projects")
-     */
-    private $type;
-
-    /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $slug;
@@ -47,15 +46,11 @@ class Project
 
     /**
      * @ORM\Column(type="datetime")
-     *
-     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
@@ -79,10 +74,12 @@ class Project
      */
     private $links;
 
-    public function __construct(string $slug, string $name)
+    private function __construct(ProjectGroup $projectGroup, string $slug, string $name)
     {
+        $this->projectGroup = $projectGroup;
         $this->slug = $slug;
         $this->name = $name;
+        $this->createdAt = new DateTimeImmutable();
 
         $this->environments = new ArrayCollection();
         $this->members = new ArrayCollection();
@@ -91,7 +88,34 @@ class Project
 
     public function __toString(): string
     {
-        return $this->getName();
+        return $this->name;
+    }
+
+    public static function createFromCreationForm(CreateProject $createProject, User $owner, StorageInterface $uploader): self
+    {
+        $project = new self($createProject->projectGroup, $createProject->slug, $createProject->name);
+        $project->description = $createProject->description;
+
+        $project->members[] = ProjectMember::createOwner($project, $owner);
+
+        if ($createProject->logoFile) {
+            $upload = $uploader->upload($createProject->logoFile, $project, 'project_logo');
+            $project->logoFilename = $upload->getFilename();
+        }
+
+        return $project;
+    }
+
+    public function updateFromEditionForm(EditProject $editProject, StorageInterface $uploader): void
+    {
+        $this->name = $editProject->name;
+        $this->description = $editProject->description;
+        $this->updatedAt = new DateTimeImmutable();
+
+        if ($editProject->logoFile) {
+            $upload = $uploader->upload($editProject->logoFile, $this, 'project_logo');
+            $this->logoFilename = $upload->getFilename();
+        }
     }
 
     public function getMemberByUser(User $user): ?ProjectMember
@@ -115,35 +139,9 @@ class Project
         return $this->projectGroup;
     }
 
-    public function setProjectGroup(?ProjectGroup $projectGroup): self
-    {
-        $this->projectGroup = $projectGroup;
-
-        return $this;
-    }
-
-    public function getType(): ?ProjectType
-    {
-        return $this->type;
-    }
-
-    public function setType(?ProjectType $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
     public function getSlug(): string
     {
         return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
     }
 
     public function getName(): string
@@ -151,59 +149,24 @@ class Project
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     public function getLogoFilename(): ?string
     {
         return $this->logoFilename;
-    }
-
-    public function setLogoFilename(?string $logoFilename): self
-    {
-        $this->logoFilename = $logoFilename;
-
-        return $this;
     }
 
     /**
@@ -214,29 +177,6 @@ class Project
         return $this->environments;
     }
 
-    public function addEnvironment(ProjectEnvironment $environment): self
-    {
-        if (!$this->environments->contains($environment)) {
-            $this->environments[] = $environment;
-            $environment->setProject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEnvironment(ProjectEnvironment $environment): self
-    {
-        if ($this->environments->contains($environment)) {
-            $this->environments->removeElement($environment);
-            // set the owning side to null (unless already changed)
-            if ($environment->getProject() === $this) {
-                $environment->setProject(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|ProjectMember[]
      */
@@ -245,57 +185,11 @@ class Project
         return $this->members;
     }
 
-    public function addMember(ProjectMember $member): self
-    {
-        if (!$this->members->contains($member)) {
-            $this->members[] = $member;
-            $member->setProject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMember(ProjectMember $member): self
-    {
-        if ($this->members->contains($member)) {
-            $this->members->removeElement($member);
-            // set the owning side to null (unless already changed)
-            if ($member->getProject() === $this) {
-                $member->setProject(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|Link[]
      */
     public function getLinks(): Collection
     {
         return $this->links;
-    }
-
-    public function addLink(Link $link): self
-    {
-        if (!$this->links->contains($link)) {
-            $this->links[] = $link;
-            $link->setProject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLink(Link $link): self
-    {
-        if ($this->links->contains($link)) {
-            $this->links->removeElement($link);
-            // set the owning side to null (unless already changed)
-            if ($link->getProject() === $this) {
-                $link->setProject(null);
-            }
-        }
-
-        return $this;
     }
 }
