@@ -2,8 +2,8 @@
 
 namespace App\Action\Server;
 
-use App\Action\BreadcrumbsTrait;
-use App\Action\SecurityTrait;
+use App\Action\Traits\BreadcrumbsTrait;
+use App\Action\Traits\SecurityTrait;
 use App\Entity\Server;
 use App\Repository\ServerRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

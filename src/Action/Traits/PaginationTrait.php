@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Traits;
 
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;

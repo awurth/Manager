@@ -2,9 +2,9 @@
 
 namespace App\Action\Credentials;
 
-use App\Action\FlashTrait;
-use App\Action\RoutingTrait;
-use App\Action\SecurityTrait;
+use App\Action\Traits\FlashTrait;
+use App\Action\Traits\RoutingTrait;
+use App\Action\Traits\SecurityTrait;
 use App\Repository\CredentialsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;

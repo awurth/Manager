@@ -2,8 +2,8 @@
 
 namespace App\Action\Project;
 
-use App\Action\PaginationTrait;
-use App\Action\TwigTrait;
+use App\Action\Traits\PaginationTrait;
+use App\Action\Traits\TwigTrait;
 use App\Repository\LinkRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;

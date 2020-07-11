@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Traits;
 
 use App\Entity\User;
 use Symfony\Component\HttpKernel\Exception\HttpException;

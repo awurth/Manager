@@ -2,9 +2,9 @@
 
 namespace App\Action\UserSettings;
 
-use App\Action\FlashTrait;
-use App\Action\RoutingTrait;
-use App\Action\TwigTrait;
+use App\Action\Traits\FlashTrait;
+use App\Action\Traits\RoutingTrait;
+use App\Action\Traits\TwigTrait;
 use App\Form\Model\ChangePassword;
 use App\Form\Type\Action\ChangePasswordType;
 use Doctrine\ORM\EntityManagerInterface;

@@ -2,10 +2,10 @@
 
 namespace App\Action\Admin;
 
-use App\Action\FlashTrait;
-use App\Action\RoutingTrait;
-use App\Action\SecurityTrait;
-use App\Action\TwigTrait;
+use App\Action\Traits\FlashTrait;
+use App\Action\Traits\RoutingTrait;
+use App\Action\Traits\SecurityTrait;
+use App\Action\Traits\TwigTrait;
 use App\Entity\LinkType;
 use App\Form\Model\Admin\CreateLinkType;
 use App\Form\Type\Action\Admin\CreateLinkTypeType;

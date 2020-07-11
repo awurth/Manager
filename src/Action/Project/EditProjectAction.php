@@ -2,9 +2,9 @@
 
 namespace App\Action\Project;
 
-use App\Action\FlashTrait;
-use App\Action\RoutingTrait;
-use App\Action\TwigTrait;
+use App\Action\Traits\FlashTrait;
+use App\Action\Traits\RoutingTrait;
+use App\Action\Traits\TwigTrait;
 use App\Form\Type\Action\EditProjectType;
 use App\Form\Model\EditProject;
 use Awurth\UploadBundle\Storage\StorageInterface;

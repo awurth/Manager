@@ -2,6 +2,9 @@
 
 namespace App\Action;
 
+use App\Action\Traits\PaginationTrait;
+use App\Action\Traits\SecurityTrait;
+use App\Action\Traits\TwigTrait;
 use App\Repository\ProjectGroupRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;

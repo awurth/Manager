@@ -2,9 +2,9 @@
 
 namespace App\Action\Server;
 
-use App\Action\EntityUrlTrait;
-use App\Action\FlashTrait;
-use App\Action\RoutingTrait;
+use App\Action\Traits\EntityUrlTrait;
+use App\Action\Traits\FlashTrait;
+use App\Action\Traits\RoutingTrait;
 use App\Entity\ServerMember;
 use App\Repository\ServerMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;

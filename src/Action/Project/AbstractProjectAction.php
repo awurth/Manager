@@ -2,8 +2,8 @@
 
 namespace App\Action\Project;
 
-use App\Action\BreadcrumbsTrait;
-use App\Action\SecurityTrait;
+use App\Action\Traits\BreadcrumbsTrait;
+use App\Action\Traits\SecurityTrait;
 use App\Entity\Project;
 use App\Entity\ProjectGroup;
 use App\Repository\ProjectGroupRepository;

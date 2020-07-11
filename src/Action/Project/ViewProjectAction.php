@@ -2,7 +2,7 @@
 
 namespace App\Action\Project;
 
-use App\Action\TwigTrait;
+use App\Action\Traits\TwigTrait;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 

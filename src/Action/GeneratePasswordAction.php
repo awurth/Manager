@@ -2,6 +2,7 @@
 
 namespace App\Action;
 
+use App\Action\Traits\TwigTrait;
 use App\Form\Model\GeneratePassword;
 use App\Form\Type\Action\GeneratePasswordType;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;

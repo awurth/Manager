@@ -2,10 +2,10 @@
 
 namespace App\Action\Project;
 
-use App\Action\FlashTrait;
-use App\Action\PaginationTrait;
-use App\Action\RoutingTrait;
-use App\Action\TwigTrait;
+use App\Action\Traits\FlashTrait;
+use App\Action\Traits\PaginationTrait;
+use App\Action\Traits\RoutingTrait;
+use App\Action\Traits\TwigTrait;
 use App\Entity\ProjectMember;
 use App\Form\Model\AddProjectMember;
 use App\Form\Type\Action\AddProjectMemberType;

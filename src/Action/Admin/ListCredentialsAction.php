@@ -2,9 +2,9 @@
 
 namespace App\Action\Admin;
 
-use App\Action\PaginationTrait;
-use App\Action\SecurityTrait;
-use App\Action\TwigTrait;
+use App\Action\Traits\PaginationTrait;
+use App\Action\Traits\SecurityTrait;
+use App\Action\Traits\TwigTrait;
 use App\Repository\CredentialsRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;

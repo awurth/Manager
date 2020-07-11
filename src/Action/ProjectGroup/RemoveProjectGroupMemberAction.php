@@ -2,9 +2,9 @@
 
 namespace App\Action\ProjectGroup;
 
-use App\Action\EntityUrlTrait;
-use App\Action\FlashTrait;
-use App\Action\RoutingTrait;
+use App\Action\Traits\EntityUrlTrait;
+use App\Action\Traits\FlashTrait;
+use App\Action\Traits\RoutingTrait;
 use App\Entity\ProjectGroupMember;
 use App\Repository\ProjectGroupMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;

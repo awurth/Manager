@@ -2,8 +2,8 @@
 
 namespace App\Action\Project;
 
-use App\Action\FlashTrait;
-use App\Action\RoutingTrait;
+use App\Action\Traits\FlashTrait;
+use App\Action\Traits\RoutingTrait;
 use App\Repository\ProjectEnvironmentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;

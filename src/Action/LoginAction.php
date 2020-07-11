@@ -2,6 +2,9 @@
 
 namespace App\Action;
 
+use App\Action\Traits\RoutingTrait;
+use App\Action\Traits\SecurityTrait;
+use App\Action\Traits\TwigTrait;
 use App\Form\Type\Action\LoginType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;

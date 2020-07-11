@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Traits;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

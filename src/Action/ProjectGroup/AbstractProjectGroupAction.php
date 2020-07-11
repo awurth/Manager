@@ -2,8 +2,8 @@
 
 namespace App\Action\ProjectGroup;
 
-use App\Action\BreadcrumbsTrait;
-use App\Action\SecurityTrait;
+use App\Action\Traits\BreadcrumbsTrait;
+use App\Action\Traits\SecurityTrait;
 use App\Entity\ProjectGroup;
 use App\Repository\ProjectGroupRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

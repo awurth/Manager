@@ -2,8 +2,8 @@
 
 namespace App\Action\Credentials;
 
-use App\Action\SecurityTrait;
-use App\Action\TwigTrait;
+use App\Action\Traits\SecurityTrait;
+use App\Action\Traits\TwigTrait;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 

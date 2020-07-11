@@ -2,9 +2,9 @@
 
 namespace App\Action\Project;
 
-use App\Action\EntityUrlTrait;
-use App\Action\FlashTrait;
-use App\Action\RoutingTrait;
+use App\Action\Traits\EntityUrlTrait;
+use App\Action\Traits\FlashTrait;
+use App\Action\Traits\RoutingTrait;
 use App\Entity\ProjectMember;
 use App\Repository\ProjectMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;

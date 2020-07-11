@@ -2,6 +2,10 @@
 
 namespace App\Action;
 
+use App\Action\Traits\FilterTrait;
+use App\Action\Traits\PaginationTrait;
+use App\Action\Traits\SecurityTrait;
+use App\Action\Traits\TwigTrait;
 use App\Form\Filter\ProjectType;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\QueryBuilder;

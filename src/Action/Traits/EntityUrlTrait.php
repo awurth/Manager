@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Traits;
 
 use App\Routing\EntityUrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

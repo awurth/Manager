@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Traits;
 
 use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 

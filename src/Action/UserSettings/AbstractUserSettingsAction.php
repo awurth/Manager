@@ -2,8 +2,8 @@
 
 namespace App\Action\UserSettings;
 
-use App\Action\BreadcrumbsTrait;
-use App\Action\SecurityTrait;
+use App\Action\Traits\BreadcrumbsTrait;
+use App\Action\Traits\SecurityTrait;
 
 abstract class AbstractUserSettingsAction
 {

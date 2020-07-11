@@ -2,7 +2,7 @@
 
 namespace App\Action\Admin;
 
-use App\Action\BreadcrumbsTrait;
+use App\Action\Traits\BreadcrumbsTrait;
 
 class AbstractAdminAction
 {

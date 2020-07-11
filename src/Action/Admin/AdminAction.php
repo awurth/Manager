@@ -2,8 +2,8 @@
 
 namespace App\Action\Admin;
 
-use App\Action\SecurityTrait;
-use App\Action\TwigTrait;
+use App\Action\Traits\SecurityTrait;
+use App\Action\Traits\TwigTrait;
 use App\Repository\ClientRepository;
 use App\Repository\ProjectGroupRepository;
 use App\Repository\ProjectRepository;

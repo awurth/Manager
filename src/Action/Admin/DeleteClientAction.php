@@ -2,9 +2,9 @@
 
 namespace App\Action\Admin;
 
-use App\Action\FlashTrait;
-use App\Action\RoutingTrait;
-use App\Action\SecurityTrait;
+use App\Action\Traits\FlashTrait;
+use App\Action\Traits\RoutingTrait;
+use App\Action\Traits\SecurityTrait;
 use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
