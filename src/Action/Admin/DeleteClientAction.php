@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/client/{id}/delete", requirements={"id": "\d+"}, name="app_admin_client_delete")
+ * @Route("/client/{id}/delete", name="app_admin_client_delete")
  */
 class DeleteClientAction
 {
@@ -29,7 +29,7 @@ class DeleteClientAction
         $this->clientRepository = $clientRepository;
     }
 
-    public function __invoke(int $id): Response
+    public function __invoke(string $id): Response
     {
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');

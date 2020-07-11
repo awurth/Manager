@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/member/{id}/remove", requirements={"id": "\d+"}, name="app_project_member_remove")
+ * @Route("/member/{id}/remove", name="app_project_member_remove")
  */
 class RemoveProjectMemberAction extends AbstractProjectAction
 {
@@ -30,7 +30,7 @@ class RemoveProjectMemberAction extends AbstractProjectAction
         $this->projectMemberRepository = $projectMemberRepository;
     }
 
-    public function __invoke(string $projectGroupSlug, string $projectSlug, int $id): Response
+    public function __invoke(string $projectGroupSlug, string $projectSlug, string $id): Response
     {
         $this->preInvoke($projectGroupSlug, $projectSlug, false);
 

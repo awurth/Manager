@@ -13,7 +13,7 @@ class ViewServerAction extends AbstractServerAction
 {
     use TwigTrait;
 
-    public function __invoke(int $id): Response
+    public function __invoke(string $id): Response
     {
         $this->preInvoke($id);
 

@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/member/{memberId}/remove", requirements={"member": "\d+"}, name="app_server_member_remove")
+ * @Route("/member/{memberId}/remove", name="app_server_member_remove")
  */
 class RemoveServerMemberAction extends AbstractServerAction
 {
@@ -30,7 +30,7 @@ class RemoveServerMemberAction extends AbstractServerAction
         $this->serverMemberRepository = $serverMemberRepository;
     }
 
-    public function __invoke(int $id, int $memberId): Response
+    public function __invoke(string $id, string $memberId): Response
     {
         $this->preInvoke($id, false);
 

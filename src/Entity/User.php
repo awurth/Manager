@@ -9,6 +9,8 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -23,8 +25,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid_binary")
      */
     private $id;
 
@@ -95,6 +96,7 @@ class User implements UserInterface
 
     private function __construct(string $email, string $firstname, string $lastname)
     {
+        $this->id = Uuid::uuid4();
         $this->email = $email;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
@@ -224,7 +226,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getId(): ?int
+    public function getId(): UuidInterface
     {
         return $this->id;
     }

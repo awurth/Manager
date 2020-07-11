@@ -23,7 +23,7 @@ class DeleteServerAction extends AbstractServerAction
         $this->entityManager = $entityManager;
     }
 
-    public function __invoke(int $id): Response
+    public function __invoke(string $id): Response
     {
         $this->preInvoke($id, false);
 

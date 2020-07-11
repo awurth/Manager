@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/environment/{id}/remove", requirements={"id": "\d+"}, name="app_project_environment_remove")
+ * @Route("/environment/{id}/remove", name="app_project_environment_remove")
  */
 class RemoveProjectEnvironmentAction extends AbstractProjectAction
 {
@@ -28,7 +28,7 @@ class RemoveProjectEnvironmentAction extends AbstractProjectAction
         $this->projectEnvironmentRepository = $projectEnvironmentRepository;
     }
 
-    public function __invoke(Request $request, string $projectGroupSlug, string $projectSlug, int $id): Response
+    public function __invoke(Request $request, string $projectGroupSlug, string $projectSlug, string $id): Response
     {
         $this->preInvoke($projectGroupSlug, $projectSlug, false);
 

@@ -83,7 +83,7 @@ class ProjectGroupMembersAction extends AbstractProjectGroupAction
         return $this->projectGroupMemberRepository->createQueryBuilder('m')
             ->join('m.user', 'u')->addSelect('u')
             ->where('m.projectGroup = :group')
-            ->setParameter('group', $this->projectGroup)
+            ->setParameter('group', $this->projectGroup->getId(), 'uuid_binary')
             ->orderBy('m.accessLevel', 'DESC')
             ->addOrderBy('m.createdAt', 'DESC');
     }

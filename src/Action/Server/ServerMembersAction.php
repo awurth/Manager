@@ -83,7 +83,7 @@ class ServerMembersAction extends AbstractServerAction
         return $this->serverMemberRepository->createQueryBuilder('m')
             ->join('m.user', 'u')->addSelect('u')
             ->where('m.server = :server')
-            ->setParameter('server', $this->server)
+            ->setParameter('server', $this->server->getId(), 'uuid_binary')
             ->orderBy('m.accessLevel', 'DESC')
             ->addOrderBy('m.createdAt', 'DESC');
     }

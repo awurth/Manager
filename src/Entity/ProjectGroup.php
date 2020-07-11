@@ -9,6 +9,8 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectGroupRepository")
@@ -17,8 +19,7 @@ class ProjectGroup
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid_binary")
      */
     private $id;
 
@@ -65,6 +66,7 @@ class ProjectGroup
 
     private function __construct(string $slug, string $name)
     {
+        $this->id = Uuid::uuid4();
         $this->slug = $slug;
         $this->name = $name;
         $this->createdAt = new DateTimeImmutable();
@@ -108,7 +110,7 @@ class ProjectGroup
         return null;
     }
 
-    public function getId(): ?int
+    public function getId(): UuidInterface
     {
         return $this->id;
     }

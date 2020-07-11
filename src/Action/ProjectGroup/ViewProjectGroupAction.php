@@ -50,7 +50,7 @@ class ViewProjectGroupAction extends AbstractProjectGroupAction
     {
         return $this->projectRepository->createQueryBuilder('p')
             ->where('p.projectGroup = :group')
-            ->setParameter('group', $this->projectGroup)
+            ->setParameter('group', $this->projectGroup->getId(), 'uuid_binary')
             ->orderBy('p.createdAt', 'DESC');
     }
 }

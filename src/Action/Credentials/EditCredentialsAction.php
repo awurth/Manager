@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/credentials/{id}/edit", requirements={"id": "\d+"}, name="app_credentials_edit")
+ * @Route("/credentials/{id}/edit", name="app_credentials_edit")
  */
 class EditCredentialsAction
 {
@@ -41,7 +41,7 @@ class EditCredentialsAction
         $this->formFactory = $formFactory;
     }
 
-    public function __invoke(Request $request, int $id): Response
+    public function __invoke(Request $request, string $id): Response
     {
         $this->denyAccessUnlessLoggedIn();
 

@@ -16,6 +16,7 @@
         "lexik/form-filter-bundle": "^6.0",
         "mhujer/breadcrumbs-bundle": "^1.5",
         "nesbot/carbon": "^2.32",
+        "ramsey/uuid-doctrine": "^1.6",
         "rollerworks/password-strength-bundle": "^2.2",
         "symfony/asset": "5.1.*",
         "symfony/console": "5.1.*",

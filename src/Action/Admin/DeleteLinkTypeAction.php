@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/link-type/{id}/delete", requirements={"id": "\d+"}, name="app_admin_link_type_delete")
+ * @Route("/link-type/{id}/delete", name="app_admin_link_type_delete")
  */
 class DeleteLinkTypeAction
 {
@@ -29,7 +29,7 @@ class DeleteLinkTypeAction
         $this->linkTypeRepository = $linkTypeRepository;
     }
 
-    public function __invoke(int $id): Response
+    public function __invoke(string $id): Response
     {
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');

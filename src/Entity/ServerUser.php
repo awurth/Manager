@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServerUserRepository")
@@ -11,8 +13,7 @@ class ServerUser
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid_binary")
      */
     private $id;
 
@@ -34,6 +35,7 @@ class ServerUser
 
     private function __construct(Server $server)
     {
+        $this->id = Uuid::uuid4();
         $this->server = $server;
     }
 
@@ -42,7 +44,7 @@ class ServerUser
         return (string)$this->username;
     }
 
-    public function getId(): ?int
+    public function getId(): UuidInterface
     {
         return $this->id;
     }

@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/environment/{id}/edit", requirements={"id": "\d+"}, name="app_project_environment_edit")
+ * @Route("/environment/{id}/edit", name="app_project_environment_edit")
  */
 class EditProjectEnvironmentAction extends AbstractProjectAction
 {
@@ -39,7 +39,7 @@ class EditProjectEnvironmentAction extends AbstractProjectAction
         $this->projectEnvironmentRepository = $projectEnvironmentRepository;
     }
 
-    public function __invoke(Request $request, string $projectGroupSlug, string $projectSlug, int $id): Response
+    public function __invoke(Request $request, string $projectGroupSlug, string $projectSlug, string $id): Response
     {
         $this->preInvoke($projectGroupSlug, $projectSlug);
 

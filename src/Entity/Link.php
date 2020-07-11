@@ -6,6 +6,8 @@ use App\Form\Model\AddProjectLink;
 use App\Form\Model\EditProjectLink;
 use App\Repository\LinkRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=LinkRepository::class)
@@ -14,8 +16,7 @@ class Link
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid_binary")
      */
     private $id;
 
@@ -42,6 +43,7 @@ class Link
 
     private function __construct(string $name, string $uri)
     {
+        $this->id = Uuid::uuid4();
         $this->name = $name;
         $this->uri = $uri;
     }
@@ -67,7 +69,7 @@ class Link
         $this->linkType = $editProjectLink->linkType;
     }
 
-    public function getId(): ?int
+    public function getId(): UuidInterface
     {
         return $this->id;
     }

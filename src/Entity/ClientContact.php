@@ -5,6 +5,8 @@ namespace App\Entity;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientContactRepository")
@@ -13,8 +15,7 @@ class ClientContact
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid_binary")
      */
     private $id;
 
@@ -61,6 +62,7 @@ class ClientContact
 
     private function __construct(Client $client)
     {
+        $this->id = Uuid::uuid4();
         $this->client = $client;
         $this->createdAt = new DateTimeImmutable();
     }
@@ -70,7 +72,7 @@ class ClientContact
         return (string)$this->email;
     }
 
-    public function getId(): ?int
+    public function getId(): UuidInterface
     {
         return $this->id;
     }

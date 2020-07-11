@@ -8,8 +8,6 @@ app_server:
     resource: ../src/Action/Server/
     type: annotation
     prefix: /server/{id}
-    requirements:
-        id: \d+
     trailing_slash_on_root: false
 
 app_project_group:

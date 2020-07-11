@@ -31,7 +31,7 @@ class EditServerAction extends AbstractServerAction
         $this->formFactory = $formFactory;
     }
 
-    public function __invoke(Request $request, int $id): Response
+    public function __invoke(Request $request, string $id): Response
     {
         $this->preInvoke($id);
 

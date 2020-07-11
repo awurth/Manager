@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/link/{id}/edit", requirements={"id": "\d+"}, name="app_project_link_edit")
+ * @Route("/link/{id}/edit", name="app_project_link_edit")
  */
 class EditProjectLinkAction extends AbstractProjectAction
 {
@@ -39,7 +39,7 @@ class EditProjectLinkAction extends AbstractProjectAction
         $this->linkRepository = $linkRepository;
     }
 
-    public function __invoke(Request $request, string $projectGroupSlug, string $projectSlug, int $id): Response
+    public function __invoke(Request $request, string $projectGroupSlug, string $projectSlug, string $id): Response
     {
         $this->preInvoke($projectGroupSlug, $projectSlug);
 

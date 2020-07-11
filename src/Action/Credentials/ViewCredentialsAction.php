@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/credentials/{id}", requirements={"id": "\d+"}, name="app_credentials_view")
+ * @Route("/credentials/{id}", name="app_credentials_view")
  */
 class ViewCredentialsAction
 {
@@ -24,7 +24,7 @@ class ViewCredentialsAction
         $this->credentialsRepository = $credentialsRepository;
     }
 
-    public function __invoke(int $id): Response
+    public function __invoke(string $id): Response
     {
         $this->denyAccessUnlessLoggedIn();
 

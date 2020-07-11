@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/link-type/{id}/edit", requirements={"id": "\d+"}, name="app_admin_link_type_edit")
+ * @Route("/link-type/{id}/edit", name="app_admin_link_type_edit")
  */
 class EditLinkTypeAction extends AbstractAdminAction
 {
@@ -45,7 +45,7 @@ class EditLinkTypeAction extends AbstractAdminAction
         $this->uploader = $uploader;
     }
 
-    public function __invoke(Request $request, int $id): Response
+    public function __invoke(Request $request, string $id): Response
     {
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');

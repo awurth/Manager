@@ -6,6 +6,8 @@ use App\Form\Model\AddServerMember;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServerMemberRepository")
@@ -21,8 +23,7 @@ class ServerMember
 
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid_binary")
      */
     private $id;
 
@@ -55,6 +56,7 @@ class ServerMember
 
     private function __construct(Server $server, User $user, int $accessLevel)
     {
+        $this->id = Uuid::uuid4();
         $this->server = $server;
         $this->user = $user;
         $this->accessLevel = $accessLevel;
@@ -75,7 +77,7 @@ class ServerMember
         return new self($server, $user, self::ACCESS_LEVEL_OWNER);
     }
 
-    public function getId(): ?int
+    public function getId(): UuidInterface
     {
         return $this->id;
     }

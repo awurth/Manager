@@ -50,7 +50,7 @@ class UniqueUserEmailValidator extends ConstraintValidator
         if ($user) {
             $qb
                 ->andWhere('u != :user')
-                ->setParameter('user', $user);
+                ->setParameter('user', $user->getId(), 'uuid_binary');
         }
 
         return $qb->getQuery()->getOneOrNullResult();

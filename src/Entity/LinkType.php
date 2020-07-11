@@ -7,6 +7,8 @@ use App\Form\Model\Admin\EditLinkType;
 use App\Repository\LinkTypeRepository;
 use Awurth\UploadBundle\Storage\StorageInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=LinkTypeRepository::class)
@@ -15,8 +17,7 @@ class LinkType
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid_binary")
      */
     private $id;
 
@@ -42,6 +43,7 @@ class LinkType
 
     private function __construct(string $name)
     {
+        $this->id = Uuid::uuid4();
         $this->name = $name;
     }
 
@@ -76,7 +78,7 @@ class LinkType
         }
     }
 
-    public function getId(): ?int
+    public function getId(): UuidInterface
     {
         return $this->id;
     }

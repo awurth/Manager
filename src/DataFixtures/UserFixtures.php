@@ -25,6 +25,7 @@ class UserFixtures extends Fixture
 
         $createUser = new CreateUser();
         $createUser->email = 'contact@alexiswurth.fr';
+        $createUser->gender = User::GENDER_NEUTRAL;
         $createUser->firstname = 'Alexis';
         $createUser->lastname = 'Wurth';
         $createUser->role = 'ROLE_ADMIN';

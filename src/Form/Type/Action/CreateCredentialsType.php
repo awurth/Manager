@@ -44,7 +44,7 @@ class CreateCredentialsType extends AbstractType
                 'query_builder' => function (UserRepository $repository) {
                     return $repository->createQueryBuilder('u')
                         ->where('u != :user')
-                        ->setParameter('user', $this->tokenStorage->getToken()->getUser());
+                        ->setParameter('user', $this->tokenStorage->getToken()->getUser()->getId(), 'uuid_binary');
                 },
                 'required' => false
             ]);

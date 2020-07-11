@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/client/{id}/edit", requirements={"id": "\d+"}, name="app_admin_client_edit")
+ * @Route("/client/{id}/edit", name="app_admin_client_edit")
  */
 class EditClientAction extends AbstractAdminAction
 {
@@ -41,7 +41,7 @@ class EditClientAction extends AbstractAdminAction
         $this->formFactory = $formFactory;
     }
 
-    public function __invoke(Request $request, int $id): Response
+    public function __invoke(Request $request, string $id): Response
     {
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');

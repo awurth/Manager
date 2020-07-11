@@ -9,6 +9,8 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CredentialsRepository")
@@ -17,8 +19,7 @@ class Credentials
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid_binary")
      */
     private $id;
 
@@ -69,6 +70,7 @@ class Credentials
 
     private function __construct(string $name, string $password)
     {
+        $this->id = Uuid::uuid4();
         $this->name = $name;
         $this->password = $password;
         $this->createdAt = new DateTimeImmutable();
@@ -129,7 +131,7 @@ class Credentials
     }
 
 
-    public function getId(): ?int
+    public function getId(): UuidInterface
     {
         return $this->id;
     }

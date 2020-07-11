@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/credentials/{id}/delete", requirements={"id": "\d+"}, name="app_credentials_delete")
+ * @Route("/credentials/{id}/delete", name="app_credentials_delete")
  */
 class DeleteCredentialsAction
 {
@@ -33,7 +33,7 @@ class DeleteCredentialsAction
         $this->entityManager = $entityManager;
     }
 
-    public function __invoke(Request $request, int $id): Response
+    public function __invoke(Request $request, string $id): Response
     {
         $this->denyAccessUnlessLoggedIn();
 
