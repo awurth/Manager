@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Form\Model\Admin\CreateUser;
+use App\Form\Model\ChangePassword;
 use App\Form\Model\EditProfile;
 use DateTimeImmutable;
 use DateTimeInterface;
@@ -123,6 +124,11 @@ class User implements UserInterface
         $user->password = $userPasswordEncoder->encodePassword($user, $createUser->plainPassword);
 
         return $user;
+    }
+
+    public function updateFromPasswordChangeForm(ChangePassword $changePassword, UserPasswordEncoderInterface $userPasswordEncoder): void
+    {
+        $this->password = $userPasswordEncoder->encodePassword($this, $changePassword->newPassword);
     }
 
     public function updateFromProfileEditionForm(EditProfile $editProfile): void

@@ -49,7 +49,7 @@ class ChangePasswordAction extends AbstractUserSettingsAction
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
 
-            $user->setPassword($this->userPasswordEncoder->encodePassword($user, $model->newPassword));
+            $user->updateFromPasswordChangeForm($model, $this->userPasswordEncoder);
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();
