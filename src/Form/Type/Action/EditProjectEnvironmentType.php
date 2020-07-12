@@ -17,7 +17,8 @@ class EditProjectEnvironmentType extends AbstractType
     {
         $builder
             ->add('server', EntityType::class, [
-                'class' => Server::class
+                'class' => Server::class,
+                'choice_value' => 'id'
             ])
             ->add('name')
             ->add('path')

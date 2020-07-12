@@ -40,6 +40,7 @@ class CreateCredentialsType extends AbstractType
             ])
             ->add('users', EntityType::class, [
                 'class' => User::class,
+                'choice_value' => 'id',
                 'multiple' => true,
                 'query_builder' => function (UserRepository $repository) {
                     return $repository->createQueryBuilder('u')

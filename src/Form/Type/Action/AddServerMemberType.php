@@ -31,6 +31,7 @@ class AddServerMemberType extends AbstractType
 
             $event->getForm()->add('user', EntityType::class, [
                 'class' => User::class,
+                'choice_value' => 'id',
                 'query_builder' => static function (UserRepository $repository) use ($model) {
                     $serverMemberIds = [];
                     foreach ($model->getServer()->getMembers() as $serverMember) {

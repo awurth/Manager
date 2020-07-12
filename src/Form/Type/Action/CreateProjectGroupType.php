@@ -22,6 +22,7 @@ class CreateProjectGroupType extends AbstractType
             ])
             ->add('client', EntityType::class, [
                 'class' => Client::class,
+                'choice_value' => 'id',
                 'placeholder' => 'select_client',
                 'required' => false
             ]);
