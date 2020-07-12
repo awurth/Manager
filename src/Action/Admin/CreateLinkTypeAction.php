@@ -26,9 +26,9 @@ class CreateLinkTypeAction extends AbstractAdminAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $entityManager;
-    private $formFactory;
-    private $uploader;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
+    private StorageInterface $uploader;
 
     public function __construct(
         EntityManagerInterface $entityManager,

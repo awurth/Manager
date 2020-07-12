@@ -19,8 +19,8 @@ class RemoveProjectLinkAction extends AbstractProjectAction
     use FlashTrait;
     use RoutingTrait;
 
-    private $entityManager;
-    private $linkRepository;
+    private EntityManagerInterface $entityManager;
+    private LinkRepository $linkRepository;
 
     public function __construct(EntityManagerInterface $entityManager, LinkRepository $linkRepository)
     {

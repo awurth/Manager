@@ -20,7 +20,7 @@ class ListClientsAction extends AbstractAdminAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $clientRepository;
+    private ClientRepository $clientRepository;
 
     public function __construct(ClientRepository $clientRepository)
     {

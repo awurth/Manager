@@ -25,18 +25,11 @@ class EditProjectGroupAction extends AbstractProjectGroupAction
     use RoutingTrait;
     use TwigTrait;
 
-    private $entityManager;
-    private $formFactory;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
 
-    /**
-     * @var FormInterface
-     */
-    private $editForm;
-
-    /**
-     * @var FormInterface
-     */
-    private $slugChangeForm;
+    private FormInterface $editForm;
+    private FormInterface $slugChangeForm;
 
     public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory)
     {

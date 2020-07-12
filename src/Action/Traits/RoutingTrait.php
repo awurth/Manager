@@ -8,10 +8,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 trait RoutingTrait
 {
-    /**
-     * @var RouterInterface
-     */
-    protected $router;
+    protected RouterInterface $router;
 
     protected function getReferer(Request $request): ?string
     {

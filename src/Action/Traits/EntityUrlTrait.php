@@ -7,10 +7,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 trait EntityUrlTrait
 {
-    /**
-     * @var EntityUrlGeneratorInterface
-     */
-    protected $entityUrlGenerator;
+    protected EntityUrlGeneratorInterface $entityUrlGenerator;
 
     protected function redirectToEntity($entity, string $routeName, array $parameters = [], int $status = 302): RedirectResponse
     {

@@ -9,7 +9,7 @@ use Twig\TwigFilter;
 
 class CarbonExtension extends AbstractExtension
 {
-    private $locale;
+    private string $locale;
 
     public function __construct(string $locale)
     {

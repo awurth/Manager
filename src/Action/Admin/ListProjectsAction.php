@@ -20,7 +20,7 @@ class ListProjectsAction extends AbstractAdminAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $projectRepository;
+    private ProjectRepository $projectRepository;
 
     public function __construct(ProjectRepository $projectRepository)
     {

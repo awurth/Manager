@@ -12,11 +12,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProjectMenuBuilder
 {
-    private $authorizationChecker;
-    private $factory;
-    private $projectRepository;
-    private $requestStack;
-    private $uploader;
+    private AuthorizationCheckerInterface $authorizationChecker;
+    private FactoryInterface $factory;
+    private ProjectRepository $projectRepository;
+    private RequestStack $requestStack;
+    private StorageInterface $uploader;
 
     public function __construct(
         AuthorizationCheckerInterface $authorizationChecker,

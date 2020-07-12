@@ -9,10 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 trait FilterTrait
 {
-    /**
-     * @var FilterBuilderUpdaterInterface
-     */
-    protected $filterBuilderUpdater;
+    protected FilterBuilderUpdaterInterface $filterBuilderUpdater;
 
     protected function filter(QueryBuilder $queryBuilder, FormInterface $form, Request $request): void
     {

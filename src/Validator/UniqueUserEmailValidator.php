@@ -11,8 +11,8 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class UniqueUserEmailValidator extends ConstraintValidator
 {
-    private $userRepository;
-    private $propertyAccessor;
+    private UserRepository $userRepository;
+    private PropertyAccessorInterface $propertyAccessor;
 
     public function __construct(PropertyAccessorInterface $propertyAccessor, UserRepository $userRepository)
     {

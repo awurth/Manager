@@ -10,8 +10,8 @@ use Symfony\Component\Security\Core\Security;
 
 class UserProjectGroupChoiceType extends AbstractType
 {
-    private $projectGroupRepository;
-    private $security;
+    private ProjectGroupRepository $projectGroupRepository;
+    private Security $security;
 
     public function __construct(ProjectGroupRepository $projectGroupRepository, Security $security)
     {

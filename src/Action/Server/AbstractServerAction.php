@@ -14,15 +14,9 @@ abstract class AbstractServerAction
     use BreadcrumbsTrait;
     use SecurityTrait;
 
-    /**
-     * @var ServerRepository
-     */
-    protected $serverRepository;
+    protected ServerRepository $serverRepository;
 
-    /**
-     * @var Server
-     */
-    protected $server;
+    protected ?Server $server;
 
     protected function preInvoke(string $id, bool $breadcrumb = true): void
     {

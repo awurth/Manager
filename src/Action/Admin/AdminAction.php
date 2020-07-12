@@ -19,10 +19,10 @@ class AdminAction extends AbstractAdminAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $clientRepository;
-    private $projectGroupRepository;
-    private $projectRepository;
-    private $serverRepository;
+    private ClientRepository $clientRepository;
+    private ProjectGroupRepository $projectGroupRepository;
+    private ProjectRepository $projectRepository;
+    private ServerRepository $serverRepository;
 
     public function __construct(
         ClientRepository $clientRepository,

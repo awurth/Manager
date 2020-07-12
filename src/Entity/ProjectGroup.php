@@ -21,48 +21,48 @@ class ProjectGroup
      * @ORM\Id()
      * @ORM\Column(type="uuid_binary")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="projectGroups")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
-    private $client;
+    private ?Client $client;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $slug;
+    private ?string $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private ?DateTimeInterface $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectGroupMember", mappedBy="projectGroup", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $members;
+    private Collection $members;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="projectGroup", cascade={"persist"})
      */
-    private $projects;
+    private Collection $projects;
 
     private function __construct(string $slug, string $name)
     {

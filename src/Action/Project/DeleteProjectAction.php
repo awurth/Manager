@@ -17,7 +17,7 @@ class DeleteProjectAction extends AbstractProjectAction
     use FlashTrait;
     use RoutingTrait;
 
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {

@@ -18,7 +18,7 @@ class GeneratePasswordAction
 {
     use TwigTrait;
 
-    private $formFactory;
+    private FormFactoryInterface $formFactory;
 
     public function __construct(FormFactoryInterface $formFactory)
     {

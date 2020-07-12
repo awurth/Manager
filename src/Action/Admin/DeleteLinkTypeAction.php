@@ -20,8 +20,8 @@ class DeleteLinkTypeAction
     use RoutingTrait;
     use SecurityTrait;
 
-    private $entityManager;
-    private $linkTypeRepository;
+    private EntityManagerInterface $entityManager;
+    private LinkTypeRepository $linkTypeRepository;
 
     public function __construct(EntityManagerInterface $entityManager, LinkTypeRepository $linkTypeRepository)
     {

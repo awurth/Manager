@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LinkTypeChoiceType extends AbstractType
 {
-    private $linkTypeRepository;
+    private LinkTypeRepository $linkTypeRepository;
 
     public function __construct(LinkTypeRepository $linkTypeRepository)
     {

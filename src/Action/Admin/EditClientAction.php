@@ -26,9 +26,9 @@ class EditClientAction extends AbstractAdminAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $clientRepository;
-    private $entityManager;
-    private $formFactory;
+    private ClientRepository $clientRepository;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
 
     public function __construct(
         ClientRepository $clientRepository,

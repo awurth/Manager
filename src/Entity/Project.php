@@ -22,58 +22,58 @@ class Project
      * @ORM\Id()
      * @ORM\Column(type="uuid_binary")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ProjectGroup", inversedBy="projects")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $projectGroup;
+    private ProjectGroup $projectGroup;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $slug;
+    private ?string $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private ?DateTimeInterface $updatedAt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $logoFilename;
+    private ?string $logoFilename;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectEnvironment", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $environments;
+    private Collection $environments;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectMember", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $members;
+    private Collection $members;
 
     /**
      * @ORM\OneToMany(targetEntity=Link::class, mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $links;
+    private Collection $links;
 
     private function __construct(ProjectGroup $projectGroup, string $slug, string $name)
     {

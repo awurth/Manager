@@ -27,9 +27,9 @@ class ProjectGroupMembersAction extends AbstractProjectGroupAction
     use RoutingTrait;
     use TwigTrait;
 
-    private $entityManager;
-    private $formFactory;
-    private $projectGroupMemberRepository;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
+    private ProjectGroupMemberRepository $projectGroupMemberRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,

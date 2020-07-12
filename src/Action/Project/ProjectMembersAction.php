@@ -27,9 +27,9 @@ class ProjectMembersAction extends AbstractProjectAction
     use RoutingTrait;
     use TwigTrait;
 
-    private $entityManager;
-    private $formFactory;
-    private $projectMemberRepository;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
+    private ProjectMemberRepository $projectMemberRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,

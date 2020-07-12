@@ -20,7 +20,7 @@ class ListServersAction extends AbstractAdminAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $serverRepository;
+    private ServerRepository $serverRepository;
 
     public function __construct(ServerRepository $serverRepository)
     {

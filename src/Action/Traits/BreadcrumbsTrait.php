@@ -6,10 +6,7 @@ use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 trait BreadcrumbsTrait
 {
-    /**
-     * @var Breadcrumbs
-     */
-    protected $breadcrumbs;
+    protected Breadcrumbs $breadcrumbs;
 
     protected function configureBreadcrumbs(): void
     {

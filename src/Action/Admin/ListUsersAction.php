@@ -20,7 +20,7 @@ class ListUsersAction extends AbstractAdminAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {

@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class UniqueProjectSlug extends Constraint
 {
-    public $message = 'The slug "{{ slug }}" is already used.';
+    public string $message = 'The slug "{{ slug }}" is already used.';
 
     public function getTargets(): string
     {

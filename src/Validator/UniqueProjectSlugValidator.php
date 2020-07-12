@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class UniqueProjectSlugValidator extends ConstraintValidator
 {
-    private $projectRepository;
+    private ProjectRepository $projectRepository;
 
     public function __construct(ProjectRepository $projectRepository)
     {

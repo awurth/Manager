@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class UniqueUserEmail extends Constraint
 {
-    public $message = 'The email "{{ email }}" is already used.';
+    public string $message = 'The email "{{ email }}" is already used.';
 
     public function getTargets(): string
     {

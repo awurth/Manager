@@ -28,72 +28,72 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\Column(type="uuid_binary")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $email;
+    private string $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $gender = self::GENDER_NEUTRAL;
+    private int $gender = self::GENDER_NEUTRAL;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $firstname;
+    private string $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $lastname;
+    private string $lastname;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private ?DateTimeInterface $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\CryptographicKey", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $cryptographicKeys;
+    private Collection $cryptographicKeys;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectGroupMember", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $projectGroupMembers;
+    private Collection $projectGroupMembers;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectMember", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $projectMembers;
+    private Collection $projectMembers;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ServerMember", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true))
      */
-    private $serverMembers;
+    private Collection $serverMembers;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\CredentialsUser", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $credentialsUsers;
+    private Collection $credentialsUsers;
 
     private function __construct(string $email, string $firstname, string $lastname)
     {

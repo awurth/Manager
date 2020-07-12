@@ -21,24 +21,24 @@ class CredentialsUser
      * @ORM\Id()
      * @ORM\Column(type="uuid_binary")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Credentials", inversedBy="credentialsUsers")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $credentials;
+    private Credentials $credentials;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="credentialsUsers")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private User $user;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $accessLevel;
+    private int $accessLevel;
 
     private function __construct(Credentials $credentials, User $user, int $accessLevel)
     {

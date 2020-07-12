@@ -10,10 +10,7 @@ use Throwable;
 
 trait SecurityTrait
 {
-    /**
-     * @var Security
-     */
-    protected $security;
+    protected Security $security;
 
     protected function createAccessDeniedException(string $message = 'Access Denied.', ?Throwable $previous = null): AccessDeniedException
     {

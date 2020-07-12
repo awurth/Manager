@@ -6,7 +6,7 @@ use InvalidArgumentException;
 
 class ChainEntityUrlGenerator implements EntityUrlGeneratorInterface
 {
-    private $generators;
+    private iterable $generators;
 
     /**
      * @param EntityUrlGeneratorInterface[]|iterable $generators

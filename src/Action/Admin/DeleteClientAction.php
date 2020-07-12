@@ -20,8 +20,8 @@ class DeleteClientAction
     use RoutingTrait;
     use SecurityTrait;
 
-    private $entityManager;
-    private $clientRepository;
+    private EntityManagerInterface $entityManager;
+    private ClientRepository $clientRepository;
 
     public function __construct(EntityManagerInterface $entityManager, ClientRepository $clientRepository)
     {

@@ -18,7 +18,7 @@ class ListProjectLinksAction extends AbstractProjectAction
     use PaginationTrait;
     use TwigTrait;
 
-    private $linkRepository;
+    private LinkRepository $linkRepository;
 
     public function __construct(LinkRepository $linkRepository)
     {

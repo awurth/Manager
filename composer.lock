@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84f67d78e60a7b3bf71d0b6b6866c40e",
+    "content-hash": "f84f6b3d3c6026e2c8677c83f4188dc9",
     "packages": [
         {
             "name": "awurth/upload-bundle",
@@ -8316,12 +8316,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "f4600041afebb27f696b9e9cb84904d2028a556d"
+                "reference": "881b9e4a8de3186c93904230bdf6344b685fe6a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/f4600041afebb27f696b9e9cb84904d2028a556d",
-                "reference": "f4600041afebb27f696b9e9cb84904d2028a556d",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/881b9e4a8de3186c93904230bdf6344b685fe6a5",
+                "reference": "881b9e4a8de3186c93904230bdf6344b685fe6a5",
                 "shasum": ""
             },
             "conflict": {
@@ -8595,7 +8595,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-10T19:06:45+00:00"
+            "time": "2020-07-11T19:04:25+00:00"
         },
         {
             "name": "symfony/debug-bundle",
@@ -8918,7 +8918,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3",
+        "php": "^7.4",
         "ext-apcu": "*",
         "ext-ctype": "*",
         "ext-iconv": "*"

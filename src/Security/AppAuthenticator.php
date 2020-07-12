@@ -19,9 +19,9 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
-    private $formFactory;
-    private $passwordEncoder;
-    private $urlGenerator;
+    private FormFactoryInterface $formFactory;
+    private UserPasswordEncoderInterface $passwordEncoder;
+    private UrlGeneratorInterface $urlGenerator;
 
     public function __construct(FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator, UserPasswordEncoderInterface $passwordEncoder)
     {

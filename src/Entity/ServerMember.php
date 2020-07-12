@@ -25,34 +25,34 @@ class ServerMember
      * @ORM\Id()
      * @ORM\Column(type="uuid_binary")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Server", inversedBy="members")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $server;
+    private Server $server;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="serverMembers")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private User $user;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $accessLevel;
+    private int $accessLevel;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private ?DateTimeInterface $updatedAt;
 
     private function __construct(Server $server, User $user, int $accessLevel)
     {

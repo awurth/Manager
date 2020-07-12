@@ -9,8 +9,8 @@ use Symfony\Component\Security\Core\Security;
 
 class UserSettingsMenuBuilder
 {
-    private $factory;
-    private $security;
+    private FactoryInterface $factory;
+    private Security $security;
 
     public function __construct(FactoryInterface $factory, Security $security)
     {

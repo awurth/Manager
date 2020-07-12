@@ -26,9 +26,9 @@ class CreateUserAction extends AbstractAdminAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $entityManager;
-    private $formFactory;
-    private $userPasswordEncoder;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
+    private UserPasswordEncoderInterface $userPasswordEncoder;
 
     public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, UserPasswordEncoderInterface $userPasswordEncoder)
     {

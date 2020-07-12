@@ -23,8 +23,8 @@ class AddProjectLinkAction extends AbstractProjectAction
     use RoutingTrait;
     use TwigTrait;
 
-    private $entityManager;
-    private $formFactory;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
 
     public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory)
     {

@@ -15,23 +15,23 @@ class ServerUser
      * @ORM\Id()
      * @ORM\Column(type="uuid_binary")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Server", inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $server;
+    private Server $server;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $username;
+    private ?string $username;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $password;
+    private ?string $password;
 
     private function __construct(Server $server)
     {

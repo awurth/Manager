@@ -26,9 +26,9 @@ class EditCredentialsAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $credentialsRepository;
-    private $entityManager;
-    private $formFactory;
+    private CredentialsRepository $credentialsRepository;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
 
     public function __construct(
         CredentialsRepository $credentialsRepository,

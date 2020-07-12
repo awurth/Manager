@@ -21,8 +21,8 @@ class DeleteCredentialsAction
     use RoutingTrait;
     use SecurityTrait;
 
-    private $credentialsRepository;
-    private $entityManager;
+    private CredentialsRepository $credentialsRepository;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(
         CredentialsRepository $credentialsRepository,

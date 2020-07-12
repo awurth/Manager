@@ -2,15 +2,11 @@
 
 namespace App\Action\Traits;
 
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 trait FlashTrait
 {
-    /**
-     * @var Session
-     */
-    protected $session;
+    protected SessionInterface $session;
 
     protected function flash(string $type, string $message): void
     {

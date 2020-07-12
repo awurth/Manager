@@ -29,7 +29,7 @@ class AccessLevelLabelExtension extends AbstractExtension
         ServerMember::ACCESS_LEVEL_OWNER => 'server.member.access_level.owner'
     ];
 
-    private $translator;
+    private TranslatorInterface $translator;
 
     public function __construct(TranslatorInterface $translator)
     {

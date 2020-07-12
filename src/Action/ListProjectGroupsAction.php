@@ -20,7 +20,7 @@ class ListProjectGroupsAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $projectGroupRepository;
+    private ProjectGroupRepository $projectGroupRepository;
 
     public function __construct(ProjectGroupRepository $projectGroupRepository)
     {

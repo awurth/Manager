@@ -21,8 +21,8 @@ class RemoveServerMemberAction extends AbstractServerAction
     use FlashTrait;
     use RoutingTrait;
 
-    private $entityManager;
-    private $serverMemberRepository;
+    private EntityManagerInterface $entityManager;
+    private ServerMemberRepository $serverMemberRepository;
 
     public function __construct(EntityManagerInterface $entityManager, ServerMemberRepository $serverMemberRepository)
     {

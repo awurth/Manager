@@ -20,7 +20,7 @@ class ListLinkTypesAction extends AbstractAdminAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $linkTypeRepository;
+    private LinkTypeRepository $linkTypeRepository;
 
     public function __construct(LinkTypeRepository $linkTypeRepository)
     {

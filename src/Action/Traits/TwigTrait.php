@@ -7,10 +7,7 @@ use Twig\Environment;
 
 trait TwigTrait
 {
-    /**
-     * @var Environment
-     */
-    protected $twig;
+    protected Environment $twig;
 
     protected function render(string $template, array $parameters = [], Response $response = null): Response
     {

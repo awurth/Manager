@@ -18,28 +18,28 @@ class Link
      * @ORM\Id()
      * @ORM\Column(type="uuid_binary")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=LinkType::class)
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
-    private $linkType;
+    private ?LinkType $linkType;
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="links")
      */
-    private $project;
+    private ?Project $project;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $uri;
+    private string $uri;
 
     private function __construct(string $name, string $uri)
     {

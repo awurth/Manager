@@ -14,15 +14,9 @@ abstract class AbstractProjectGroupAction
     use BreadcrumbsTrait;
     use SecurityTrait;
 
-    /**
-     * @var ProjectGroupRepository
-     */
-    protected $projectGroupRepository;
+    protected ProjectGroupRepository $projectGroupRepository;
 
-    /**
-     * @var ProjectGroup
-     */
-    protected $projectGroup;
+    protected ?ProjectGroup $projectGroup;
 
     protected function preInvoke(string $slug, bool $breadcrumb = true): void
     {

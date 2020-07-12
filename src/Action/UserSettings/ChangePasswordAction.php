@@ -23,9 +23,9 @@ class ChangePasswordAction extends AbstractUserSettingsAction
     use RoutingTrait;
     use TwigTrait;
 
-    private $entityManager;
-    private $formFactory;
-    private $userPasswordEncoder;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
+    private UserPasswordEncoderInterface $userPasswordEncoder;
 
     public function __construct(
         EntityManagerInterface $entityManager,

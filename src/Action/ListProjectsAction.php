@@ -24,8 +24,8 @@ class ListProjectsAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $formFactory;
-    private $projectRepository;
+    private FormFactoryInterface $formFactory;
+    private ProjectRepository $projectRepository;
 
     public function __construct(FormFactoryInterface $formFactory, ProjectRepository $projectRepository)
     {

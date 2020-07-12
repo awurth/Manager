@@ -19,49 +19,49 @@ class ProjectEnvironment
      * @ORM\Id()
      * @ORM\Column(type="uuid_binary")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="environments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $project;
+    private Project $project;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Server", inversedBy="projectEnvironments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $server;
+    private Server $server;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $path;
+    private string $path;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $url;
+    private ?string $url;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private ?DateTimeInterface $updatedAt;
 
     private function __construct(Project $project, Server $server, string $name, string $path)
     {

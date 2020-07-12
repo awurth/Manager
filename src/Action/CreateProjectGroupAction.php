@@ -25,8 +25,8 @@ class CreateProjectGroupAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $formFactory;
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface$formFactory;
 
     public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory)
     {

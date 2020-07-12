@@ -11,10 +11,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProjectGroupMenuBuilder
 {
-    private $authorizationChecker;
-    private $factory;
-    private $projectGroupRepository;
-    private $requestStack;
+    private AuthorizationCheckerInterface $authorizationChecker;
+    private FactoryInterface $factory;
+    private ProjectGroupRepository $projectGroupRepository;
+    private RequestStack $requestStack;
 
     public function __construct(
         AuthorizationCheckerInterface $authorizationChecker,

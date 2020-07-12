@@ -19,27 +19,27 @@ class LinkType
      * @ORM\Id()
      * @ORM\Column(type="uuid_binary")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=7, nullable=true)
      */
-    private $color;
+    private ?string $color;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $uriPrefix;
+    private ?string $uriPrefix;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $iconFilename;
+    private ?string $iconFilename;
 
     private function __construct(string $name)
     {

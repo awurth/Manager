@@ -8,7 +8,7 @@ use Twig\TwigFunction;
 
 class EntityUrlGeneratorExtension extends AbstractExtension
 {
-    private $entityUrlGenerator;
+    private EntityUrlGeneratorInterface $entityUrlGenerator;
 
     public function __construct(EntityUrlGeneratorInterface $entityUrlGenerator)
     {

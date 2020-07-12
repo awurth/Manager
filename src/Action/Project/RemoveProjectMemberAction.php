@@ -21,8 +21,8 @@ class RemoveProjectMemberAction extends AbstractProjectAction
     use FlashTrait;
     use RoutingTrait;
 
-    private $entityManager;
-    private $projectMemberRepository;
+    private EntityManagerInterface $entityManager;
+    private ProjectMemberRepository $projectMemberRepository;
 
     public function __construct(EntityManagerInterface $entityManager, ProjectMemberRepository $projectMemberRepository)
     {

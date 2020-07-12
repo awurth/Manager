@@ -19,9 +19,9 @@ class SearchAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $projectGroupRepository;
-    private $projectRepository;
-    private $serverRepository;
+    private ProjectGroupRepository $projectGroupRepository;
+    private ProjectRepository $projectRepository;
+    private ServerRepository $serverRepository;
 
     public function __construct(
         ProjectGroupRepository $projectGroupRepository,

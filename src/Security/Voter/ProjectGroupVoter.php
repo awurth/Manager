@@ -18,7 +18,7 @@ class ProjectGroupVoter extends Voter
         'OWNER' => ProjectGroupMember::ACCESS_LEVEL_OWNER
     ];
 
-    private $authorizationChecker;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(AuthorizationCheckerInterface $authorizationChecker)
     {

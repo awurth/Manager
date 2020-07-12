@@ -20,8 +20,8 @@ class LoginAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $authenticationUtils;
-    private $formFactory;
+    private AuthenticationUtils $authenticationUtils;
+    private FormFactoryInterface $formFactory;
 
     public function __construct(AuthenticationUtils $authenticationUtils, FormFactoryInterface $formFactory)
     {

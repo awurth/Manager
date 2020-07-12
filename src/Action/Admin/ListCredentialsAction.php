@@ -20,7 +20,7 @@ class ListCredentialsAction extends AbstractAdminAction
     use SecurityTrait;
     use TwigTrait;
 
-    private $credentialsRepository;
+    private CredentialsRepository $credentialsRepository;
 
     public function __construct(CredentialsRepository $credentialsRepository)
     {

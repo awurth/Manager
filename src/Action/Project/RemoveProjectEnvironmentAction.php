@@ -19,8 +19,8 @@ class RemoveProjectEnvironmentAction extends AbstractProjectAction
     use FlashTrait;
     use RoutingTrait;
 
-    private $entityManager;
-    private $projectEnvironmentRepository;
+    private EntityManagerInterface $entityManager;
+    private ProjectEnvironmentRepository $projectEnvironmentRepository;
 
     public function __construct(EntityManagerInterface $entityManager, ProjectEnvironmentRepository $projectEnvironmentRepository)
     {

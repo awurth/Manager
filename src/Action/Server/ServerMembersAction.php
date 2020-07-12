@@ -27,9 +27,9 @@ class ServerMembersAction extends AbstractServerAction
     use RoutingTrait;
     use TwigTrait;
 
-    private $entityManager;
-    private $formFactory;
-    private $serverMemberRepository;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
+    private ServerMemberRepository $serverMemberRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,

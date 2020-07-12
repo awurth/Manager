@@ -24,9 +24,9 @@ class EditProjectEnvironmentAction extends AbstractProjectAction
     use RoutingTrait;
     use TwigTrait;
 
-    private $entityManager;
-    private $formFactory;
-    private $projectEnvironmentRepository;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
+    private ProjectEnvironmentRepository $projectEnvironmentRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,

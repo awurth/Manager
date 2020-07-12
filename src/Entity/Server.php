@@ -21,52 +21,52 @@ class Server
      * @ORM\Id()
      * @ORM\Column(type="uuid_binary")
      */
-    private $id;
+    private UuidInterface $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $ip;
+    private ?string $ip;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $operatingSystem;
+    private ?string $operatingSystem;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $sshPort;
+    private ?int $sshPort;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private ?DateTimeInterface $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ServerUser", mappedBy="server", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $users;
+    private Collection $users;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectEnvironment", mappedBy="server", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $projectEnvironments;
+    private Collection $projectEnvironments;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ServerMember", mappedBy="server", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $members;
+    private Collection $members;
 
     private function __construct(string $name)
     {
