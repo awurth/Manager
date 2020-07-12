@@ -17,7 +17,7 @@ export default class Select {
     this.render();
   }
 
-  private getDefaultValue (): Array<any> | object {
+  private getDefaultValue (): Array<{ value: string; label: string }> | { value: string; label: string } {
     if (this.element.multiple) {
       const selected = [];
       this.element.querySelectorAll('option[selected]').forEach((option: HTMLOptionElement) => {
@@ -30,28 +30,44 @@ export default class Select {
       return selected;
     }
 
-    const selected = this.element.querySelector('option[selected]') as HTMLOptionElement;
+    if (this.element.value) {
+      const selected = this.element.querySelector(`option[value="${this.element.value}"]`) as HTMLOptionElement;
+      return selected ? {
+        value: selected.value,
+        label: selected.textContent
+      } : null;
+    }
 
-    return selected ? {
-      value: selected.value,
-      label: selected.textContent
-    } : null;
+    return null;
   }
 
-  private getOptions (): Array<any> {
+  private getPlaceholder (): string {
+    let placeholder = '';
+    this.element.querySelectorAll('option').forEach((option: HTMLOptionElement) => {
+      if (option.value === '') {
+        placeholder = option.textContent;
+      }
+    });
+
+    return placeholder;
+  }
+
+  private getOptions (): Array<{ value: string; label: string }> {
     const options = [];
     this.element.querySelectorAll('option').forEach((option: HTMLOptionElement) => {
-      options.push({
-        value: option.value,
-        label: option.textContent
-      });
+      if (option.value !== '') {
+        options.push({
+          value: option.value,
+          label: option.textContent
+        });
+      }
     });
 
     return options;
   }
 
   @bind
-  private onChange (value: any): void {
+  private onChange (value: Array<{ value: string }> | { value: string }): void {
     this.element.querySelectorAll('option').forEach((option: HTMLOptionElement) => {
       option.selected = false;
     });
@@ -81,10 +97,11 @@ export default class Select {
   private render (): void {
     const options = this.getOptions();
 
-    const LinkTypeChoice = () => (
+    const LinkTypeChoice = (): ReactSelect => (
       <ReactSelect
+        placeholder={this.getPlaceholder()}
         defaultValue={this.getDefaultValue()}
-        isClearable={!this.element.required}
+        isClearable={!this.element.required && !!this.getPlaceholder()}
         isDisabled={this.element.disabled}
         isMulti={this.element.multiple}
         onChange={this.onChange}
@@ -117,6 +134,7 @@ export default class Select {
     const container = document.createElement('div');
 
     this.element.style.display = 'none';
+    this.element.required = false;
     this.element.insertAdjacentElement('afterend', container);
 
     ReactDOM.render(<LinkTypeChoice/>, container);
