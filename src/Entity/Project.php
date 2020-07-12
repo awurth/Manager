@@ -25,7 +25,7 @@ class Project
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ProjectGroup", inversedBy="projects")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProjectGroup")
      * @ORM\JoinColumn(nullable=false)
      */
     private ProjectGroup $projectGroup;
@@ -61,19 +61,9 @@ class Project
     private ?string $logoFilename;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectEnvironment", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private Collection $environments;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjectMember", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private Collection $members;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Link::class, mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private Collection $links;
 
     private function __construct(ProjectGroup $projectGroup, string $slug, string $name)
     {
@@ -83,9 +73,7 @@ class Project
         $this->name = $name;
         $this->createdAt = new DateTimeImmutable();
 
-        $this->environments = new ArrayCollection();
         $this->members = new ArrayCollection();
-        $this->links = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -172,26 +160,10 @@ class Project
     }
 
     /**
-     * @return Collection|ProjectEnvironment[]
-     */
-    public function getEnvironments(): Collection
-    {
-        return $this->environments;
-    }
-
-    /**
      * @return Collection|ProjectMember[]
      */
     public function getMembers(): Collection
     {
-        return $this->members;
-    }
-
-    /**
-     * @return Collection|Link[]
-     */
-    public function getLinks(): Collection
-    {
-        return $this->links;
+        return new ArrayCollection($this->members->toArray());
     }
 }

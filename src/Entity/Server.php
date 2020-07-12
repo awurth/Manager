@@ -54,16 +54,6 @@ class Server
     private ?DateTimeInterface $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ServerUser", mappedBy="server", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private Collection $users;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectEnvironment", mappedBy="server", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private Collection $projectEnvironments;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ServerMember", mappedBy="server", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private Collection $members;
@@ -74,8 +64,6 @@ class Server
         $this->name = $name;
         $this->createdAt = new DateTimeImmutable();
 
-        $this->users = new ArrayCollection();
-        $this->projectEnvironments = new ArrayCollection();
         $this->members = new ArrayCollection();
     }
 
@@ -152,26 +140,10 @@ class Server
     }
 
     /**
-     * @return Collection|ServerUser[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    /**
-     * @return Collection|ProjectEnvironment[]
-     */
-    public function getProjectEnvironments(): Collection
-    {
-        return $this->projectEnvironments;
-    }
-
-    /**
      * @return Collection|ServerMember[]
      */
     public function getMembers(): Collection
     {
-        return $this->members;
+        return new ArrayCollection($this->members->toArray());
     }
 }

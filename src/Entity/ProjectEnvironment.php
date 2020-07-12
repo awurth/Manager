@@ -22,13 +22,13 @@ class ProjectEnvironment
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="environments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project")
      * @ORM\JoinColumn(nullable=false)
      */
     private Project $project;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Server", inversedBy="projectEnvironments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Server")
      * @ORM\JoinColumn(nullable=false)
      */
     private Server $server;

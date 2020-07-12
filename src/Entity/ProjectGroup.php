@@ -24,7 +24,7 @@ class ProjectGroup
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="projectGroups")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private ?Client $client;
@@ -59,11 +59,6 @@ class ProjectGroup
      */
     private Collection $members;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="projectGroup", cascade={"persist"})
-     */
-    private Collection $projects;
-
     private function __construct(string $slug, string $name)
     {
         $this->id = Uuid::uuid4();
@@ -72,7 +67,6 @@ class ProjectGroup
         $this->createdAt = new DateTimeImmutable();
 
         $this->members = new ArrayCollection();
-        $this->projects = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -150,14 +144,6 @@ class ProjectGroup
      */
     public function getMembers(): Collection
     {
-        return $this->members;
-    }
-
-    /**
-     * @return Collection|Project[]
-     */
-    public function getProjects(): Collection
-    {
-        return $this->projects;
+        return new ArrayCollection($this->members->toArray());
     }
 }

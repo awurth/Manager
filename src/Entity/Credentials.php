@@ -181,6 +181,6 @@ class Credentials
      */
     public function getCredentialsUsers(): Collection
     {
-        return $this->credentialsUsers;
+        return new ArrayCollection($this->credentialsUsers->toArray());
     }
 }

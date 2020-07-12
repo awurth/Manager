@@ -27,9 +27,9 @@
         {% endif %}
       </div>
       <p class="leading-relaxed text-base">{{ project.description }}</p>
-      {% if project.links|length %}
+      {% if links|length %}
         <div class="flex flex-wrap mt-3">
-          {% for link in project.links %}
+          {% for link in links %}
             <a
               class="flex items-center border-2 rounded-full text-xs font-medium text-gray-800 px-2 py-1 mr-2"
               href="{{ link.uri }}"

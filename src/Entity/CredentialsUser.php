@@ -30,7 +30,7 @@ class CredentialsUser
     private Credentials $credentials;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="credentialsUsers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private User $user;

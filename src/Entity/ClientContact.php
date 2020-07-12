@@ -20,7 +20,7 @@ class ClientContact
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="contacts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client")
      * @ORM\JoinColumn(nullable=false)
      */
     private Client $client;

@@ -7,9 +7,9 @@
       Nouvel environnement
     </a>
   {% endif %}
-  {% if project.environments|length %}
+  {% if environments|length %}
     <div class="grid grid-cols-2 gap-4">
-      {% for environment in project.environments %}
+      {% for environment in environments %}
         <div class="card">
           <h2 class="text-gray-900 text-lg font-medium mb-3">{{ environment.name }}</h2>
           {% if environment.description %}

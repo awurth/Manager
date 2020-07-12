@@ -18,7 +18,7 @@ class ServerUser
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Server", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Server")
      * @ORM\JoinColumn(nullable=false)
      */
     private Server $server;

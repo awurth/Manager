@@ -6,8 +6,6 @@ use App\Form\Model\Admin\CreateClient;
 use App\Form\Model\Admin\EditClient;
 use DateTimeImmutable;
 use DateTimeInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -63,24 +61,11 @@ class Client
      */
     private ?DateTimeInterface $updatedAt;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ClientContact", mappedBy="client", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private Collection $contacts;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectGroup", mappedBy="client", cascade={"persist"})
-     */
-    private Collection $projectGroups;
-
     private function __construct(string $name)
     {
         $this->id = Uuid::uuid4();
         $this->name = $name;
         $this->createdAt = new DateTimeImmutable();
-
-        $this->contacts = new ArrayCollection();
-        $this->projectGroups = new ArrayCollection();
     }
 
     public static function createFromAdminCreationForm(CreateClient $createClient): self
@@ -154,21 +139,5 @@ class Client
     public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * @return Collection|ClientContact[]
-     */
-    public function getContacts(): Collection
-    {
-        return $this->contacts;
-    }
-
-    /**
-     * @return Collection|ProjectGroup[]
-     */
-    public function getProjectGroups(): Collection
-    {
-        return $this->projectGroups;
     }
 }

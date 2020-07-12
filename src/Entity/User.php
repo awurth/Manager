@@ -7,8 +7,6 @@ use App\Form\Model\ChangePassword;
 use App\Form\Model\EditProfile;
 use DateTimeImmutable;
 use DateTimeInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -61,31 +59,6 @@ class User implements UserInterface
      */
     private ?DateTimeInterface $updatedAt;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CryptographicKey", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private Collection $cryptographicKeys;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectGroupMember", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private Collection $projectGroupMembers;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectMember", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private Collection $projectMembers;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ServerMember", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true))
-     */
-    private Collection $serverMembers;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CredentialsUser", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private Collection $credentialsUsers;
-
     private function __construct(string $email, string $firstname, string $lastname)
     {
         $this->id = Uuid::uuid4();
@@ -93,12 +66,6 @@ class User implements UserInterface
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->createdAt = new DateTimeImmutable();
-
-        $this->cryptographicKeys = new ArrayCollection();
-        $this->projectGroupMembers = new ArrayCollection();
-        $this->projectMembers = new ArrayCollection();
-        $this->serverMembers = new ArrayCollection();
-        $this->credentialsUsers = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -134,60 +101,6 @@ class User implements UserInterface
         return $this->getFirstname().' '.$this->getLastname();
     }
 
-    /**
-     * @return CryptographicKey[]
-     */
-    public function getSshKeys(): array
-    {
-        $sshKeys = [];
-        foreach ($this->getCryptographicKeys() as $cryptographicKey) {
-            if ($cryptographicKey->getType() === CryptographicKey::TYPE_SSH) {
-                $sshKeys[] = $cryptographicKey;
-            }
-        }
-
-        return $sshKeys;
-    }
-
-    /**
-     * @return ProjectGroup[]
-     */
-    public function getProjectGroups(): array
-    {
-        $projectGroups = [];
-        foreach ($this->getProjectGroupMembers() as $projectGroupMember) {
-            $projectGroups[] = $projectGroupMember->getProjectGroup();
-        }
-
-        return $projectGroups;
-    }
-
-    /**
-     * @return Project[]
-     */
-    public function getProjects(): array
-    {
-        $projects = [];
-        foreach ($this->getProjectMembers() as $projectMember) {
-            $projects[] = $projectMember->getProject();
-        }
-
-        return $projects;
-    }
-
-    /**
-     * @return Credentials[]
-     */
-    public function getCredentialsList(): array
-    {
-        $credentialsList = [];
-        foreach ($this->getCredentialsUsers() as $credentialsUser) {
-            $credentialsList[] = $credentialsUser->getCredentials();
-        }
-
-        return $credentialsList;
-    }
-
     public function eraseCredentials(): void
     {
     }
@@ -202,12 +115,12 @@ class User implements UserInterface
         return $this->getEmail();
     }
 
-    public function hasRole($role): bool
+    public function hasRole(string $role): bool
     {
         return in_array(strtoupper($role), $this->getRoles(), true);
     }
 
-    private function addRole($role): self
+    private function addRole(string $role): self
     {
         $role = strtoupper($role);
         if ($role === 'ROLE_USER') {
@@ -263,45 +176,5 @@ class User implements UserInterface
     public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * @return Collection|CryptographicKey[]
-     */
-    public function getCryptographicKeys(): Collection
-    {
-        return $this->cryptographicKeys;
-    }
-
-    /**
-     * @return Collection|ProjectGroupMember[]
-     */
-    public function getProjectGroupMembers(): Collection
-    {
-        return $this->projectGroupMembers;
-    }
-
-    /**
-     * @return Collection|ProjectMember[]
-     */
-    public function getProjectMembers(): Collection
-    {
-        return $this->projectMembers;
-    }
-
-    /**
-     * @return Collection|ServerMember[]
-     */
-    public function getServerMembers(): Collection
-    {
-        return $this->serverMembers;
-    }
-
-    /**
-     * @return Collection|CredentialsUser[]
-     */
-    public function getCredentialsUsers(): Collection
-    {
-        return $this->credentialsUsers;
     }
 }

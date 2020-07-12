@@ -34,7 +34,7 @@ class ServerMember
     private Server $server;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="serverMembers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private User $user;

@@ -27,7 +27,7 @@ class Link
     private ?LinkType $linkType;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="links")
+     * @ORM\ManyToOne(targetEntity=Project::class)
      */
     private ?Project $project;
 

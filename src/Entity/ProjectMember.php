@@ -34,7 +34,7 @@ class ProjectMember
     private Project $project;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="projectMembers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private User $user;
