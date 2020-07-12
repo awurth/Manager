@@ -30,11 +30,6 @@ class CreateUser
 
     /**
      * @Assert\NotBlank()
-     */
-    public $gender;
-
-    /**
-     * @Assert\NotBlank()
      * @Assert\Length(max=255)
      */
     public $firstname;

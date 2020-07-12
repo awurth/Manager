@@ -3,7 +3,6 @@
 namespace App\Form\Type\Action\Admin;
 
 use App\Form\Model\Admin\CreateUser;
-use App\Form\Type\GenderType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -23,9 +22,6 @@ class CreateUserType extends AbstractType
                     'user.role.user' => 'ROLE_USER',
                     'user.role.admin' => 'ROLE_ADMIN'
                 ],
-                'expanded' => true
-            ])
-            ->add('gender', GenderType::class, [
                 'expanded' => true
             ])
             ->add('firstname')

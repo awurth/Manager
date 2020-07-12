@@ -19,11 +19,6 @@ class EditProfile
 
     /**
      * @Assert\NotBlank()
-     */
-    public $gender;
-
-    /**
-     * @Assert\NotBlank()
      * @Assert\Length(max=255)
      */
     public $firstname;
@@ -40,7 +35,6 @@ class EditProfile
     {
         $this->user = $user;
         $this->email = $user->getEmail();
-        $this->gender = $user->getGender();
         $this->firstname = $user->getFirstname();
         $this->lastname = $user->getLastname();
     }

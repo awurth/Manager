@@ -3,7 +3,6 @@
 namespace App\Form\Type\Action;
 
 use App\Form\Model\EditProfile;
-use App\Form\Type\GenderType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,9 +14,6 @@ class EditProfileType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('gender', GenderType::class, [
-                'expanded' => true
-            ])
             ->add('firstname')
             ->add('lastname');
     }

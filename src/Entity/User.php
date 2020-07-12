@@ -20,10 +20,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
-    public const GENDER_NEUTRAL = 0;
-    public const GENDER_FEMALE = 1;
-    public const GENDER_MALE = 2;
-
     /**
      * @ORM\Id()
      * @ORM\Column(type="uuid_binary")
@@ -44,11 +40,6 @@ class User implements UserInterface
      * @ORM\Column(type="json")
      */
     private array $roles = [];
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private int $gender = self::GENDER_NEUTRAL;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -118,7 +109,6 @@ class User implements UserInterface
     public static function createFromAdminCreationForm(CreateUser $createUser, UserPasswordEncoderInterface $userPasswordEncoder): self
     {
         $user = new self($createUser->email, $createUser->firstname, $createUser->lastname);
-        $user->gender = $createUser->gender;
         $user->roles[] = $createUser->role;
 
         $user->password = $userPasswordEncoder->encodePassword($user, $createUser->plainPassword);
@@ -134,7 +124,6 @@ class User implements UserInterface
     public function updateFromProfileEditionForm(EditProfile $editProfile): void
     {
         $this->email = $editProfile->email;
-        $this->gender = $editProfile->gender;
         $this->firstname = $editProfile->firstname;
         $this->lastname = $editProfile->lastname;
         $this->updatedAt = new DateTimeImmutable();
@@ -254,11 +243,6 @@ class User implements UserInterface
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
-    }
-
-    public function getGender(): ?int
-    {
-        return $this->gender;
     }
 
     public function getFirstname(): string

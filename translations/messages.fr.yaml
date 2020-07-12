@@ -1,6 +1,3 @@
-gender_female: Femme
-gender_male: Homme
-gender_neutral: Neutre
 select_client: Sélectionnez un client
 select_project_type: Sélectionnez un type
 
@@ -237,7 +234,6 @@ form:
         create_user_email: Adresse email
         create_user_plainPassword: Mot de passe
         create_user_role: Permissions
-        create_user_gender: Genre
         create_user_firstname: Prénom
         create_user_lastname: Nom
 
@@ -263,7 +259,6 @@ form:
 
         edit_profile_email: Adresse email
         edit_profile_firstname: Prénom
-        edit_profile_gender: Genre
         edit_profile_lastname: Nom
 
         edit_project_name: Nom
