@@ -16,17 +16,13 @@ abstract class AbstractServerAction
 
     protected ServerRepository $serverRepository;
 
-    protected ?Server $server;
+    protected Server $server;
 
     protected function preInvoke(string $id, bool $breadcrumb = true): void
     {
         $this->denyAccessUnlessLoggedIn();
 
-        $this->server = $this->serverRepository->findOneBy(['id' => $id]);
-
-        if (!$this->server) {
-            throw new NotFoundHttpException('Server not found');
-        }
+        $this->server = $this->serverRepository->get($id);
 
         if ($breadcrumb) {
             $this->breadcrumbs->prependRouteItem(

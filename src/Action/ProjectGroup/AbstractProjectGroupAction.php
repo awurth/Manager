@@ -7,7 +7,6 @@ use App\Action\Traits\EntityUrlTrait;
 use App\Action\Traits\SecurityTrait;
 use App\Entity\ProjectGroup;
 use App\Repository\ProjectGroupRepository;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 abstract class AbstractProjectGroupAction
 {
@@ -17,17 +16,13 @@ abstract class AbstractProjectGroupAction
 
     protected ProjectGroupRepository $projectGroupRepository;
 
-    protected ?ProjectGroup $projectGroup;
+    protected ProjectGroup $projectGroup;
 
     protected function preInvoke(string $slug, bool $breadcrumb = true): void
     {
         $this->denyAccessUnlessLoggedIn();
 
-        $this->projectGroup = $this->projectGroupRepository->findOneBy(['slug' => $slug]);
-
-        if (!$this->projectGroup) {
-            throw new NotFoundHttpException('Project group not found');
-        }
+        $this->projectGroup = $this->projectGroupRepository->getBySlug($slug);
 
         if ($breadcrumb) {
             $this->breadcrumbs->prependItem(
