@@ -91,7 +91,7 @@ class EditProjectGroupAction extends AbstractProjectGroupAction
             return null;
         }
 
-        $this->projectGroup->setSlug($model->slug);
+        $this->projectGroup->updateFromSlugChangeForm($model);
 
         $this->entityManager->persist($this->projectGroup);
         $this->entityManager->flush();

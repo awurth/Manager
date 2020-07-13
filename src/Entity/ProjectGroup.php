@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Form\Model\ChangeProjectGroupSlug;
 use App\Form\Model\CreateProjectGroup;
 use App\Form\Model\EditProjectGroup;
 use App\Repository\ProjectGroupRepository;
@@ -92,6 +93,11 @@ class ProjectGroup
         $this->description = $editProjectGroup->description;
         $this->client = $editProjectGroup->client;
         $this->updatedAt = new DateTimeImmutable();
+    }
+
+    public function updateFromSlugChangeForm(ChangeProjectGroupSlug $changeProjectGroupSlug): void
+    {
+        $this->slug = $changeProjectGroupSlug->slug;
     }
 
     public function getMemberByUser(User $user): ?ProjectGroupMember
