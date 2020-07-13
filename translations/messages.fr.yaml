@@ -179,12 +179,15 @@ form:
         add_project_link_uri: URL
 
         add_project_group_member_user: Utilisateur
+        add_project_group_member_user_placeholder: Sélectionnez un utilisateur
         add_project_group_member_accessLevel: Niveau d'accès
 
         add_project_member_user: Utilisateur
+        add_project_member_user_placeholder: Sélectionnez un utilisateur
         add_project_member_accessLevel: Niveau d'accès
 
         add_server_member_user: Utilisateur
+        add_server_member_user_placeholder: Sélectionnez un utilisateur
         add_server_member_accessLevel: Niveau d'accès
 
         change_password_currentPassword: Mot de passe actuel

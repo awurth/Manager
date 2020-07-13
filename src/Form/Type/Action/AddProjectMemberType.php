@@ -32,6 +32,7 @@ class AddProjectMemberType extends AbstractType
             $event->getForm()->add('user', EntityType::class, [
                 'class' => User::class,
                 'choice_value' => 'id',
+                'placeholder' => 'form.label.add_project_group_member_user_placeholder',
                 'query_builder' => static function (UserRepository $repository) use ($model) {
                     $projectMemberIds = [];
                     foreach ($model->getProject()->getMembers() as $projectMember) {
