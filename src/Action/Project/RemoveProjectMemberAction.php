@@ -17,7 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RemoveProjectMemberAction extends AbstractProjectAction
 {
-    use EntityUrlTrait;
     use FlashTrait;
     use RoutingTrait;
 
@@ -63,9 +62,6 @@ class RemoveProjectMemberAction extends AbstractProjectAction
 
         $this->flash('success', 'flash.success.project.member.remove');
 
-        return $this->redirectToRoute('app_project_members', [
-            'projectGroupSlug' => $this->projectGroup->getSlug(),
-            'projectSlug' => $this->project->getSlug()
-        ]);
+        return $this->redirectToEntity($this->project, 'members');
     }
 }

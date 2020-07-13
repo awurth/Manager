@@ -4,7 +4,6 @@ namespace App\Action\Project;
 
 use App\Action\Traits\FlashTrait;
 use App\Action\Traits\PaginationTrait;
-use App\Action\Traits\RoutingTrait;
 use App\Action\Traits\TwigTrait;
 use App\Entity\ProjectMember;
 use App\Form\Model\AddProjectMember;
@@ -24,7 +23,6 @@ class ProjectMembersAction extends AbstractProjectAction
 {
     use FlashTrait;
     use PaginationTrait;
-    use RoutingTrait;
     use TwigTrait;
 
     private EntityManagerInterface $entityManager;
@@ -60,10 +58,7 @@ class ProjectMembersAction extends AbstractProjectAction
 
             $this->flash('success', 'flash.success.project.member.add');
 
-            return $this->redirectToRoute('app_project_members', [
-                'projectGroupSlug' => $this->projectGroup->getSlug(),
-                'projectSlug' => $this->project->getSlug()
-            ]);
+            return $this->redirectToEntity($this->project, 'members');
         }
 
         $pager = $this->paginate($this->getQueryBuilder(), $request);

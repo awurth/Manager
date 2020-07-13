@@ -2,9 +2,7 @@
 
 namespace App\Action\ProjectGroup;
 
-use App\Action\Traits\EntityUrlTrait;
 use App\Action\Traits\FlashTrait;
-use App\Action\Traits\RoutingTrait;
 use App\Entity\ProjectGroupMember;
 use App\Repository\ProjectGroupMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,9 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
 {
-    use EntityUrlTrait;
     use FlashTrait;
-    use RoutingTrait;
 
     private EntityManagerInterface $entityManager;
     private ProjectGroupMemberRepository $projectGroupMemberRepository;
@@ -63,6 +59,6 @@ class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
 
         $this->flash('success', 'flash.success.project_group.member.remove');
 
-        return $this->redirectToRoute('app_project_group_members', ['slug' => $this->projectGroup->getSlug()]);
+        return $this->redirectToEntity($this->projectGroup, 'members');
     }
 }

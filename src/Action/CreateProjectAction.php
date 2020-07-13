@@ -2,8 +2,8 @@
 
 namespace App\Action;
 
+use App\Action\Traits\EntityUrlTrait;
 use App\Action\Traits\FlashTrait;
-use App\Action\Traits\RoutingTrait;
 use App\Action\Traits\SecurityTrait;
 use App\Action\Traits\TwigTrait;
 use App\Entity\Project;
@@ -21,8 +21,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CreateProjectAction
 {
+    use EntityUrlTrait;
     use FlashTrait;
-    use RoutingTrait;
     use SecurityTrait;
     use TwigTrait;
 
@@ -58,10 +58,7 @@ class CreateProjectAction
 
             $this->flash('success', 'flash.success.project.create');
 
-            return $this->redirectToRoute('app_project_view', [
-                'projectGroupSlug' => $project->getProjectGroup()->getSlug(),
-                'projectSlug' => $project->getSlug()
-            ]);
+            return $this->redirectToEntity($project, 'view');
         }
 
         return $this->renderPage('create-project', 'app/project/create.html.twig', [

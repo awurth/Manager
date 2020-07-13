@@ -3,15 +3,16 @@
 namespace App\Action\ProjectGroup;
 
 use App\Action\Traits\BreadcrumbsTrait;
+use App\Action\Traits\EntityUrlTrait;
 use App\Action\Traits\SecurityTrait;
 use App\Entity\ProjectGroup;
 use App\Repository\ProjectGroupRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\RouterInterface;
 
 abstract class AbstractProjectGroupAction
 {
     use BreadcrumbsTrait;
+    use EntityUrlTrait;
     use SecurityTrait;
 
     protected ProjectGroupRepository $projectGroupRepository;
@@ -29,11 +30,9 @@ abstract class AbstractProjectGroupAction
         }
 
         if ($breadcrumb) {
-            $this->breadcrumbs->prependRouteItem(
+            $this->breadcrumbs->prependItem(
                 $this->projectGroup->getName(),
-                'app_project_group_view',
-                ['slug' => $this->projectGroup->getSlug()],
-                RouterInterface::ABSOLUTE_PATH,
+                $this->entityUrlGenerator->generate($this->projectGroup, 'view'),
                 [],
                 false
             );

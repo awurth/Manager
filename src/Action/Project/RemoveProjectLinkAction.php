@@ -3,7 +3,6 @@
 namespace App\Action\Project;
 
 use App\Action\Traits\FlashTrait;
-use App\Action\Traits\RoutingTrait;
 use App\Repository\LinkRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class RemoveProjectLinkAction extends AbstractProjectAction
 {
     use FlashTrait;
-    use RoutingTrait;
 
     private EntityManagerInterface $entityManager;
     private LinkRepository $linkRepository;
@@ -49,9 +47,6 @@ class RemoveProjectLinkAction extends AbstractProjectAction
 
         $this->flash('success', 'flash.success.project.link.remove');
 
-        return $this->redirectToRoute('app_project_link_list', [
-            'projectGroupSlug' => $this->projectGroup->getSlug(),
-            'projectSlug' => $this->project->getSlug()
-        ]);
+        return $this->redirectToEntity($this->project, 'link_list');
     }
 }

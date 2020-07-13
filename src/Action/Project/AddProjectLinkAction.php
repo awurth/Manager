@@ -3,7 +3,6 @@
 namespace App\Action\Project;
 
 use App\Action\Traits\FlashTrait;
-use App\Action\Traits\RoutingTrait;
 use App\Action\Traits\TwigTrait;
 use App\Entity\Link;
 use App\Form\Model\AddProjectLink;
@@ -20,7 +19,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class AddProjectLinkAction extends AbstractProjectAction
 {
     use FlashTrait;
-    use RoutingTrait;
     use TwigTrait;
 
     private EntityManagerInterface $entityManager;
@@ -50,17 +48,11 @@ class AddProjectLinkAction extends AbstractProjectAction
 
             $this->flash('success', 'flash.success.project.link.create');
 
-            return $this->redirectToRoute('app_project_link_list', [
-                'projectGroupSlug' => $this->projectGroup->getSlug(),
-                'projectSlug' => $this->project->getSlug()
-            ]);
+            return $this->redirectToEntity($this->project, 'link_list');
         }
 
         $this->breadcrumbs
-            ->addRouteItem('breadcrumb.project.link.list', 'app_project_link_list', [
-                'projectGroupSlug' => $this->projectGroup->getSlug(),
-                'projectSlug' => $this->project->getSlug()
-            ])
+            ->addItem('breadcrumb.project.link.list', $this->entityUrlGenerator->generate($this->project, 'link_list'))
             ->addItem('breadcrumb.project.link.create');
 
         return $this->renderPage('add-project-link', 'app/project/add_link.html.twig', [

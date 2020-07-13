@@ -3,25 +3,24 @@
 namespace App\Action\Project;
 
 use App\Action\Traits\BreadcrumbsTrait;
+use App\Action\Traits\EntityUrlTrait;
 use App\Action\Traits\SecurityTrait;
 use App\Entity\Project;
 use App\Entity\ProjectGroup;
 use App\Repository\ProjectGroupRepository;
 use App\Repository\ProjectRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\RouterInterface;
 
 abstract class AbstractProjectAction
 {
     use BreadcrumbsTrait;
+    use EntityUrlTrait;
     use SecurityTrait;
 
     protected ProjectGroupRepository $projectGroupRepository;
-
     protected ProjectRepository $projectRepository;
 
     protected ?ProjectGroup $projectGroup;
-
     protected ?Project $project;
 
     protected function preInvoke(string $projectGroupSlug, string $projectSlug, bool $breadcrumb = true): void
@@ -41,24 +40,17 @@ abstract class AbstractProjectAction
         }
 
         if ($breadcrumb) {
-            $this->breadcrumbs->prependRouteItem(
+            $this->breadcrumbs->prependItem(
                 $this->project->getName(),
-                'app_project_view',
-                [
-                    'projectGroupSlug' => $this->projectGroup->getSlug(),
-                    'projectSlug' => $this->project->getSlug()
-                ],
-                RouterInterface::ABSOLUTE_PATH,
+                $this->entityUrlGenerator->generate($this->project, 'view'),
                 [],
                 false
             );
 
             if ($this->isGranted('VIEW', $this->projectGroup)) {
-                $this->breadcrumbs->prependRouteItem(
+                $this->breadcrumbs->prependItem(
                     $this->projectGroup->getName(),
-                    'app_project_group_view',
-                    ['slug' => $this->projectGroup->getSlug()],
-                    RouterInterface::ABSOLUTE_PATH,
+                    $this->entityUrlGenerator->generate($this->projectGroup, 'view'),
                     [],
                     false
                 );

@@ -3,7 +3,6 @@
 namespace App\Action\Project;
 
 use App\Action\Traits\FlashTrait;
-use App\Action\Traits\RoutingTrait;
 use App\Action\Traits\TwigTrait;
 use App\Form\Type\Action\EditProjectType;
 use App\Form\Model\EditProject;
@@ -20,7 +19,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class EditProjectAction extends AbstractProjectAction
 {
     use FlashTrait;
-    use RoutingTrait;
     use TwigTrait;
 
     private EntityManagerInterface $entityManager;
@@ -56,10 +54,7 @@ class EditProjectAction extends AbstractProjectAction
 
             $this->flash('success', 'flash.success.project.edit');
 
-            return $this->redirectToRoute('app_project_view', [
-                'projectGroupSlug' => $this->projectGroup->getSlug(),
-                'projectSlug' => $this->project->getSlug()
-            ]);
+            return $this->redirectToEntity($this->project, 'view');
         }
 
         return $this->renderPage('edit-project', 'app/project/edit.html.twig', [

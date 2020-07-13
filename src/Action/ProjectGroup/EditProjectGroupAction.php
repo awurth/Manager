@@ -3,7 +3,6 @@
 namespace App\Action\ProjectGroup;
 
 use App\Action\Traits\FlashTrait;
-use App\Action\Traits\RoutingTrait;
 use App\Action\Traits\TwigTrait;
 use App\Form\Model\ChangeProjectGroupSlug;
 use App\Form\Type\Action\ChangeProjectGroupSlugType;
@@ -22,7 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class EditProjectGroupAction extends AbstractProjectGroupAction
 {
     use FlashTrait;
-    use RoutingTrait;
     use TwigTrait;
 
     private EntityManagerInterface $entityManager;
@@ -80,7 +78,7 @@ class EditProjectGroupAction extends AbstractProjectGroupAction
 
         $this->flash('success', 'flash.success.project_group.edit');
 
-        return $this->redirectToRoute('app_project_group_edit', ['slug' => $this->projectGroup->getSlug()]);
+        return $this->redirectToEntity($this->projectGroup, 'edit');
     }
 
     private function handleSlugChangeForm(Request $request): ?Response
@@ -100,6 +98,6 @@ class EditProjectGroupAction extends AbstractProjectGroupAction
 
         $this->flash('success', 'flash.success.project_group.change_slug');
 
-        return $this->redirectToRoute('app_project_group_edit', ['slug' => $this->projectGroup->getSlug()]);
+        return $this->redirectToEntity($this->projectGroup, 'edit');
     }
 }

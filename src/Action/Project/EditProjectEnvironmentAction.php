@@ -3,7 +3,6 @@
 namespace App\Action\Project;
 
 use App\Action\Traits\FlashTrait;
-use App\Action\Traits\RoutingTrait;
 use App\Action\Traits\TwigTrait;
 use App\Form\Type\Action\EditProjectEnvironmentType;
 use App\Form\Model\EditProjectEnvironment;
@@ -21,7 +20,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class EditProjectEnvironmentAction extends AbstractProjectAction
 {
     use FlashTrait;
-    use RoutingTrait;
     use TwigTrait;
 
     private EntityManagerInterface $entityManager;
@@ -67,17 +65,11 @@ class EditProjectEnvironmentAction extends AbstractProjectAction
 
             $this->flash('success', 'flash.success.project.environment.edit');
 
-            return $this->redirectToRoute('app_project_environment_list', [
-                'projectGroupSlug' => $this->projectGroup->getSlug(),
-                'projectSlug' => $this->project->getSlug()
-            ]);
+            return $this->redirectToEntity($this->project, 'environment_list');
         }
 
         $this->breadcrumbs
-            ->addRouteItem('breadcrumb.project.environment.list', 'app_project_environment_list', [
-                'projectGroupSlug' => $this->projectGroup->getSlug(),
-                'projectSlug' => $this->project->getSlug()
-            ])
+            ->addItem('breadcrumb.project.environment.list', $this->entityUrlGenerator->generate($this->project, 'environment_list'))
             ->addItem($environment->getName(), '', [], false);
 
         return $this->renderPage('edit-project-environment', 'app/project/edit_environment.html.twig', [

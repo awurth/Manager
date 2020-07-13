@@ -3,7 +3,6 @@
 namespace App\Action\Project;
 
 use App\Action\Traits\FlashTrait;
-use App\Action\Traits\RoutingTrait;
 use App\Action\Traits\TwigTrait;
 use App\Entity\ProjectEnvironment;
 use App\Form\Type\Action\AddProjectEnvironmentType;
@@ -20,7 +19,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class AddProjectEnvironmentAction extends AbstractProjectAction
 {
     use FlashTrait;
-    use RoutingTrait;
     use TwigTrait;
 
     private EntityManagerInterface $entityManager;
@@ -39,10 +37,7 @@ class AddProjectEnvironmentAction extends AbstractProjectAction
         $this->denyAccessUnlessGranted('MEMBER', $this->project);
 
         $this->breadcrumbs
-            ->addRouteItem('breadcrumb.project.environment.list', 'app_project_environment_list', [
-                'projectGroupSlug' => $this->projectGroup->getSlug(),
-                'projectSlug' => $this->project->getSlug()
-            ])
+            ->addItem('breadcrumb.project.environment.list', $this->entityUrlGenerator->generate($this->project, 'environment_list'))
             ->addItem('breadcrumb.project.environment.create');
 
         $model = new AddProjectEnvironment();
@@ -57,10 +52,7 @@ class AddProjectEnvironmentAction extends AbstractProjectAction
 
             $this->flash('success', 'flash.success.project.environment.create');
 
-            return $this->redirectToRoute('app_project_environment_list', [
-                'projectGroupSlug' => $this->projectGroup->getSlug(),
-                'projectSlug' => $this->project->getSlug()
-            ]);
+            return $this->redirectToEntity($this->project, 'environment_list');
         }
 
         return $this->renderPage('add-project-environment', 'app/project/add_environment.html.twig', [
