@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Form\Model\CreateCredentials;
 use App\Form\Model\EditCredentials;
+use App\Repository\CredentialsRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,7 +14,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CredentialsRepository")
+ * @ORM\Entity(repositoryClass=CredentialsRepository::class)
  */
 class Credentials
 {
@@ -64,7 +65,7 @@ class Credentials
     private ?DateTimeInterface $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CredentialsUser", mappedBy="credentials", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=CredentialsUser::class, mappedBy="credentials", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private Collection $credentialsUsers;
 

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Form\Model\AddProjectGroupMember;
+use App\Repository\ProjectGroupMemberRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +11,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProjectGroupMemberRepository")
+ * @ORM\Entity(repositoryClass=ProjectGroupMemberRepository::class)
  * @ORM\Table(uniqueConstraints={
  *     @ORM\UniqueConstraint(columns={"project_group_id", "user_id"})
  * })
@@ -28,13 +29,13 @@ class ProjectGroupMember
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ProjectGroup", inversedBy="members")
+     * @ORM\ManyToOne(targetEntity=ProjectGroup::class, inversedBy="members")
      * @ORM\JoinColumn(nullable=false)
      */
     private ProjectGroup $projectGroup;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private User $user;

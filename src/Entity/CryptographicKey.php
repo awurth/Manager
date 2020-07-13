@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\CryptographicKeyRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CryptographicKeyRepository")
+ * @ORM\Entity(repositoryClass=CryptographicKeyRepository::class)
  */
 class CryptographicKey
 {
@@ -22,7 +23,7 @@ class CryptographicKey
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private User $user;

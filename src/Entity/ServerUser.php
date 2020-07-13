@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+use App\Repository\ServerUserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ServerUserRepository")
+ * @ORM\Entity(repositoryClass=ServerUserRepository::class)
  */
 class ServerUser
 {
@@ -18,7 +19,7 @@ class ServerUser
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Server")
+     * @ORM\ManyToOne(targetEntity=Server::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private Server $server;

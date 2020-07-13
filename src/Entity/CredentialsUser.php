@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+use App\Repository\CredentialsUserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CredentialsUserRepository")
+ * @ORM\Entity(repositoryClass=CredentialsUserRepository::class)
  * @ORM\Table(uniqueConstraints={
  *     @ORM\UniqueConstraint(columns={"credentials_id", "user_id"})
  * })
@@ -24,13 +25,13 @@ class CredentialsUser
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Credentials", inversedBy="credentialsUsers")
+     * @ORM\ManyToOne(targetEntity=Credentials::class, inversedBy="credentialsUsers")
      * @ORM\JoinColumn(nullable=false)
      */
     private Credentials $credentials;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private User $user;

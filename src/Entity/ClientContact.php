@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\ClientContactRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ClientContactRepository")
+ * @ORM\Entity(repositoryClass=ClientContactRepository::class)
  */
 class ClientContact
 {
@@ -20,7 +21,7 @@ class ClientContact
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Client")
+     * @ORM\ManyToOne(targetEntity=Client::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private Client $client;

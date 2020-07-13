@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Form\Model\Admin\CreateClient;
 use App\Form\Model\Admin\EditClient;
+use App\Repository\ClientRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,7 +12,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
+ * @ORM\Entity(repositoryClass=ClientRepository::class)
  */
 class Client
 {

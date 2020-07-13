@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Form\Model\CreateProject;
 use App\Form\Model\EditProject;
+use App\Repository\ProjectRepository;
 use Awurth\UploadBundle\Storage\StorageInterface;
 use DateTimeImmutable;
 use DateTimeInterface;
@@ -14,7 +15,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
+ * @ORM\Entity(repositoryClass=ProjectRepository::class)
  */
 class Project
 {
@@ -25,7 +26,7 @@ class Project
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ProjectGroup")
+     * @ORM\ManyToOne(targetEntity=ProjectGroup::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private ProjectGroup $projectGroup;
@@ -61,7 +62,7 @@ class Project
     private ?string $logoFilename;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectMember", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=ProjectMember::class, mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private Collection $members;
 

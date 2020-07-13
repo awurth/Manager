@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Form\Model\AddServerMember;
+use App\Repository\ServerMemberRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +11,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ServerMemberRepository")
+ * @ORM\Entity(repositoryClass=ServerMemberRepository::class)
  * @ORM\Table(uniqueConstraints={
  *     @ORM\UniqueConstraint(columns={"server_id", "user_id"})
  * })
@@ -28,13 +29,13 @@ class ServerMember
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Server", inversedBy="members")
+     * @ORM\ManyToOne(targetEntity=Server::class, inversedBy="members")
      * @ORM\JoinColumn(nullable=false)
      */
     private Server $server;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private User $user;

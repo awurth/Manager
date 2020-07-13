@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Form\Model\CreateServer;
 use App\Form\Model\EditServer;
+use App\Repository\ServerRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,7 +14,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ServerRepository")
+ * @ORM\Entity(repositoryClass=ServerRepository::class)
  */
 class Server
 {
@@ -54,7 +55,7 @@ class Server
     private ?DateTimeInterface $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ServerMember", mappedBy="server", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=ServerMember::class, mappedBy="server", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private Collection $members;
 

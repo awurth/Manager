@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Form\Model\AddProjectEnvironment;
 use App\Form\Model\EditProjectEnvironment;
+use App\Repository\ProjectEnvironmentRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,7 +12,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProjectEnvironmentRepository")
+ * @ORM\Entity(repositoryClass=ProjectEnvironmentRepository::class)
  */
 class ProjectEnvironment
 {
@@ -22,13 +23,13 @@ class ProjectEnvironment
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project")
+     * @ORM\ManyToOne(targetEntity=Project::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private Project $project;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Server")
+     * @ORM\ManyToOne(targetEntity=Server::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private Server $server;

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Form\Model\CreateProjectGroup;
 use App\Form\Model\EditProjectGroup;
+use App\Repository\ProjectGroupRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,7 +14,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProjectGroupRepository")
+ * @ORM\Entity(repositoryClass=ProjectGroupRepository::class)
  */
 class ProjectGroup
 {
@@ -24,7 +25,7 @@ class ProjectGroup
     private UuidInterface $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Client")
+     * @ORM\ManyToOne(targetEntity=Client::class)
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private ?Client $client;
@@ -55,7 +56,7 @@ class ProjectGroup
     private ?DateTimeInterface $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectGroupMember", mappedBy="projectGroup", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=ProjectGroupMember::class, mappedBy="projectGroup", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private Collection $members;
 
