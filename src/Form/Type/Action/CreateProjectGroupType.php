@@ -2,9 +2,8 @@
 
 namespace App\Form\Type\Action;
 
-use App\Entity\Client;
 use App\Form\Model\CreateProjectGroup;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Form\Type\ClientChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,9 +19,7 @@ class CreateProjectGroupType extends AbstractType
             ->add('description', TextareaType::class, [
                 'required' => false
             ])
-            ->add('client', EntityType::class, [
-                'class' => Client::class,
-                'choice_value' => 'id',
+            ->add('client', ClientChoiceType::class, [
                 'placeholder' => 'select_client',
                 'required' => false
             ]);

@@ -2,12 +2,11 @@
 
 namespace App\Form\Type\Action;
 
-use App\Entity\User;
 use App\Form\Model\CreateCredentials;
 use App\Repository\UserRepository;
 use App\Security\Security;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -17,10 +16,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CreateCredentialsType extends AbstractType
 {
     private Security $security;
+    private UserRepository $userRepository;
 
-    public function __construct(Security $security)
+    public function __construct(Security $security, UserRepository $userRepository)
     {
         $this->security = $security;
+        $this->userRepository = $userRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -38,15 +39,12 @@ class CreateCredentialsType extends AbstractType
             ->add('description', TextareaType::class, [
                 'required' => false
             ])
-            ->add('users', EntityType::class, [
-                'class' => User::class,
+            ->add('users', ChoiceType::class, [
+                'choices' => $this->getUsersChoices(),
+                'choice_label' => 'email',
                 'choice_value' => 'id',
+                'choice_translation_domain' => false,
                 'multiple' => true,
-                'query_builder' => function (UserRepository $repository) {
-                    return $repository->createQueryBuilder('u')
-                        ->where('u != :user')
-                        ->setParameter('user', $this->security->getUser()->getId(), 'uuid_binary');
-                },
                 'required' => false
             ]);
     }
@@ -56,5 +54,13 @@ class CreateCredentialsType extends AbstractType
         $resolver->setDefaults([
             'data_class' => CreateCredentials::class
         ]);
+    }
+
+    private function getUsersChoices(): array
+    {
+        return $this->userRepository->createQueryBuilder('u')
+            ->where('u != :user')
+            ->setParameter('user', $this->security->getUser()->getId(), 'uuid_binary')
+            ->getQuery()->getResult();
     }
 }

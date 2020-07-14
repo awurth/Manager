@@ -2,11 +2,10 @@
 
 namespace App\Form\Type\Action;
 
+use App\Entity\ProjectGroup;
 use App\Entity\ProjectGroupMember;
-use App\Entity\User;
 use App\Form\Model\AddProjectGroupMember;
 use App\Repository\UserRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,6 +15,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AddProjectGroupMemberType extends AbstractType
 {
+    private UserRepository $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('accessLevel', ChoiceType::class, [
@@ -25,25 +31,16 @@ class AddProjectGroupMemberType extends AbstractType
             ]
         ]);
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, static function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             /** @var AddProjectGroupMember $model */
             $model = $event->getData();
 
-            $event->getForm()->add('user', EntityType::class, [
-                'class' => User::class,
+            $event->getForm()->add('user', ChoiceType::class, [
+                'choices' => $this->getUserChoices($model->getProjectGroup()),
+                'choice_label' => 'email',
                 'choice_value' => 'id',
-                'placeholder' => 'form.label.add_project_group_member_user_placeholder',
-                'query_builder' => static function (UserRepository $repository) use ($model) {
-                    $projectGroupMemberIds = [];
-                    foreach ($model->getProjectGroup()->getMembers() as $projectGroupMember) {
-                        $projectGroupMemberIds[] = $projectGroupMember->getUser()->getId();
-                    }
-
-                    $qb = $repository->createQueryBuilder('u');
-                    $qb->where($qb->expr()->notIn('u.id', $projectGroupMemberIds));
-
-                    return $qb;
-                }
+                'choice_translation_domain' => false,
+                'placeholder' => 'form.label.add_project_group_member_user_placeholder'
             ]);
         });
     }
@@ -53,5 +50,21 @@ class AddProjectGroupMemberType extends AbstractType
         $resolver->setDefaults([
             'data_class' => AddProjectGroupMember::class
         ]);
+    }
+
+    private function getUserChoices(ProjectGroup $projectGroup): array
+    {
+        $projectGroupMemberUserIds = [];
+        foreach ($projectGroup->getMembers() as $projectGroupMember) {
+            $projectGroupMemberUserIds[] = $projectGroupMember->getUser()->getId()->getBytes();
+        }
+
+        $qb = $this->userRepository->createQueryBuilder('u');
+
+        $qb
+            ->where($qb->expr()->notIn('u.id', ':users'))
+            ->setParameter('users', $projectGroupMemberUserIds);
+
+        return $qb->getQuery()->getResult();
     }
 }

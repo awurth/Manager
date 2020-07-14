@@ -2,9 +2,8 @@
 
 namespace App\Form\Type\Action;
 
-use App\Entity\Server;
 use App\Form\Model\EditProjectEnvironment;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Form\Type\ServerChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -16,10 +15,7 @@ class EditProjectEnvironmentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('server', EntityType::class, [
-                'class' => Server::class,
-                'choice_value' => 'id'
-            ])
+            ->add('server', ServerChoiceType::class)
             ->add('name')
             ->add('path')
             ->add('url', UrlType::class, [
