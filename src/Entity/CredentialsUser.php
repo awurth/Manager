@@ -26,13 +26,13 @@ class CredentialsUser
 
     /**
      * @ORM\ManyToOne(targetEntity=Credentials::class, inversedBy="credentialsUsers")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private Credentials $credentials;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private User $user;
 

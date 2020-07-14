@@ -27,7 +27,7 @@ class Project
 
     /**
      * @ORM\ManyToOne(targetEntity=ProjectGroup::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private ProjectGroup $projectGroup;
 

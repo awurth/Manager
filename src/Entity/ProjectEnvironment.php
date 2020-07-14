@@ -24,13 +24,13 @@ class ProjectEnvironment
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private Project $project;
 
     /**
      * @ORM\ManyToOne(targetEntity=Server::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private Server $server;
 
