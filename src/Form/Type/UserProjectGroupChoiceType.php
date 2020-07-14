@@ -3,10 +3,10 @@
 namespace App\Form\Type;
 
 use App\Repository\ProjectGroupRepository;
+use App\Security\Security;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Security;
 
 class UserProjectGroupChoiceType extends AbstractType
 {
@@ -43,7 +43,7 @@ class UserProjectGroupChoiceType extends AbstractType
         return $this->projectGroupRepository->createQueryBuilder('g')
             ->join('g.members', 'm')
             ->where('m.user = :user')
-            ->setParameter('user', $user = $this->security->getUser()->getId(), 'uuid_binary')
+            ->setParameter('user', $this->security->getUser()->getId(), 'uuid_binary')
             ->orderBy('g.updatedAt', 'DESC')
             ->addOrderBy('g.createdAt', 'DESC')
             ->getQuery()->getResult();

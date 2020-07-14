@@ -3,7 +3,6 @@
 namespace App\Form\Model;
 
 use App\Entity\Project;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -17,7 +16,7 @@ class EditProject
     public $description;
 
     /**
-     * @var UploadedFile|File
+     * @var UploadedFile
      *
      * @Assert\Image()
      */

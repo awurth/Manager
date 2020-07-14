@@ -10,6 +10,7 @@ trait FlashTrait
 
     protected function flash(string $type, string $message): void
     {
+        /** @psalm-suppress UndefinedInterfaceMethod */
         $this->session->getFlashBag()->add($type, $message);
     }
 

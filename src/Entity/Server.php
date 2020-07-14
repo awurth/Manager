@@ -141,9 +141,10 @@ class Server
     }
 
     /**
-     * @return Collection|ServerMember[]
+     * @psalm-suppress MismatchingDocblockReturnType
+     * @return ArrayCollection|ServerMember[]
      */
-    public function getMembers(): Collection
+    public function getMembers(): ArrayCollection
     {
         return new ArrayCollection($this->members->toArray());
     }

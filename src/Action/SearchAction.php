@@ -38,7 +38,7 @@ class SearchAction
     {
         $this->denyAccessUnlessLoggedIn();
 
-        $search = $request->query->get('search');
+        $search = (string)$request->query->get('search');
 
         $groups = $projects = $servers = [];
         if (strlen($search) > 2) {

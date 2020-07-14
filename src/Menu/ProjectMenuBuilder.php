@@ -142,7 +142,11 @@ class ProjectMenuBuilder
 
     private function getProject(): Project
     {
+        /**
+         * @psalm-suppress PossiblyNullPropertyFetch
+         * @psalm-suppress PossiblyNullReference
+         */
         $params = $this->requestStack->getCurrentRequest()->attributes->get('_route_params');
-        return $this->projectRepository->findOneBy(['slug' => $params['projectSlug']]);
+        return $this->projectRepository->getBySlug($params['projectSlug'] ?? '');
     }
 }

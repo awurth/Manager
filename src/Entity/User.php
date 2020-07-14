@@ -87,6 +87,7 @@ class User implements UserInterface
     public function updateFromPasswordChangeForm(ChangePassword $changePassword, UserPasswordEncoderInterface $userPasswordEncoder): void
     {
         $this->password = $userPasswordEncoder->encodePassword($this, $changePassword->newPassword);
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     public function updateFromProfileEditionForm(EditProfile $editProfile): void

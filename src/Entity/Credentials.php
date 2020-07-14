@@ -178,9 +178,10 @@ class Credentials
     }
 
     /**
-     * @return Collection|CredentialsUser[]
+     * @psalm-suppress MismatchingDocblockReturnType
+     * @return ArrayCollection|CredentialsUser[]
      */
-    public function getCredentialsUsers(): Collection
+    public function getCredentialsUsers(): ArrayCollection
     {
         return new ArrayCollection($this->credentialsUsers->toArray());
     }

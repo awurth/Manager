@@ -121,7 +121,11 @@ class ServerMenuBuilder
 
     private function getServer(): Server
     {
+        /**
+         * @psalm-suppress PossiblyNullPropertyFetch
+         * @psalm-suppress PossiblyNullReference
+         */
         $params = $this->requestStack->getCurrentRequest()->attributes->get('_route_params');
-        return $this->serverRepository->findOneBy(['id' => $params['id']]);
+        return $this->serverRepository->get($params['id'] ?? '');
     }
 }

@@ -35,6 +35,7 @@ trait SecurityTrait
         }
     }
 
+    /** @psalm-suppress all */
     protected function getUser(): User
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */

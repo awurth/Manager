@@ -3,6 +3,7 @@
 namespace App\Action\ProjectGroup;
 
 use App\Action\Traits\FlashTrait;
+use App\Action\Traits\RoutingTrait;
 use App\Entity\ProjectGroupMember;
 use App\Repository\ProjectGroupMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
 {
     use FlashTrait;
+    use RoutingTrait;
 
     private EntityManagerInterface $entityManager;
     private ProjectGroupMemberRepository $projectGroupMemberRepository;

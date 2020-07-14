@@ -43,7 +43,7 @@ class AccessLevelLabelExtension extends AbstractExtension
         ];
     }
 
-    public function getAccessLevelLabel($entity): ?string
+    public function getAccessLevelLabel(object $entity): ?string
     {
         $label = null;
         if ($entity instanceof ProjectGroupMember) {

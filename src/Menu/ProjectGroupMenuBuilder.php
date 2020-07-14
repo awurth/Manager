@@ -95,7 +95,11 @@ class ProjectGroupMenuBuilder
 
     private function getProjectGroup(): ProjectGroup
     {
+        /**
+         * @psalm-suppress PossiblyNullPropertyFetch
+         * @psalm-suppress PossiblyNullReference
+         */
         $params = $this->requestStack->getCurrentRequest()->attributes->get('_route_params');
-        return $this->projectGroupRepository->findOneBy(['slug' => $params['slug']]);
+        return $this->projectGroupRepository->getBySlug($params['slug'] ?? '');
     }
 }

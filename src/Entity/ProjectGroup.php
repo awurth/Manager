@@ -34,7 +34,7 @@ class ProjectGroup
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    private ?string $slug;
+    private string $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -98,6 +98,7 @@ class ProjectGroup
     public function updateFromSlugChangeForm(ChangeProjectGroupSlug $changeProjectGroupSlug): void
     {
         $this->slug = $changeProjectGroupSlug->slug;
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     public function getMemberByUser(User $user): ?ProjectGroupMember
@@ -147,9 +148,10 @@ class ProjectGroup
     }
 
     /**
-     * @return Collection|ProjectGroupMember[]
+     * @psalm-suppress MismatchingDocblockReturnType
+     * @return ArrayCollection|ProjectGroupMember[]
      */
-    public function getMembers(): Collection
+    public function getMembers(): ArrayCollection
     {
         return new ArrayCollection($this->members->toArray());
     }

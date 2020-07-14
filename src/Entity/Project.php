@@ -34,7 +34,7 @@ class Project
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    private ?string $slug;
+    private string $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -125,7 +125,7 @@ class Project
         return $this->id;
     }
 
-    public function getProjectGroup(): ?ProjectGroup
+    public function getProjectGroup(): ProjectGroup
     {
         return $this->projectGroup;
     }
@@ -161,9 +161,10 @@ class Project
     }
 
     /**
-     * @return Collection|ProjectMember[]
+     * @psalm-suppress MismatchingDocblockReturnType
+     * @return ArrayCollection|ProjectMember[]
      */
-    public function getMembers(): Collection
+    public function getMembers(): ArrayCollection
     {
         return new ArrayCollection($this->members->toArray());
     }

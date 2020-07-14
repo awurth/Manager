@@ -26,11 +26,12 @@ class CarbonExtension extends AbstractExtension
 
     public function getCarbon(DateTimeInterface $dateTime): Carbon
     {
-        return new Carbon($dateTime);
+        return Carbon::instance($dateTime);
     }
 
     public function getDiffForHumans(DateTimeInterface $dateTime, ?string $locale = null): string
     {
+        /** @psalm-suppress PossiblyInvalidMethodCall */
         return $this->getCarbon($dateTime)->locale($locale ?: $this->locale)->diffForHumans();
     }
 }

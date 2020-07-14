@@ -39,10 +39,12 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "psalm/plugin-symfony": "^1.4",
         "roave/security-advisories": "dev-master",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
-        "symfony/profiler-pack": "*"
+        "symfony/profiler-pack": "*",
+        "vimeo/psalm": "^3.12"
     },
     "config": {
         "optimize-autoloader": true,
