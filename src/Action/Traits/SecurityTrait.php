@@ -3,9 +3,9 @@
 namespace App\Action\Traits;
 
 use App\Entity\User;
+use App\Security\Security;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\Security;
 use Throwable;
 
 trait SecurityTrait
@@ -35,10 +35,8 @@ trait SecurityTrait
         }
     }
 
-    /** @psalm-suppress all */
     protected function getUser(): User
     {
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->security->getUser();
     }
 
