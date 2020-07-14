@@ -4,6 +4,7 @@ namespace App\Action\Project;
 
 use App\Action\Traits\TwigTrait;
 use App\Repository\LinkRepository;
+use App\Repository\ProjectMemberRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,10 +16,12 @@ class ViewProjectAction extends AbstractProjectAction
     use TwigTrait;
 
     private LinkRepository $linkRepository;
+    private ProjectMemberRepository $projectMemberRepository;
 
-    public function __construct(LinkRepository $linkRepository)
+    public function __construct(LinkRepository $linkRepository, ProjectMemberRepository $projectMemberRepository)
     {
         $this->linkRepository = $linkRepository;
+        $this->projectMemberRepository = $projectMemberRepository;
     }
 
     public function __invoke(string $projectGroupSlug, string $projectSlug): Response
@@ -31,7 +34,7 @@ class ViewProjectAction extends AbstractProjectAction
 
         return $this->renderPage('view-project', 'app/project/view.html.twig', [
             'project' => $this->project,
-            'member' => $this->project->getMemberByUser($this->getUser()),
+            'member' => $this->projectMemberRepository->findOneBy(['user' => $this->getUser(), 'project' => $this->project]),
             'links' => $links
         ]);
     }

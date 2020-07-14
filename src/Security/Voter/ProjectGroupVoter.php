@@ -5,6 +5,7 @@ namespace App\Security\Voter;
 use App\Entity\ProjectGroup;
 use App\Entity\ProjectGroupMember;
 use App\Entity\User;
+use App\Repository\ProjectGroupMemberRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -19,10 +20,15 @@ class ProjectGroupVoter extends Voter
     ];
 
     private AuthorizationCheckerInterface $authorizationChecker;
+    private ProjectGroupMemberRepository $projectGroupMemberRepository;
 
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(
+        AuthorizationCheckerInterface $authorizationChecker,
+        ProjectGroupMemberRepository $projectGroupMemberRepository
+    )
     {
         $this->authorizationChecker = $authorizationChecker;
+        $this->projectGroupMemberRepository = $projectGroupMemberRepository;
     }
 
     protected function supports($attribute, $subject): bool
@@ -33,12 +39,12 @@ class ProjectGroupVoter extends Voter
 
     /**
      * @param string         $attribute
-     * @param ProjectGroup   $subject
+     * @param ProjectGroup   $projectGroup
      * @param TokenInterface $token
      *
      * @return bool
      */
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
+    protected function voteOnAttribute($attribute, $projectGroup, TokenInterface $token): bool
     {
         /** @var User $user */
         $user = $token->getUser();
@@ -51,11 +57,11 @@ class ProjectGroupVoter extends Voter
             return true;
         }
 
-        if (!$groupMember = $subject->getMemberByUser($user)) {
+        if (!$groupMember = $this->projectGroupMemberRepository->findOneBy(['user' => $user, 'projectGroup' => $projectGroup])) {
             return false;
         }
 
-        if ($accessLevel = self::ACCESS_LEVELS[$attribute] ?? null) {
+        if (($accessLevel = self::ACCESS_LEVELS[$attribute] ?? null) !== null) {
             return $groupMember->getAccessLevel() >= $accessLevel;
         }
 

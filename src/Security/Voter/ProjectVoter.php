@@ -6,6 +6,8 @@ use App\Entity\Project;
 use App\Entity\ProjectGroupMember;
 use App\Entity\ProjectMember;
 use App\Entity\User;
+use App\Repository\ProjectGroupMemberRepository;
+use App\Repository\ProjectMemberRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -26,10 +28,18 @@ class ProjectVoter extends Voter
     ];
 
     private AuthorizationCheckerInterface $authorizationChecker;
+    private ProjectGroupMemberRepository $projectGroupMemberRepository;
+    private ProjectMemberRepository $projectMemberRepository;
 
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(
+        AuthorizationCheckerInterface $authorizationChecker,
+        ProjectGroupMemberRepository $projectGroupMemberRepository,
+        ProjectMemberRepository $projectMemberRepository
+    )
     {
         $this->authorizationChecker = $authorizationChecker;
+        $this->projectGroupMemberRepository = $projectGroupMemberRepository;
+        $this->projectMemberRepository = $projectMemberRepository;
     }
 
     protected function supports($attribute, $subject): bool
@@ -43,12 +53,12 @@ class ProjectVoter extends Voter
 
     /**
      * @param string         $attribute
-     * @param Project        $subject
+     * @param Project        $project
      * @param TokenInterface $token
      *
      * @return bool
      */
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
+    protected function voteOnAttribute($attribute, $project, TokenInterface $token): bool
     {
         /** @var User $user */
         $user = $token->getUser();
@@ -61,18 +71,18 @@ class ProjectVoter extends Voter
             return true;
         }
 
-        $projectMember = $subject->getMemberByUser($user);
-        $projectGroupMember = $subject->getProjectGroup()->getMemberByUser($user);
+        $projectMember = $this->projectMemberRepository->findOneBy(['user' => $user, 'project' => $project]);
+        $projectGroupMember = $this->projectGroupMemberRepository->findOneBy(['user' => $user, 'projectGroup' => $project->getProjectGroup()]);
 
         if (!$projectMember && !$projectGroupMember) {
             return false;
         }
 
         if ($projectMember) {
-            if ($accessLevel = self::PROJECT_ACCESS_LEVELS[$attribute] ?? null) {
+            if (($accessLevel = self::PROJECT_ACCESS_LEVELS[$attribute] ?? null) !== null) {
                 return $projectMember->getAccessLevel() >= $accessLevel;
             }
-        } elseif ($accessLevel = self::PROJECT_GROUP_ACCESS_LEVELS[$attribute] ?? null) {
+        } elseif (($accessLevel = self::PROJECT_GROUP_ACCESS_LEVELS[$attribute] ?? null) !== null) {
             return $projectGroupMember->getAccessLevel() >= $accessLevel;
         }
 

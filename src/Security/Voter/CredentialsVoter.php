@@ -4,6 +4,7 @@ namespace App\Security\Voter;
 
 use App\Entity\Credentials;
 use App\Entity\CredentialsUser;
+use App\Repository\CredentialsUserRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -17,10 +18,15 @@ class CredentialsVoter extends Voter
     ];
 
     private AuthorizationCheckerInterface $authorizationChecker;
+    private CredentialsUserRepository $credentialsUserRepository;
 
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(
+        AuthorizationCheckerInterface $authorizationChecker,
+        CredentialsUserRepository $credentialsUserRepository
+    )
     {
         $this->authorizationChecker = $authorizationChecker;
+        $this->credentialsUserRepository = $credentialsUserRepository;
     }
 
     protected function supports($attribute, $subject): bool
@@ -31,12 +37,12 @@ class CredentialsVoter extends Voter
 
     /**
      * @param string         $attribute
-     * @param Credentials    $subject
+     * @param Credentials    $credentials
      * @param TokenInterface $token
      *
      * @return bool
      */
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
+    protected function voteOnAttribute($attribute, $credentials, TokenInterface $token): bool
     {
         $user = $token->getUser();
 
@@ -48,11 +54,11 @@ class CredentialsVoter extends Voter
             return true;
         }
 
-        if (!$credentialsUser = $this->getCredentialsUser($user, $subject)) {
+        if (!$credentialsUser = $this->credentialsUserRepository->findOneBy(['user' => $user, 'credentials' => $credentials])) {
             return false;
         }
 
-        if ($accessLevel = self::ACCESS_LEVELS[$attribute] ?? null) {
+        if (($accessLevel = self::ACCESS_LEVELS[$attribute] ?? null) !== null) {
             return $credentialsUser->getAccessLevel() >= $accessLevel;
         }
 
@@ -65,16 +71,5 @@ class CredentialsVoter extends Voter
         }
 
         return false;
-    }
-
-    private function getCredentialsUser(UserInterface $user, Credentials $credentials): ?CredentialsUser
-    {
-        foreach ($credentials->getCredentialsUsers() as $credentialsUser) {
-            if ($credentialsUser->getUser() === $user) {
-                return $credentialsUser;
-            }
-        }
-
-        return null;
     }
 }

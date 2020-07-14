@@ -4,6 +4,7 @@ namespace App\Action\ProjectGroup;
 
 use App\Action\Traits\PaginationTrait;
 use App\Action\Traits\TwigTrait;
+use App\Repository\ProjectGroupMemberRepository;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,9 +20,11 @@ class ViewProjectGroupAction extends AbstractProjectGroupAction
     use TwigTrait;
 
     private ProjectRepository $projectRepository;
+    private ProjectGroupMemberRepository $projectGroupMemberRepository;
 
-    public function __construct(ProjectRepository $projectRepository)
+    public function __construct(ProjectGroupMemberRepository $projectGroupMemberRepository, ProjectRepository $projectRepository)
     {
+        $this->projectGroupMemberRepository = $projectGroupMemberRepository;
         $this->projectRepository = $projectRepository;
     }
 
@@ -35,7 +38,7 @@ class ViewProjectGroupAction extends AbstractProjectGroupAction
 
         return $this->renderPage('view-project-group', 'app/project_group/view.html.twig', [
             'group' => $this->projectGroup,
-            'member' => $this->projectGroup->getMemberByUser($this->getUser()),
+            'member' => $this->projectGroupMemberRepository->findOneBy(['user' => $this->getUser(), 'projectGroup' => $this->projectGroup]),
             'projects' => $pager->getCurrentPageResults(),
             'pager' => $pager
         ]);

@@ -5,6 +5,7 @@ namespace App\Security\Voter;
 use App\Entity\Server;
 use App\Entity\ServerMember;
 use App\Entity\User;
+use App\Repository\ServerMemberRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -19,10 +20,15 @@ class ServerVoter extends Voter
     ];
 
     private AuthorizationCheckerInterface $authorizationChecker;
+    private ServerMemberRepository $serverMemberRepository;
 
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(
+        AuthorizationCheckerInterface $authorizationChecker,
+        ServerMemberRepository $serverMemberRepository
+    )
     {
         $this->authorizationChecker = $authorizationChecker;
+        $this->serverMemberRepository = $serverMemberRepository;
     }
 
     protected function supports($attribute, $subject): bool
@@ -33,12 +39,12 @@ class ServerVoter extends Voter
 
     /**
      * @param string         $attribute
-     * @param Server         $subject
+     * @param Server         $server
      * @param TokenInterface $token
      *
      * @return bool
      */
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
+    protected function voteOnAttribute($attribute, $server, TokenInterface $token): bool
     {
         /** @var User $user */
         $user = $token->getUser();
@@ -51,11 +57,11 @@ class ServerVoter extends Voter
             return true;
         }
 
-        if (!$serverMember = $subject->getMemberByUser($user)) {
+        if (!$serverMember = $this->serverMemberRepository->findOneBy(['user' => $user, 'server' => $server])) {
             return false;
         }
 
-        if ($accessLevel = self::ACCESS_LEVELS[$attribute] ?? null) {
+        if (($accessLevel = self::ACCESS_LEVELS[$attribute] ?? null) !== null) {
             return $serverMember->getAccessLevel() >= $accessLevel;
         }
 
