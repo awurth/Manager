@@ -53,3 +53,7 @@ services:
     App\Menu\ServerMenuBuilder:
         tags:
             - { name: knp_menu.menu_builder, method: create, alias: server }
+
+    _instanceof:
+        App\Routing\EntityUrlGeneratorInterface:
+            tags: ['app.entity_url_generator']
