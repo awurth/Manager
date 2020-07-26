@@ -69,8 +69,8 @@ class EditProjectLinkAction extends AbstractProjectAction
         }
 
         $this->breadcrumbs
-            ->addRouteItem('breadcrumb.project.link.list', $this->entityUrlGenerator->generate($this->project, 'link_list'))
-            ->addItem($link->getUri(), '', [], false);
+            ->addItem('breadcrumb.project.link.list', $this->entityUrlGenerator->generate($this->project, 'link_list'))
+            ->addItem($link->getName(), '', [], false);
 
         return $this->renderPage('edit-project-link', 'app/project/edit_link.html.twig', [
             'form' => $form->createView()
