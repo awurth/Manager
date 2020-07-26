@@ -44,7 +44,12 @@ class Project
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private ?string $description;
+    private ?string $description = null;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $logoFilename = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -54,12 +59,7 @@ class Project
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTimeInterface $updatedAt;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $logoFilename;
+    private ?DateTimeInterface $updatedAt = null;
 
     /**
      * @ORM\OneToMany(targetEntity=ProjectMember::class, mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -145,6 +145,11 @@ class Project
         return $this->description;
     }
 
+    public function getLogoFilename(): ?string
+    {
+        return $this->logoFilename;
+    }
+
     public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
@@ -153,11 +158,6 @@ class Project
     public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    public function getLogoFilename(): ?string
-    {
-        return $this->logoFilename;
     }
 
     /**

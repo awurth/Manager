@@ -32,12 +32,12 @@ class Credentials
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $username;
+    private ?string $username = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $email;
+    private ?string $email = null;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -47,12 +47,12 @@ class Credentials
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $website;
+    private ?string $website = null;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private ?string $description;
+    private ?string $description = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -62,7 +62,7 @@ class Credentials
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt = null;
 
     /**
      * @ORM\OneToMany(targetEntity=CredentialsUser::class, mappedBy="credentials", cascade={"persist", "remove"}, orphanRemoval=true)

@@ -29,17 +29,17 @@ class LinkType
     /**
      * @ORM\Column(type="string", length=7, nullable=true)
      */
-    private ?string $color;
+    private ?string $color = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $uriPrefix;
+    private ?string $uriPrefix = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $iconFilename;
+    private ?string $iconFilename = null;
 
     private function __construct(string $name)
     {

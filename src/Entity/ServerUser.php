@@ -27,12 +27,12 @@ class ServerUser
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $username;
+    private ?string $username = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $password;
+    private ?string $password = null;
 
     private function __construct(Server $server)
     {

@@ -47,12 +47,12 @@ class ProjectEnvironment
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $url;
+    private ?string $url = null;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private ?string $description;
+    private ?string $description = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -62,7 +62,7 @@ class ProjectEnvironment
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt = null;
 
     private function __construct(Project $project, Server $server, string $name, string $path)
     {

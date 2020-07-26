@@ -29,7 +29,7 @@ class ProjectGroup
      * @ORM\ManyToOne(targetEntity=Client::class)
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
-    private ?Client $client;
+    private ?Client $client = null;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
@@ -44,7 +44,7 @@ class ProjectGroup
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private ?string $description;
+    private ?string $description = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -54,7 +54,7 @@ class ProjectGroup
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt = null;
 
     /**
      * @ORM\OneToMany(targetEntity=ProjectGroupMember::class, mappedBy="projectGroup", cascade={"persist", "remove"}, orphanRemoval=true)

@@ -58,7 +58,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt = null;
 
     private function __construct(string $email, string $firstname, string $lastname)
     {

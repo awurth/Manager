@@ -32,17 +32,17 @@ class Server
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $ip;
+    private ?string $ip = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $operatingSystem;
+    private ?string $operatingSystem = null;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private ?int $sshPort;
+    private ?int $sshPort = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -52,7 +52,7 @@ class Server
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt = null;
 
     /**
      * @ORM\OneToMany(targetEntity=ServerMember::class, mappedBy="server", cascade={"persist", "remove"}, orphanRemoval=true)

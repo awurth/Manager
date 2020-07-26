@@ -24,12 +24,12 @@ class Link
      * @ORM\ManyToOne(targetEntity=LinkType::class)
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
-    private ?LinkType $linkType;
+    private ?LinkType $linkType = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class)
      */
-    private ?Project $project;
+    private ?Project $project = null;
 
     /**
      * @ORM\Column(type="string", length=255)

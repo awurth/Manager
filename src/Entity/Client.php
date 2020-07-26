@@ -30,27 +30,27 @@ class Client
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $address;
+    private ?string $address = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $postcode;
+    private ?string $postcode = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $city;
+    private ?string $city = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $phone;
+    private ?string $phone = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $email;
+    private ?string $email = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -60,7 +60,7 @@ class Client
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt = null;
 
     private function __construct(string $name)
     {

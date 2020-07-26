@@ -29,27 +29,27 @@ class ClientContact
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $email;
+    private ?string $email = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $firstname;
+    private ?string $firstname = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $lastname;
+    private ?string $lastname = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $job;
+    private ?string $job = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $phone;
+    private ?string $phone = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -59,7 +59,7 @@ class ClientContact
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt = null;
 
     private function __construct(Client $client)
     {
