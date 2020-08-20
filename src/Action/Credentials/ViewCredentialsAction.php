@@ -7,7 +7,6 @@ use App\Action\Traits\TwigTrait;
 use App\Entity\ValueObject\Id;
 use App\Repository\CredentialsRepository;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -29,11 +28,7 @@ final class ViewCredentialsAction
     {
         $this->denyAccessUnlessLoggedIn();
 
-        $credentials = $this->credentialsRepository->find(Id::fromString($id));
-
-        if (!$credentials) {
-            throw new NotFoundHttpException('Credentials not found');
-        }
+        $credentials = $this->credentialsRepository->get(Id::fromString($id));
 
         $this->denyAccessUnlessGranted('VIEW', $credentials);
 

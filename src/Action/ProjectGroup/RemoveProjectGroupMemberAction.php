@@ -9,7 +9,6 @@ use App\Entity\ValueObject\Id;
 use App\Repository\ProjectGroupMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -35,11 +34,7 @@ final class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
 
         $this->denyAccessUnlessGranted('MEMBER', $this->projectGroup);
 
-        $member = $this->projectGroupMemberRepository->find(Id::fromString($id));
-
-        if (!$member) {
-            throw new NotFoundHttpException('Group member not found');
-        }
+        $member = $this->projectGroupMemberRepository->get(Id::fromString($id));
 
         $user = $this->security->getUser();
 

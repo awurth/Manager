@@ -9,7 +9,6 @@ use App\Entity\ValueObject\Id;
 use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -21,13 +20,13 @@ final class DeleteClientAction
     use RoutingTrait;
     use SecurityTrait;
 
-    private EntityManagerInterface $entityManager;
     private ClientRepository $clientRepository;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager, ClientRepository $clientRepository)
+    public function __construct(ClientRepository $clientRepository, EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
         $this->clientRepository = $clientRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function __invoke(string $id): Response
@@ -35,11 +34,7 @@ final class DeleteClientAction
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $client = $this->clientRepository->find(Id::fromString($id));
-
-        if (!$client) {
-            throw new NotFoundHttpException('Client not found');
-        }
+        $client = $this->clientRepository->get(Id::fromString($id));
 
         $this->entityManager->remove($client);
         $this->entityManager->flush();

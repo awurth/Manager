@@ -8,7 +8,6 @@ use App\Repository\ProjectEnvironmentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -33,11 +32,7 @@ final class RemoveProjectEnvironmentAction extends AbstractProjectAction
 
         $this->denyAccessUnlessGranted('MEMBER', $this->project);
 
-        $environment = $this->projectEnvironmentRepository->find(Id::fromString($id));
-
-        if (!$environment) {
-            throw new NotFoundHttpException('Project environment not found');
-        }
+        $environment = $this->projectEnvironmentRepository->get(Id::fromString($id));
 
         if ($environment->getProject() !== $this->project) {
             throw $this->createAccessDeniedException('The environment does not belong to the current project');

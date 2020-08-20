@@ -14,7 +14,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -47,11 +46,7 @@ final class EditClientAction extends AbstractAdminAction
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $client = $this->clientRepository->find(Id::fromString($id));
-
-        if (!$client) {
-            throw new NotFoundHttpException('Client not found');
-        }
+        $client = $this->clientRepository->get(Id::fromString($id));
 
         $model = new EditClient($client);
         $form = $this->formFactory->create(EditClientType::class, $model);

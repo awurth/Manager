@@ -8,7 +8,6 @@ use App\Repository\LinkRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -33,11 +32,7 @@ final class RemoveProjectLinkAction extends AbstractProjectAction
 
         $this->denyAccessUnlessGranted('MEMBER', $this->project);
 
-        $link = $this->linkRepository->find(Id::fromString($id));
-
-        if (!$link) {
-            throw new NotFoundHttpException('Project link not found');
-        }
+        $link = $this->linkRepository->get(Id::fromString($id));
 
         if ($link->getProject() !== $this->project) {
             throw $this->createAccessDeniedException('The link does not belong to the current project');

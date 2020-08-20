@@ -15,7 +15,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -51,11 +50,7 @@ final class EditLinkTypeAction extends AbstractAdminAction
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $linkType = $this->linkTypeRepository->find(Id::fromString($id));
-
-        if (!$linkType) {
-            throw new NotFoundHttpException('Link type not found');
-        }
+        $linkType = $this->linkTypeRepository->get(Id::fromString($id));
 
         $model = new EditLinkType($linkType);
         $form = $this->formFactory->create(EditLinkTypeType::class, $model);

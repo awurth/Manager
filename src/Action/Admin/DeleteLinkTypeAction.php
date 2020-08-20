@@ -9,7 +9,6 @@ use App\Entity\ValueObject\Id;
 use App\Repository\LinkTypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -35,11 +34,7 @@ final class DeleteLinkTypeAction
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $linkType = $this->linkTypeRepository->find(Id::fromString($id));
-
-        if (!$linkType) {
-            throw new NotFoundHttpException('Link type not found');
-        }
+        $linkType = $this->linkTypeRepository->get(Id::fromString($id));
 
         $this->entityManager->remove($linkType);
         $this->entityManager->flush();

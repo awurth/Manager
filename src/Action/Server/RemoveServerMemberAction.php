@@ -10,7 +10,6 @@ use App\Entity\ValueObject\Id;
 use App\Repository\ServerMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -37,12 +36,7 @@ final class RemoveServerMemberAction extends AbstractServerAction
 
         $this->denyAccessUnlessGranted('MEMBER', $this->server);
 
-        $member = $this->serverMemberRepository->find(Id::fromString($memberId));
-
-        if (!$member) {
-            throw new NotFoundHttpException('Server member not found');
-        }
-
+        $member = $this->serverMemberRepository->get(Id::fromString($memberId));
         $user = $this->security->getUser();
 
         if ($member->getAccessLevel() === ServerMember::ACCESS_LEVEL_OWNER) {

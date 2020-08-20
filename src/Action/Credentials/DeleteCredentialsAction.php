@@ -10,7 +10,6 @@ use App\Repository\CredentialsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -38,11 +37,7 @@ final class DeleteCredentialsAction
     {
         $this->denyAccessUnlessLoggedIn();
 
-        $credentials = $this->credentialsRepository->find(Id::fromString($id));
-
-        if (!$credentials) {
-            throw new NotFoundHttpException('Credentials not found');
-        }
+        $credentials = $this->credentialsRepository->get(Id::fromString($id));
 
         $this->denyAccessUnlessGranted('DELETE', $credentials);
 
