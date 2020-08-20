@@ -6,6 +6,7 @@ use App\Action\Traits\FlashTrait;
 use App\Action\Traits\RoutingTrait;
 use App\Action\Traits\SecurityTrait;
 use App\Action\Traits\TwigTrait;
+use App\Entity\ValueObject\Id;
 use App\Form\Type\Action\Admin\EditClientType;
 use App\Form\Model\Admin\EditClient;
 use App\Repository\ClientRepository;
@@ -46,7 +47,7 @@ final class EditClientAction extends AbstractAdminAction
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $client = $this->clientRepository->find($id);
+        $client = $this->clientRepository->find(Id::fromString($id));
 
         if (!$client) {
             throw new NotFoundHttpException('Client not found');

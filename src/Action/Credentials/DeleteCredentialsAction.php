@@ -5,6 +5,7 @@ namespace App\Action\Credentials;
 use App\Action\Traits\FlashTrait;
 use App\Action\Traits\RoutingTrait;
 use App\Action\Traits\SecurityTrait;
+use App\Entity\ValueObject\Id;
 use App\Repository\CredentialsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,7 +38,7 @@ final class DeleteCredentialsAction
     {
         $this->denyAccessUnlessLoggedIn();
 
-        $credentials = $this->credentialsRepository->find($id);
+        $credentials = $this->credentialsRepository->find(Id::fromString($id));
 
         if (!$credentials) {
             throw new NotFoundHttpException('Credentials not found');

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\ValueObject\Id;
 use App\Form\Model\CreateServer;
 use App\Form\Model\EditServer;
 use App\Repository\ServerRepository;
@@ -10,8 +11,6 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ServerRepository::class)
@@ -20,9 +19,9 @@ class Server
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="uuid_binary")
+     * @ORM\Column(type="uuid")
      */
-    private UuidInterface $id;
+    private Id $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -61,7 +60,7 @@ class Server
 
     private function __construct(string $name)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Id::generate();
         $this->name = $name;
         $this->createdAt = new DateTimeImmutable();
 
@@ -105,7 +104,7 @@ class Server
         return null;
     }
 
-    public function getId(): UuidInterface
+    public function getId(): Id
     {
         return $this->id;
     }

@@ -6,6 +6,7 @@ use App\Action\Traits\FlashTrait;
 use App\Action\Traits\RoutingTrait;
 use App\Action\Traits\SecurityTrait;
 use App\Action\Traits\TwigTrait;
+use App\Entity\ValueObject\Id;
 use App\Form\Type\Action\EditCredentialsType;
 use App\Form\Model\EditCredentials;
 use App\Repository\CredentialsRepository;
@@ -45,7 +46,7 @@ final class EditCredentialsAction
     {
         $this->denyAccessUnlessLoggedIn();
 
-        $credentials = $this->credentialsRepository->find($id);
+        $credentials = $this->credentialsRepository->find(Id::fromString($id));
 
         if (!$credentials) {
             throw new NotFoundHttpException('Credentials not found');

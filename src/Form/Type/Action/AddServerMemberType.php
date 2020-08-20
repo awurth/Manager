@@ -54,16 +54,16 @@ final class AddServerMemberType extends AbstractType
 
     private function getUserChoices(Server $server): array
     {
-        $serverMemberUserIds = [];
+        $serverMemberUsers = [];
         foreach ($server->getMembers() as $serverMember) {
-            $serverMemberUserIds[] = $serverMember->getUser()->getId()->getBytes();
+            $serverMemberUsers[] = $serverMember->getUser();
         }
 
         $qb = $this->userRepository->createQueryBuilder('u');
 
         $qb
-            ->where($qb->expr()->notIn('u.id', ':users'))
-            ->setParameter('users', $serverMemberUserIds);
+            ->where($qb->expr()->notIn('u', ':users'))
+            ->setParameter('users', $serverMemberUsers);
 
         return $qb->getQuery()->getResult();
     }

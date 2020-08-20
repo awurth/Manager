@@ -3,11 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\LinkType;
+use App\Entity\ValueObject\Id;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method LinkType|null find($id, $lockMode = null, $lockVersion = null)
+ * @method LinkType|null find(Id $id, $lockMode = null, $lockVersion = null)
  * @method LinkType|null findOneBy(array $criteria, array $orderBy = null)
  * @method LinkType[]    findAll()
  * @method LinkType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)

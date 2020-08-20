@@ -6,6 +6,7 @@ use App\Action\Traits\EntityUrlTrait;
 use App\Action\Traits\FlashTrait;
 use App\Action\Traits\RoutingTrait;
 use App\Entity\ServerMember;
+use App\Entity\ValueObject\Id;
 use App\Repository\ServerMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,7 +37,7 @@ final class RemoveServerMemberAction extends AbstractServerAction
 
         $this->denyAccessUnlessGranted('MEMBER', $this->server);
 
-        $member = $this->serverMemberRepository->find($memberId);
+        $member = $this->serverMemberRepository->find(Id::fromString($memberId));
 
         if (!$member) {
             throw new NotFoundHttpException('Server member not found');

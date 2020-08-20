@@ -5,6 +5,7 @@ namespace App\Action\Admin;
 use App\Action\Traits\FlashTrait;
 use App\Action\Traits\RoutingTrait;
 use App\Action\Traits\SecurityTrait;
+use App\Entity\ValueObject\Id;
 use App\Repository\LinkTypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,7 +35,7 @@ final class DeleteLinkTypeAction
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $linkType = $this->linkTypeRepository->find($id);
+        $linkType = $this->linkTypeRepository->find(Id::fromString($id));
 
         if (!$linkType) {
             throw new NotFoundHttpException('Link type not found');

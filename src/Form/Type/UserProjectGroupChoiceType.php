@@ -43,7 +43,7 @@ final class UserProjectGroupChoiceType extends AbstractType
         return $this->projectGroupRepository->createQueryBuilder('g')
             ->join('g.members', 'm')
             ->where('m.user = :user')
-            ->setParameter('user', $this->security->getUser()->getId(), 'uuid_binary')
+            ->setParameter('user', $this->security->getUser())
             ->orderBy('g.updatedAt', 'DESC')
             ->addOrderBy('g.createdAt', 'DESC')
             ->getQuery()->getResult();

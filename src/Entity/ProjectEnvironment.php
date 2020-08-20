@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
+use App\Entity\ValueObject\Id;
 use App\Form\Model\AddProjectEnvironment;
 use App\Form\Model\EditProjectEnvironment;
 use App\Repository\ProjectEnvironmentRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectEnvironmentRepository::class)
@@ -18,9 +17,9 @@ class ProjectEnvironment
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="uuid_binary")
+     * @ORM\Column(type="uuid")
      */
-    private UuidInterface $id;
+    private Id $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class)
@@ -66,7 +65,7 @@ class ProjectEnvironment
 
     private function __construct(Project $project, Server $server, string $name, string $path)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Id::generate();
         $this->project = $project;
         $this->server = $server;
         $this->name = $name;
@@ -104,7 +103,7 @@ class ProjectEnvironment
         $this->updatedAt = new DateTimeImmutable();
     }
 
-    public function getId(): UuidInterface
+    public function getId(): Id
     {
         return $this->id;
     }

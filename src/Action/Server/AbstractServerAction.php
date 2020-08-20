@@ -5,8 +5,8 @@ namespace App\Action\Server;
 use App\Action\Traits\BreadcrumbsTrait;
 use App\Action\Traits\SecurityTrait;
 use App\Entity\Server;
+use App\Entity\ValueObject\Id;
 use App\Repository\ServerRepository;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 
 abstract class AbstractServerAction
@@ -22,7 +22,7 @@ abstract class AbstractServerAction
     {
         $this->denyAccessUnlessLoggedIn();
 
-        $this->server = $this->serverRepository->get($id);
+        $this->server = $this->serverRepository->get(Id::fromString($id));
 
         if ($breadcrumb) {
             $this->breadcrumbs->prependRouteItem(

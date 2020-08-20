@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
+use App\Entity\ValueObject\Id;
 use App\Form\Model\AddProjectGroupMember;
 use App\Repository\ProjectGroupMemberRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectGroupMemberRepository::class)
@@ -24,9 +23,9 @@ class ProjectGroupMember
 
     /**
      * @ORM\Id()
-     * @ORM\Column(type="uuid_binary")
+     * @ORM\Column(type="uuid")
      */
-    private UuidInterface $id;
+    private Id $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=ProjectGroup::class, inversedBy="members")
@@ -57,7 +56,7 @@ class ProjectGroupMember
 
     private function __construct(ProjectGroup $projectGroup, User $user, int $accessLevel)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Id::generate();
         $this->projectGroup = $projectGroup;
         $this->user = $user;
         $this->accessLevel = $accessLevel;
@@ -78,7 +77,7 @@ class ProjectGroupMember
         return new self($projectGroup, $user, self::ACCESS_LEVEL_OWNER);
     }
 
-    public function getId(): UuidInterface
+    public function getId(): Id
     {
         return $this->id;
     }

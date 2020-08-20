@@ -2,10 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\ValueObject\Id;
 use App\Repository\CredentialsUserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=CredentialsUserRepository::class)
@@ -20,9 +19,9 @@ class CredentialsUser
 
     /**
      * @ORM\Id()
-     * @ORM\Column(type="uuid_binary")
+     * @ORM\Column(type="uuid")
      */
-    private UuidInterface $id;
+    private Id $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Credentials::class, inversedBy="credentialsUsers")
@@ -43,7 +42,7 @@ class CredentialsUser
 
     private function __construct(Credentials $credentials, User $user, int $accessLevel)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Id::generate();
         $this->credentials = $credentials;
         $this->user = $user;
         $this->accessLevel = $accessLevel;
@@ -59,7 +58,7 @@ class CredentialsUser
         return new self($credentials, $user, self::ACCESS_LEVEL_USER);
     }
 
-    public function getId(): UuidInterface
+    public function getId(): Id
     {
         return $this->id;
     }

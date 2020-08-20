@@ -4,6 +4,7 @@ namespace App\Action\Credentials;
 
 use App\Action\Traits\SecurityTrait;
 use App\Action\Traits\TwigTrait;
+use App\Entity\ValueObject\Id;
 use App\Repository\CredentialsRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -28,7 +29,7 @@ final class ViewCredentialsAction
     {
         $this->denyAccessUnlessLoggedIn();
 
-        $credentials = $this->credentialsRepository->find($id);
+        $credentials = $this->credentialsRepository->find(Id::fromString($id));
 
         if (!$credentials) {
             throw new NotFoundHttpException('Credentials not found');

@@ -3,11 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\ProjectMember;
+use App\Entity\ValueObject\Id;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ProjectMember|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ProjectMember|null find(Id $id, $lockMode = null, $lockVersion = null)
  * @method ProjectMember|null findOneBy(array $criteria, array $orderBy = null)
  * @method ProjectMember[]    findAll()
  * @method ProjectMember[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)

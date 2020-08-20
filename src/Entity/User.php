@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\ValueObject\Id;
 use App\Form\Model\Admin\CreateUser;
 use App\Form\Model\ChangePassword;
 use App\Form\Model\EditProfile;
@@ -9,21 +10,20 @@ use App\Repository\UserRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Table(name="users")
  */
 class User implements UserInterface
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="uuid_binary")
+     * @ORM\Column(type="uuid")
      */
-    private UuidInterface $id;
+    private Id $id;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
@@ -62,7 +62,7 @@ class User implements UserInterface
 
     private function __construct(string $email, string $firstname, string $lastname)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Id::generate();
         $this->email = $email;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
@@ -136,7 +136,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getId(): UuidInterface
+    public function getId(): Id
     {
         return $this->id;
     }

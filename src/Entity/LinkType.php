@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
+use App\Entity\ValueObject\Id;
 use App\Form\Model\Admin\CreateLinkType;
 use App\Form\Model\Admin\EditLinkType;
 use App\Repository\LinkTypeRepository;
 use Awurth\UploadBundle\Storage\StorageInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=LinkTypeRepository::class)
@@ -17,9 +16,9 @@ class LinkType
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="uuid_binary")
+     * @ORM\Column(type="uuid")
      */
-    private UuidInterface $id;
+    private Id $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -43,7 +42,7 @@ class LinkType
 
     private function __construct(string $name)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Id::generate();
         $this->name = $name;
     }
 
@@ -78,7 +77,7 @@ class LinkType
         }
     }
 
-    public function getId(): UuidInterface
+    public function getId(): Id
     {
         return $this->id;
     }

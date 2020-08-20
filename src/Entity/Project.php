@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\ValueObject\Id;
 use App\Form\Model\CreateProject;
 use App\Form\Model\EditProject;
 use App\Repository\ProjectRepository;
@@ -11,8 +12,6 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectRepository::class)
@@ -21,9 +20,9 @@ class Project
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="uuid_binary")
+     * @ORM\Column(type="uuid")
      */
-    private UuidInterface $id;
+    private Id $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=ProjectGroup::class)
@@ -68,7 +67,7 @@ class Project
 
     private function __construct(ProjectGroup $projectGroup, string $slug, string $name)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Id::generate();
         $this->projectGroup = $projectGroup;
         $this->slug = $slug;
         $this->name = $name;
@@ -120,7 +119,7 @@ class Project
         return null;
     }
 
-    public function getId(): UuidInterface
+    public function getId(): Id
     {
         return $this->id;
     }

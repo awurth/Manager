@@ -54,16 +54,16 @@ final class AddProjectMemberType extends AbstractType
 
     private function getUserChoices(Project $project): array
     {
-        $projectMemberUserIds = [];
+        $projectMemberUsers = [];
         foreach ($project->getMembers() as $projectMember) {
-            $projectMemberUserIds[] = $projectMember->getUser()->getId()->getBytes();
+            $projectMemberUsers[] = $projectMember->getUser();
         }
 
         $qb = $this->userRepository->createQueryBuilder('u');
 
         $qb
-            ->where($qb->expr()->notIn('u.id', ':users'))
-            ->setParameter('users', $projectMemberUserIds);
+            ->where($qb->expr()->notIn('u', ':users'))
+            ->setParameter('users', $projectMemberUsers);
 
         return $qb->getQuery()->getResult();
     }

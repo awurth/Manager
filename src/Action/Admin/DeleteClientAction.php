@@ -5,6 +5,7 @@ namespace App\Action\Admin;
 use App\Action\Traits\FlashTrait;
 use App\Action\Traits\RoutingTrait;
 use App\Action\Traits\SecurityTrait;
+use App\Entity\ValueObject\Id;
 use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,7 +35,7 @@ final class DeleteClientAction
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $client = $this->clientRepository->find($id);
+        $client = $this->clientRepository->find(Id::fromString($id));
 
         if (!$client) {
             throw new NotFoundHttpException('Client not found');

@@ -2,12 +2,11 @@
 
 namespace App\Entity;
 
+use App\Entity\ValueObject\Id;
 use App\Repository\CryptographicKeyRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=CryptographicKeyRepository::class)
@@ -18,9 +17,9 @@ class CryptographicKey
 
     /**
      * @ORM\Id()
-     * @ORM\Column(type="uuid_binary")
+     * @ORM\Column(type="uuid")
      */
-    private UuidInterface $id;
+    private Id $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
@@ -55,7 +54,7 @@ class CryptographicKey
 
     private function __construct(User $user, string $name, string $value)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Id::generate();
         $this->user = $user;
         $this->name = $name;
         $this->value = $value;
@@ -67,7 +66,7 @@ class CryptographicKey
         return $this->name;
     }
 
-    public function getId(): UuidInterface
+    public function getId(): Id
     {
         return $this->id;
     }

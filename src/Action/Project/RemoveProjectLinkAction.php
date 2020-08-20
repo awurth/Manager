@@ -3,6 +3,7 @@
 namespace App\Action\Project;
 
 use App\Action\Traits\FlashTrait;
+use App\Entity\ValueObject\Id;
 use App\Repository\LinkRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +33,7 @@ final class RemoveProjectLinkAction extends AbstractProjectAction
 
         $this->denyAccessUnlessGranted('MEMBER', $this->project);
 
-        $link = $this->linkRepository->find($id);
+        $link = $this->linkRepository->find(Id::fromString($id));
 
         if (!$link) {
             throw new NotFoundHttpException('Project link not found');

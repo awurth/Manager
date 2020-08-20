@@ -3,6 +3,7 @@
 namespace App\Menu;
 
 use App\Entity\Server;
+use App\Entity\ValueObject\Id;
 use App\Repository\ServerRepository;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
@@ -126,6 +127,6 @@ final class ServerMenuBuilder
          * @psalm-suppress PossiblyNullReference
          */
         $params = $this->requestStack->getCurrentRequest()->attributes->get('_route_params');
-        return $this->serverRepository->get($params['id'] ?? '');
+        return $this->serverRepository->get(Id::fromString($params['id'] ?? ''));
     }
 }

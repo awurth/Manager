@@ -4,6 +4,7 @@ namespace App\Action\Project;
 
 use App\Action\Traits\FlashTrait;
 use App\Action\Traits\TwigTrait;
+use App\Entity\ValueObject\Id;
 use App\Form\Model\EditProjectLink;
 use App\Form\Type\Action\EditProjectLinkType;
 use App\Repository\LinkRepository;
@@ -43,7 +44,7 @@ final class EditProjectLinkAction extends AbstractProjectAction
 
         $this->denyAccessUnlessGranted('MEMBER', $this->project);
 
-        $link = $this->linkRepository->find($id);
+        $link = $this->linkRepository->find(Id::fromString($id));
 
         if (!$link) {
             throw new NotFoundHttpException('Link not found');

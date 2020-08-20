@@ -50,7 +50,7 @@ final class ListProjectLinksAction extends AbstractProjectAction
         return $this->linkRepository->createQueryBuilder('l')
             ->leftJoin('l.linkType', 't')->addSelect('t')
             ->where('l.project = :project')
-            ->setParameter('project', $this->project->getId(), 'uuid_binary')
+            ->setParameter('project', $this->project)
             ->orderBy('t.name')
             ->addOrderBy('l.uri');
     }

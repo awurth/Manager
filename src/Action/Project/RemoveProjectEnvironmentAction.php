@@ -3,6 +3,7 @@
 namespace App\Action\Project;
 
 use App\Action\Traits\FlashTrait;
+use App\Entity\ValueObject\Id;
 use App\Repository\ProjectEnvironmentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +33,7 @@ final class RemoveProjectEnvironmentAction extends AbstractProjectAction
 
         $this->denyAccessUnlessGranted('MEMBER', $this->project);
 
-        $environment = $this->projectEnvironmentRepository->find($id);
+        $environment = $this->projectEnvironmentRepository->find(Id::fromString($id));
 
         if (!$environment) {
             throw new NotFoundHttpException('Project environment not found');

@@ -60,7 +60,7 @@ final class CreateCredentialsType extends AbstractType
     {
         return $this->userRepository->createQueryBuilder('u')
             ->where('u != :user')
-            ->setParameter('user', $this->security->getUser()->getId(), 'uuid_binary')
+            ->setParameter('user', $this->security->getUser())
             ->getQuery()->getResult();
     }
 }

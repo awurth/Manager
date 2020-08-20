@@ -6,6 +6,7 @@ use App\Action\Traits\EntityUrlTrait;
 use App\Action\Traits\FlashTrait;
 use App\Action\Traits\RoutingTrait;
 use App\Entity\ProjectMember;
+use App\Entity\ValueObject\Id;
 use App\Repository\ProjectMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,7 +36,7 @@ final class RemoveProjectMemberAction extends AbstractProjectAction
 
         $this->denyAccessUnlessGranted('MEMBER', $this->project);
 
-        $member = $this->projectMemberRepository->find($id);
+        $member = $this->projectMemberRepository->find(Id::fromString($id));
 
         if (!$member) {
             throw new NotFoundHttpException('Project member not found');

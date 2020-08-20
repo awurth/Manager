@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
+use App\Entity\ValueObject\Id;
 use App\Form\Model\Admin\CreateClient;
 use App\Form\Model\Admin\EditClient;
 use App\Repository\ClientRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
@@ -18,9 +17,9 @@ class Client
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="uuid_binary")
+     * @ORM\Column(type="uuid")
      */
-    private UuidInterface $id;
+    private Id $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -64,7 +63,7 @@ class Client
 
     private function __construct(string $name)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Id::generate();
         $this->name = $name;
         $this->createdAt = new DateTimeImmutable();
     }
@@ -97,7 +96,7 @@ class Client
         return $this->name;
     }
 
-    public function getId(): UuidInterface
+    public function getId(): Id
     {
         return $this->id;
     }

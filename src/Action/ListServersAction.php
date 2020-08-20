@@ -44,7 +44,7 @@ final class ListServersAction
         return $this->serverRepository->createQueryBuilder('s')
             ->join('s.members', 'm')
             ->where('m.user = :user')
-            ->setParameter('user', $this->security->getUser()->getId(), 'uuid_binary')
+            ->setParameter('user', $this->security->getUser())
             ->orderBy('s.createdAt', 'DESC');
     }
 }

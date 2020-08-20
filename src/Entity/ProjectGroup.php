@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\ValueObject\Id;
 use App\Form\Model\ChangeProjectGroupSlug;
 use App\Form\Model\CreateProjectGroup;
 use App\Form\Model\EditProjectGroup;
@@ -11,8 +12,6 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectGroupRepository::class)
@@ -21,9 +20,9 @@ class ProjectGroup
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="uuid_binary")
+     * @ORM\Column(type="uuid")
      */
-    private UuidInterface $id;
+    private Id $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Client::class)
@@ -63,7 +62,7 @@ class ProjectGroup
 
     private function __construct(string $slug, string $name)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Id::generate();
         $this->slug = $slug;
         $this->name = $name;
         $this->createdAt = new DateTimeImmutable();
@@ -112,7 +111,7 @@ class ProjectGroup
         return null;
     }
 
-    public function getId(): UuidInterface
+    public function getId(): Id
     {
         return $this->id;
     }

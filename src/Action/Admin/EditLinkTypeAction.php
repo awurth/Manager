@@ -6,6 +6,7 @@ use App\Action\Traits\FlashTrait;
 use App\Action\Traits\RoutingTrait;
 use App\Action\Traits\SecurityTrait;
 use App\Action\Traits\TwigTrait;
+use App\Entity\ValueObject\Id;
 use App\Form\Model\Admin\EditLinkType;
 use App\Form\Type\Action\Admin\EditLinkTypeType;
 use App\Repository\LinkTypeRepository;
@@ -50,7 +51,7 @@ final class EditLinkTypeAction extends AbstractAdminAction
         $this->denyAccessUnlessLoggedIn();
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $linkType = $this->linkTypeRepository->find($id);
+        $linkType = $this->linkTypeRepository->find(Id::fromString($id));
 
         if (!$linkType) {
             throw new NotFoundHttpException('Link type not found');

@@ -5,6 +5,7 @@ namespace App\Action\ProjectGroup;
 use App\Action\Traits\FlashTrait;
 use App\Action\Traits\RoutingTrait;
 use App\Entity\ProjectGroupMember;
+use App\Entity\ValueObject\Id;
 use App\Repository\ProjectGroupMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,7 +35,7 @@ final class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
 
         $this->denyAccessUnlessGranted('MEMBER', $this->projectGroup);
 
-        $member = $this->projectGroupMemberRepository->find($id);
+        $member = $this->projectGroupMemberRepository->find(Id::fromString($id));
 
         if (!$member) {
             throw new NotFoundHttpException('Group member not found');

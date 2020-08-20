@@ -44,7 +44,7 @@ final class ListCredentialsAction
         return $this->credentialsRepository->createQueryBuilder('c')
             ->join('c.credentialsUsers', 'cu')
             ->where('cu.user = :user')
-            ->setParameter('user', $this->security->getUser()->getId(), 'uuid_binary')
+            ->setParameter('user', $this->security->getUser())
             ->orderBy('c.createdAt', 'DESC');
     }
 }

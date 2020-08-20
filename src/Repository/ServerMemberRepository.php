@@ -3,11 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\ServerMember;
+use App\Entity\ValueObject\Id;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ServerMember|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ServerMember|null find(Id $id, $lockMode = null, $lockVersion = null)
  * @method ServerMember|null findOneBy(array $criteria, array $orderBy = null)
  * @method ServerMember[]    findAll()
  * @method ServerMember[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)

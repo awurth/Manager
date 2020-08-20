@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\ValueObject\Id;
 use App\Form\Model\CreateCredentials;
 use App\Form\Model\EditCredentials;
 use App\Repository\CredentialsRepository;
@@ -10,8 +11,6 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=CredentialsRepository::class)
@@ -20,9 +19,9 @@ class Credentials
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="uuid_binary")
+     * @ORM\Column(type="uuid")
      */
-    private UuidInterface $id;
+    private Id $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -71,7 +70,7 @@ class Credentials
 
     private function __construct(string $name, string $password)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Id::generate();
         $this->name = $name;
         $this->password = $password;
         $this->createdAt = new DateTimeImmutable();
@@ -132,7 +131,7 @@ class Credentials
     }
 
 
-    public function getId(): UuidInterface
+    public function getId(): Id
     {
         return $this->id;
     }
