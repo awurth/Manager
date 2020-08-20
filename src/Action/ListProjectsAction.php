@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/projects", name="app_project_list")
  */
-class ListProjectsAction
+final class ListProjectsAction
 {
     use FilterTrait;
     use PaginationTrait;

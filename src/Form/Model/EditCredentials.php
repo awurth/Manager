@@ -5,7 +5,7 @@ namespace App\Form\Model;
 use App\Entity\Credentials;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class EditCredentials
+final class EditCredentials
 {
     /**
      * @Assert\NotBlank()

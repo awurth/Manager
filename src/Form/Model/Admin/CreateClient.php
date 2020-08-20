@@ -4,7 +4,7 @@ namespace App\Form\Model\Admin;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateClient
+final class CreateClient
 {
     /**
      * @Assert\NotBlank()

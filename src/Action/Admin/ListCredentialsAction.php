@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/credentials", name="app_admin_credentials_list")
  */
-class ListCredentialsAction extends AbstractAdminAction
+final class ListCredentialsAction extends AbstractAdminAction
 {
     use PaginationTrait;
     use SecurityTrait;

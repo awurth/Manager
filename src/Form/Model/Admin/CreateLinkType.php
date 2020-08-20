@@ -4,7 +4,7 @@ namespace App\Form\Model\Admin;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateLinkType
+final class CreateLinkType
 {
     /**
      * @Assert\NotBlank()

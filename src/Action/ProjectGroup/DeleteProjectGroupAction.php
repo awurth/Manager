@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/delete", name="app_project_group_delete")
  */
-class DeleteProjectGroupAction extends AbstractProjectGroupAction
+final class DeleteProjectGroupAction extends AbstractProjectGroupAction
 {
     use FlashTrait;
     use RoutingTrait;

@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/environments", name="app_project_environment_list")
  */
-class ListProjectEnvironmentsAction extends AbstractProjectAction
+final class ListProjectEnvironmentsAction extends AbstractProjectAction
 {
     use TwigTrait;
 

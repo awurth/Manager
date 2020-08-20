@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/", name="app_project_group_view")
  */
-class ViewProjectGroupAction extends AbstractProjectGroupAction
+final class ViewProjectGroupAction extends AbstractProjectGroupAction
 {
     use PaginationTrait;
     use TwigTrait;

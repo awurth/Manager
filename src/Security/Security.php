@@ -6,7 +6,7 @@ use App\Entity\User;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Security\Core\Security as SymfonySecurity;
 
-class Security
+final class Security
 {
     private SymfonySecurity $security;
 

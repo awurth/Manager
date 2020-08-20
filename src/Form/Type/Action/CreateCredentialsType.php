@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CreateCredentialsType extends AbstractType
+final class CreateCredentialsType extends AbstractType
 {
     private Security $security;
     private UserRepository $userRepository;

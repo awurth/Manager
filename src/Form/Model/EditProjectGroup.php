@@ -5,7 +5,7 @@ namespace App\Form\Model;
 use App\Entity\ProjectGroup;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class EditProjectGroup
+final class EditProjectGroup
 {
     public $client;
 

@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/projects", name="app_admin_project_list")
  */
-class ListProjectsAction extends AbstractAdminAction
+final class ListProjectsAction extends AbstractAdminAction
 {
     use PaginationTrait;
     use SecurityTrait;

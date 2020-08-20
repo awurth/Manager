@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AddServerMemberType extends AbstractType
+final class AddServerMemberType extends AbstractType
 {
     private UserRepository $userRepository;
 

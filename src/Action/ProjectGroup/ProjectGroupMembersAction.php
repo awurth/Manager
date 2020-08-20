@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/members", name="app_project_group_members")
  */
-class ProjectGroupMembersAction extends AbstractProjectGroupAction
+final class ProjectGroupMembersAction extends AbstractProjectGroupAction
 {
     use FlashTrait;
     use PaginationTrait;

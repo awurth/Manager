@@ -2,7 +2,7 @@
 
 namespace App\Repository\Exception;
 
-class ProjectNotFoundException extends EntityNotFoundException
+final class ProjectNotFoundException extends EntityNotFoundException
 {
     public static function bySlug(string $slug): self
     {

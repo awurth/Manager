@@ -9,7 +9,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class AccessLevelLabelExtension extends AbstractExtension
+final class AccessLevelLabelExtension extends AbstractExtension
 {
     private const ACCESS_LEVELS_PROJECT_GROUP_MEMBER = [
         ProjectGroupMember::ACCESS_LEVEL_GUEST => 'project_group.member.access_level.guest',

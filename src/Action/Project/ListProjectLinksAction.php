@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/links", name="app_project_link_list")
  */
-class ListProjectLinksAction extends AbstractProjectAction
+final class ListProjectLinksAction extends AbstractProjectAction
 {
     use PaginationTrait;
     use TwigTrait;

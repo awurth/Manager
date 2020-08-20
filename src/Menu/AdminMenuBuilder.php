@@ -5,7 +5,7 @@ namespace App\Menu;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 
-class AdminMenuBuilder
+final class AdminMenuBuilder
 {
     private FactoryInterface $factory;
 

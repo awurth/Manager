@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/logout", name="app_logout")
  */
-class LogoutAction
+final class LogoutAction
 {
     public function __invoke(): void
     {

@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/servers", name="app_server_list")
  */
-class ListServersAction
+final class ListServersAction
 {
     use PaginationTrait;
     use SecurityTrait;

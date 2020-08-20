@@ -2,7 +2,7 @@
 
 namespace App\Repository\Exception;
 
-class ServerNotFoundException extends EntityNotFoundException
+final class ServerNotFoundException extends EntityNotFoundException
 {
     public static function byId(string $id): self
     {

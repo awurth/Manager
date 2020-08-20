@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/", name="app_profile")
  */
-class ProfileAction extends AbstractUserSettingsAction
+final class ProfileAction extends AbstractUserSettingsAction
 {
     use FlashTrait;
     use RoutingTrait;

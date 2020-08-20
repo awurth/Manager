@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class CredentialsVoter extends Voter
+final class CredentialsVoter extends Voter
 {
     private const ACCESS_LEVELS = [
         'USER' => CredentialsUser::ACCESS_LEVEL_USER,

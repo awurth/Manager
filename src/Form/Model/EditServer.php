@@ -5,7 +5,7 @@ namespace App\Form\Model;
 use App\Entity\Server;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class EditServer
+final class EditServer
 {
     /**
      * @Assert\NotBlank()

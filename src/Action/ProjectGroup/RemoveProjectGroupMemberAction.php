@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/member/{id}/remove", name="app_project_group_member_remove")
  */
-class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
+final class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
 {
     use FlashTrait;
     use RoutingTrait;

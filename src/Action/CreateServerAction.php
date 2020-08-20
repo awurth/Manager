@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/servers/new", name="app_server_create")
  */
-class CreateServerAction
+final class CreateServerAction
 {
     use FlashTrait;
     use RoutingTrait;

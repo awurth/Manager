@@ -9,7 +9,7 @@ use Knp\Menu\ItemInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class ServerMenuBuilder
+final class ServerMenuBuilder
 {
     private AuthorizationCheckerInterface $authorizationChecker;
     private FactoryInterface $factory;

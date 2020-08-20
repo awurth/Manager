@@ -4,6 +4,6 @@ namespace App\Repository\Exception;
 
 use RuntimeException;
 
-class EntityNotFoundException extends RuntimeException
+abstract class EntityNotFoundException extends RuntimeException
 {
 }

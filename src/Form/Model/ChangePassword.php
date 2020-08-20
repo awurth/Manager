@@ -6,7 +6,7 @@ use Rollerworks\Component\PasswordStrength\Validator\Constraints\PasswordStrengt
 use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ChangePassword
+final class ChangePassword
 {
     /**
      * @Assert\NotBlank()

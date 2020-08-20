@@ -5,7 +5,7 @@ namespace App\Form\Model;
 use App\Entity\ProjectEnvironment;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class EditProjectEnvironment
+final class EditProjectEnvironment
 {
     /**
      * @Assert\NotBlank()

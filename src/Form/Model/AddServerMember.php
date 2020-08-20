@@ -6,7 +6,7 @@ use App\Entity\Server;
 use App\Entity\ServerMember;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class AddServerMember
+final class AddServerMember
 {
     public const VALID_ACCESS_LEVELS = [
         ServerMember::ACCESS_LEVEL_GUEST,

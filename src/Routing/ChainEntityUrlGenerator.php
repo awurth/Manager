@@ -4,7 +4,7 @@ namespace App\Routing;
 
 use InvalidArgumentException;
 
-class ChainEntityUrlGenerator implements EntityUrlGeneratorInterface
+final class ChainEntityUrlGenerator implements EntityUrlGeneratorInterface
 {
     private iterable $generators;
 

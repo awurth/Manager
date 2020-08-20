@@ -12,7 +12,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method CryptographicKey[]    findAll()
  * @method CryptographicKey[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CryptographicKeyRepository extends ServiceEntityRepository
+final class CryptographicKeyRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

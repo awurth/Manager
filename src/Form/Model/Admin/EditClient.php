@@ -5,7 +5,7 @@ namespace App\Form\Model\Admin;
 use App\Entity\Client;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class EditClient
+final class EditClient
 {
     /**
      * @Assert\NotBlank()

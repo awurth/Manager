@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/groups/new", name="app_project_group_create")
  */
-class CreateProjectGroupAction
+final class CreateProjectGroupAction
 {
     use EntityUrlTrait;
     use FlashTrait;

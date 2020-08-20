@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/link-type/{id}/delete", name="app_admin_link_type_delete")
  */
-class DeleteLinkTypeAction
+final class DeleteLinkTypeAction
 {
     use FlashTrait;
     use RoutingTrait;

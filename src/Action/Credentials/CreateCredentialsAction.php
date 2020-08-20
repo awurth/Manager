@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/credentials/new", name="app_credentials_create")
  */
-class CreateCredentialsAction
+final class CreateCredentialsAction
 {
     use FlashTrait;
     use RoutingTrait;

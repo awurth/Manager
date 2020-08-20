@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/", name="app_admin")
  */
-class AdminAction extends AbstractAdminAction
+final class AdminAction extends AbstractAdminAction
 {
     use SecurityTrait;
     use TwigTrait;

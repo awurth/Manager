@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/clients/new", name="app_admin_client_create")
  */
-class CreateClientAction extends AbstractAdminAction
+final class CreateClientAction extends AbstractAdminAction
 {
     use FlashTrait;
     use RoutingTrait;

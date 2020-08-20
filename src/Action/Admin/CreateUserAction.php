@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * @Route("/users/new", name="app_admin_user_create")
  */
-class CreateUserAction extends AbstractAdminAction
+final class CreateUserAction extends AbstractAdminAction
 {
     use FlashTrait;
     use RoutingTrait;

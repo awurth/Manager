@@ -5,7 +5,7 @@ namespace App\Form\Model\Admin;
 use App\Entity\LinkType;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class EditLinkType
+final class EditLinkType
 {
     /**
      * @Assert\NotBlank()

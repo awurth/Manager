@@ -12,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method LinkType[]    findAll()
  * @method LinkType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LinkTypeRepository extends ServiceEntityRepository
+final class LinkTypeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

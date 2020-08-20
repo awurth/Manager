@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class LabelFormatExtension extends AbstractTypeExtension
+final class LabelFormatExtension extends AbstractTypeExtension
 {
     public static function getExtendedTypes(): iterable
     {

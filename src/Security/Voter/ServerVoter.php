@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class ServerVoter extends Voter
+final class ServerVoter extends Voter
 {
     private const ACCESS_LEVELS = [
         'GUEST' => ServerMember::ACCESS_LEVEL_GUEST,

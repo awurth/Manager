@@ -6,7 +6,7 @@ use App\Entity\Project;
 use App\Entity\ProjectMember;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class AddProjectMember
+final class AddProjectMember
 {
     public const VALID_ACCESS_LEVELS = [
         ProjectMember::ACCESS_LEVEL_GUEST,

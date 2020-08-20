@@ -5,7 +5,7 @@ namespace App\Form\Model;
 use App\Entity\Link;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class EditProjectLink
+final class EditProjectLink
 {
     public $linkType;
 

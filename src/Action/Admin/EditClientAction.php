@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/client/{id}/edit", name="app_admin_client_edit")
  */
-class EditClientAction extends AbstractAdminAction
+final class EditClientAction extends AbstractAdminAction
 {
     use FlashTrait;
     use RoutingTrait;

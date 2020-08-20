@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
-class UniqueProjectSlugValidator extends ConstraintValidator
+final class UniqueProjectSlugValidator extends ConstraintValidator
 {
     private ProjectRepository $projectRepository;
 

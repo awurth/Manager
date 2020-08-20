@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
-class UniqueUserEmailValidator extends ConstraintValidator
+final class UniqueUserEmailValidator extends ConstraintValidator
 {
     private UserRepository $userRepository;
     private PropertyAccessorInterface $propertyAccessor;

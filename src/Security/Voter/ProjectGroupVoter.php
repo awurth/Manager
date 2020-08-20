@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class ProjectGroupVoter extends Voter
+final class ProjectGroupVoter extends Voter
 {
     private const ACCESS_LEVELS = [
         'GUEST' => ProjectGroupMember::ACCESS_LEVEL_GUEST,

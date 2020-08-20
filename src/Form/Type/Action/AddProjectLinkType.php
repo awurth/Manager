@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AddProjectLinkType extends AbstractType
+final class AddProjectLinkType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

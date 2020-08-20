@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/client/{id}/delete", name="app_admin_client_delete")
  */
-class DeleteClientAction
+final class DeleteClientAction
 {
     use FlashTrait;
     use RoutingTrait;

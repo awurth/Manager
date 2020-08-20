@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/", name="app_server_view")
  */
-class ViewServerAction extends AbstractServerAction
+final class ViewServerAction extends AbstractServerAction
 {
     use TwigTrait;
 

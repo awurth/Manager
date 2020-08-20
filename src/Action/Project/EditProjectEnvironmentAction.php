@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/environment/{id}/edit", name="app_project_environment_edit")
  */
-class EditProjectEnvironmentAction extends AbstractProjectAction
+final class EditProjectEnvironmentAction extends AbstractProjectAction
 {
     use FlashTrait;
     use TwigTrait;

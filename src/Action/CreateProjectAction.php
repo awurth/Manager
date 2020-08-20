@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/projects/new", name="app_project_create")
  */
-class CreateProjectAction
+final class CreateProjectAction
 {
     use EntityUrlTrait;
     use FlashTrait;

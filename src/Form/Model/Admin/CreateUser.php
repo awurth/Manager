@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @UniqueUserEmail()
  */
-class CreateUser
+final class CreateUser
 {
     public const VALID_ROLES = [
         'ROLE_ADMIN',

@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/delete", name="app_server_delete")
  */
-class DeleteServerAction extends AbstractServerAction
+final class DeleteServerAction extends AbstractServerAction
 {
     use FlashTrait;
     use RoutingTrait;

@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/credentials", name="app_credentials_list")
  */
-class ListCredentialsAction
+final class ListCredentialsAction
 {
     use PaginationTrait;
     use SecurityTrait;

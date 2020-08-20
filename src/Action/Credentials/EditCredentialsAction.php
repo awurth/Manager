@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/credentials/{id}/edit", name="app_credentials_edit")
  */
-class EditCredentialsAction
+final class EditCredentialsAction
 {
     use FlashTrait;
     use RoutingTrait;

@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/password", name="app_generate_password")
  */
-class GeneratePasswordAction
+final class GeneratePasswordAction
 {
     use TwigTrait;
 

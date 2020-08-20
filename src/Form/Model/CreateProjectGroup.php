@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @UniqueProjectGroupSlug()
  */
-class CreateProjectGroup
+final class CreateProjectGroup
 {
     public $client;
 

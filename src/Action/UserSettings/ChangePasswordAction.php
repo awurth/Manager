@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * @Route("/password", name="app_change_password")
  */
-class ChangePasswordAction extends AbstractUserSettingsAction
+final class ChangePasswordAction extends AbstractUserSettingsAction
 {
     use FlashTrait;
     use RoutingTrait;

@@ -6,7 +6,7 @@ use App\Routing\EntityUrlGeneratorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class EntityUrlGeneratorExtension extends AbstractExtension
+final class EntityUrlGeneratorExtension extends AbstractExtension
 {
     private EntityUrlGeneratorInterface $entityUrlGenerator;
 

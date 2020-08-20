@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/edit", name="app_project_group_edit")
  */
-class EditProjectGroupAction extends AbstractProjectGroupAction
+final class EditProjectGroupAction extends AbstractProjectGroupAction
 {
     use FlashTrait;
     use TwigTrait;

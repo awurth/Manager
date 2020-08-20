@@ -4,7 +4,7 @@ namespace App\Routing;
 
 use App\Entity\ProjectGroup;
 
-class ProjectGroupUrlGenerator extends AbstractEntityUrlGenerator
+final class ProjectGroupUrlGenerator extends AbstractEntityUrlGenerator
 {
     /**
      * @param ProjectGroup $projectGroup

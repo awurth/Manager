@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/", name="app_project_view")
  */
-class ViewProjectAction extends AbstractProjectAction
+final class ViewProjectAction extends AbstractProjectAction
 {
     use TwigTrait;
 

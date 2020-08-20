@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/search", name="app_search")
  */
-class SearchAction
+final class SearchAction
 {
     use SecurityTrait;
     use TwigTrait;

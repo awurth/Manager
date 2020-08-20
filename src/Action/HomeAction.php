@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/", name="app_home")
  */
-class HomeAction
+final class HomeAction
 {
     public function __invoke(Request $request, HttpKernelInterface $httpKernel): Response
     {

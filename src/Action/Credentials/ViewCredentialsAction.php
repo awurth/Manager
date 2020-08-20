@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/credentials/{id}", name="app_credentials_view")
  */
-class ViewCredentialsAction
+final class ViewCredentialsAction
 {
     use SecurityTrait;
     use TwigTrait;

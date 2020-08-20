@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/link-type/{id}/edit", name="app_admin_link_type_edit")
  */
-class EditLinkTypeAction extends AbstractAdminAction
+final class EditLinkTypeAction extends AbstractAdminAction
 {
     use FlashTrait;
     use RoutingTrait;

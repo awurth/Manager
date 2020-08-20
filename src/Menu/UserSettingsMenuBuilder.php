@@ -7,7 +7,7 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\Security\Core\Security;
 
-class UserSettingsMenuBuilder
+final class UserSettingsMenuBuilder
 {
     private FactoryInterface $factory;
     private Security $security;

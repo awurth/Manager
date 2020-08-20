@@ -19,7 +19,7 @@ use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\TextFilterType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FilterLabelFormatExtension extends AbstractTypeExtension
+final class FilterLabelFormatExtension extends AbstractTypeExtension
 {
     public static function getExtendedTypes(): iterable
     {

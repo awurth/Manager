@@ -4,7 +4,7 @@ namespace App\Action\Admin;
 
 use App\Action\Traits\BreadcrumbsTrait;
 
-class AbstractAdminAction
+abstract class AbstractAdminAction
 {
     use BreadcrumbsTrait;
 

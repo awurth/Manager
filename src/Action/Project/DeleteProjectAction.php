@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/delete", name="app_project_delete")
  */
-class DeleteProjectAction extends AbstractProjectAction
+final class DeleteProjectAction extends AbstractProjectAction
 {
     use FlashTrait;
     use RoutingTrait;

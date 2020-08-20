@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/environment/{id}/remove", name="app_project_environment_remove")
  */
-class RemoveProjectEnvironmentAction extends AbstractProjectAction
+final class RemoveProjectEnvironmentAction extends AbstractProjectAction
 {
     use FlashTrait;
 

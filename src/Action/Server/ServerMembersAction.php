@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/members", name="app_server_members")
  */
-class ServerMembersAction extends AbstractServerAction
+final class ServerMembersAction extends AbstractServerAction
 {
     use FlashTrait;
     use PaginationTrait;

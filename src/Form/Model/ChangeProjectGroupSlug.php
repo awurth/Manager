@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @UniqueProjectGroupSlug()
  */
-class ChangeProjectGroupSlug
+final class ChangeProjectGroupSlug
 {
     /**
      * @Assert\NotBlank()

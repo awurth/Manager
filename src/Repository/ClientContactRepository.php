@@ -12,7 +12,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method ClientContact[]    findAll()
  * @method ClientContact[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ClientContactRepository extends ServiceEntityRepository
+final class ClientContactRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

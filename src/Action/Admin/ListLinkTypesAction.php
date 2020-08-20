@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/link-types", name="app_admin_link_type_list")
  */
-class ListLinkTypesAction extends AbstractAdminAction
+final class ListLinkTypesAction extends AbstractAdminAction
 {
     use PaginationTrait;
     use SecurityTrait;

@@ -4,7 +4,7 @@ namespace App\Form\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateServer
+final class CreateServer
 {
     /**
      * @Assert\NotBlank()

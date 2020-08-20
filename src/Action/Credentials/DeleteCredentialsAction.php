@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/credentials/{id}/delete", name="app_credentials_delete")
  */
-class DeleteCredentialsAction
+final class DeleteCredentialsAction
 {
     use FlashTrait;
     use RoutingTrait;

@@ -7,7 +7,7 @@ use DateTimeInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class CarbonExtension extends AbstractExtension
+final class CarbonExtension extends AbstractExtension
 {
     private string $locale;
 

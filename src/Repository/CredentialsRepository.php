@@ -12,7 +12,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Credentials[]    findAll()
  * @method Credentials[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CredentialsRepository extends ServiceEntityRepository
+final class CredentialsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

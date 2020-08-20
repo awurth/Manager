@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @UniqueUserEmail()
  */
-class EditProfile
+final class EditProfile
 {
     /**
      * @Assert\NotBlank()

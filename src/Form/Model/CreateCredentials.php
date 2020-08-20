@@ -4,7 +4,7 @@ namespace App\Form\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateCredentials
+final class CreateCredentials
 {
     /**
      * @Assert\NotBlank()

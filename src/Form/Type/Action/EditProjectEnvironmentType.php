@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditProjectEnvironmentType extends AbstractType
+final class EditProjectEnvironmentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

@@ -2,7 +2,7 @@
 
 namespace App\Form\Model;
 
-class GeneratePassword
+final class GeneratePassword
 {
     public $uppercase = true;
     public $lowercase = true;

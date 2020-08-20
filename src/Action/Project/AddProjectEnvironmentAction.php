@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/environments/new", name="app_project_environment_add")
  */
-class AddProjectEnvironmentAction extends AbstractProjectAction
+final class AddProjectEnvironmentAction extends AbstractProjectAction
 {
     use FlashTrait;
     use TwigTrait;

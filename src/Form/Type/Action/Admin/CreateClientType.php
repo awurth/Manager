@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CreateClientType extends AbstractType
+final class CreateClientType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

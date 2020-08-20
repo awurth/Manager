@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/edit", name="app_server_edit")
  */
-class EditServerAction extends AbstractServerAction
+final class EditServerAction extends AbstractServerAction
 {
     use FlashTrait;
     use RoutingTrait;

@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/member/{memberId}/remove", name="app_server_member_remove")
  */
-class RemoveServerMemberAction extends AbstractServerAction
+final class RemoveServerMemberAction extends AbstractServerAction
 {
     use EntityUrlTrait;
     use FlashTrait;

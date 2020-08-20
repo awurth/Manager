@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/links/new", name="app_project_link_add")
  */
-class AddProjectLinkAction extends AbstractProjectAction
+final class AddProjectLinkAction extends AbstractProjectAction
 {
     use FlashTrait;
     use TwigTrait;

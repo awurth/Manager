@@ -8,7 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class LinkTypeChoiceType extends AbstractType
+final class LinkTypeChoiceType extends AbstractType
 {
     private LinkTypeRepository $linkTypeRepository;
 

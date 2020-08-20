@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/link-types/new", name="app_admin_link_type_create")
  */
-class CreateLinkTypeAction extends AbstractAdminAction
+final class CreateLinkTypeAction extends AbstractAdminAction
 {
     use FlashTrait;
     use RoutingTrait;
