@@ -44,7 +44,7 @@ final class CreateProjectGroupAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $group = ProjectGroup::createFromCreationForm($model, $this->getUser());
+            $group = ProjectGroup::createFromCreationForm($model, $this->security->getUser());
 
             $this->entityManager->persist($group);
             $this->entityManager->flush();

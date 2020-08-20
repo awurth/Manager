@@ -47,7 +47,7 @@ final class ChangePasswordAction extends AbstractUserSettingsAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $this->getUser();
+            $user = $this->security->getUser();
 
             $user->updateFromPasswordChangeForm($model, $this->userPasswordEncoder);
 

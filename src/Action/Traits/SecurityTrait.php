@@ -2,9 +2,7 @@
 
 namespace App\Action\Traits;
 
-use App\Entity\User;
 use App\Security\Security;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Throwable;
 
@@ -19,35 +17,20 @@ trait SecurityTrait
 
     protected function denyAccessUnlessLoggedIn(): void
     {
-        if (!$this->isLoggedIn()) {
-            throw new HttpException(401);
+        if (!$this->security->isLoggedIn()) {
+            throw $this->createAccessDeniedException();
         }
     }
 
     protected function denyAccessUnlessGranted(string $attribute, $subject = null, string $message = 'Access Denied.'): void
     {
-        if (!$this->isGranted($attribute, $subject)) {
+        if (!$this->security->isGranted($attribute, $subject)) {
             $exception = $this->createAccessDeniedException($message);
             $exception->setAttributes($attribute);
             $exception->setSubject($subject);
 
             throw $exception;
         }
-    }
-
-    protected function getUser(): User
-    {
-        return $this->security->getUser();
-    }
-
-    protected function isGranted(string $attribute, $subject = null): bool
-    {
-        return $this->security->isGranted($attribute, $subject);
-    }
-
-    protected function isLoggedIn(): bool
-    {
-        return $this->isGranted('IS_AUTHENTICATED_REMEMBERED');
     }
 
     /**

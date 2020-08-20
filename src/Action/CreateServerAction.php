@@ -45,7 +45,7 @@ final class CreateServerAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $server = Server::createFromCreationForm($model, $this->getUser());
+            $server = Server::createFromCreationForm($model, $this->security->getUser());
 
             $this->entityManager->persist($server);
             $this->entityManager->flush();

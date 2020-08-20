@@ -34,7 +34,7 @@ final class ViewProjectAction extends AbstractProjectAction
 
         return $this->renderPage('view-project', 'app/project/view.html.twig', [
             'project' => $this->project,
-            'member' => $this->projectMemberRepository->findOneBy(['user' => $this->getUser(), 'project' => $this->project]),
+            'member' => $this->projectMemberRepository->findOneBy(['user' => $this->security->getUser(), 'project' => $this->project]),
             'links' => $links
         ]);
     }

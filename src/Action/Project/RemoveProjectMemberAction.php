@@ -41,7 +41,7 @@ final class RemoveProjectMemberAction extends AbstractProjectAction
             throw new NotFoundHttpException('Project member not found');
         }
 
-        $user = $this->getUser();
+        $user = $this->security->getUser();
 
         if ($member->getAccessLevel() === ProjectMember::ACCESS_LEVEL_OWNER) {
             if ($member->getUser() !== $user) {

@@ -42,7 +42,7 @@ final class RemoveServerMemberAction extends AbstractServerAction
             throw new NotFoundHttpException('Server member not found');
         }
 
-        $user = $this->getUser();
+        $user = $this->security->getUser();
 
         if ($member->getAccessLevel() === ServerMember::ACCESS_LEVEL_OWNER) {
             if ($member->getUser() !== $user) {

@@ -40,7 +40,7 @@ final class RemoveProjectGroupMemberAction extends AbstractProjectGroupAction
             throw new NotFoundHttpException('Group member not found');
         }
 
-        $user = $this->getUser();
+        $user = $this->security->getUser();
 
         if ($member->getAccessLevel() === ProjectGroupMember::ACCESS_LEVEL_OWNER) {
             if ($member->getUser() !== $user) {

@@ -31,7 +31,7 @@ final class LoginAction
 
     public function __invoke(): Response
     {
-        if ($this->isLoggedIn()) {
+        if ($this->security->isLoggedIn()) {
             return $this->redirectToRoute('app_home');
         }
 

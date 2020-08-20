@@ -44,7 +44,7 @@ final class CreateCredentialsAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $credentials = Credentials::createFromCreationForm($model, $this->getUser());
+            $credentials = Credentials::createFromCreationForm($model, $this->security->getUser());
 
             $this->entityManager->persist($credentials);
             $this->entityManager->flush();

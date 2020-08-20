@@ -37,7 +37,7 @@ abstract class AbstractProjectAction
                 false
             );
 
-            if ($this->isGranted('VIEW', $this->projectGroup)) {
+            if ($this->security->isGranted('VIEW', $this->projectGroup)) {
                 $this->breadcrumbs->prependItem(
                     $this->projectGroup->getName(),
                     $this->entityUrlGenerator->generate($this->projectGroup, 'view'),

@@ -3,7 +3,7 @@
 namespace App\Security;
 
 use App\Entity\User;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Security as SymfonySecurity;
 
 final class Security
@@ -20,14 +20,19 @@ final class Security
         $user = $this->security->getUser();
 
         if (!$user instanceof User) {
-            throw new HttpException(401);
+            throw new AccessDeniedException();
         }
 
         return $user;
     }
 
-    public function isGranted(string $attribute, $subject = null): bool
+    public function isGranted(string $attribute, ?object $subject = null): bool
     {
         return $this->security->isGranted($attribute, $subject);
+    }
+
+    public function isLoggedIn(): bool
+    {
+        return $this->isGranted('IS_AUTHENTICATED_REMEMBERED');
     }
 }

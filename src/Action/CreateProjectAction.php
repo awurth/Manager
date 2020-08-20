@@ -51,7 +51,7 @@ final class CreateProjectAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $project = Project::createFromCreationForm($model, $this->getUser(), $this->uploader);
+            $project = Project::createFromCreationForm($model, $this->security->getUser(), $this->uploader);
 
             $this->entityManager->persist($project);
             $this->entityManager->flush();

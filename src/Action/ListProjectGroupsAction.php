@@ -44,7 +44,7 @@ final class ListProjectGroupsAction
         return $this->projectGroupRepository->createQueryBuilder('g')
             ->join('g.members', 'm')
             ->where('m.user = :user')
-            ->setParameter('user', $this->getUser()->getId(), 'uuid_binary')
+            ->setParameter('user', $this->security->getUser()->getId(), 'uuid_binary')
             ->orderBy('g.createdAt', 'DESC');
     }
 }

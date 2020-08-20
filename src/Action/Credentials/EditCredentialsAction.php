@@ -58,7 +58,7 @@ final class EditCredentialsAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $credentials->updateFromEditionForm($model, $this->getUser());
+            $credentials->updateFromEditionForm($model, $this->security->getUser());
 
             $this->entityManager->persist($credentials);
             $this->entityManager->flush();

@@ -35,7 +35,7 @@ final class ProfileAction extends AbstractUserSettingsAction
     {
         $this->preInvoke();
 
-        $user = $this->getUser();
+        $user = $this->security->getUser();
 
         $model = new EditProfile($user);
         $form = $this->formFactory->create(EditProfileType::class, $model);
