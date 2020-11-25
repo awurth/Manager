@@ -6,7 +6,7 @@ use App\Entity\Server;
 use App\Entity\ValueObject\Id;
 use App\Repository\Exception\ServerNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Server|null find(Id $id, $lockMode = null, $lockVersion = null)

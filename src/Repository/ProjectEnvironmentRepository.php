@@ -6,7 +6,7 @@ use App\Entity\ProjectEnvironment;
 use App\Entity\ValueObject\Id;
 use App\Repository\Exception\ProjectEnvironmentNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method ProjectEnvironment|null find(Id $id, $lockMode = null, $lockVersion = null)

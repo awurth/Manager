@@ -6,7 +6,7 @@ use App\Entity\Client;
 use App\Entity\ValueObject\Id;
 use App\Repository\Exception\ClientNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Client|null find(Id $id, $lockMode = null, $lockVersion = null)

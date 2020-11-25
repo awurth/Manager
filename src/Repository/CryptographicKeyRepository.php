@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Entity\CryptographicKey;
 use App\Entity\ValueObject\Id;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method CryptographicKey|null find(Id $id, $lockMode = null, $lockVersion = null)

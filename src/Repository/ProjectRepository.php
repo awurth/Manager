@@ -6,7 +6,7 @@ use App\Entity\Project;
 use App\Entity\ValueObject\Id;
 use App\Repository\Exception\ProjectNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Project|null find(Id $id, $lockMode = null, $lockVersion = null)

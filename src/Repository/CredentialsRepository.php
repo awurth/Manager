@@ -6,7 +6,7 @@ use App\Entity\Credentials;
 use App\Entity\ValueObject\Id;
 use App\Repository\Exception\CredentialsNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Credentials|null find(Id $id, $lockMode = null, $lockVersion = null)
