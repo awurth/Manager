@@ -2,7 +2,9 @@
 
 namespace App\Entity\ValueObject;
 
-final class Id
+use Symfony\Component\Uid\Uuid;
+
+class Id
 {
     private string $id;
 
@@ -23,7 +25,7 @@ final class Id
 
     public static function generate(): self
     {
-        return new static(uuid_create(UUID_TYPE_RANDOM));
+        return new static((string)Uuid::v4());
     }
 
     public function equals(Id $id): bool
