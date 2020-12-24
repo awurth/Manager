@@ -1,4 +1,6 @@
 security:
+    enable_authenticator_manager: true
+
     encoders:
         App\Entity\User:
             algorithm: auto
@@ -24,9 +26,8 @@ security:
             security: false
         app:
             pattern: ^/
-            guard:
-                authenticators:
-                    - App\Security\AppAuthenticator
+            custom_authenticators:
+                - App\Security\AppAuthenticator
             logout:
                 path: app_logout
                 target: app_login
@@ -36,12 +37,10 @@ security:
                 lifetime: 2592000
                 path: /
                 secret: '%kernel.secret%'
-            anonymous: true
-            lazy: true
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/.*, roles: IS_AUTHENTICATED_REMEMBERED }

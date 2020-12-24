@@ -3,74 +3,65 @@
 namespace App\Security;
 
 use App\Form\Type\Action\LoginType;
+use App\Repository\UserRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\PasswordUpgradeBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
+use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-final class AppAuthenticator extends AbstractFormLoginAuthenticator
+final class AppAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
     private FormFactoryInterface $formFactory;
-    private UserPasswordEncoderInterface $passwordEncoder;
     private UrlGeneratorInterface $urlGenerator;
+    private UserRepository $userRepository;
 
-    public function __construct(FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator, UserRepository $userRepository)
     {
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
-        $this->passwordEncoder = $passwordEncoder;
+        $this->userRepository = $userRepository;
     }
 
-    public function supports(Request $request): bool
+    protected function getLoginUrl(Request $request): string
     {
-        return 'app_login' === $request->attributes->get('_route')
-            && $request->isMethod('POST');
+        return $this->urlGenerator->generate('app_login');
     }
 
-    public function getCredentials(Request $request): array
+    public function authenticate(Request $request): PassportInterface
     {
         $form = $this->formFactory->create(LoginType::class);
         $form->handleRequest($request);
 
-        $data = $form->getData();
-        $request->getSession()->set(
-            Security::LAST_USERNAME,
-            $data['email']
-        );
+        $email = $form->get('email')->getData();
+        $password = $form->get('password')->getData();
 
-        return $data;
+        $userBadge = new UserBadge($email, function (string $userIdentifier) {
+            return $this->userRepository->findOneBy(['email' => $userIdentifier]);
+        });
+        $credentials = new PasswordCredentials($password);
+
+        return new Passport($userBadge, $credentials, [
+            new PasswordUpgradeBadge($password)
+        ]);
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider): UserInterface
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        return $userProvider->loadUserByUsername($credentials['email']);
-    }
-
-    public function checkCredentials($credentials, UserInterface $user): bool
-    {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
-    }
-
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
-    {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
-    }
-
-    protected function getLoginUrl(): string
-    {
-        return $this->urlGenerator->generate('app_login');
     }
 }
