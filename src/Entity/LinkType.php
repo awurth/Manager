@@ -51,6 +51,9 @@ class LinkType
         return $this->name;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public static function createFromAdminCreationForm(CreateLinkType $createLinkType, StorageInterface $uploader): self
     {
         $linkType = new self($createLinkType->name);
@@ -65,6 +68,9 @@ class LinkType
         return $linkType;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public function updateFromAdminEditionForm(EditLinkType $editLinkType, StorageInterface $uploader): void
     {
         $this->name = $editLinkType->name;

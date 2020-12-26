@@ -81,6 +81,9 @@ class Project
         return $this->name;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public static function createFromCreationForm(CreateProject $createProject, User $owner, StorageInterface $uploader): self
     {
         $project = new self($createProject->projectGroup, $createProject->slug, $createProject->name);
@@ -96,6 +99,9 @@ class Project
         return $project;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public function updateFromEditionForm(EditProject $editProject, StorageInterface $uploader): void
     {
         $this->name = $editProject->name;

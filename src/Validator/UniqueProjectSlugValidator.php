@@ -16,19 +16,19 @@ final class UniqueProjectSlugValidator extends ConstraintValidator
         $this->projectRepository = $projectRepository;
     }
 
-    public function validate($model, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof UniqueProjectSlug) {
             throw new UnexpectedTypeException($constraint, UniqueProjectSlug::class);
         }
 
-        $existingProject = $this->projectRepository->findOneBy(['slug' => $model->slug]);
+        $existingProject = $this->projectRepository->findOneBy(['slug' => $value->slug]);
 
         if ($existingProject) {
             $this->context->buildViolation($constraint->message)
                 ->atPath('slug')
-                ->setParameter('{{ slug }}', $model->slug)
-                ->setInvalidValue($model->slug)
+                ->setParameter('{{ slug }}', $value->slug)
+                ->setInvalidValue($value->slug)
                 ->addViolation();
         }
     }

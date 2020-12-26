@@ -67,6 +67,9 @@ class Server
         $this->members = new ArrayCollection();
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public static function createFromCreationForm(CreateServer $createServer, User $owner): self
     {
         $server = new self($createServer->name);
@@ -79,6 +82,9 @@ class Server
         return $server;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public function updateFromEditionForm(EditServer $editServer): void
     {
         $this->name = $editServer->name;

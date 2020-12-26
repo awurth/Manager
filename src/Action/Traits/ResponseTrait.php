@@ -8,6 +8,13 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 trait ResponseTrait
 {
+    /**
+     * @param \SplFileInfo|string $file
+     * @param string|null         $fileName
+     * @param string              $disposition
+     *
+     * @return BinaryFileResponse
+     */
     protected function file($file, ?string $fileName = null, string $disposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT): BinaryFileResponse
     {
         $response = new BinaryFileResponse($file);
@@ -16,6 +23,13 @@ trait ResponseTrait
         return $response;
     }
 
+    /**
+     * @param mixed $data
+     * @param int   $status
+     * @param array $headers
+     *
+     * @return JsonResponse
+     */
     protected function json($data, int $status = 200, array $headers = []): JsonResponse
     {
         return new JsonResponse($data, $status, $headers);

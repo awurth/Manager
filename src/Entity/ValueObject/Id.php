@@ -4,7 +4,7 @@ namespace App\Entity\ValueObject;
 
 use Symfony\Component\Uid\Uuid;
 
-class Id
+final class Id
 {
     private string $id;
 
@@ -20,12 +20,12 @@ class Id
 
     public static function fromString(string $id): self
     {
-        return new static($id);
+        return new self($id);
     }
 
     public static function generate(): self
     {
-        return new static((string)Uuid::v4());
+        return new self((string)Uuid::v4());
     }
 
     public function equals(Id $id): bool

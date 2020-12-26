@@ -78,6 +78,9 @@ class ProjectEnvironment
         return $this->name;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public static function createFromCreationForm(AddProjectEnvironment $addProjectEnvironment, Project $project): self
     {
         $environment = new self(
@@ -93,6 +96,9 @@ class ProjectEnvironment
         return $environment;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public function updateFromEditionForm(EditProjectEnvironment $editProjectEnvironment): void
     {
         $this->name = $editProjectEnvironment->name;

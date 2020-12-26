@@ -32,6 +32,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     private string $password;
 
@@ -74,6 +76,9 @@ class User implements UserInterface
         return $this->email;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public static function createFromAdminCreationForm(CreateUser $createUser, UserPasswordEncoderInterface $userPasswordEncoder): self
     {
         $user = new self($createUser->email, $createUser->firstname, $createUser->lastname);
@@ -84,12 +89,18 @@ class User implements UserInterface
         return $user;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public function updateFromPasswordChangeForm(ChangePassword $changePassword, UserPasswordEncoderInterface $userPasswordEncoder): void
     {
         $this->password = $userPasswordEncoder->encodePassword($this, $changePassword->newPassword);
         $this->updatedAt = new DateTimeImmutable();
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public function updateFromProfileEditionForm(EditProfile $editProfile): void
     {
         $this->email = $editProfile->email;

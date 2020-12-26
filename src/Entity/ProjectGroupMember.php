@@ -52,7 +52,7 @@ class ProjectGroupMember
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt = null;
 
     private function __construct(ProjectGroup $projectGroup, User $user, int $accessLevel)
     {
@@ -63,6 +63,9 @@ class ProjectGroupMember
         $this->createdAt = new DateTimeImmutable();
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public static function createFromGroupMemberAdditionForm(AddProjectGroupMember $addProjectGroupMember): self
     {
         return new self(

@@ -52,7 +52,7 @@ class ServerMember
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt = null;
 
     private function __construct(Server $server, User $user, int $accessLevel)
     {
@@ -63,6 +63,9 @@ class ServerMember
         $this->createdAt = new DateTimeImmutable();
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public static function createFromServerMemberAdditionForm(AddServerMember $addServerMember): self
     {
         return new self(

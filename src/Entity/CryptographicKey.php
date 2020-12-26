@@ -50,7 +50,7 @@ class CryptographicKey
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt = null;
 
     private function __construct(User $user, string $name, string $value)
     {

@@ -8,7 +8,6 @@ use App\Repository\CredentialsUserRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 final class CredentialsVoter extends Voter
 {
@@ -29,24 +28,17 @@ final class CredentialsVoter extends Voter
         $this->credentialsUserRepository = $credentialsUserRepository;
     }
 
-    protected function supports($attribute, $subject): bool
+    protected function supports(string $attribute, $subject): bool
     {
         return (array_key_exists($attribute, self::ACCESS_LEVELS) || in_array($attribute, ['DELETE', 'EDIT', 'VIEW']))
             && $subject instanceof Credentials;
     }
 
-    /**
-     * @param string         $attribute
-     * @param Credentials    $credentials
-     * @param TokenInterface $token
-     *
-     * @return bool
-     */
-    protected function voteOnAttribute($attribute, $credentials, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
 
-        if (!$user instanceof UserInterface) {
+        if (!$user) {
             return false;
         }
 
@@ -54,7 +46,7 @@ final class CredentialsVoter extends Voter
             return true;
         }
 
-        if (!$credentialsUser = $this->credentialsUserRepository->findOneBy(['user' => $user, 'credentials' => $credentials])) {
+        if (!$credentialsUser = $this->credentialsUserRepository->findOneBy(['user' => $user, 'credentials' => $subject])) {
             return false;
         }
 

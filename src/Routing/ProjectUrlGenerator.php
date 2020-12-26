@@ -6,17 +6,12 @@ use App\Entity\Project;
 
 final class ProjectUrlGenerator extends AbstractEntityUrlGenerator
 {
-    /**
-     * @param Project $project
-     * @param string  $action
-     * @param array   $parameters
-     *
-     * @return string
-     */
-    public function generate($project, string $action, array $parameters = []): string
+    public function generate($entity, string $action, array $parameters = []): string
     {
-        $parameters['projectGroupSlug'] = $project->getProjectGroup()->getSlug();
-        $parameters['projectSlug'] = $project->getSlug();
+        /** @var Project $entity */
+
+        $parameters['projectGroupSlug'] = $entity->getProjectGroup()->getSlug();
+        $parameters['projectSlug'] = $entity->getSlug();
 
         return $this->router->generate('app_project_'.$action, $parameters);
     }

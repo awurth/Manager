@@ -8,6 +8,6 @@ final class ProjectEnvironmentNotFoundException extends EntityNotFoundException
 {
     public static function byId(Id $id): self
     {
-        return new self(sprintf('Project environment not found with id "%s"', $id));
+        return new self(sprintf('Project environment not found with id "%s"', (string)$id));
     }
 }

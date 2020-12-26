@@ -22,6 +22,13 @@ final class EntityUrlGeneratorExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * @param mixed  $entity
+     * @param string $action
+     * @param array  $parameters
+     *
+     * @return string|null
+     */
     public function getPathTo($entity, string $action, array $parameters = []): ?string
     {
         return $this->entityUrlGenerator->generate($entity, $action, $parameters);

@@ -52,6 +52,9 @@ class Link
         return $this->uri;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public static function createFromProjectLinkCreationForm(AddProjectLink $addProjectLink, Project $project): self
     {
         $link = new self($addProjectLink->name, $addProjectLink->uri);
@@ -61,6 +64,9 @@ class Link
         return $link;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public function updateFromProjectLinkEditionForm(EditProjectLink $editProjectLink): void
     {
         $this->name = $editProjectLink->name;

@@ -22,6 +22,11 @@ trait SecurityTrait
         }
     }
 
+    /**
+     * @param string     $attribute
+     * @param mixed|null $subject
+     * @param string     $message
+     */
     protected function denyAccessUnlessGranted(string $attribute, $subject = null, string $message = 'Access Denied.'): void
     {
         if (!$this->security->isGranted($attribute, $subject)) {

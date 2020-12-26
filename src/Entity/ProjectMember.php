@@ -63,6 +63,9 @@ class ProjectMember
         $this->createdAt = new DateTimeImmutable();
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public static function createFromProjectMemberAdditionForm(AddProjectMember $addProjectMember): self
     {
         return new self(

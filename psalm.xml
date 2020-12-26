@@ -1,25 +1,45 @@
 <?xml version="1.0"?>
 <psalm
-  errorLevel="3"
-  resolveFromConfigFile="true"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="https://getpsalm.org/schema/config"
-  xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    errorLevel="3"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 >
-  <projectFiles>
-    <directory name="src" />
-    <ignoreFiles>
-      <directory name="vendor" />
-    </ignoreFiles>
-  </projectFiles>
-  <plugins>
-    <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin" />
-  </plugins>
-  <issueHandlers>
-    <MoreSpecificImplementedParamType>
-      <errorLevel type="suppress">
-        <directory name="src/Security/Voter" />
-      </errorLevel>
-    </MoreSpecificImplementedParamType>
-  </issueHandlers>
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+    <plugins>
+        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
+            <containerXml>var/cache/dev/App_KernelDevDebugContainer.xml</containerXml>
+        </pluginClass>
+    </plugins>
+    <issueHandlers>
+        <MissingConstructor>
+            <errorLevel type="suppress">
+                <directory name="src/Action/Traits" />
+                <directory name="src/Form/Model" />
+            </errorLevel>
+        </MissingConstructor>
+        <MissingPropertyType>
+            <errorLevel type="suppress">
+                <directory name="src/Form/Model" />
+                <directory name="src/Form/Model/Admin" />
+            </errorLevel>
+        </MissingPropertyType>
+        <UnresolvableInclude>
+            <errorLevel type="suppress">
+                <file name="src/Kernel.php" />
+            </errorLevel>
+        </UnresolvableInclude>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="src/Action" />
+                <directory name="src/DataFixtures" />
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+    </issueHandlers>
 </psalm>

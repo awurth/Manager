@@ -25,6 +25,9 @@ final class GeneratePasswordAction
         $this->formFactory = $formFactory;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public function __invoke(Request $request): Response
     {
         $model = new GeneratePassword();

@@ -31,7 +31,7 @@ final class CreateProject
     public $description;
 
     /**
-     * @var UploadedFile
+     * @var UploadedFile|null
      *
      * @Assert\Image()
      */

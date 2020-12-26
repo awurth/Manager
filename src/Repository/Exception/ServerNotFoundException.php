@@ -8,6 +8,6 @@ final class ServerNotFoundException extends EntityNotFoundException
 {
     public static function byId(Id $id): self
     {
-        return new self(sprintf('Server not found with id "%s"', $id));
+        return new self(sprintf('Server not found with id "%s"', (string)$id));
     }
 }

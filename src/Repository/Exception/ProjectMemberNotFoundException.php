@@ -8,6 +8,6 @@ final class ProjectMemberNotFoundException extends EntityNotFoundException
 {
     public static function byId(Id $id): self
     {
-        return new self(sprintf('Project member not found with id "%s"', $id));
+        return new self(sprintf('Project member not found with id "%s"', (string)$id));
     }
 }

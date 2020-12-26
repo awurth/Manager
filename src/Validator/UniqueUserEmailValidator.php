@@ -20,23 +20,23 @@ final class UniqueUserEmailValidator extends ConstraintValidator
         $this->propertyAccessor = $propertyAccessor;
     }
 
-    public function validate($model, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof UniqueUserEmail) {
             throw new UnexpectedTypeException($constraint, UniqueUserEmail::class);
         }
 
-        $user = $this->propertyAccessor->isReadable($model, 'user')
-            ? $this->propertyAccessor->getValue($model, 'user')
+        $user = $this->propertyAccessor->isReadable($value, 'user')
+            ? $this->propertyAccessor->getValue($value, 'user')
             : null;
 
-        $existingUser = $this->getExistingUser($model->email, $user);
+        $existingUser = $this->getExistingUser($value->email, $user);
 
         if ($existingUser) {
             $this->context->buildViolation($constraint->message)
                 ->atPath('email')
-                ->setParameter('{{ email }}', $model->email)
-                ->setInvalidValue($model->email)
+                ->setParameter('{{ email }}', $value->email)
+                ->setInvalidValue($value->email)
                 ->addViolation();
         }
     }

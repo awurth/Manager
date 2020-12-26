@@ -83,6 +83,9 @@ class Credentials
         return $this->getName();
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public static function createFromCreationForm(CreateCredentials $createCredentials, User $owner): self
     {
         $credentials = new self($createCredentials->name, $createCredentials->password);
@@ -99,6 +102,9 @@ class Credentials
         return $credentials;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public function updateFromEditionForm(EditCredentials $editCredentials, User $currentUser): void
     {
         $this->name = $editCredentials->name;

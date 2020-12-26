@@ -68,6 +68,9 @@ class Client
         $this->createdAt = new DateTimeImmutable();
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public static function createFromAdminCreationForm(CreateClient $createClient): self
     {
         $client = new self($createClient->name);
@@ -80,6 +83,9 @@ class Client
         return $client;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public function updateFromAdminEditionForm(EditClient $editClient): void
     {
         $this->name = $editClient->name;

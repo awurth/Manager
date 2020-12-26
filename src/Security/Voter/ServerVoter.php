@@ -4,12 +4,10 @@ namespace App\Security\Voter;
 
 use App\Entity\Server;
 use App\Entity\ServerMember;
-use App\Entity\User;
 use App\Repository\ServerMemberRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 final class ServerVoter extends Voter
 {
@@ -31,25 +29,17 @@ final class ServerVoter extends Voter
         $this->serverMemberRepository = $serverMemberRepository;
     }
 
-    protected function supports($attribute, $subject): bool
+    protected function supports(string $attribute, $subject): bool
     {
         return (array_key_exists($attribute, self::ACCESS_LEVELS) || in_array($attribute, ['DELETE', 'EDIT', 'VIEW']))
             && $subject instanceof Server;
     }
 
-    /**
-     * @param string         $attribute
-     * @param Server         $server
-     * @param TokenInterface $token
-     *
-     * @return bool
-     */
-    protected function voteOnAttribute($attribute, $server, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
-        /** @var User $user */
         $user = $token->getUser();
 
-        if (!$user instanceof UserInterface) {
+        if (!$user) {
             return false;
         }
 
@@ -57,7 +47,7 @@ final class ServerVoter extends Voter
             return true;
         }
 
-        if (!$serverMember = $this->serverMemberRepository->findOneBy(['user' => $user, 'server' => $server])) {
+        if (!$serverMember = $this->serverMemberRepository->findOneBy(['user' => $user, 'server' => $subject])) {
             return false;
         }
 

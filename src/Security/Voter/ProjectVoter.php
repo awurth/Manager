@@ -5,13 +5,11 @@ namespace App\Security\Voter;
 use App\Entity\Project;
 use App\Entity\ProjectGroupMember;
 use App\Entity\ProjectMember;
-use App\Entity\User;
 use App\Repository\ProjectGroupMemberRepository;
 use App\Repository\ProjectMemberRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 final class ProjectVoter extends Voter
 {
@@ -42,7 +40,7 @@ final class ProjectVoter extends Voter
         $this->projectMemberRepository = $projectMemberRepository;
     }
 
-    protected function supports($attribute, $subject): bool
+    protected function supports(string $attribute, $subject): bool
     {
         $supportsAccessLevel = array_key_exists($attribute, self::PROJECT_ACCESS_LEVELS)
             || array_key_exists($attribute, self::PROJECT_GROUP_ACCESS_LEVELS)
@@ -51,19 +49,13 @@ final class ProjectVoter extends Voter
         return $supportsAccessLevel && $subject instanceof Project;
     }
 
-    /**
-     * @param string         $attribute
-     * @param Project        $project
-     * @param TokenInterface $token
-     *
-     * @return bool
-     */
-    protected function voteOnAttribute($attribute, $project, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
-        /** @var User $user */
+        /** @var Project $subject */
+
         $user = $token->getUser();
 
-        if (!$user instanceof UserInterface) {
+        if (!$user) {
             return false;
         }
 
@@ -71,8 +63,8 @@ final class ProjectVoter extends Voter
             return true;
         }
 
-        $projectMember = $this->projectMemberRepository->findOneBy(['user' => $user, 'project' => $project]);
-        $projectGroupMember = $this->projectGroupMemberRepository->findOneBy(['user' => $user, 'projectGroup' => $project->getProjectGroup()]);
+        $projectMember = $this->projectMemberRepository->findOneBy(['user' => $user, 'project' => $subject]);
+        $projectGroupMember = $this->projectGroupMemberRepository->findOneBy(['user' => $user, 'projectGroup' => $subject->getProjectGroup()]);
 
         if (!$projectMember && !$projectGroupMember) {
             return false;

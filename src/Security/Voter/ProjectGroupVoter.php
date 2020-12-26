@@ -4,12 +4,10 @@ namespace App\Security\Voter;
 
 use App\Entity\ProjectGroup;
 use App\Entity\ProjectGroupMember;
-use App\Entity\User;
 use App\Repository\ProjectGroupMemberRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 final class ProjectGroupVoter extends Voter
 {
@@ -31,25 +29,17 @@ final class ProjectGroupVoter extends Voter
         $this->projectGroupMemberRepository = $projectGroupMemberRepository;
     }
 
-    protected function supports($attribute, $subject): bool
+    protected function supports(string $attribute, $subject): bool
     {
         return (array_key_exists($attribute, self::ACCESS_LEVELS) || in_array($attribute, ['DELETE', 'EDIT', 'VIEW']))
             && $subject instanceof ProjectGroup;
     }
 
-    /**
-     * @param string         $attribute
-     * @param ProjectGroup   $projectGroup
-     * @param TokenInterface $token
-     *
-     * @return bool
-     */
-    protected function voteOnAttribute($attribute, $projectGroup, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
-        /** @var User $user */
         $user = $token->getUser();
 
-        if (!$user instanceof UserInterface) {
+        if (!$user) {
             return false;
         }
 
@@ -57,7 +47,7 @@ final class ProjectGroupVoter extends Voter
             return true;
         }
 
-        if (!$groupMember = $this->projectGroupMemberRepository->findOneBy(['user' => $user, 'projectGroup' => $projectGroup])) {
+        if (!$groupMember = $this->projectGroupMemberRepository->findOneBy(['user' => $user, 'projectGroup' => $subject])) {
             return false;
         }
 

@@ -16,7 +16,7 @@ final class EditProject
     public $description;
 
     /**
-     * @var UploadedFile
+     * @var UploadedFile|null
      *
      * @Assert\Image()
      */

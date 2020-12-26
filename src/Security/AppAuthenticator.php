@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\User;
 use App\Form\Type\Action\LoginType;
 use App\Repository\UserRepository;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -46,7 +47,7 @@ final class AppAuthenticator extends AbstractLoginFormAuthenticator
         $email = $form->get('email')->getData();
         $password = $form->get('password')->getData();
 
-        $userBadge = new UserBadge($email, function (string $userIdentifier) {
+        $userBadge = new UserBadge($email, function (string $userIdentifier): ?User {
             return $this->userRepository->findOneBy(['email' => $userIdentifier]);
         });
         $credentials = new PasswordCredentials($password);

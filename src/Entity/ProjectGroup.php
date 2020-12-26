@@ -75,6 +75,9 @@ class ProjectGroup
         return $this->name;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public static function createFromCreationForm(CreateProjectGroup $createProjectGroup, User $owner): self
     {
         $projectGroup = new self($createProjectGroup->slug, $createProjectGroup->name);
@@ -86,6 +89,9 @@ class ProjectGroup
         return $projectGroup;
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public function updateFromEditionForm(EditProjectGroup $editProjectGroup): void
     {
         $this->name = $editProjectGroup->name;
@@ -94,6 +100,9 @@ class ProjectGroup
         $this->updatedAt = new DateTimeImmutable();
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public function updateFromSlugChangeForm(ChangeProjectGroupSlug $changeProjectGroupSlug): void
     {
         $this->slug = $changeProjectGroupSlug->slug;
