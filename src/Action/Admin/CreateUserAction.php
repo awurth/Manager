@@ -13,8 +13,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/users/new", name="app_admin_user_create")
@@ -28,13 +28,13 @@ final class CreateUserAction extends AbstractAdminAction
 
     private EntityManagerInterface $entityManager;
     private FormFactoryInterface $formFactory;
-    private UserPasswordEncoderInterface $userPasswordEncoder;
+    private UserPasswordHasherInterface $userPasswordHasher;
 
-    public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, UserPasswordEncoderInterface $userPasswordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, UserPasswordHasherInterface $userPasswordHasher)
     {
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
-        $this->userPasswordEncoder = $userPasswordEncoder;
+        $this->userPasswordHasher = $userPasswordHasher;
     }
 
     public function __invoke(Request $request): Response
@@ -47,7 +47,7 @@ final class CreateUserAction extends AbstractAdminAction
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = User::createFromAdminCreationForm($model, $this->userPasswordEncoder);
+            $user = User::createFromAdminCreationForm($model, $this->userPasswordHasher);
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();

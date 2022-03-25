@@ -10,14 +10,15 @@ use App\Repository\UserRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="users")
  */
-class User implements UserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id()
@@ -79,12 +80,12 @@ class User implements UserInterface
     /**
      * @psalm-suppress MissingPropertyType
      */
-    public static function createFromAdminCreationForm(CreateUser $createUser, UserPasswordEncoderInterface $userPasswordEncoder): self
+    public static function createFromAdminCreationForm(CreateUser $createUser, UserPasswordHasherInterface $userPasswordHasher): self
     {
         $user = new self($createUser->email, $createUser->firstname, $createUser->lastname);
         $user->roles[] = $createUser->role;
 
-        $user->password = $userPasswordEncoder->encodePassword($user, $createUser->plainPassword);
+        $user->password = $userPasswordHasher->hashPassword($user, $createUser->plainPassword);
 
         return $user;
     }
@@ -92,9 +93,9 @@ class User implements UserInterface
     /**
      * @psalm-suppress MissingPropertyType
      */
-    public function updateFromPasswordChangeForm(ChangePassword $changePassword, UserPasswordEncoderInterface $userPasswordEncoder): void
+    public function updateFromPasswordChangeForm(ChangePassword $changePassword, UserPasswordHasherInterface $userPasswordHasher): void
     {
-        $this->password = $userPasswordEncoder->encodePassword($this, $changePassword->newPassword);
+        $this->password = $userPasswordHasher->hashPassword($this, $changePassword->newPassword);
         $this->updatedAt = new DateTimeImmutable();
     }
 
@@ -124,6 +125,11 @@ class User implements UserInterface
     }
 
     public function getUsername(): string
+    {
+        return $this->getEmail();
+    }
+
+    public function getUserIdentifier(): string
     {
         return $this->getEmail();
     }

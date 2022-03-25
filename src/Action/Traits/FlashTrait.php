@@ -2,23 +2,22 @@
 
 namespace App\Action\Traits;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 trait FlashTrait
 {
-    protected SessionInterface $session;
+    protected RequestStack $requestStack;
 
     protected function flash(string $type, string $message): void
     {
-        /** @psalm-suppress UndefinedInterfaceMethod */
-        $this->session->getFlashBag()->add($type, $message);
+        $this->requestStack->getSession()->getFlashBag()->add($type, $message);
     }
 
     /**
      * @required
      */
-    public function setSession(SessionInterface $session): void
+    public function setRequestStack(RequestStack $requestStack): void
     {
-        $this->session = $session;
+        $this->requestStack = $requestStack;
     }
 }

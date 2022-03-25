@@ -11,8 +11,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/password", name="app_change_password")
@@ -25,17 +25,17 @@ final class ChangePasswordAction extends AbstractUserSettingsAction
 
     private EntityManagerInterface $entityManager;
     private FormFactoryInterface $formFactory;
-    private UserPasswordEncoderInterface $userPasswordEncoder;
+    private UserPasswordHasherInterface $userPasswordHasher;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FormFactoryInterface $formFactory,
-        UserPasswordEncoderInterface $userPasswordEncoder
+        UserPasswordHasherInterface $userPasswordHasher
     )
     {
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
-        $this->userPasswordEncoder = $userPasswordEncoder;
+        $this->userPasswordHasher = $userPasswordHasher;
     }
 
     public function __invoke(Request $request): Response
@@ -49,7 +49,7 @@ final class ChangePasswordAction extends AbstractUserSettingsAction
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->security->getUser();
 
-            $user->updateFromPasswordChangeForm($model, $this->userPasswordEncoder);
+            $user->updateFromPasswordChangeForm($model, $this->userPasswordHasher);
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();

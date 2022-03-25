@@ -16,7 +16,6 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\PasswordUpgrade
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
-use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 final class AppAuthenticator extends AbstractLoginFormAuthenticator
@@ -39,7 +38,7 @@ final class AppAuthenticator extends AbstractLoginFormAuthenticator
         return $this->urlGenerator->generate('app_login');
     }
 
-    public function authenticate(Request $request): PassportInterface
+    public function authenticate(Request $request): Passport
     {
         $form = $this->formFactory->create(LoginType::class);
         $form->handleRequest($request);

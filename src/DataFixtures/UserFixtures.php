@@ -7,16 +7,16 @@ use App\Form\Model\Admin\CreateUser;
 use App\Repository\UserRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class UserFixtures extends Fixture
 {
-    private UserPasswordEncoderInterface $passwordEncoder;
+    private UserPasswordHasherInterface $passwordHasher;
     private UserRepository $userRepository;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder, UserRepository $userRepository)
+    public function __construct(UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository)
     {
-        $this->passwordEncoder = $passwordEncoder;
+        $this->passwordHasher = $passwordHasher;
         $this->userRepository = $userRepository;
     }
 
@@ -33,7 +33,7 @@ final class UserFixtures extends Fixture
         $createUser->role = 'ROLE_ADMIN';
         $createUser->plainPassword = 'admin';
 
-        $user = User::createFromAdminCreationForm($createUser, $this->passwordEncoder);
+        $user = User::createFromAdminCreationForm($createUser, $this->passwordHasher);
 
         $manager->persist($user);
         $manager->flush();
