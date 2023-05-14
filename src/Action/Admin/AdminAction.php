@@ -11,9 +11,7 @@ use App\Repository\ServerRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/", name="app_admin")
- */
+#[Route('/', name: 'app_admin')]
 final class AdminAction extends AbstractAdminAction
 {
     use SecurityTrait;

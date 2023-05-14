@@ -4,15 +4,16 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.1.4",
+        "php": ">=8.2",
         "ext-apcu": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "awurth/upload-bundle": "^0.4.0",
         "babdev/pagerfanta-bundle": "^3.6",
-        "doctrine/doctrine-bundle": "^2.5",
+        "doctrine/doctrine-bundle": "^2.9",
+        "doctrine/annotations": "*",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.11",
+        "doctrine/orm": "^2.14",
         "hackzilla/password-generator": "^1.6",
         "knplabs/knp-menu-bundle": "^3.2",
         "lexik/form-filter-bundle": "^7.0.2",
@@ -21,48 +22,44 @@
         "pagerfanta/doctrine-orm-adapter": "^3.6",
         "pagerfanta/twig": "^3.6",
         "rollerworks/password-strength-bundle": "^2.2",
-        "symfony/asset": "6.0.*",
-        "symfony/console": "6.0.*",
-        "symfony/dotenv": "6.0.*",
-        "symfony/expression-language": "6.0.*",
-        "symfony/flex": "^2.1",
-        "symfony/form": "6.0.*",
-        "symfony/framework-bundle": "6.0.*",
-        "symfony/intl": "6.0.*",
-        "symfony/mime": "6.0.*",
-        "symfony/monolog-bundle": "^3.7.1",
-        "symfony/runtime": "6.0.*",
-        "symfony/security-bundle": "6.0.*",
-        "symfony/serializer": "6.0.*",
-        "symfony/translation": "6.0.*",
-        "symfony/twig-bundle": "6.0.*",
-        "symfony/uid": "6.0.*",
-        "symfony/validator": "6.0.*",
-        "symfony/web-link": "6.0.*",
-        "symfony/webpack-encore-bundle": "^1.14",
-        "symfony/yaml": "6.0.*",
+        "symfony/asset": "6.2.*",
+        "symfony/console": "6.2.*",
+        "symfony/dotenv": "6.2.*",
+        "symfony/expression-language": "6.2.*",
+        "symfony/flex": "^2",
+        "symfony/form": "6.2.*",
+        "symfony/framework-bundle": "6.2.*",
+        "symfony/intl": "6.2.*",
+        "symfony/mime": "6.2.*",
+        "symfony/monolog-bundle": "^3.8",
+        "symfony/runtime": "6.2.*",
+        "symfony/security-bundle": "6.2.*",
+        "symfony/serializer": "6.2.*",
+        "symfony/translation": "6.2.*",
+        "symfony/twig-bundle": "6.2.*",
+        "symfony/uid": "6.2.*",
+        "symfony/validator": "6.2.*",
+        "symfony/web-link": "6.2.*",
+        "symfony/webpack-encore-bundle": "^1.16",
+        "symfony/yaml": "6.2.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "psalm/plugin-symfony": "^3.1",
-        "symfony/debug-bundle": "6.0.*",
+        "symfony/debug-bundle": "6.2.*",
         "symfony/maker-bundle": "^1.38",
-        "symfony/stopwatch": "6.0.*",
-        "symfony/var-dumper": "6.0.*",
-        "symfony/web-profiler-bundle": "6.0.*",
+        "symfony/stopwatch": "6.2.*",
+        "symfony/var-dumper": "6.2.*",
+        "symfony/web-profiler-bundle": "6.2.*",
         "vimeo/psalm": "^4.3"
     },
     "config": {
         "allow-plugins": {
-            "composer/package-versions-deprecated": true,
+            "php-http/discovery": true,
             "symfony/flex": true,
             "symfony/runtime": true
-        },
-        "optimize-autoloader": true,
-        "preferred-install": {
-            "*": "dist"
         },
         "sort-packages": true
     },
@@ -78,7 +75,8 @@
         "symfony/polyfill-php73": "*",
         "symfony/polyfill-php74": "*",
         "symfony/polyfill-php80": "*",
-        "symfony/polyfill-php81": "*"
+        "symfony/polyfill-php81": "*",
+        "symfony/polyfill-php82": "*"
     },
     "scripts": {
         "auto-scripts": {
@@ -98,7 +96,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.0.*",
+            "require": "6.2.*",
             "docker": true
         }
     }

@@ -1,17 +1,19 @@
 # Executables (local)
-DOCKER_COMP = docker-compose
+DOCKER_COMP = docker compose
 
 # Docker containers
 PHP_CONT = $(DOCKER_COMP) exec php
+NODE_CONT = $(DOCKER_COMP) exec node
 
 # Executables
 PHP      = $(PHP_CONT) php
 COMPOSER = $(PHP_CONT) composer
 SYMFONY  = $(PHP_CONT) bin/console
+YARN     = $(NODE_CONT) yarn
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        = help build up start down logs sh composer vendor update sf cc db-sql db-update db-fixtures test
+.PHONY        : help build up start down logs sh composer vendor update sf cc db-sql db-update db-fixtures test
 
 ## —— 🎵 🐳 The Symfony-docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
@@ -35,6 +37,10 @@ logs: ## Show live logs
 sh: ## Connect to the PHP FPM container
 	@$(PHP_CONT) sh
 
+install: build up vendor db-update ## Installs the project
+
+install-dev: build up vendor-dev db-update db-fixtures ## Installs the project for dev environment
+
 ## —— Composer 🧙 ——————————————————————————————————————————————————————————————
 composer: ## Run composer, pass the parameter "c=" to run a given command, example: make composer c='req symfony/orm-pack'
 	@$(eval c ?=)
@@ -44,8 +50,26 @@ vendor: ## Install vendors according to the current composer.lock file
 vendor: c=install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction
 vendor: composer
 
-update: ## Updates vendors
+vendor-dev: ## Install vendors according to the current composer.lock file
+vendor-dev: c=install
+vendor-dev: composer
+
+update: update-php update-node ## Updates dependencies
+
+update-php: ## Updates PHP vendors
 	@$(COMPOSER) update
+
+update-node: ## Updates Node modules
+	@$(YARN) upgrade
+
+yarn-dev:
+	@$(YARN) dev
+
+yarn-watch:
+	@$(YARN) watch
+
+yarn-build:
+	@$(YARN) build
 
 ## —— Symfony 🎵 ———————————————————————————————————————————————————————————————
 sf: ## List all Symfony commands or pass the parameter "c=" to run a given command, example: make sf c=about
@@ -54,6 +78,9 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 
 cc: c=c:c ## Clear the cache
 cc: sf
+
+dump: ## Start a dump server that collects and displays dumps in a single place
+	@$(SYMFONY) server:dump
 
 ## —— Database —————————————————————————————————————————————————————————————————
 db-create: ## Creates the configured database
@@ -66,17 +93,35 @@ db-drop: ## Drops the configured database
 
 db-sql: ## Dump the SQL needed to update the database schema to match the current mapping metadata
 	@$(eval env ?= dev)
-	@$(SYMFONY) doctrine:schema:update --dump-sql --env=$(env)
+	@$(SYMFONY) doctrine:schema:update --dump-sql --complete --env=$(env)
 
 db-update: ## Execute the SQL needed to update the database schema to match the current mapping metadata
 	@$(eval env ?= dev)
-	@$(SYMFONY) doctrine:schema:update --force --env=$(env)
+	@$(SYMFONY) doctrine:schema:update --force --complete --env=$(env)
 
 db-fixtures: ## Load data fixtures
 	@$(eval env ?= dev)
-	@$(SYMFONY) hautelook:fixtures:load --env=$(env)
+	@$(SYMFONY) doctrine:fixtures:load --env=$(env)
 
 ## —— Tests ————————————————————————————————————————————————————————————————————
-test: ## Run tests
+test: phpunit behat ## Run tests
+
+behat: ## Run Behat tests
+	@$(eval c ?=)
+	@$(PHP) vendor/bin/behat $(c)
+
+phpunit: ## Run PHPUnit tests
 	@$(eval c ?=)
 	@$(PHP) bin/phpunit $(c)
+
+## —— Quality tools ————————————————————————————————————————————————————————————
+lint-php: ## Runs PHP CS Fixer
+	@$(PHP) vendor/bin/php-cs-fixer fix
+
+lint-twig: ## Runs Twig CS Fixer
+	@$(PHP) vendor/bin/twig-cs-fixer lint --fix templates
+
+lint: lint-php lint-twig  ## Runs CS Fixers
+
+phpstan:
+	@$(PHP) vendor/bin/phpstan analyse

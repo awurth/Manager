@@ -26,9 +26,9 @@ Encore
   .enableTypeScriptLoader()
   .enableReactPreset()
   .enablePostCssLoader()
-  .enableEslintLoader(options => {
-    options.configFile = './.eslintrc.js';
-    options.parser = '@typescript-eslint/parser';
+  .enableEslintPlugin(options => {
+    // options.configFile = './.eslintrc.js';
+    // options.parser = '@typescript-eslint/parser';
   })
   .configureLoaderRule('eslint', loader => {
     loader.test = /\.(js|ts)$/;

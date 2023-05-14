@@ -16,9 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/link-types/new", name="app_admin_link_type_create")
- */
+#[Route('/link-types/new', name: 'app_admin_link_type_create')]
 final class CreateLinkTypeAction extends AbstractAdminAction
 {
     use FlashTrait;

@@ -1,23 +1,23 @@
 app_user_settings:
     resource: ../src/Action/UserSettings/
-    type: annotation
+    type: attribute
     prefix: /profile
     trailing_slash_on_root: false
 
 app_server:
     resource: ../src/Action/Server/
-    type: annotation
+    type: attribute
     prefix: /server/{id}
     trailing_slash_on_root: false
 
 app_project_group:
     resource: ../src/Action/ProjectGroup/
-    type: annotation
+    type: attribute
     prefix: /{slug}
     trailing_slash_on_root: false
 
 app_project:
     resource: ../src/Action/Project/
-    type: annotation
+    type: attribute
     prefix: /{projectGroupSlug}/{projectSlug}
     trailing_slash_on_root: false

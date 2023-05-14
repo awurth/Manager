@@ -1,13 +1,9 @@
 actions:
     resource: ../../src/Action/
-    type: annotation
+    type: attribute
 
 admin_actions:
     resource: ../../src/Action/Admin/
-    type: annotation
+    type: attribute
     prefix: /admin
     trailing_slash_on_root: false
-
-kernel:
-    resource: ../../src/Kernel.php
-    type: annotation

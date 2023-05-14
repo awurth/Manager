@@ -16,9 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/users/new", name="app_admin_user_create")
- */
+#[Route('/users/new', name: 'app_admin_user_create')]
 final class CreateUserAction extends AbstractAdminAction
 {
     use FlashTrait;
